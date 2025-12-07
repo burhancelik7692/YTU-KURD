@@ -1,16 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { BookOpen, Music, Palette, History, Languages } from 'lucide-react';
+import { BookOpen, Music, Palette, History, Languages, Calendar, Quote } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { siteContent } from '../data/locales';
+import { DAILY_CONTENT } from '../data/daily'; // Veriyi çektik
 
 const Home = () => {
   const { lang } = useLanguage();
-  
   const t = siteContent[lang].home;
   const c = siteContent[lang].cards;
+
+  // --- GÜNÜN SÖZÜ MANTIĞI ---
+  const [dailyItem, setDailyItem] = useState(null);
+
+  useEffect(() => {
+    // Yılın kaçıncı günü olduğunu buluyoruz (Böylece her gün değişir)
+    const now = new Date();
+    const start = new Date(now.getFullYear(), 0, 0);
+    const diff = now - start;
+    const oneDay = 1000 * 60 * 60 * 24;
+    const dayOfYear = Math.floor(diff / oneDay);
+    
+    // Güne göre listeden birini seç
+    const item = DAILY_CONTENT[dayOfYear % DAILY_CONTENT.length];
+    setDailyItem(item);
+  }, []);
 
   const features = [{
     icon: Languages,
@@ -49,6 +65,8 @@ const Home = () => {
       <Helmet>
         <title>{lang === 'KU' ? 'Sereke' : (lang === 'TR' ? 'Anasayfa' : 'Home')} - YTU Kurdî</title>
         <meta name="description" content={t.heroSubtitle} />
+        {/* PWA için tema rengi */}
+        <meta name="theme-color" content="#1e3a8a" />
       </Helmet>
 
       <div className="min-h-screen bg-gray-50">
@@ -88,7 +106,6 @@ const Home = () => {
             </p>
 
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-               {/* BURASI MAİL ADRESİNE GİDER */}
                <a 
                  href="mailto:ytukurdidrive@gmail.com" 
                  className="inline-block bg-white text-blue-900 px-10 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition shadow-lg shadow-white/10"
@@ -98,6 +115,30 @@ const Home = () => {
             </motion.div>
           </motion.div>
         </section>
+
+        {/* --- GÜNÜN SÖZÜ KARTI (YENİ EKLENDİ) --- */}
+        {dailyItem && (
+          <section className="relative z-20 -mt-16 px-4">
+            <motion.div 
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl border-t-4 border-yellow-500 p-6 md:p-8 flex flex-col md:flex-row items-center gap-6"
+            >
+              <div className="bg-yellow-100 p-4 rounded-full text-yellow-600">
+                <Calendar size={32} />
+              </div>
+              <div className="text-center md:text-left flex-1">
+                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-1">
+                  {lang === 'KU' ? `Rojev: ${dailyItem.type}` : `Günün İçeriği: ${dailyItem.type === 'Gotin' ? 'Söz' : 'Kelime'}`}
+                </h3>
+                <p className="text-2xl font-black text-slate-800 mb-2">"{dailyItem.text}"</p>
+                <p className="text-slate-500 italic text-lg">{dailyItem.meaning}</p>
+              </div>
+              <Quote className="text-slate-100 hidden md:block" size={80} />
+            </motion.div>
+          </section>
+        )}
 
         {/* --- ABOUT SECTION --- */}
         <section className="py-20 px-4 bg-white relative z-10">
@@ -140,12 +181,11 @@ const Home = () => {
             <h2 className="text-4xl font-bold mb-6">{t.ctaTitle}</h2>
             <p className="text-xl mb-10 text-blue-100">{t.ctaText}</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              {/* BURASI INSTAGRAM'A GİDER */}
               <a 
                 href="https://instagram.com/ytukurdi"
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="bg-cyan-600 text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-cyan-500 transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-cyan-500/20"
+                className="bg-cyan-600 text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-cyan-50 transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-cyan-500/20"
               >
                 {t.ctaButton}
               </a>
