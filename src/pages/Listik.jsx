@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ArrowLeft, RotateCcw, Delete, CornerDownLeft, HelpCircle, Book, 
+  ArrowLeft, RotateCcw, Delete, CornerDownLeft, HelpCircle, 
   Gamepad2, Library, CheckCircle, XCircle, Play, Pause, Music as MusicIcon, Share2,
   Award, Clock, Trophy, ChevronRight
 } from 'lucide-react';
@@ -9,6 +9,16 @@ import confetti from 'canvas-confetti';
 import { useLanguage } from '../context/LanguageContext';
 // Veritabanı importu
 import { WORDLE_DB, QUIZ_DB } from '../data/questions';
+
+// --- YARDIMCI FONKSİYON: ŞIK KARIŞTIRMA (SHUFFLE) ---
+const shuffleArray = (array) => {
+  const newArr = [...array];
+  for (let i = newArr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+  }
+  return newArr;
+};
 
 // --- MÜZİK LİSTESİ ---
 const musicPlaylist = [
@@ -96,11 +106,7 @@ const WordleGame = ({ onBack, lang }) => {
         {guesses.map((guess, i) => {
           const isCurrent = i === guesses.findIndex(v=>v===null);
           return (
-            <motion.div 
-              key={i} 
-              className="grid grid-cols-5 gap-2"
-              animate={isCurrent && shakeRow ? { x: [-5, 5, -5, 5, 0] } : {}}
-            >
+            <motion.div key={i} className="grid grid-cols-5 gap-2" animate={isCurrent && shakeRow ? { x: [-5, 5, -5, 5, 0] } : {}}>
               {Array.from({ length: 5 }).map((_, j) => {
                 const letter = isCurrent ? currentGuess[j] : (guess ? guess[j] : "");
                 let color = "bg-slate-800 border-slate-700";
@@ -150,7 +156,7 @@ const WordleGame = ({ onBack, lang }) => {
 };
 
 // ==========================================
-// 2. KÜLTÜR TESTİ (GELİŞMİŞ)
+// 2. KÜLTÜR TESTİ (GELİŞMİŞ ŞIK KARIŞTIRMALI)
 // ==========================================
 const CultureQuiz = ({ onBack, lang }) => {
   const t = {
@@ -167,8 +173,8 @@ const CultureQuiz = ({ onBack, lang }) => {
   const [audio] = useState(new Audio());
   const [isPlaying, setIsPlaying] = useState(false);
   const [timeLeft, setTimeLeft] = useState(15);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [currentTrack, setCurrentTrack] = useState(null); // Çalan şarkı bilgisi
+  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null); // Hangi şıkka tıklandı?
+  const [currentTrack, setCurrentTrack] = useState(null);
 
   const stopMusic = () => {
     audio.pause();
@@ -181,45 +187,60 @@ const CultureQuiz = ({ onBack, lang }) => {
   }, []);
 
   const startGame = (diff, catId) => {
+    // 1. Soruları çek
     let pool = QUIZ_DB.filter(q => q.difficulty === diff);
+    
+    // 2. Kategori filtrele
     if (catId && catId !== 'mix') {
       const catMap = { 'dirok': 'Dîrok', 'weje': 'Wêje', 'ziman': 'Ziman', 'folklor': 'Folklor' };
       const targetCat = catMap[catId] || catId;
       pool = pool.filter(q => q.category === targetCat);
     }
-    if(pool.length === 0) pool = QUIZ_DB.filter(q => q.difficulty === diff); // Yedek
+    
+    // 3. Yedek (Boşsa hepsinden getir)
+    if(pool.length === 0) pool = QUIZ_DB.filter(q => q.difficulty === diff);
     if(pool.length === 0) return alert("Pirs tune / Soru yok");
     
-    pool = pool.sort(() => 0.5 - Math.random()).slice(0, 10);
-    setQuestions(pool);
+    // 4. Soruları seç ve ŞIKLARI KARIŞTIR (Kritik Nokta)
+    const selectedQuestions = pool.sort(() => 0.5 - Math.random()).slice(0, 10).map(q => {
+      return {
+        ...q,
+        options: shuffleArray([...q.options]) // Şıkları burada karıştırıyoruz!
+      };
+    });
+    
+    setQuestions(selectedQuestions);
     setScore(0);
     setIndex(0);
     setScreen('play');
     setTimeLeft(15);
-    setSelectedAnswer(null);
+    setSelectedAnswerIndex(null);
   };
 
-  // Sayaç (Sadece cevap verilmemişse çalışır)
+  // Sayaç
   useEffect(() => {
-    if (screen === 'play' && timeLeft > 0 && selectedAnswer === null) {
+    if (screen === 'play' && timeLeft > 0 && selectedAnswerIndex === null) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearTimeout(timer);
-    } else if (timeLeft === 0 && selectedAnswer === null) {
-      handleAnswer(0);
+    } else if (timeLeft === 0 && selectedAnswerIndex === null) {
+      // Süre bitince otomatik yanlış say (ama geçiş manuel)
+      setSelectedAnswerIndex(-1); // -1: Süre bitti işareti
     }
-  }, [screen, timeLeft, selectedAnswer]);
+  }, [screen, timeLeft, selectedAnswerIndex]);
 
-  const handleAnswer = (points) => {
-    if (selectedAnswer !== null) return; // Çift tıklamayı önle
-    setSelectedAnswer(points);
+  const handleAnswer = (points, idx) => {
+    if (selectedAnswerIndex !== null) return; // Çift tıklamayı önle
+    
+    setSelectedAnswerIndex(idx); // Hangi butona basıldığını kaydet
     setScore(score + points);
+    
     if(points > 0) confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 }, colors: ['#fbbf24', '#1e3a8a'] });
   };
 
   const nextQuestion = () => {
     if (index + 1 < questions.length) {
       setIndex(index + 1);
-      setSelectedAnswer(null);
+      setSelectedAnswerIndex(null);
       setTimeLeft(15);
     } else {
       setScreen('result');
@@ -237,7 +258,7 @@ const CultureQuiz = ({ onBack, lang }) => {
     const tracks = musicPlaylist.filter(t => t.id === mood);
     const track = tracks[Math.floor(Math.random() * tracks.length)] || musicPlaylist[0];
     
-    setCurrentTrack(track); // Şarkı bilgisini kaydet
+    setCurrentTrack(track);
     audio.src = track.src;
     audio.currentTime = track.start;
     audio.volume = 0.5;
@@ -250,26 +271,20 @@ const CultureQuiz = ({ onBack, lang }) => {
     setIsPlaying(!isPlaying);
   };
 
-  // EKRAN: ZORLUK SEÇİMİ
+  // EKRANLAR (Zorluk, Kategori...)
   if (screen === 'diff') {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
         <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8 border border-slate-200 relative overflow-hidden text-center">
           <button onClick={() => {stopMusic(); onBack();}} className="absolute top-4 left-4 text-slate-400 hover:text-blue-900"><ArrowLeft size={24} /></button>
           <div className="h-2 w-full bg-gradient-to-r from-blue-900 via-blue-500 to-yellow-500 absolute top-0 left-0"></div>
-          <div className="mt-6 mb-4">
-            <img src="/logo.png" alt="YTU Kurdî" className="w-24 h-24 mx-auto rounded-full shadow-lg border-4 border-white animate-[spin_20s_linear_infinite]" />
-          </div>
+          <div className="mt-6 mb-4"><img src="/logo.png" className="w-24 h-24 mx-auto rounded-full shadow-lg border-4 border-white animate-[spin_20s_linear_infinite]" /></div>
           <h1 className="text-2xl font-black text-blue-900 mb-2">{t.title}</h1>
           <p className="text-slate-500 text-sm mb-8">Dîrok, Wêje, Ziman û Çand</p>
           <div className="space-y-3">
             {[1, 2, 3].map(lvl => (
-              <button key={lvl} onClick={() => { setDifficulty(lvl); setScreen('category'); }} 
-                className="w-full p-4 rounded-2xl border-2 border-slate-100 hover:border-blue-500 hover:bg-blue-50 transition-all flex items-center justify-between group"
-              >
-                <span className="font-bold text-slate-700 group-hover:text-blue-900">
-                  {lvl === 1 ? t.easy : (lvl === 2 ? t.medium : t.hard)}
-                </span>
+              <button key={lvl} onClick={() => { setDifficulty(lvl); setScreen('category'); }} className="w-full p-4 rounded-2xl border-2 border-slate-100 hover:border-blue-500 hover:bg-blue-50 transition-all flex items-center justify-between group">
+                <span className="font-bold text-slate-700 group-hover:text-blue-900">{lvl === 1 ? t.easy : (lvl === 2 ? t.medium : t.hard)}</span>
                 <div className="flex text-yellow-500">{[...Array(lvl)].map((_, i) => <Award key={i} size={16} fill="currentColor" />)}</div>
               </button>
             ))}
@@ -279,7 +294,6 @@ const CultureQuiz = ({ onBack, lang }) => {
     );
   }
 
-  // EKRAN: KATEGORİ
   if (screen === 'category') {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
@@ -300,7 +314,7 @@ const CultureQuiz = ({ onBack, lang }) => {
     );
   }
 
-  // EKRAN: SORU (OYUN)
+  // 3. OYUN EKRANI
   if (screen === 'play') {
     const q = questions[index];
     return (
@@ -318,25 +332,32 @@ const CultureQuiz = ({ onBack, lang }) => {
               <div className="flex items-center gap-1 text-slate-600 font-bold bg-slate-100 px-3 py-1 rounded-full text-xs"><Clock size={14} /> {timeLeft}s</div>
             </div>
             <h2 className="text-xl font-bold text-slate-800 mb-8 leading-snug min-h-[4rem]">{q.question}</h2>
+            
             <div className="space-y-3">
               {q.options.map((opt, i) => {
-                const isCorrect = opt.points > 0;
-                let btnStyle = "border-2 border-slate-100 hover:bg-slate-50"; // Varsayılan
+                const isSelected = selectedAnswerIndex === i;
+                const isCorrectOption = opt.points > 0;
                 
-                // Cevap verildiyse renkleri ayarla
-                if (selectedAnswer !== null) {
-                  if (isCorrect) btnStyle = "bg-green-100 border-green-500 text-green-800 shadow-md scale-[1.02]"; // Doğru olan her zaman yeşil
-                  else if (selectedAnswer === opt.points) btnStyle = "bg-red-100 border-red-500 text-red-800"; // Yanlış seçilen kırmızı
-                  else btnStyle = "border-slate-100 opacity-50 grayscale"; // Diğerleri sönük
+                // RENK MANTIĞI (ÖNEMLİ)
+                let style = "border-2 border-slate-100 hover:border-blue-200 hover:bg-slate-50"; // Varsayılan
+                
+                if (selectedAnswerIndex !== null) { // Cevap verildiyse
+                  if (isCorrectOption) {
+                    style = "bg-green-100 border-green-500 text-green-800 font-bold"; // Doğru olan HEP YEŞİL
+                  } else if (isSelected && !isCorrectOption) {
+                    style = "bg-red-100 border-red-500 text-red-800 font-bold"; // Yanlış seçtiğin KIRMIZI
+                  } else {
+                    style = "opacity-40 border-slate-100 grayscale"; // Diğerleri silik
+                  }
                 }
 
                 return (
-                  <button key={i} disabled={selectedAnswer !== null} onClick={() => handleAnswer(opt.points)} 
-                    className={`w-full p-4 rounded-xl text-left font-semibold transition-all flex justify-between items-center ${btnStyle}`}
+                  <button key={i} disabled={selectedAnswerIndex !== null} onClick={() => handleAnswer(opt.points, i)} 
+                    className={`w-full p-4 rounded-xl text-left font-semibold transition-all flex justify-between items-center ${style}`}
                   >
                     {opt.text}
-                    {selectedAnswer !== null && isCorrect && <CheckCircle size={18} className="text-green-600" />}
-                    {selectedAnswer !== null && selectedAnswer === opt.points && !isCorrect && <XCircle size={18} className="text-red-500" />}
+                    {selectedAnswerIndex !== null && isCorrectOption && <CheckCircle size={20} className="text-green-600" />}
+                    {selectedAnswerIndex !== null && isSelected && !isCorrectOption && <XCircle size={20} className="text-red-500" />}
                   </button>
                 );
               })}
@@ -344,7 +365,7 @@ const CultureQuiz = ({ onBack, lang }) => {
             
             {/* Açıklama ve İleri Butonu */}
             <AnimatePresence>
-              {selectedAnswer !== null && (
+              {selectedAnswerIndex !== null && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-6">
                   <div className="p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-xl mb-4">
                     <p className="text-sm text-blue-900"><strong>ℹ️</strong> {q.explanation}</p>
@@ -361,7 +382,7 @@ const CultureQuiz = ({ onBack, lang }) => {
     );
   }
 
-  // EKRAN: SONUÇ
+  // 4. SONUÇ EKRANI
   if (screen === 'result') {
     const percentage = Math.round((score / (questions.length * 10)) * 100);
     return (
@@ -375,13 +396,12 @@ const CultureQuiz = ({ onBack, lang }) => {
             <div className="text-6xl font-black text-blue-900 mb-2">%{percentage}</div>
             <p className="text-slate-500 text-sm mb-6">{percentage > 50 ? "Serkeftin!" : "Dîsa biceribîne."}</p>
             
-            {/* Müzik Player (Gelişmiş) */}
+            {/* Müzik Player */}
             <div className="flex items-center gap-3 bg-slate-100 p-4 rounded-2xl mb-6 shadow-inner border border-slate-200">
               <button onClick={toggleMusic} className="w-12 h-12 bg-blue-900 text-white rounded-full flex items-center justify-center hover:bg-blue-800 transition shadow-lg shrink-0">
                 {isPlaying ? <Pause size={20} /> : <Play size={20} />}
               </button>
               <div className="text-left overflow-hidden w-full">
-                {/* Şarkı Bilgileri Buraya Geliyor */}
                 {currentTrack ? (
                   <>
                     <div className="text-sm font-bold text-blue-900 truncate">{currentTrack.title}</div>
