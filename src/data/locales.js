@@ -29,8 +29,14 @@ export const siteContent = {
       ctaTitle: 'Beşdarî Komeleya Me Bibe',
       ctaText: 'Heke tu dixwazî zimanê kurdî hîn bibî, çanda xwe nas bikî, û bi me re bixebitî, bi me re têkilî dayne!',
       ctaButton: 'Dest Pê Bike',
-      eventTitle: 'Çalakiya Pêşerojê', // Yeni: Sayaç başlığı
-      dailyTitle: 'Peyva Rojê'        // Yeni: Günün sözü başlığı
+      // Yeni Eklenenler (Sayaç ve Günün Sözü için)
+      eventTitle: 'Çalakiya Pêşerojê',
+      eventEmptyTitle: 'Tê Ragihandin',
+      eventEmptyDesc: 'Ji bo çalakiyên nû li bendê bin.',
+      dailyTitle: 'Naveroka Rojê',
+      dailyWord: 'Peyv',
+      dailyQuote: 'Gotin',
+      time: { day: 'Roj', hour: 'Saet', min: 'Deqe', sec: 'Çirk' }
     },
     // --- KARTLAR (HOME SAYFASINDAKİ ÖZETLER) ---
     cards: {
@@ -130,12 +136,17 @@ export const siteContent = {
       ctaText: 'Kürtçe öğrenmek, kültürü tanımak ve bizimle birlikte çalışmak istiyorsan, iletişime geç!',
       ctaButton: 'Başla',
       eventTitle: 'Sıradaki Etkinlik',
-      dailyTitle: 'Günün İçeriği'
+      eventEmptyTitle: 'Duyurulacak',
+      eventEmptyDesc: 'Yeni etkinlikler için beklemede kalın.',
+      dailyTitle: 'Günün İçeriği',
+      dailyWord: 'Kelime',
+      dailyQuote: 'Söz',
+      time: { day: 'Gün', hour: 'Saat', min: 'Dak', sec: 'San' }
     },
     cards: {
       zimanTitle: 'Dil', zimanDesc: 'Kürtçe dil eğitimi ve gramer',
-      candTitle: 'Kültür', candDesc: 'Kürt halkının zengin kültürü',
-      dirokTitle: 'Tarih', dirokDesc: 'Kürtlerin köklü tarihi',
+      candTitle: 'Kültür', candDesc: 'Zengin Kürt kültürü',
+      dirokTitle: 'Tarih', dirokDesc: 'Köklü tarih',
       muzikTitle: 'Müzik', muzikDesc: 'Kürt müziği ve şarkıları',
       hunerTitle: 'Sanat', hunerDesc: 'Kürt sanatı ve sanatçıları'
     },
@@ -228,7 +239,12 @@ export const siteContent = {
       ctaText: 'If you want to learn Kurdish, discover the culture, and work with us, contact us!',
       ctaButton: 'Start Now',
       eventTitle: 'Upcoming Event',
-      dailyTitle: 'Daily Content'
+      eventEmptyTitle: 'To Be Announced',
+      eventEmptyDesc: 'Stay tuned for new events.',
+      dailyTitle: 'Daily Content',
+      dailyWord: 'Word',
+      dailyQuote: 'Quote',
+      time: { day: 'Day', hour: 'Hr', min: 'Min', sec: 'Sec' }
     },
     cards: {
       zimanTitle: 'Language', zimanDesc: 'Kurdish language learning and grammar',
@@ -291,7 +307,7 @@ export const siteContent = {
         sections: [
           { title: "Kurdish Cinema", text: "Yilmaz Guney is considered the father of Kurdish cinema. Movies like 'Yol' have made a global impact." },
           { title: "Painting", text: "Kurdish painters reflect their people's pain and hope on canvas." },
-          { title: "Folk Dance (Govend)", text: "Kurdish dances are a vital part of social life. Each region (Serhat, Botan) has its own style." }
+          { title: "Folk Dance (Govend)", text: "Kurdish dances are a vital part of social life. Each region (Serhat, Botan, Amed) has its own style." }
         ]
       }
     }
