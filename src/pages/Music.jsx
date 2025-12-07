@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Music as MusicIcon, Play, Pause, Loader2, AlertCircle } from 'lucide-react';
-// ARTIK SUPABASE DEĞİL, SERVİSİMİZİ ÇAĞIRIYORUZ
+// Servisimizi çağırıyoruz
 import { musicService } from '../services/musicService';
 
 const Music = () => {
@@ -16,7 +16,6 @@ const Music = () => {
     fetchMusic();
   }, []);
 
-  // Kod ne kadar temizlendi, görüyor musun?
   const fetchMusic = async () => {
     setLoading(true);
     
@@ -94,9 +93,9 @@ const Music = () => {
                     <div className="h-48 bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center relative">
                       {/* Servisten gelen formatlanmış 'imageUrl' kullanılıyor */}
                       {item.imageUrl ? (
-                         <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover" />
+                          <img src={item.imageUrl} alt={item.title} className="w-full h-full object-cover" />
                       ) : (
-                         <MusicIcon className="text-white/50 w-24 h-24" />
+                          <MusicIcon className="text-white/50 w-24 h-24" />
                       )}
                       
                       <button

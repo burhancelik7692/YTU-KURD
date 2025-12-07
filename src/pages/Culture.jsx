@@ -1,146 +1,89 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Sparkles, Users, Heart, Globe } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft, Users } from 'lucide-react'; // Kültür için 'Users' ikonu uygun
+import { useLanguage } from '../context/LanguageContext';
+import { siteContent } from '../data/locales';
 
 const Culture = () => {
-  const culturalAspects = [
-    {
-      icon: Sparkles,
-      title: 'Newroz',
-      description: 'Sala Nû ya Kurdî',
-      content: 'Newroz (21ê Adarê) cejna herî girîng a kurdan e. Ev cejn sala nû ya kurdî ye û bi agir û govend tê pîrozkirin. Newroz sembolê azadî û nûbûnê ye.',
-      // Newroz ateşi ve kutlama görseli
-      image: '/newroz.png'
-    },
-    {
-      icon: Users,
-      title: 'Govend',
-      description: 'Dansa Kevneşopî ya Kurdî',
-      content: 'Govend dansa tradîsyonel a kurdan e. Mirov bi dest girtin û bi rêzikî diherikin. Her herêmek govenda xwe ya taybetî heye. Govend di hemû cejnan de tê kirin.',
-      // Kalabalık, el ele tutuşmuş insanlar görseli
-      image: '/govend.jpg'
-    },
-    {
-      icon: Heart,
-      title: 'Cilên Neteweyî',
-      description: 'Kincên Tradîsyonel',
-      content: 'Cilên kurdî gelek rengîn û xweşik in. Jin şal û krasên bi reng li xwe dikin, mêr jî şal û pantolên fireh li xwe dikin. Her herêmek cilên xwe yên taybetî hene.',
-      // Geleneksel, renkli kumaş ve kıyafet dokusu görseli
-      image: '/cilen neteweyi.jpg'
-    },
-    {
-      icon: Globe,
-      title: 'Xwarin û Vexwarin',
-      description: 'Xwarinên Kurdî',
-      content: 'Xwarinên kurdî gelek lezîz in. Biryani, dolma, kufte, û naan xwarinên navdar in. Çay û dew jî vexwarinên herî populer in. Mêvandarî di çanda kurdî de gelek girîng e.',
-      // Zengin bir sofra görseli
-      image: '/xwarin u vexwarin.png'
-    }
-  ];
-
-  const traditions = [
-    { title: 'Dengbêj', description: 'Stranbêjên kevneşopî yên kurdî' },
-    { title: 'Çîrokbêj', description: 'Kesên ku çîrokên kevn vedibêjin' },
-    { title: 'Mêvandarî', description: 'Pêşwaziya germ ji mêvanan' },
-    { title: 'Dawet', description: 'Zewacên tradîsyonel ên kurdî' },
-    { title: 'Soz', description: 'Peymana kevneşopî' },
-    { title: 'Kilam', description: 'Stranên gelêrî yên kurdî' }
-  ];
+  const { lang } = useLanguage();
+  
+  // Veritabanından (locales.js) 'cand' kısmını çekiyoruz
+  // Eğer veri yoksa hata vermemesi için boş obje {} kontrolü ekledik
+  const content = siteContent[lang]?.pages?.cand || { 
+    title: "Çand", 
+    desc: "Loading...", 
+    sections: [] 
+  };
 
   return (
     <>
+      {/* SEO Ayarları */}
       <Helmet>
-        <title>Çand - YTU Kurdî </title>
-        <meta name="description" content="Çanda dewlemend a gelê kurd - Newroz, govend, cilên neteweyî û tradîsyonên me" />
+        <title>{content.title} - YTU Kurdî</title>
+        <meta name="description" content={content.desc} />
       </Helmet>
 
-      <div className="min-h-screen py-12 px-4">
-        <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+      <div className="min-h-screen bg-slate-50 pt-24 pb-12 px-4">
+        <div className="max-w-4xl mx-auto">
+          
+          {/* Geri Dön Butonu */}
+          <Link to="/" className="inline-flex items-center text-slate-500 hover:text-blue-900 mb-6 transition group">
+            <ArrowLeft size={20} className="mr-1 group-hover:-translate-x-1 transition-transform" /> 
+            {lang === 'KU' ? 'Vegere' : (lang === 'TR' ? 'Geri' : 'Back')}
+          </Link>
+          
+          {/* Ana İçerik Kartı */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            transition={{ duration: 0.5 }}
+            className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100"
           >
-            <h1 className="text-5xl font-bold text-gray-900 mb-6">Çanda Kurdî</h1>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Çanda dewlemend û kevneşopî ya gelê kurd - Tradîsyon, cejn û jiyana me
-            </p>
-          </motion.div>
-
-          {/* Cultural Aspects */}
-          <div className="space-y-12 mb-16">
-            {culturalAspects.map((aspect, index) => (
-              <motion.div
-                key={aspect.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 bg-white rounded-2xl shadow-xl overflow-hidden`}
-              >
-                <div className="md:w-1/2">
-                  {/* BURADA DÜZELTME YAPILDI: Artık her kart kendi resmini kullanıyor */}
-                  <img 
-                    className="w-full h-80 object-cover hover:scale-105 transition-transform duration-500" 
-                    src={aspect.image}
-                    alt={aspect.title}
-                  />
+            {/* Başlık Kısmı (Emerald - Yeşil Tema) */}
+            <div className="bg-emerald-600 p-8 md:p-12 text-white relative overflow-hidden">
+              <div className="relative z-10">
+                <div className="bg-white/20 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-sm">
+                  <Users size={32} className="text-white" />
                 </div>
-                <div className="md:w-1/2 p-8 flex flex-col justify-center">
-                  <div className="bg-emerald-500 w-16 h-16 rounded-xl flex items-center justify-center mb-6">
-                    <aspect.icon className="text-white" size={32} />
-                  </div>
-                  <h2 className="text-3xl font-bold text-gray-900 mb-3">{aspect.title}</h2>
-                  <p className="text-lg text-emerald-600 font-semibold mb-4">{aspect.description}</p>
-                  <p className="text-gray-700 leading-relaxed text-lg">{aspect.content}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+                <h1 className="text-4xl md:text-5xl font-black mb-4 tracking-tight">{content.title}</h1>
+                <p className="text-emerald-100 text-lg md:text-xl font-medium max-w-2xl">{content.desc}</p>
+              </div>
+              
+              {/* Dekoratif Arka Plan Şekilleri */}
+              <div className="absolute right-0 top-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-16 -mt-16 pointer-events-none"></div>
+              <div className="absolute left-0 bottom-0 w-32 h-32 bg-black opacity-5 rounded-full -ml-10 -mb-10 pointer-events-none"></div>
+            </div>
 
-          {/* Traditions Grid */}
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">Tradîsyonên Me</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {traditions.map((tradition, index) => (
-                <motion.div
-                  key={tradition.title}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+            {/* İçerik Döngüsü */}
+            <div className="p-8 md:p-12 space-y-10">
+              {content.sections && content.sections.map((section, idx) => (
+                <motion.div 
+                  key={idx} 
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="bg-gradient-to-br from-emerald-500 to-blue-600 rounded-xl p-6 text-white hover:scale-105 transition-transform duration-300 shadow-lg"
+                  transition={{ delay: idx * 0.1 }}
+                  className="border-l-4 border-emerald-500 pl-6 py-1 group hover:bg-emerald-50/50 rounded-r-xl transition-colors"
                 >
-                  <h3 className="text-2xl font-bold mb-2">{tradition.title}</h3>
-                  <p className="text-emerald-100">{tradition.description}</p>
+                  <h2 className="text-2xl font-bold text-slate-800 mb-3 group-hover:text-emerald-700 transition-colors">
+                    {section.title}
+                  </h2>
+                  <p className="text-slate-600 leading-relaxed text-lg">
+                    {section.text}
+                  </p>
                 </motion.div>
               ))}
             </div>
-          </motion.section>
 
-          {/* Quote Section */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-gradient-to-r from-blue-600 to-emerald-600 rounded-2xl shadow-xl p-12 text-center text-white"
-          >
-            <p className="text-3xl font-bold mb-4 italic">
-              "Çand û ziman canê gelekî ne"
-            </p>
-            <p className="text-xl text-blue-100">
-              Gotineke kurdî
-            </p>
+            {/* Alt Bilgi Alanı */}
+            <div className="bg-slate-50 p-8 text-center border-t border-slate-100">
+              <p className="text-slate-400 text-sm italic">
+                {lang === 'KU' ? 'Çand hebûna me ye.' : 'Kültür varlığımızdır.'}
+              </p>
+            </div>
+
           </motion.div>
         </div>
       </div>

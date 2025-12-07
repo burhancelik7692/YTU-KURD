@@ -2,32 +2,60 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { BookOpen, Music, Palette, History, Languages, Calendar, Quote } from 'lucide-react';
+import { 
+  BookOpen, Music, Palette, History, Languages, 
+  Calendar, Quote, Clock, MapPin 
+} from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { siteContent } from '../data/locales';
-import { DAILY_CONTENT } from '../data/daily'; // Veriyi çektik
+import { DAILY_CONTENT } from '../data/daily';
+
+// --- GERİ SAYIM HEDEFİ ---
+const TARGET_DATE = new Date("2025-03-21T00:00:00").getTime(); // Newroz 2025
+const EVENT_NAME = { KU: "Newroz 2025", TR: "2025 Newroz'u", EN: "Newroz 2025" };
 
 const Home = () => {
   const { lang } = useLanguage();
   const t = siteContent[lang].home;
   const c = siteContent[lang].cards;
 
-  // --- GÜNÜN SÖZÜ MANTIĞI ---
+  // --- 1. GÜNÜN SÖZÜ MANTIĞI ---
   const [dailyItem, setDailyItem] = useState(null);
-
+  
   useEffect(() => {
-    // Yılın kaçıncı günü olduğunu buluyoruz (Böylece her gün değişir)
     const now = new Date();
     const start = new Date(now.getFullYear(), 0, 0);
     const diff = now - start;
     const oneDay = 1000 * 60 * 60 * 24;
     const dayOfYear = Math.floor(diff / oneDay);
-    
-    // Güne göre listeden birini seç
     const item = DAILY_CONTENT[dayOfYear % DAILY_CONTENT.length];
     setDailyItem(item);
   }, []);
 
+  // --- 2. GERİ SAYIM MANTIĞI ---
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = TARGET_DATE - now;
+
+      if (distance < 0) {
+        clearInterval(timer);
+      } else {
+        setTimeLeft({
+          days: Math.floor(distance / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((distance % (1000 * 60)) / 1000)
+        });
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  // Kartlar
   const features = [{
     icon: Languages,
     title: c.zimanTitle,
@@ -65,7 +93,6 @@ const Home = () => {
       <Helmet>
         <title>{lang === 'KU' ? 'Sereke' : (lang === 'TR' ? 'Anasayfa' : 'Home')} - YTU Kurdî</title>
         <meta name="description" content={t.heroSubtitle} />
-        {/* PWA için tema rengi */}
         <meta name="theme-color" content="#1e3a8a" />
       </Helmet>
 
@@ -116,32 +143,80 @@ const Home = () => {
           </motion.div>
         </section>
 
-        {/* --- GÜNÜN SÖZÜ KARTI (YENİ EKLENDİ) --- */}
-        {dailyItem && (
-          <section className="relative z-20 -mt-16 px-4">
+        {/* --- YENİ BÖLÜM: GERİ SAYIM & GÜNÜN SÖZÜ (YAN YANA) --- */}
+        <section className="relative z-20 -mt-20 px-4 pb-12">
+          <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+            
+            {/* 1. KART: GERİ SAYIM (EVENT) */}
             <motion.div 
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="max-w-3xl mx-auto bg-white rounded-2xl shadow-xl border-t-4 border-yellow-500 p-6 md:p-8 flex flex-col md:flex-row items-center gap-6"
+              className="bg-blue-900 text-white rounded-3xl p-8 shadow-2xl border border-blue-800 flex flex-col justify-center relative overflow-hidden"
             >
-              <div className="bg-yellow-100 p-4 rounded-full text-yellow-600">
-                <Calendar size={32} />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500 rounded-full filter blur-3xl opacity-20 -mr-10 -mt-10"></div>
+              
+              <div className="flex items-center gap-3 mb-6">
+                <div className="bg-yellow-500 p-2 rounded-lg text-blue-900"><Clock size={24} /></div>
+                <div>
+                  <h3 className="text-xs font-bold text-blue-200 uppercase tracking-widest">{lang === 'KU' ? 'Çalakiya Pêşerojê' : 'Sıradaki Etkinlik'}</h3>
+                  <h2 className="text-2xl font-bold text-white">{EVENT_NAME[lang]}</h2>
+                </div>
               </div>
-              <div className="text-center md:text-left flex-1">
-                <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-1">
-                  {lang === 'KU' ? `Rojev: ${dailyItem.type}` : `Günün İçeriği: ${dailyItem.type === 'Gotin' ? 'Söz' : 'Kelime'}`}
-                </h3>
-                <p className="text-2xl font-black text-slate-800 mb-2">"{dailyItem.text}"</p>
-                <p className="text-slate-500 italic text-lg">{dailyItem.meaning}</p>
+
+              <div className="grid grid-cols-4 gap-2 text-center">
+                <div className="bg-white/10 rounded-xl p-3 backdrop-blur-sm">
+                  <div className="text-2xl font-black text-yellow-400">{timeLeft.days}</div>
+                  <div className="text-[10px] uppercase text-blue-200">{lang==='KU'?'Roj':'Gün'}</div>
+                </div>
+                <div className="bg-white/10 rounded-xl p-3 backdrop-blur-sm">
+                  <div className="text-2xl font-black text-yellow-400">{timeLeft.hours}</div>
+                  <div className="text-[10px] uppercase text-blue-200">{lang==='KU'?'Saet':'Saat'}</div>
+                </div>
+                <div className="bg-white/10 rounded-xl p-3 backdrop-blur-sm">
+                  <div className="text-2xl font-black text-yellow-400">{timeLeft.minutes}</div>
+                  <div className="text-[10px] uppercase text-blue-200">{lang==='KU'?'Deqe':'Dak'}</div>
+                </div>
+                <div className="bg-white/10 rounded-xl p-3 backdrop-blur-sm">
+                  <div className="text-2xl font-black text-yellow-400">{timeLeft.seconds}</div>
+                  <div className="text-[10px] uppercase text-blue-200">{lang==='KU'?'Çirk':'San'}</div>
+                </div>
               </div>
-              <Quote className="text-slate-100 hidden md:block" size={80} />
+              
+              <div className="mt-6 flex items-center gap-2 text-sm text-blue-200">
+                <MapPin size={16} /> YTÜ Davutpaşa Kampüsü
+              </div>
             </motion.div>
-          </section>
-        )}
+
+            {/* 2. KART: GÜNÜN SÖZÜ */}
+            {dailyItem && (
+              <motion.div 
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-3xl p-8 shadow-2xl border border-slate-100 flex flex-col justify-center relative"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="bg-yellow-100 p-2 rounded-lg text-yellow-600"><Calendar size={24} /></div>
+                  <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+                    {lang === 'KU' ? `Peyva Rojê: ${dailyItem.type}` : `Günün İçeriği: ${dailyItem.type}`}
+                  </h3>
+                </div>
+                
+                <div className="flex-1 flex flex-col justify-center">
+                  <p className="text-3xl font-black text-slate-800 mb-2">"{dailyItem.text}"</p>
+                  <p className="text-lg text-slate-500 italic">{dailyItem.meaning}</p>
+                </div>
+
+                <Quote className="absolute bottom-4 right-4 text-slate-100" size={80} />
+              </motion.div>
+            )}
+
+          </div>
+        </section>
 
         {/* --- ABOUT SECTION --- */}
-        <section className="py-20 px-4 bg-white relative z-10">
+        <section className="py-12 px-4 bg-white relative z-10">
           <div className="max-w-4xl mx-auto">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
               <h2 className="text-4xl font-bold text-blue-900 mb-6">{t.aboutTitle}</h2>
@@ -161,7 +236,7 @@ const Home = () => {
               {features.map((feature, index) => (
                 <motion.div key={feature.path} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: index * 0.1 }}>
                   <Link to={feature.path}>
-                    <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group border border-slate-100">
+                    <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 group border border-slate-100 h-full">
                       <div className={`${feature.color} w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md`}>
                         <feature.icon className="text-white" size={32} />
                       </div>

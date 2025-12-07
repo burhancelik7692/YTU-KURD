@@ -156,7 +156,7 @@ const Language = () => {
                 { kurdish: 'Şev baş', meaning: 'İyi geceler' },
                 { kurdish: 'Sipas', meaning: 'Teşekkür ederim' },
                 { kurdish: 'Ji kerema xwe', meaning: 'Lütfen' },
-                { kurdish: 'eman eman  ez dimirim', meaning: 'Özür dilerim' },
+                { kurdish: 'Bibore', meaning: 'Özür dilerim' },
                 { kurdish: 'Erê', meaning: 'Evet' },
                 { kurdish: 'Na', meaning: 'Hayır' },
                 { kurdish: 'Ez te hez dikim', meaning: 'Seni seviyorum' },
