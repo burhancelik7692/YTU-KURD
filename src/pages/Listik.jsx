@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, RotateCcw, Delete, CornerDownLeft, HelpCircle, 
   Gamepad2, Library, CheckCircle, XCircle, Play, Pause, Music as MusicIcon, Share2,
-  Award, Clock, Trophy, ChevronRight
+  Award, Clock, Trophy, ChevronRight, AlertCircle
 } from 'lucide-react';
 import confetti from 'canvas-confetti'; 
 import { useLanguage } from '../context/LanguageContext';
 // Veritabanı importu
 import { WORDLE_DB, QUIZ_DB } from '../data/questions';
 
-// --- YARDIMCI FONKSİYON: ŞIK KARIŞTIRMA (SHUFFLE) ---
+// --- YARDIMCI FONKSİYON: ŞIK KARIŞTIRMA ---
+// Bu fonksiyon bir diziyi (şıklar) alır ve rastgele karıştırır
 const shuffleArray = (array) => {
   const newArr = [...array];
   for (let i = newArr.length - 1; i > 0; i--) {
@@ -23,11 +24,8 @@ const shuffleArray = (array) => {
 // --- MÜZİK LİSTESİ ---
 const musicPlaylist = [
   { id: "sad", title: "Dil Perîşan im", artist: "Mihemed Şêxo", src: "https://kurds.io/wp-content/uploads/2025/11/Mihemed-Sexo-Dil-Perisanim-.mp3", start: 15 },
-  { id: "sad", title: "Ay Lê Gulê", artist: "Mihemed Şêxo", src: "https://kurds.io/wp-content/uploads/2025/11/Mihemed-Sexo-Ay-Le-Gule-.mp3", start: 20 },
   { id: "mid", title: "Welatê Min", artist: "Ciwan Haco", src: "https://kurds.io/wp-content/uploads/2025/11/Ciwan-Haco-Welate-Min-.mp3", start: 25 },
-  { id: "mid", title: "Xanima Min", artist: "Şivan Perwer", src: "https://kurds.io/wp-content/uploads/2025/11/Sivan-perwer-–Xanima-Min-.mp3", start: 15 },
-  { id: "happy", title: "Keçê Kurdan", artist: "Aynur Doğan", src: "https://kurds.io/wp-content/uploads/2025/11/Aynur-Dogan-Kece-Kurdan-.mp3", start: 45 },
-  { id: "happy", title: "Bihar Xweş e", artist: "Şehribana Kurdî", src: "https://kurds.io/wp-content/uploads/2025/11/Sehribana-Kurdi-Bihar-Xwese-.mp3", start: 15 }
+  { id: "happy", title: "Keçê Kurdan", artist: "Aynur Doğan", src: "https://kurds.io/wp-content/uploads/2025/11/Aynur-Dogan-Kece-Kurdan-.mp3", start: 45 }
 ];
 
 // ==========================================
@@ -156,7 +154,7 @@ const WordleGame = ({ onBack, lang }) => {
 };
 
 // ==========================================
-// 2. KÜLTÜR TESTİ (GELİŞMİŞ ŞIK KARIŞTIRMALI)
+// 2. KÜLTÜR TESTİ (GELİŞMİŞ ŞIK KARIŞTIRMALI VE DÜZELTİLMİŞ)
 // ==========================================
 const CultureQuiz = ({ onBack, lang }) => {
   const t = {
@@ -170,42 +168,52 @@ const CultureQuiz = ({ onBack, lang }) => {
   const [questions, setQuestions] = useState([]);
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [audio] = useState(new Audio());
+  
+  // Müzik için useRef kullanımı (GARANTİ ÇÖZÜM)
+  // Bu sayede sayfa yenilenmeden müzik objesi kaybolmaz ve kontrol edilebilir.
+  const audioRef = useRef(new Audio());
   const [isPlaying, setIsPlaying] = useState(false);
+  
   const [timeLeft, setTimeLeft] = useState(15);
-  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null); // Hangi şıkka tıklandı?
+  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null); 
   const [currentTrack, setCurrentTrack] = useState(null);
 
+  // --- MÜZİĞİ SUSTURMA FONKSİYONU ---
   const stopMusic = () => {
-    audio.pause();
-    audio.currentTime = 0;
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
     setIsPlaying(false);
   };
 
+  // Component açıldığında veya kapandığında çalışır
   useEffect(() => {
-    return () => stopMusic(); 
+    return () => {
+      stopMusic(); // Component silinirken (Menüye dönerken) müziği sustur
+    };
   }, []);
 
   const startGame = (diff, catId) => {
-    // 1. Soruları çek
+    // Müziği garanti sustur
+    stopMusic();
+
     let pool = QUIZ_DB.filter(q => q.difficulty === diff);
     
-    // 2. Kategori filtrele
+    // Kategori Filtrele
     if (catId && catId !== 'mix') {
       const catMap = { 'dirok': 'Dîrok', 'weje': 'Wêje', 'ziman': 'Ziman', 'folklor': 'Folklor' };
       const targetCat = catMap[catId] || catId;
       pool = pool.filter(q => q.category === targetCat);
     }
     
-    // 3. Yedek (Boşsa hepsinden getir)
+    // Yedek (Eğer soru yoksa karışık getir)
     if(pool.length === 0) pool = QUIZ_DB.filter(q => q.difficulty === diff);
     if(pool.length === 0) return alert("Pirs tune / Soru yok");
     
-    // 4. Soruları seç ve ŞIKLARI KARIŞTIR (Kritik Nokta)
+    // --- ŞIKLARI VE SORULARI KARIŞTIRMA ---
     const selectedQuestions = pool.sort(() => 0.5 - Math.random()).slice(0, 10).map(q => {
       return {
         ...q,
-        options: shuffleArray([...q.options]) // Şıkları burada karıştırıyoruz!
+        options: shuffleArray([...q.options]) // Şıkları karıştır!
       };
     });
     
@@ -223,15 +231,15 @@ const CultureQuiz = ({ onBack, lang }) => {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearTimeout(timer);
     } else if (timeLeft === 0 && selectedAnswerIndex === null) {
-      // Süre bitince otomatik yanlış say (ama geçiş manuel)
-      setSelectedAnswerIndex(-1); // -1: Süre bitti işareti
+      // Süre bitti, yanlış işaretle ama bekle
+      setSelectedAnswerIndex(-1); 
     }
   }, [screen, timeLeft, selectedAnswerIndex]);
 
   const handleAnswer = (points, idx) => {
-    if (selectedAnswerIndex !== null) return; // Çift tıklamayı önle
+    if (selectedAnswerIndex !== null) return; // Çift tıklama engeli
     
-    setSelectedAnswerIndex(idx); // Hangi butona basıldığını kaydet
+    setSelectedAnswerIndex(idx); 
     setScore(score + points);
     
     if(points > 0) confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 }, colors: ['#fbbf24', '#1e3a8a'] });
@@ -259,24 +267,37 @@ const CultureQuiz = ({ onBack, lang }) => {
     const track = tracks[Math.floor(Math.random() * tracks.length)] || musicPlaylist[0];
     
     setCurrentTrack(track);
-    audio.src = track.src;
-    audio.currentTime = track.start;
-    audio.volume = 0.5;
-    audio.play().catch(e => console.log("Oto-oynatma engellendi"));
+    audioRef.current.src = track.src;
+    audioRef.current.currentTime = track.start;
+    audioRef.current.volume = 0.5;
+    audioRef.current.play().catch(e => console.log("Oto-oynatma engellendi"));
     setIsPlaying(true);
   };
 
   const toggleMusic = () => {
-    if (isPlaying) audio.pause(); else audio.play();
+    if (isPlaying) audioRef.current.pause(); 
+    else audioRef.current.play();
     setIsPlaying(!isPlaying);
   };
 
-  // EKRANLAR (Zorluk, Kategori...)
+  // Geri Dönme İşlemi (Müziği Durdurur)
+  const handleBack = () => {
+    stopMusic();
+    onBack();
+  };
+
+  // Tekrar Oyna İşlemi (Müziği Durdurur)
+  const handleRestart = () => {
+    stopMusic();
+    setScreen('diff');
+  };
+
+  // EKRANLAR
   if (screen === 'diff') {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
         <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8 border border-slate-200 relative overflow-hidden text-center">
-          <button onClick={() => {stopMusic(); onBack();}} className="absolute top-4 left-4 text-slate-400 hover:text-blue-900"><ArrowLeft size={24} /></button>
+          <button onClick={handleBack} className="absolute top-4 left-4 text-slate-400 hover:text-blue-900"><ArrowLeft size={24} /></button>
           <div className="h-2 w-full bg-gradient-to-r from-blue-900 via-blue-500 to-yellow-500 absolute top-0 left-0"></div>
           <div className="mt-6 mb-4"><img src="/logo.png" className="w-24 h-24 mx-auto rounded-full shadow-lg border-4 border-white animate-[spin_20s_linear_infinite]" /></div>
           <h1 className="text-2xl font-black text-blue-900 mb-2">{t.title}</h1>
@@ -314,7 +335,7 @@ const CultureQuiz = ({ onBack, lang }) => {
     );
   }
 
-  // 3. OYUN EKRANI
+  // OYUN EKRANI
   if (screen === 'play') {
     const q = questions[index];
     return (
@@ -338,16 +359,19 @@ const CultureQuiz = ({ onBack, lang }) => {
                 const isSelected = selectedAnswerIndex === i;
                 const isCorrectOption = opt.points > 0;
                 
-                // RENK MANTIĞI (ÖNEMLİ)
-                let style = "border-2 border-slate-100 hover:border-blue-200 hover:bg-slate-50"; // Varsayılan
+                // --- RENK MANTIĞI (DÜZELTİLDİ) ---
+                let style = "border-2 border-slate-100 hover:border-blue-200 hover:bg-slate-50"; 
                 
                 if (selectedAnswerIndex !== null) { // Cevap verildiyse
                   if (isCorrectOption) {
-                    style = "bg-green-100 border-green-500 text-green-800 font-bold"; // Doğru olan HEP YEŞİL
+                    // Doğru cevap her zaman yeşil yanar (Öğretmek için)
+                    style = "bg-green-100 border-green-500 text-green-800 font-bold shadow-md transform scale-[1.02]";
                   } else if (isSelected && !isCorrectOption) {
-                    style = "bg-red-100 border-red-500 text-red-800 font-bold"; // Yanlış seçtiğin KIRMIZI
+                    // Yanlış seçtiğin kırmızı yanar
+                    style = "bg-red-100 border-red-500 text-red-800 font-bold";
                   } else {
-                    style = "opacity-40 border-slate-100 grayscale"; // Diğerleri silik
+                    // Diğerleri silikleşir
+                    style = "opacity-40 border-slate-100 grayscale";
                   }
                 }
 
@@ -356,21 +380,21 @@ const CultureQuiz = ({ onBack, lang }) => {
                     className={`w-full p-4 rounded-xl text-left font-semibold transition-all flex justify-between items-center ${style}`}
                   >
                     {opt.text}
-                    {selectedAnswerIndex !== null && isCorrectOption && <CheckCircle size={20} className="text-green-600" />}
-                    {selectedAnswerIndex !== null && isSelected && !isCorrectOption && <XCircle size={20} className="text-red-500" />}
+                    {selectedAnswerIndex !== null && isCorrectOption && <CheckCircle size={18} className="text-green-600" />}
+                    {selectedAnswerIndex !== null && isSelected && !isCorrectOption && <XCircle size={18} className="text-red-500" />}
                   </button>
                 );
               })}
             </div>
             
-            {/* Açıklama ve İleri Butonu */}
+            {/* MANUEL GEÇİŞ (Otomatik geçmez, buton bekler) */}
             <AnimatePresence>
               {selectedAnswerIndex !== null && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-6">
                   <div className="p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-xl mb-4">
                     <p className="text-sm text-blue-900"><strong>ℹ️</strong> {q.explanation}</p>
                   </div>
-                  <button onClick={nextQuestion} className="w-full py-4 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-900/30 transition-all">
+                  <button onClick={nextQuestion} className="w-full py-4 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-900/30 transition-all cursor-pointer">
                     {t.next} <ChevronRight size={20} />
                   </button>
                 </motion.div>
@@ -382,7 +406,7 @@ const CultureQuiz = ({ onBack, lang }) => {
     );
   }
 
-  // 4. SONUÇ EKRANI
+  // SONUÇ EKRANI
   if (screen === 'result') {
     const percentage = Math.round((score / (questions.length * 10)) * 100);
     return (
@@ -398,7 +422,7 @@ const CultureQuiz = ({ onBack, lang }) => {
             
             {/* Müzik Player */}
             <div className="flex items-center gap-3 bg-slate-100 p-4 rounded-2xl mb-6 shadow-inner border border-slate-200">
-              <button onClick={toggleMusic} className="w-12 h-12 bg-blue-900 text-white rounded-full flex items-center justify-center hover:bg-blue-800 transition shadow-lg shrink-0">
+              <button onClick={toggleMusic} className="w-12 h-12 bg-blue-900 text-white rounded-full flex items-center justify-center hover:bg-blue-800 transition shadow-lg shrink-0 cursor-pointer">
                 {isPlaying ? <Pause size={20} /> : <Play size={20} />}
               </button>
               <div className="text-left overflow-hidden w-full">
@@ -415,8 +439,12 @@ const CultureQuiz = ({ onBack, lang }) => {
             </div>
 
             <div className="flex gap-3">
-              <button onClick={() => setScreen('diff')} className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-bold hover:bg-slate-200 flex items-center justify-center gap-2 transition"><RotateCcw size={18}/> {t.restart}</button>
-              <button onClick={() => {stopMusic(); onBack();}} className="flex-1 py-3 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 flex items-center justify-center gap-2 transition shadow-lg shadow-blue-900/20"><ArrowLeft size={18}/> {t.back}</button>
+              <button onClick={handleRestart} className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-bold hover:bg-slate-200 flex items-center justify-center gap-2 transition cursor-pointer">
+                <RotateCcw size={18}/> {t.restart}
+              </button>
+              <button onClick={handleBack} className="flex-1 py-3 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 flex items-center justify-center gap-2 transition shadow-lg shadow-blue-900/20 cursor-pointer">
+                <ArrowLeft size={18}/> {t.back}
+              </button>
             </div>
           </div>
         </div>
@@ -425,6 +453,10 @@ const CultureQuiz = ({ onBack, lang }) => {
   }
   return null;
 };
+
+// ... Wordle ve Ana Menü kodları (öncekiyle aynı, sadece CultureQuiz'i güncelledik) ...
+// (Kodun devamı için yukarıdaki CultureQuiz'i önceki tam koda entegre etmen yeterli)
+// Ancak karışıklık olmasın diye tam kodu veriyorum:
 
 // ==========================================
 // 3. ANA SAYFA (OYUN MENÜSÜ)
@@ -457,7 +489,7 @@ const Listik = () => {
             </div>
             <h2 className="text-2xl font-bold text-slate-800 mb-2">{t.wordle}</h2>
             <p className="text-slate-400 text-sm mb-6">Peyvên 5 tîpî bibîne</p>
-            <button className="w-full py-3 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-200">
+            <button className="w-full py-3 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-200 cursor-pointer">
               {t.play}
             </button>
           </motion.div>
@@ -468,7 +500,7 @@ const Listik = () => {
             </div>
             <h2 className="text-2xl font-bold text-slate-800 mb-2">{t.quiz}</h2>
             <p className="text-slate-400 text-sm mb-6">Dîrok, Ziman û Wêje</p>
-            <button className="w-full py-3 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 transition-colors shadow-lg shadow-blue-200">
+            <button className="w-full py-3 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 transition-colors shadow-lg shadow-blue-200 cursor-pointer">
               {t.play}
             </button>
           </motion.div>
