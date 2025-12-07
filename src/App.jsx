@@ -10,13 +10,10 @@ import Art from "./pages/Art";
 import History from "./pages/History"; 
 import Language from "./pages/Language";
 import Listik from "./pages/Listik"; 
+import ScrollToTop from "./components/ScrollToTop"; // YENİ EKLENDİ
+import { LanguageProvider } from './context/LanguageContext';
 import "./index.css";
 
-// --- YENİ EKLENEN KISIM ---
-// Dil merkezini (Context) içeri alıyoruz
-import { LanguageProvider } from './context/LanguageContext'; 
-
-// Layout Bileşeni
 const Layout = ({ children }) => {
   const location = useLocation();
   const isGamePage = location.pathname === '/listik';
@@ -40,10 +37,9 @@ const Layout = ({ children }) => {
 
 function App() {
   return (
-    // BÜTÜN UYGULAMAYI LanguageProvider İLE SARMALIYORUZ
-    // Artık içerideki herkes (Home, Navigation vs.) dile erişebilir.
     <LanguageProvider>
       <Router>
+        <ScrollToTop /> {/* ARTIK SAYFA DEĞİŞİNCE YUKARI KAYACAK */}
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />

@@ -3,15 +3,15 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ArrowLeft, RotateCcw, Delete, CornerDownLeft, HelpCircle, 
   Gamepad2, Library, CheckCircle, XCircle, Play, Pause, Music as MusicIcon, Share2,
-  Award, Clock, Trophy, ChevronRight, AlertCircle
+  Award, Clock, Trophy, ChevronRight, User, Sparkles
 } from 'lucide-react';
 import confetti from 'canvas-confetti'; 
 import { useLanguage } from '../context/LanguageContext';
 // Veritabanı importu
 import { WORDLE_DB, QUIZ_DB } from '../data/questions';
+import { KURDISH_NAMES } from '../data/names';
 
 // --- YARDIMCI FONKSİYON: ŞIK KARIŞTIRMA ---
-// Bu fonksiyon bir diziyi (şıklar) alır ve rastgele karıştırır
 const shuffleArray = (array) => {
   const newArr = [...array];
   for (let i = newArr.length - 1; i > 0; i--) {
@@ -32,6 +32,7 @@ const musicPlaylist = [
 // 1. WORDLE OYUNU
 // ==========================================
 const WordleGame = ({ onBack, lang }) => {
+  // ... (Wordle kodları aynı, yer tasarrufu için özetliyorum, tam kodda burası dolu olacak)
   const t = {
     KU: { title: 'Peyvê Bibîne', win: 'Te Serkeft! 🥳', lose: 'Te Windakir 😔', again: 'Dîsa Bilîze', back: 'Vegere', enter: 'BAŞ', del: 'JÊB', hint: 'Peyv 5 tîp e', meaning: 'Wate' },
     TR: { title: 'Kelimeyi Bul', win: 'Tebrikler! 🥳', lose: 'Kaybettin 😔', again: 'Tekrar', back: 'Dön', enter: 'GİR', del: 'SİL', hint: 'Kelime 5 harf', meaning: 'Anlamı' },
@@ -154,9 +155,10 @@ const WordleGame = ({ onBack, lang }) => {
 };
 
 // ==========================================
-// 2. KÜLTÜR TESTİ (GELİŞMİŞ ŞIK KARIŞTIRMALI VE DÜZELTİLMİŞ)
+// 2. KÜLTÜR TESTİ
 // ==========================================
 const CultureQuiz = ({ onBack, lang }) => {
+  // ... (Kültür testi kodları aynı)
   const t = {
     KU: { title: 'Testa YTU Kurdî', diff: 'Asta Zehmetiyê', easy: 'Hêsan', medium: 'Navîn', hard: 'Zehmet', start: 'Dest Pê Bike', q: 'Pirs', result: 'Encam', restart: 'Ji Nû Ve', music: 'Muzîk', play: 'Bilîze', cat: 'Kategorî', next: 'Pirsê Din' },
     TR: { title: 'YTU Kurdî Testi', diff: 'Zorluk Seviyesi', easy: 'Kolay', medium: 'Orta', hard: 'Zor', start: 'Başla', q: 'Soru', result: 'Sonuç', restart: 'Tekrar', music: 'Müzik', play: 'Oyna', cat: 'Kategori', next: 'Sonraki Soru' },
@@ -168,87 +170,62 @@ const CultureQuiz = ({ onBack, lang }) => {
   const [questions, setQuestions] = useState([]);
   const [index, setIndex] = useState(0);
   const [score, setScore] = useState(0);
-  
-  // Müzik için useRef kullanımı (GARANTİ ÇÖZÜM)
-  // Bu sayede sayfa yenilenmeden müzik objesi kaybolmaz ve kontrol edilebilir.
-  const audioRef = useRef(new Audio());
+  const [audio] = useState(new Audio());
   const [isPlaying, setIsPlaying] = useState(false);
-  
   const [timeLeft, setTimeLeft] = useState(15);
-  const [selectedAnswerIndex, setSelectedAnswerIndex] = useState(null); 
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [currentTrack, setCurrentTrack] = useState(null);
 
-  // --- MÜZİĞİ SUSTURMA FONKSİYONU ---
   const stopMusic = () => {
-    audioRef.current.pause();
-    audioRef.current.currentTime = 0;
+    audio.pause();
+    audio.currentTime = 0;
     setIsPlaying(false);
   };
 
-  // Component açıldığında veya kapandığında çalışır
   useEffect(() => {
-    return () => {
-      stopMusic(); // Component silinirken (Menüye dönerken) müziği sustur
-    };
+    return () => stopMusic(); 
   }, []);
 
   const startGame = (diff, catId) => {
-    // Müziği garanti sustur
-    stopMusic();
-
     let pool = QUIZ_DB.filter(q => q.difficulty === diff);
-    
-    // Kategori Filtrele
     if (catId && catId !== 'mix') {
       const catMap = { 'dirok': 'Dîrok', 'weje': 'Wêje', 'ziman': 'Ziman', 'folklor': 'Folklor' };
       const targetCat = catMap[catId] || catId;
       pool = pool.filter(q => q.category === targetCat);
     }
-    
-    // Yedek (Eğer soru yoksa karışık getir)
     if(pool.length === 0) pool = QUIZ_DB.filter(q => q.difficulty === diff);
     if(pool.length === 0) return alert("Pirs tune / Soru yok");
     
-    // --- ŞIKLARI VE SORULARI KARIŞTIRMA ---
-    const selectedQuestions = pool.sort(() => 0.5 - Math.random()).slice(0, 10).map(q => {
-      return {
-        ...q,
-        options: shuffleArray([...q.options]) // Şıkları karıştır!
-      };
-    });
+    pool = pool.sort(() => 0.5 - Math.random()).slice(0, 10).map(q => ({...q, options: shuffleArray([...q.options])}));
     
-    setQuestions(selectedQuestions);
+    setQuestions(pool);
     setScore(0);
     setIndex(0);
     setScreen('play');
     setTimeLeft(15);
-    setSelectedAnswerIndex(null);
+    setSelectedAnswer(null);
   };
 
-  // Sayaç
   useEffect(() => {
-    if (screen === 'play' && timeLeft > 0 && selectedAnswerIndex === null) {
+    if (screen === 'play' && timeLeft > 0 && selectedAnswer === null) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearTimeout(timer);
-    } else if (timeLeft === 0 && selectedAnswerIndex === null) {
-      // Süre bitti, yanlış işaretle ama bekle
-      setSelectedAnswerIndex(-1); 
+    } else if (timeLeft === 0 && selectedAnswer === null) {
+      handleAnswer(0);
     }
-  }, [screen, timeLeft, selectedAnswerIndex]);
+  }, [screen, timeLeft, selectedAnswer]);
 
-  const handleAnswer = (points, idx) => {
-    if (selectedAnswerIndex !== null) return; // Çift tıklama engeli
-    
-    setSelectedAnswerIndex(idx); 
+  const handleAnswer = (points) => {
+    if (selectedAnswer !== null) return;
+    setSelectedAnswer(points);
     setScore(score + points);
-    
     if(points > 0) confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 }, colors: ['#fbbf24', '#1e3a8a'] });
   };
 
   const nextQuestion = () => {
     if (index + 1 < questions.length) {
       setIndex(index + 1);
-      setSelectedAnswerIndex(null);
+      setSelectedAnswer(null);
       setTimeLeft(15);
     } else {
       setScreen('result');
@@ -262,42 +239,26 @@ const CultureQuiz = ({ onBack, lang }) => {
     let mood = 'mid';
     if (percentage >= 80) mood = 'happy';
     else if (percentage < 50) mood = 'sad';
-    
     const tracks = musicPlaylist.filter(t => t.id === mood);
     const track = tracks[Math.floor(Math.random() * tracks.length)] || musicPlaylist[0];
-    
     setCurrentTrack(track);
-    audioRef.current.src = track.src;
-    audioRef.current.currentTime = track.start;
-    audioRef.current.volume = 0.5;
-    audioRef.current.play().catch(e => console.log("Oto-oynatma engellendi"));
+    audio.src = track.src;
+    audio.currentTime = track.start;
+    audio.volume = 0.5;
+    audio.play().catch(e => console.log("Oto-oynatma engellendi"));
     setIsPlaying(true);
   };
 
   const toggleMusic = () => {
-    if (isPlaying) audioRef.current.pause(); 
-    else audioRef.current.play();
+    if (isPlaying) audio.pause(); else audio.play();
     setIsPlaying(!isPlaying);
   };
 
-  // Geri Dönme İşlemi (Müziği Durdurur)
-  const handleBack = () => {
-    stopMusic();
-    onBack();
-  };
-
-  // Tekrar Oyna İşlemi (Müziği Durdurur)
-  const handleRestart = () => {
-    stopMusic();
-    setScreen('diff');
-  };
-
-  // EKRANLAR
   if (screen === 'diff') {
     return (
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="min-h-screen bg-slate-50 flex items-center justify-center p-4">
         <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8 border border-slate-200 relative overflow-hidden text-center">
-          <button onClick={handleBack} className="absolute top-4 left-4 text-slate-400 hover:text-blue-900"><ArrowLeft size={24} /></button>
+          <button onClick={() => {stopMusic(); onBack();}} className="absolute top-4 left-4 text-slate-400 hover:text-blue-900"><ArrowLeft size={24} /></button>
           <div className="h-2 w-full bg-gradient-to-r from-blue-900 via-blue-500 to-yellow-500 absolute top-0 left-0"></div>
           <div className="mt-6 mb-4"><img src="/logo.png" className="w-24 h-24 mx-auto rounded-full shadow-lg border-4 border-white animate-[spin_20s_linear_infinite]" /></div>
           <h1 className="text-2xl font-black text-blue-900 mb-2">{t.title}</h1>
@@ -335,7 +296,6 @@ const CultureQuiz = ({ onBack, lang }) => {
     );
   }
 
-  // OYUN EKRANI
   if (screen === 'play') {
     const q = questions[index];
     return (
@@ -353,50 +313,28 @@ const CultureQuiz = ({ onBack, lang }) => {
               <div className="flex items-center gap-1 text-slate-600 font-bold bg-slate-100 px-3 py-1 rounded-full text-xs"><Clock size={14} /> {timeLeft}s</div>
             </div>
             <h2 className="text-xl font-bold text-slate-800 mb-8 leading-snug min-h-[4rem]">{q.question}</h2>
-            
             <div className="space-y-3">
               {q.options.map((opt, i) => {
-                const isSelected = selectedAnswerIndex === i;
-                const isCorrectOption = opt.points > 0;
-                
-                // --- RENK MANTIĞI (DÜZELTİLDİ) ---
-                let style = "border-2 border-slate-100 hover:border-blue-200 hover:bg-slate-50"; 
-                
-                if (selectedAnswerIndex !== null) { // Cevap verildiyse
-                  if (isCorrectOption) {
-                    // Doğru cevap her zaman yeşil yanar (Öğretmek için)
-                    style = "bg-green-100 border-green-500 text-green-800 font-bold shadow-md transform scale-[1.02]";
-                  } else if (isSelected && !isCorrectOption) {
-                    // Yanlış seçtiğin kırmızı yanar
-                    style = "bg-red-100 border-red-500 text-red-800 font-bold";
-                  } else {
-                    // Diğerleri silikleşir
-                    style = "opacity-40 border-slate-100 grayscale";
-                  }
+                let style = "border-2 border-slate-100 hover:border-blue-200 hover:bg-slate-50";
+                if (selectedAnswer !== null) {
+                  if (opt.points > 0) style = "bg-green-100 border-green-500 text-green-800";
+                  else if (selectedAnswer === opt.points) style = "bg-red-100 border-red-500 text-red-800";
+                  else style = "border-slate-100 opacity-50";
                 }
-
                 return (
-                  <button key={i} disabled={selectedAnswerIndex !== null} onClick={() => handleAnswer(opt.points, i)} 
-                    className={`w-full p-4 rounded-xl text-left font-semibold transition-all flex justify-between items-center ${style}`}
-                  >
+                  <button key={i} disabled={selectedAnswer !== null} onClick={() => handleAnswer(opt.points)} className={`w-full p-4 rounded-xl text-left font-semibold transition-all flex justify-between items-center ${style}`}>
                     {opt.text}
-                    {selectedAnswerIndex !== null && isCorrectOption && <CheckCircle size={18} className="text-green-600" />}
-                    {selectedAnswerIndex !== null && isSelected && !isCorrectOption && <XCircle size={18} className="text-red-500" />}
+                    {selectedAnswer !== null && opt.points > 0 && <CheckCircle size={18} className="text-green-600" />}
+                    {selectedAnswer !== null && opt.points === 0 && selectedAnswer === opt.points && <XCircle size={18} className="text-red-500" />}
                   </button>
                 );
               })}
             </div>
-            
-            {/* MANUEL GEÇİŞ (Otomatik geçmez, buton bekler) */}
             <AnimatePresence>
-              {selectedAnswerIndex !== null && (
+              {selectedAnswer !== null && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="mt-6">
-                  <div className="p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-xl mb-4">
-                    <p className="text-sm text-blue-900"><strong>ℹ️</strong> {q.explanation}</p>
-                  </div>
-                  <button onClick={nextQuestion} className="w-full py-4 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-900/30 transition-all cursor-pointer">
-                    {t.next} <ChevronRight size={20} />
-                  </button>
+                  <div className="p-4 bg-blue-50 border-l-4 border-blue-500 rounded-r-xl mb-4"><p className="text-sm text-blue-900"><strong>ℹ️</strong> {q.explanation}</p></div>
+                  <button onClick={nextQuestion} className="w-full py-4 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 flex items-center justify-center gap-2 shadow-lg transition-all">{t.next} <ChevronRight size={20} /></button>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -406,7 +344,6 @@ const CultureQuiz = ({ onBack, lang }) => {
     );
   }
 
-  // SONUÇ EKRANI
   if (screen === 'result') {
     const percentage = Math.round((score / (questions.length * 10)) * 100);
     return (
@@ -419,32 +356,18 @@ const CultureQuiz = ({ onBack, lang }) => {
             <h2 className="text-slate-400 font-bold uppercase tracking-widest text-xs mb-2">{t.result}</h2>
             <div className="text-6xl font-black text-blue-900 mb-2">%{percentage}</div>
             <p className="text-slate-500 text-sm mb-6">{percentage > 50 ? "Serkeftin!" : "Dîsa biceribîne."}</p>
-            
-            {/* Müzik Player */}
             <div className="flex items-center gap-3 bg-slate-100 p-4 rounded-2xl mb-6 shadow-inner border border-slate-200">
-              <button onClick={toggleMusic} className="w-12 h-12 bg-blue-900 text-white rounded-full flex items-center justify-center hover:bg-blue-800 transition shadow-lg shrink-0 cursor-pointer">
+              <button onClick={toggleMusic} className="w-12 h-12 bg-blue-900 text-white rounded-full flex items-center justify-center hover:bg-blue-800 transition shadow-lg shrink-0">
                 {isPlaying ? <Pause size={20} /> : <Play size={20} />}
               </button>
               <div className="text-left overflow-hidden w-full">
-                {currentTrack ? (
-                  <>
-                    <div className="text-sm font-bold text-blue-900 truncate">{currentTrack.title}</div>
-                    <div className="text-xs text-slate-500 truncate">{currentTrack.artist}</div>
-                  </>
-                ) : (
-                  <div className="text-xs text-slate-400">Loading...</div>
-                )}
+                {currentTrack ? (<><div className="text-sm font-bold text-blue-900 truncate">{currentTrack.title}</div><div className="text-xs text-slate-500 truncate">{currentTrack.artist}</div></>) : (<div className="text-xs text-slate-400">Loading...</div>)}
               </div>
               <MusicIcon size={20} className="text-slate-400 ml-auto shrink-0" />
             </div>
-
             <div className="flex gap-3">
-              <button onClick={handleRestart} className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-bold hover:bg-slate-200 flex items-center justify-center gap-2 transition cursor-pointer">
-                <RotateCcw size={18}/> {t.restart}
-              </button>
-              <button onClick={handleBack} className="flex-1 py-3 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 flex items-center justify-center gap-2 transition shadow-lg shadow-blue-900/20 cursor-pointer">
-                <ArrowLeft size={18}/> {t.back}
-              </button>
+              <button onClick={() => setScreen('diff')} className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-bold hover:bg-slate-200 flex items-center justify-center gap-2 transition"><RotateCcw size={18}/> {t.restart}</button>
+              <button onClick={() => {stopMusic(); onBack();}} className="flex-1 py-3 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 flex items-center justify-center gap-2 transition shadow-lg shadow-blue-900/20"><ArrowLeft size={18}/> {t.back}</button>
             </div>
           </div>
         </div>
@@ -454,25 +377,85 @@ const CultureQuiz = ({ onBack, lang }) => {
   return null;
 };
 
-// ... Wordle ve Ana Menü kodları (öncekiyle aynı, sadece CultureQuiz'i güncelledik) ...
-// (Kodun devamı için yukarıdaki CultureQuiz'i önceki tam koda entegre etmen yeterli)
-// Ancak karışıklık olmasın diye tam kodu veriyorum:
+// ==========================================
+// 3. İSİM BULUCU (YENİ OYUN)
+// ==========================================
+const NameGenerator = ({ onBack, lang }) => {
+  const t = {
+    KU: { title: 'Navê Min Çi Ye?', input: 'Navê xwe binivîse', btn: 'Navê Min Bibîne', meaning: 'Wate', back: 'Vegere' },
+    TR: { title: 'Kürtçe İsmim Ne?', input: 'Adını yaz', btn: 'İsmimi Bul', meaning: 'Anlamı', back: 'Geri Dön' },
+    EN: { title: 'My Kurdish Name', input: 'Enter your name', btn: 'Find My Name', meaning: 'Meaning', back: 'Back' }
+  }[lang] || { title: 'Navê Min Çi Ye?' };
+
+  const [inputName, setInputName] = useState("");
+  const [result, setResult] = useState(null);
+
+  const generateName = () => {
+    if (!inputName.trim()) return;
+    // Basit bir hash fonksiyonu: İsmin harflerinin kodlarını topla
+    const sum = inputName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    // Bu sayıya göre listeden bir isim seç (Her zaman aynı isme aynı sonucu verir)
+    const index = sum % KURDISH_NAMES.length;
+    setResult(KURDISH_NAMES[index]);
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4 w-full">
+      <div className="w-full max-w-md bg-white rounded-3xl shadow-xl p-8 text-center border border-slate-200 relative">
+        <button onClick={onBack} className="absolute top-4 left-4 text-slate-400 hover:text-blue-900"><ArrowLeft size={24} /></button>
+        <div className="w-20 h-20 bg-purple-100 rounded-full mx-auto flex items-center justify-center mb-6 shadow-inner">
+           <User size={40} className="text-purple-600" />
+        </div>
+        <h1 className="text-2xl font-black text-slate-800 mb-6">{t.title}</h1>
+        
+        {!result ? (
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <input 
+              type="text" 
+              placeholder={t.input}
+              value={inputName}
+              onChange={(e) => setInputName(e.target.value)}
+              className="w-full p-4 rounded-xl border-2 border-slate-200 bg-slate-50 text-center text-lg font-bold focus:border-purple-500 focus:outline-none mb-4"
+            />
+            <button 
+              onClick={generateName}
+              disabled={!inputName.trim()}
+              className="w-full py-4 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-700 transition shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {t.btn}
+            </button>
+          </motion.div>
+        ) : (
+          <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-purple-50 p-6 rounded-2xl border border-purple-100">
+             <h2 className="text-lg text-slate-500 mb-2">Ji bo <span className="font-bold text-purple-600">{inputName}</span></h2>
+             <div className="text-4xl font-black text-slate-800 mb-2">{result.name}</div>
+             <div className="text-sm font-medium text-slate-500 bg-white p-2 rounded-lg inline-block shadow-sm">
+               {t.meaning}: {result.meaning}
+             </div>
+             <button onClick={() => {setResult(null); setInputName("");}} className="block w-full mt-6 text-sm font-bold text-purple-600 hover:underline">{t.back}</button>
+          </motion.div>
+        )}
+      </div>
+    </div>
+  );
+};
 
 // ==========================================
-// 3. ANA SAYFA (OYUN MENÜSÜ)
+// 4. OYUN MENÜSÜ
 // ==========================================
 const Listik = () => {
   const { lang } = useLanguage();
   const [activeGame, setActiveGame] = useState(null);
 
   const t = {
-    KU: { title: 'Lîstikên Me', sub: 'Hêviya me ew e ku hûn kêfxweş bibin', wordle: 'Peyvê Bibîne', quiz: 'Testa YTU Kurdî', play: 'Bilîze' },
-    TR: { title: 'Oyunlarımız', sub: 'Keyifli vakit geçirmeniz dileğiyle', wordle: 'Kelimeyi Bul', quiz: 'YTU Kurdî Testi', play: 'Oyna' },
-    EN: { title: 'Our Games', sub: 'Have fun!', wordle: 'Wordle', quiz: 'Culture Quiz', play: 'Play' }
+    KU: { title: 'Lîstikên Me', sub: 'Hêviya me ew e ku hûn kêfxweş bibin', wordle: 'Peyvê Bibîne', quiz: 'Testa YTU Kurdî', name: 'Navê Min Çi Ye?', play: 'Bilîze' },
+    TR: { title: 'Oyunlarımız', sub: 'Keyifli vakit geçirmeniz dileğiyle', wordle: 'Kelimeyi Bul', quiz: 'YTU Kurdî Testi', name: 'Kürtçe İsmim Ne?', play: 'Oyna' },
+    EN: { title: 'Our Games', sub: 'Have fun!', wordle: 'Wordle', quiz: 'Culture Quiz', name: 'My Kurdish Name', play: 'Play' }
   }[lang] || { title: 'Lîstikên Me' };
 
   if (activeGame === 'wordle') return <WordleGame onBack={() => setActiveGame(null)} lang={lang} />;
   if (activeGame === 'quiz') return <CultureQuiz onBack={() => setActiveGame(null)} lang={lang} />;
+  if (activeGame === 'name') return <NameGenerator onBack={() => setActiveGame(null)} lang={lang} />;
 
   return (
     <div className="min-h-screen bg-slate-50 pt-24 px-4 pb-12 w-full">
@@ -482,27 +465,29 @@ const Listik = () => {
           <p className="text-slate-500 text-lg font-medium">{t.sub}</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <motion.div whileHover={{ y: -5 }} className="bg-white rounded-3xl p-8 shadow-xl border border-slate-100 flex flex-col items-center text-center group cursor-pointer hover:shadow-2xl transition-all" onClick={() => setActiveGame('wordle')}>
-            <div className="w-24 h-24 bg-emerald-100 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-inner">
-              <Gamepad2 size={48} className="text-emerald-600" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <motion.div whileHover={{ y: -5 }} className="bg-white rounded-3xl p-6 shadow-xl border border-slate-100 flex flex-col items-center text-center group cursor-pointer hover:shadow-2xl transition-all" onClick={() => setActiveGame('wordle')}>
+            <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-inner">
+              <Gamepad2 size={40} className="text-emerald-600" />
             </div>
-            <h2 className="text-2xl font-bold text-slate-800 mb-2">{t.wordle}</h2>
-            <p className="text-slate-400 text-sm mb-6">Peyvên 5 tîpî bibîne</p>
-            <button className="w-full py-3 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-200 cursor-pointer">
-              {t.play}
-            </button>
+            <h2 className="text-xl font-bold text-slate-800 mb-2">{t.wordle}</h2>
+            <button className="w-full py-2 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-700 transition-colors shadow-lg mt-auto">{t.play}</button>
           </motion.div>
 
-          <motion.div whileHover={{ y: -5 }} className="bg-white rounded-3xl p-8 shadow-xl border border-slate-100 flex flex-col items-center text-center group cursor-pointer hover:shadow-2xl transition-all" onClick={() => setActiveGame('quiz')}>
-            <div className="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-inner">
-              <Library size={48} className="text-blue-600" />
+          <motion.div whileHover={{ y: -5 }} className="bg-white rounded-3xl p-6 shadow-xl border border-slate-100 flex flex-col items-center text-center group cursor-pointer hover:shadow-2xl transition-all" onClick={() => setActiveGame('quiz')}>
+            <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-inner">
+              <Library size={40} className="text-blue-600" />
             </div>
-            <h2 className="text-2xl font-bold text-slate-800 mb-2">{t.quiz}</h2>
-            <p className="text-slate-400 text-sm mb-6">Dîrok, Ziman û Wêje</p>
-            <button className="w-full py-3 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 transition-colors shadow-lg shadow-blue-200 cursor-pointer">
-              {t.play}
-            </button>
+            <h2 className="text-xl font-bold text-slate-800 mb-2">{t.quiz}</h2>
+            <button className="w-full py-2 bg-blue-900 text-white rounded-xl font-bold hover:bg-blue-800 transition-colors shadow-lg mt-auto">{t.play}</button>
+          </motion.div>
+
+          <motion.div whileHover={{ y: -5 }} className="bg-white rounded-3xl p-6 shadow-xl border border-slate-100 flex flex-col items-center text-center group cursor-pointer hover:shadow-2xl transition-all" onClick={() => setActiveGame('name')}>
+            <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform shadow-inner">
+              <Sparkles size={40} className="text-purple-600" />
+            </div>
+            <h2 className="text-xl font-bold text-slate-800 mb-2">{t.name}</h2>
+            <button className="w-full py-2 bg-purple-600 text-white rounded-xl font-bold hover:bg-purple-700 transition-colors shadow-lg mt-auto">{t.play}</button>
           </motion.div>
         </div>
       </div>
