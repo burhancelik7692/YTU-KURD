@@ -1,181 +1,124 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { BookOpen, MessageCircle, FileText, Headphones } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowLeft, BookOpen, MessageCircle, FileText, Headphones, Languages } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import { siteContent } from '../data/locales';
 
 const Language = () => {
-  const topics = [
-    {
-      icon: BookOpen,
-      title: 'Rêzimana Kurdî',
-      description: 'Rêziman û qawaidên zimanê kurdî hîn bibin',
-      content: 'Zimanê kurdî zimanek Hind-Ewropî ye û du zaravayên sereke hene: Kurmancî (Kurdiya Jorîn) û Soranî (Kurdiya Navîn). Alfabeya latînî ji bo Kurmancî û alfabeya erebî ji bo Soranî tê bikar anîn.'
-    },
-    {
-      icon: MessageCircle,
-      title: 'Axaftina Rojane',
-      description: 'Hevokên rojane yên kurdî',
-      content: 'Silav - Roj baş, Spas - Sipas, Bi xêr hatî - Bi xêr hatî, Çawa yî? - Tu çawa yî?, Ez baş im - Ez baş im, Navê te çi ye? - Navê te çi ye?'
-    },
-    {
-      icon: FileText,
-      title: 'Peyv û Bêje',
-      description: 'Peyv û bêjeyên girîng',
-      content: 'Mal - Xanî, Dê - Dayik, Bav - Bav, Birayê - Bira, Xwişk - Xwişk, Heval - Heval, Dibistan - Dibistan, Pirtûk - Pirtûk'
-    },
-    {
-      icon: Headphones,
-      title: 'Guhdarî û Axaftin',
-      description: 'Pratîka guhdarî û axaftinê',
-      content: 'Ji bo ku hûn zimanê kurdî baş hîn bibin, divê hûn her roj guhdarî bikin û bi kurdî bipeyivin. Stranên kurdî bibihîzin, fîlmên kurdî temaşe bikin û bi hevalên xwe re bi kurdî bipeyivin.'
-    }
-  ];
+  const { lang } = useLanguage();
+  
+  const content = siteContent[lang]?.pages?.ziman || { 
+    title: "Ziman", desc: "Loading...", alphabetTitle: "Alfabe", topics: [], phrases: []
+  };
 
+  // Konu İkonları
+  const getIcon = (id) => {
+    switch (id) {
+      case 'reziman': return BookOpen;
+      case 'axaftin': return MessageCircle;
+      case 'peyv': return FileText;
+      case 'guhdari': return Headphones;
+      default: return BookOpen;
+    }
+  };
+
+  // Sabit Alfabe
   const alphabet = [
-    { letter: 'A', pronunciation: 'a' },
-    { letter: 'B', pronunciation: 'be' },
-    { letter: 'C', pronunciation: 'ce' },
-    { letter: 'Ç', pronunciation: 'çe' },
-    { letter: 'D', pronunciation: 'de' },
-    { letter: 'E', pronunciation: 'e' },
-    { letter: 'Ê', pronunciation: 'ê' },
-    { letter: 'F', pronunciation: 'fe' },
-    { letter: 'G', pronunciation: 'ge' },
-    { letter: 'H', pronunciation: 'he' },
-    { letter: 'I', pronunciation: 'ı' },
-    { letter: 'Î', pronunciation: 'î' },
-    { letter: 'J', pronunciation: 'je' },
-    { letter: 'K', pronunciation: 'ke' },
-    { letter: 'L', pronunciation: 'le' },
-    { letter: 'M', pronunciation: 'me' },
-    { letter: 'N', pronunciation: 'ne' },
-    { letter: 'O', pronunciation: 'o' },
-    { letter: 'P', pronunciation: 'pe' },
-    { letter: 'Q', pronunciation: 'qe' },
-    { letter: 'R', pronunciation: 're' },
-    { letter: 'S', pronunciation: 'se' },
-    { letter: 'Ş', pronunciation: 'şe' },
-    { letter: 'T', pronunciation: 'te' },
-    { letter: 'U', pronunciation: 'u' },
-    { letter: 'Û', pronunciation: 'û' },
-    { letter: 'V', pronunciation: 've' },
-    { letter: 'W', pronunciation: 'we' },
-    { letter: 'X', pronunciation: 'xe' },
-    { letter: 'Y', pronunciation: 'ye' },
+    { letter: 'A', pronunciation: 'a' }, { letter: 'B', pronunciation: 'be' },
+    { letter: 'C', pronunciation: 'ce' }, { letter: 'Ç', pronunciation: 'çe' },
+    { letter: 'D', pronunciation: 'de' }, { letter: 'E', pronunciation: 'e' },
+    { letter: 'Ê', pronunciation: 'ê' }, { letter: 'F', pronunciation: 'fe' },
+    { letter: 'G', pronunciation: 'ge' }, { letter: 'H', pronunciation: 'he' },
+    { letter: 'I', pronunciation: 'ı' }, { letter: 'Î', pronunciation: 'î' },
+    { letter: 'J', pronunciation: 'je' }, { letter: 'K', pronunciation: 'ke' },
+    { letter: 'L', pronunciation: 'le' }, { letter: 'M', pronunciation: 'me' },
+    { letter: 'N', pronunciation: 'ne' }, { letter: 'O', pronunciation: 'o' },
+    { letter: 'P', pronunciation: 'pe' }, { letter: 'Q', pronunciation: 'qe' },
+    { letter: 'R', pronunciation: 're' }, { letter: 'S', pronunciation: 'se' },
+    { letter: 'Ş', pronunciation: 'şe' }, { letter: 'T', pronunciation: 'te' },
+    { letter: 'U', pronunciation: 'u' }, { letter: 'Û', pronunciation: 'û' },
+    { letter: 'V', pronunciation: 've' }, { letter: 'W', pronunciation: 'we' },
+    { letter: 'X', pronunciation: 'xe' }, { letter: 'Y', pronunciation: 'ye' },
     { letter: 'Z', pronunciation: 'ze' }
   ];
 
   return (
     <>
       <Helmet>
-        <title>Ziman - YTU Kurdî </title>
-        <meta name="description" content="Zimanê kurdî hîn bibin - Rêziman, peyv, û axaftina rojane" />
+        <title>{content.title} - YTU Kurdî</title>
+        <meta name="description" content={content.desc} />
       </Helmet>
 
-      <div className="min-h-screen py-12 px-4">
-        <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-5xl font-bold text-gray-900 mb-6">Zimanê Kurdî</h1>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-              Zimanê kurdî hîn bibin - Alfabê, rêziman, peyv û axaftina rojane
-            </p>
+      <div className="min-h-screen bg-slate-50 pt-24 pb-12 px-4">
+        <div className="max-w-4xl mx-auto">
+          
+          <Link to="/" className="inline-flex items-center text-slate-500 hover:text-blue-900 mb-6 transition group">
+            <ArrowLeft size={20} className="mr-1 group-hover:-translate-x-1 transition-transform" /> 
+            {lang === 'KU' ? 'Vegere' : (lang === 'TR' ? 'Geri' : 'Back')}
+          </Link>
+          
+          {/* Başlık */}
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-16">
+            <div className="inline-block p-4 bg-blue-100 rounded-full mb-4">
+              <Languages size={40} className="text-blue-600" />
+            </div>
+            <h1 className="text-5xl font-black text-slate-900 mb-4 tracking-tight">{content.title}</h1>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto">{content.desc}</p>
           </motion.div>
 
-          {/* Alphabet Section */}
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-16"
-          >
-            <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Alfabeya Kurdî (Kurmancî)</h2>
-            <div className="bg-white rounded-2xl shadow-xl p-8">
-              <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-4">
-                {alphabet.map((item, index) => (
-                  <motion.div
-                    key={item.letter}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: index * 0.02 }}
-                    className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-4 text-center hover:scale-110 transition-transform duration-300 cursor-pointer shadow-lg"
-                  >
-                    <div className="text-3xl font-bold text-white mb-1">{item.letter}</div>
-                    <div className="text-xs text-blue-100">{item.pronunciation}</div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.section>
-
-          {/* Topics Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            {topics.map((topic, index) => (
-              <motion.div
-                key={topic.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300"
-              >
-                <div className="flex items-start space-x-4">
-                  <div className="bg-blue-500 rounded-xl p-3 flex-shrink-0">
-                    <topic.icon className="text-white" size={28} />
+          {/* Konular */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
+            {content.topics && content.topics.map((topic, index) => {
+              const Icon = getIcon(topic.id);
+              return (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 hover:shadow-xl transition-all"
+                >
+                  <div className="bg-blue-600 w-14 h-14 rounded-2xl flex items-center justify-center mb-6 text-white shadow-lg shadow-blue-200">
+                    <Icon size={28} />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{topic.title}</h3>
-                    <p className="text-gray-600 mb-4">{topic.description}</p>
-                    <p className="text-gray-700 leading-relaxed">{topic.content}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                  <h3 className="text-2xl font-bold text-slate-800 mb-2">{topic.title}</h3>
+                  <p className="text-sm font-bold text-blue-500 uppercase tracking-wide mb-4">{topic.desc}</p>
+                  <p className="text-slate-600 leading-relaxed">{topic.text}</p>
+                </motion.div>
+              );
+            })}
           </div>
 
-          {/* Common Phrases */}
-          <motion.section
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="bg-gradient-to-br from-emerald-500 to-blue-600 rounded-2xl shadow-xl p-8 md:p-12 text-white"
-          >
-            <h2 className="text-3xl font-bold mb-8 text-center">Hevokên Girîng</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {[
-                { kurdish: 'Roj baş', meaning: 'Günaydın / İyi günler' },
-                { kurdish: 'Êvar baş', meaning: 'İyi akşamlar' },
-                { kurdish: 'Şev baş', meaning: 'İyi geceler' },
-                { kurdish: 'Sipas', meaning: 'Teşekkür ederim' },
-                { kurdish: 'Ji kerema xwe', meaning: 'Lütfen' },
-                { kurdish: 'Bibore', meaning: 'Özür dilerim' },
-                { kurdish: 'Erê', meaning: 'Evet' },
-                { kurdish: 'Na', meaning: 'Hayır' },
-                { kurdish: 'Ez te hez dikim', meaning: 'Seni seviyorum' },
-                { kurdish: 'Bi xêr hatî', meaning: 'Hoş geldin' }
-              ].map((phrase, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-all duration-300"
-                >
-                  <div className="text-xl font-bold mb-1">{phrase.kurdish}</div>
-                  <div className="text-blue-100">{phrase.meaning}</div>
+          {/* Alfabe */}
+          <motion.section initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className="bg-white rounded-3xl shadow-xl p-8 mb-16 border border-slate-100">
+            <h2 className="text-3xl font-bold text-center text-blue-900 mb-8">{content.alphabetTitle}</h2>
+            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-3">
+              {alphabet.map((item, index) => (
+                <motion.div key={item.letter} whileHover={{ scale: 1.1 }} className="bg-slate-50 rounded-xl p-3 text-center cursor-pointer border border-slate-200 hover:bg-blue-50 hover:border-blue-200 transition-colors">
+                  <div className="text-2xl font-black text-slate-800">{item.letter}</div>
+                  <div className="text-xs text-slate-400 font-medium">{item.pronunciation}</div>
                 </motion.div>
               ))}
             </div>
           </motion.section>
+
+          {/* Pratik Cümleler */}
+          <motion.section className="bg-gradient-to-br from-blue-900 to-slate-900 rounded-3xl shadow-2xl p-8 md:p-12 text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full blur-3xl opacity-20 -mr-20 -mt-20"></div>
+            <h2 className="text-3xl font-bold text-center mb-10 relative z-10">{content.phrasesTitle}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
+              {content.phrases && content.phrases.map((phrase, index) => (
+                <div key={index} className="bg-white/10 backdrop-blur-md rounded-xl p-5 border border-white/10 hover:bg-white/20 transition">
+                  <div className="text-xl font-bold text-yellow-400 mb-1">{phrase.org}</div>
+                  <div className="text-blue-100">{phrase.mean}</div>
+                </div>
+              ))}
+            </div>
+          </motion.section>
+
         </div>
       </div>
     </>

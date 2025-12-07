@@ -1,6 +1,9 @@
 export const siteContent = {
-  // --- KÜRTÇE (KU) ---
+  // =================================================================
+  // KÜRTÇE (KU)
+  // =================================================================
   KU: {
+    // --- MENÜ (NAVBAR) ---
     nav: {
       sereke: 'Sereke',
       ziman: 'Ziman',
@@ -12,6 +15,7 @@ export const siteContent = {
       follow: 'Me Bişopînin',
       join: 'Tevlî Me Bibe'
     },
+    // --- ANA SAYFA (HOME) ---
     home: {
       heroTitle1: 'Li YTÜ',
       heroTitle2: 'Dengê Me',
@@ -24,8 +28,11 @@ export const siteContent = {
       featuresTitle: 'Beşên Me',
       ctaTitle: 'Beşdarî Komeleya Me Bibe',
       ctaText: 'Heke tu dixwazî zimanê kurdî hîn bibî, çanda xwe nas bikî, û bi me re bixebitî, bi me re têkilî dayne!',
-      ctaButton: 'Dest Pê Bike'
+      ctaButton: 'Dest Pê Bike',
+      eventTitle: 'Çalakiya Pêşerojê', // Yeni: Sayaç başlığı
+      dailyTitle: 'Peyva Rojê'        // Yeni: Günün sözü başlığı
     },
+    // --- KARTLAR (HOME SAYFASINDAKİ ÖZETLER) ---
     cards: {
       zimanTitle: 'Ziman', zimanDesc: 'Hînbûna zimanê kurdî û rêzimana wê',
       candTitle: 'Çand', candDesc: 'Çanda dewlemend a gelê kurd',
@@ -33,6 +40,7 @@ export const siteContent = {
       muzikTitle: 'Muzîk', muzikDesc: 'Muzîka kurdî û stranan',
       hunerTitle: 'Huner', hunerDesc: 'Huner û hunermendên kurd'
     },
+    // --- ALT SAYFALAR (DETAYLAR) ---
     pages: {
       dirok: {
         title: "Dîroka Kurdan",
@@ -55,9 +63,12 @@ export const siteContent = {
           { id: 'guhdari', title: 'Guhdarî û Axaftin', desc: 'Pratîka ziman', text: 'Ji bo hînbûnê divê hûn her roj guhdarî bikin û biaxivin.' }
         ],
         phrases: [
-          { org: 'Roj baş', mean: 'Günaydın' }, { org: 'Şev baş', mean: 'İyi geceler' },
-          { org: 'Spas', mean: 'Teşekkürler' }, { org: 'Tu çawa yî?', mean: 'Nasılsın?' },
-          { org: 'Ez baş im', mean: 'İyiyim' }, { org: 'Navê te çi ye?', mean: 'Adın ne?' }
+          { org: 'Roj baş', mean: 'Günaydın' },
+          { org: 'Şev baş', mean: 'İyi geceler' },
+          { org: 'Spas', mean: 'Teşekkürler' },
+          { org: 'Tu çawa yî?', mean: 'Nasılsın?' },
+          { org: 'Ez baş im', mean: 'İyiyim' },
+          { org: 'Navê te çi ye?', mean: 'Adın ne?' }
         ]
       },
       cand: {
@@ -90,7 +101,9 @@ export const siteContent = {
     }
   },
 
-  // --- TÜRKÇE (TR) ---
+  // =================================================================
+  // TÜRKÇE (TR)
+  // =================================================================
   TR: {
     nav: {
       sereke: 'Anasayfa',
@@ -115,7 +128,9 @@ export const siteContent = {
       featuresTitle: 'Bölümlerimiz',
       ctaTitle: 'Topluluğumuza Katılın',
       ctaText: 'Kürtçe öğrenmek, kültürü tanımak ve bizimle birlikte çalışmak istiyorsan, iletişime geç!',
-      ctaButton: 'Başla'
+      ctaButton: 'Başla',
+      eventTitle: 'Sıradaki Etkinlik',
+      dailyTitle: 'Günün İçeriği'
     },
     cards: {
       zimanTitle: 'Dil', zimanDesc: 'Kürtçe dil eğitimi ve gramer',
@@ -146,9 +161,12 @@ export const siteContent = {
           { id: 'guhdari', title: 'Dinleme ve Konuşma', desc: 'Dil pratiği', text: 'Öğrenmek için her gün dinlemeli ve konuşmalısınız.' }
         ],
         phrases: [
-          { org: 'Roj baş', mean: 'Günaydın' }, { org: 'Şev baş', mean: 'İyi geceler' },
-          { org: 'Spas', mean: 'Teşekkürler' }, { org: 'Tu çawa yî?', mean: 'Nasılsın?' },
-          { org: 'Ez baş im', mean: 'İyiyim' }, { org: 'Navê te çi ye?', mean: 'Adın ne?' }
+          { org: 'Roj baş', mean: 'Günaydın' },
+          { org: 'Şev baş', mean: 'İyi geceler' },
+          { org: 'Spas', mean: 'Teşekkürler' },
+          { org: 'Tu çawa yî?', mean: 'Nasılsın?' },
+          { org: 'Ez baş im', mean: 'İyiyim' },
+          { org: 'Navê te çi ye?', mean: 'Adın ne?' }
         ]
       },
       cand: {
@@ -181,73 +199,99 @@ export const siteContent = {
     }
   },
 
-  // --- İNGİLİZCE (EN) ---
+  // =================================================================
+  // İNGİLİZCE (EN)
+  // =================================================================
   EN: {
     nav: {
-      sereke: 'Home', ziman: 'Language', cand: 'Culture', dirok: 'History', muzik: 'Music', huner: 'Art', listik: 'Game', follow: 'Follow Us', join: 'Join Us'
+      sereke: 'Home',
+      ziman: 'Language',
+      cand: 'Culture',
+      dirok: 'History',
+      muzik: 'Music',
+      huner: 'Art',
+      listik: 'Game',
+      follow: 'Follow Us',
+      join: 'Join Us'
     },
     home: {
-      heroTitle1: 'At YTU', heroTitle2: 'Our Voice', heroTitle3: 'Our Color.', heroSubtitle: 'Yildiz Technical University - Kurdish Society',
-      heroButton: 'Join Us', aboutTitle: 'About Us',
+      heroTitle1: 'At YTU',
+      heroTitle2: 'Our Voice',
+      heroTitle3: 'Our Color.',
+      heroSubtitle: 'Yildiz Technical University - Kurdish Society',
+      heroButton: 'Join Us',
+      aboutTitle: 'About Us',
       aboutText1: 'YTU Kurdish Society was established in 2025. Our aim is to protect the Kurdish language, promote our culture, and teach our history.',
       aboutText2: 'We work with Kurdish students and anyone interested in the language. We organize various cultural, artistic, and educational activities.',
-      featuresTitle: 'Our Departments', ctaTitle: 'Join Our Community',
-      ctaText: 'If you want to learn Kurdish, discover the culture, and work with us, contact us!', ctaButton: 'Start Now'
+      featuresTitle: 'Our Departments',
+      ctaTitle: 'Join Our Community',
+      ctaText: 'If you want to learn Kurdish, discover the culture, and work with us, contact us!',
+      ctaButton: 'Start Now',
+      eventTitle: 'Upcoming Event',
+      dailyTitle: 'Daily Content'
     },
     cards: {
-      zimanTitle: 'Language', zimanDesc: 'Kurdish language learning',
-      candTitle: 'Culture', candDesc: 'Rich culture of Kurds',
-      dirokTitle: 'History', dirokDesc: 'Ancient history of Kurds',
+      zimanTitle: 'Language', zimanDesc: 'Kurdish language learning and grammar',
+      candTitle: 'Culture', candDesc: 'The rich culture of the Kurdish people',
+      dirokTitle: 'History', dirokDesc: 'Ancient history of the Kurds',
       muzikTitle: 'Music', muzikDesc: 'Kurdish music and songs',
       hunerTitle: 'Art', hunerDesc: 'Kurdish art and artists'
     },
     pages: {
       dirok: {
-        title: "Kurdish History", desc: "From Medes to today.",
+        title: "Kurdish History",
+        desc: "From Medes to today, the journey of the ancient people of Mesopotamia.",
         sections: [
-          { title: "Origins", text: "Kurds are one of the most ancient peoples of Mesopotamia." },
-          { title: "Principalities", text: "In the middle ages, Kurds established many principalities like Marwanids and Soran." },
-          { title: "Modern Era", text: "Today Kurds continue their struggle for identity and rights." }
+          { title: "Origins", text: "Kurds are one of the most ancient peoples of Mesopotamia. Known in history as Guti, Hurrian, and Medes." },
+          { title: "Kurdish Principalities", text: "In the middle ages, Kurds established many principalities like Marwanids, Shaddadids, Botan, Soran, and Baban." },
+          { title: "Modern Era", text: "Today Kurds continue their struggle for identity and rights in four parts of Kurdistan and diaspora." }
         ]
       },
       ziman: {
-        title: "Kurdish Language", desc: "Our language is our identity.",
+        title: "Kurdish Language",
+        desc: "Our language is our identity. Kurdish is an Indo-European language.",
         alphabetTitle: "Kurdish Alphabet (Kurmanci)",
         phrasesTitle: "Important Phrases",
         topics: [
-          { id: 'reziman', title: 'Grammar', desc: 'Grammar rules', text: 'Kurdish is an Indo-European language.' },
-          { id: 'axaftin', title: 'Daily Speech', desc: 'Daily phrases', text: 'Hello, How are you, Thanks...' },
-          { id: 'peyv', title: 'Vocabulary', desc: 'Important words', text: 'Home, Mother, Father, School...' },
-          { id: 'guhdari', title: 'Listening', desc: 'Practice', text: 'Listen and speak every day.' }
+          { id: 'reziman', title: 'Grammar', desc: 'Grammar rules', text: 'Kurdish belongs to the Indo-European language family. Written in Latin and Arabic scripts.' },
+          { id: 'axaftin', title: 'Daily Speech', desc: 'Daily phrases', text: 'Hello, How are you, I am fine, Thanks, Welcome...' },
+          { id: 'peyv', title: 'Vocabulary', desc: 'Important words', text: 'Home, Mother, Father, School, Bread, Water, Life...' },
+          { id: 'guhdari', title: 'Listening & Speaking', desc: 'Language practice', text: 'To learn well, you must listen and speak Kurdish every day.' }
         ],
         phrases: [
-          { org: 'Roj baş', mean: 'Good morning' }, { org: 'Şev baş', mean: 'Good night' },
-          { org: 'Spas', mean: 'Thanks' }, { org: 'Tu çawa yî?', mean: 'How are you?' },
-          { org: 'Ez baş im', mean: 'I am fine' }, { org: 'Navê te çi ye?', mean: 'What is your name?' }
+          { org: 'Roj baş', mean: 'Good morning' },
+          { org: 'Şev baş', mean: 'Good night' },
+          { org: 'Spas', mean: 'Thanks' },
+          { org: 'Tu çawa yî?', mean: 'How are you?' },
+          { org: 'Ez baş im', mean: 'I am fine' },
+          { org: 'Navê te çi ye?', mean: 'What is your name?' }
         ]
       },
       cand: {
-        title: "Kurdish Culture", desc: "Colors and life of Kurds.",
+        title: "Kurdish Culture",
+        desc: "Colors, sounds, and life of the Kurdish people.",
         sections: [
-          { title: "Newroz", text: "Newroz (March 21) is the national new year." },
-          { title: "Clothing", text: "Colorful traditional clothes." },
-          { title: "Hospitality", text: "Guests are sacred in Kurdish culture." }
+          { title: "Newroz", text: "Newroz (March 21) is the national new year of Kurds. It symbolizes new beginnings and resistance." },
+          { title: "Clothing", text: "Kurdish clothes are known for their vibrant colors. Shal u shapik (men) and kiras u fistan (women) are staples." },
+          { title: "Hospitality", text: "Guests are sacred in Kurdish culture. Doors are always open, and the best food is served to guests." }
         ]
       },
       muzik: {
-        title: "Kurdish Music", desc: "Voice of the mountains.",
+        title: "Kurdish Music",
+        desc: "Voice of the mountains and love.",
         sections: [
-          { title: "Dengbej", text: "Traditional bards telling stories." },
-          { title: "Instruments", text: "Tembur, erbane, and flute." },
-          { title: "Modern", text: "Artists like Sivan Perwer and Ciwan Haco." }
+          { title: "Dengbej", text: "Dengbej is the pillar of Kurdish music. Bards tell history and pain through voice alone. Shakiro is a great example." },
+          { title: "Instruments", text: "Tembur, erbane (def), zurna, and flute are main instruments. Tembur holds a sacred place." },
+          { title: "Modern Music", text: "Artists like Sivan Perwer, Ciwan Haco, and Aynur Dogan bring Kurdish music to the world with modern styles." }
         ]
       },
       huner: {
-        title: "Art & Cinema", desc: "Kurdish perspective.",
+        title: "Art & Cinema",
+        desc: "Seeing the world through Kurdish eyes.",
         sections: [
-          { title: "Cinema", text: "Yilmaz Guney is the father of Kurdish cinema." },
-          { title: "Dance", text: "Govend is a vital part of social life." },
-          { title: "Painting", text: "Reflecting pain and hope." }
+          { title: "Kurdish Cinema", text: "Yilmaz Guney is considered the father of Kurdish cinema. Movies like 'Yol' have made a global impact." },
+          { title: "Painting", text: "Kurdish painters reflect their people's pain and hope on canvas." },
+          { title: "Folk Dance (Govend)", text: "Kurdish dances are a vital part of social life. Each region (Serhat, Botan) has its own style." }
         ]
       }
     }
