@@ -1,14 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Mail, MapPin, Send, CheckCircle, Instagram, Youtube, Twitter } from 'lucide-react';
+import { ArrowLeft, Mail, MapPin, Send, CheckCircle, Instagram, Youtube, Loader2, AlertCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { siteContent } from '../data/locales';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const { lang } = useLanguage();
+  const formRef = useRef();
   
+  // --- EMAILJS AYARLARI (GÜNCELLENDİ) ---
+  const SERVICE_ID = "service_0hpjfn7";
+  const TEMPLATE_ID = "template_2mlwdvd";
+  const PUBLIC_KEY = "59FSh2DYoLKksW1Wf";
+
   const content = siteContent[lang]?.pages?.tekili || { 
     title: "Têkilî", 
     desc: "Loading...", 
@@ -16,22 +23,23 @@ const Contact = () => {
     info: {} 
   };
 
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('idle');
+  const [status, setStatus] = useState('idle'); // idle, sending, success, error
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setStatus('sending');
-    
-    setTimeout(() => {
-      setStatus('success');
-      setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setStatus('idle'), 3000);
-    }, 1500);
-  };
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
+      .then((result) => {
+          console.log("Email başarıyla gönderildi:", result.text);
+          setStatus('success');
+          e.target.reset(); // Formu temizle
+          setTimeout(() => setStatus('idle'), 5000); // 5 sn sonra eski haline dön
+      }, (error) => {
+          console.error("Email hatası:", error.text);
+          setStatus('error');
+          setTimeout(() => setStatus('idle'), 5000);
+      });
   };
 
   return (
@@ -49,11 +57,7 @@ const Contact = () => {
             {lang === 'KU' ? 'Vegere' : (lang === 'TR' ? 'Geri' : 'Back')}
           </Link>
 
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            className="text-center mb-12"
-          >
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-12">
             <div className="inline-block p-4 bg-blue-100 rounded-full mb-4">
               <Mail size={40} className="text-blue-600" />
             </div>
@@ -63,30 +67,18 @@ const Contact = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
-            <motion.div 
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="space-y-6"
-            >
+            {/* SOL TARAF: BİLGİLER */}
+            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 }} className="space-y-6">
               <div className="bg-white rounded-3xl shadow-xl p-8 border border-slate-100">
                 <h3 className="text-2xl font-bold text-slate-800 mb-6">{content.info.addressTitle}</h3>
                 
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="bg-blue-50 p-3 rounded-lg text-blue-600">
-                    <MapPin size={24} />
-                  </div>
-                  <div>
-                    <p className="text-slate-600 font-medium leading-relaxed">
-                      {content.info.address}
-                    </p>
-                  </div>
+                  <div className="bg-blue-50 p-3 rounded-lg text-blue-600"><MapPin size={24} /></div>
+                  <div><p className="text-slate-600 font-medium leading-relaxed">{content.info.address}</p></div>
                 </div>
 
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="bg-blue-50 p-3 rounded-lg text-blue-600">
-                    <Mail size={24} />
-                  </div>
+                  <div className="bg-blue-50 p-3 rounded-lg text-blue-600"><Mail size={24} /></div>
                   <div>
                     <p className="font-bold text-slate-800">{content.info.emailTitle}</p>
                     <a href="mailto:ytukurdidrive@gmail.com" className="text-blue-600 hover:underline">ytukurdidrive@gmail.com</a>
@@ -96,14 +88,13 @@ const Contact = () => {
                 <div>
                   <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">{content.info.follow}</p>
                   <div className="flex gap-4">
+                    {/* INSTAGRAM */}
                     <a href="https://instagram.com/ytukurdi" target="_blank" rel="noreferrer" className="bg-slate-100 p-3 rounded-xl text-slate-600 hover:bg-pink-100 hover:text-pink-600 transition">
                       <Instagram size={24} />
                     </a>
-                    <a href="https://youtube.com" target="_blank" rel="noreferrer" className="bg-slate-100 p-3 rounded-xl text-slate-600 hover:bg-red-100 hover:text-red-600 transition">
+                    {/* YOUTUBE (GÜNCELLENDİ) */}
+                    <a href="https://www.youtube.com/@ytukurdi" target="_blank" rel="noreferrer" className="bg-slate-100 p-3 rounded-xl text-slate-600 hover:bg-red-100 hover:text-red-600 transition">
                       <Youtube size={24} />
-                    </a>
-                    <a href="https://twitter.com" target="_blank" rel="noreferrer" className="bg-slate-100 p-3 rounded-xl text-slate-600 hover:bg-blue-100 hover:text-blue-500 transition">
-                      <Twitter size={24} />
                     </a>
                   </div>
                 </div>
@@ -116,88 +107,53 @@ const Contact = () => {
                   height="100%" 
                   style={{border:0}} 
                   allowFullScreen="" 
-                  loading="lazy"
+                  loading="lazy" 
                   title="YTU Map"
                 ></iframe>
               </div>
             </motion.div>
 
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
-              className="bg-white rounded-3xl shadow-xl p-8 border border-slate-100 flex flex-col"
-            >
+            {/* SAĞ TARAF: FORM (ARTIK ÇALIŞIYOR) */}
+            <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 }} className="bg-white rounded-3xl shadow-xl p-8 border border-slate-100 flex flex-col">
               <h2 className="text-2xl font-bold text-slate-800 mb-6">{lang === 'KU' ? 'Ji me re binivîse' : (lang === 'TR' ? 'Bize Yazın' : 'Write to Us')}</h2>
               
               {status === 'success' ? (
                 <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex-1 flex flex-col items-center justify-center text-center p-8 bg-green-50 rounded-2xl border border-green-100">
-                  <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4">
-                    <CheckCircle size={40} />
-                  </div>
+                  <div className="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mb-4"><CheckCircle size={40} /></div>
                   <h3 className="text-2xl font-bold text-green-800 mb-2">{lang === 'KU' ? 'Spas!' : 'Teşekkürler!'}</h3>
                   <p className="text-green-700">{content.form.success}</p>
                 </motion.div>
+              ) : status === 'error' ? (
+                <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="flex-1 flex flex-col items-center justify-center text-center p-8 bg-red-50 rounded-2xl border border-red-100">
+                  <div className="w-20 h-20 bg-red-100 text-red-600 rounded-full flex items-center justify-center mb-4"><AlertCircle size={40} /></div>
+                  <h3 className="text-2xl font-bold text-red-800 mb-2">Hata!</h3>
+                  <p className="text-red-700">Mesaj gönderilemedi. Lütfen daha sonra tekrar deneyin.</p>
+                  <button onClick={() => setStatus('idle')} className="mt-4 px-6 py-2 bg-red-600 text-white rounded-lg font-bold">Tekrar Dene</button>
+                </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-4 flex-1">
+                <form ref={formRef} onSubmit={handleSubmit} className="space-y-4 flex-1">
                   <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2">{content.form.name}</label>
-                    <input 
-                      type="text" 
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition"
-                      placeholder="..."
-                    />
+                    {/* name="name" EmailJS şablonundaki {{name}} değişkenine denk gelmeli */}
+                    <input type="text" name="name" required className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition" placeholder="..." />
                   </div>
-                  
                   <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2">{content.form.email}</label>
-                    <input 
-                      type="email" 
-                      name="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition"
-                      placeholder="nav@mînak.com"
-                    />
+                    {/* name="email" EmailJS şablonundaki {{email}} değişkenine denk gelmeli */}
+                    <input type="email" name="email" required className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition" placeholder="nav@mînak.com" />
                   </div>
-
                   <div>
                     <label className="block text-sm font-bold text-slate-700 mb-2">{content.form.message}</label>
-                    <textarea 
-                      name="message"
-                      required
-                      rows="5"
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition resize-none"
-                      placeholder="..."
-                    ></textarea>
+                    {/* name="message" EmailJS şablonundaki {{message}} değişkenine denk gelmeli */}
+                    <textarea name="message" required rows="5" className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition resize-none" placeholder="..."></textarea>
                   </div>
-
-                  <button 
-                    type="submit" 
-                    disabled={status === 'sending'}
-                    className="w-full py-4 bg-blue-900 text-white rounded-xl font-bold text-lg hover:bg-blue-800 transition shadow-lg flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
-                  >
-                    {status === 'sending' ? (
-                      content.form.sending
-                    ) : (
-                      <>
-                        {content.form.send} <Send size={20} />
-                      </>
-                    )}
+                  <button type="submit" disabled={status === 'sending'} className="w-full py-4 bg-blue-900 text-white rounded-xl font-bold text-lg hover:bg-blue-800 transition shadow-lg flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed">
+                    {status === 'sending' ? <><Loader2 className="animate-spin" /> {content.form.sending}</> : <>{content.form.send} <Send size={20} /></>}
                   </button>
                 </form>
               )}
             </motion.div>
-
           </div>
-
         </div>
       </div>
     </>
