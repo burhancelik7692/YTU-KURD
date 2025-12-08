@@ -8,7 +8,7 @@ import { getAuth } from "firebase/auth";      // Authentication
 // Lütfen bu bilgilerin KONSOLDAN DOĞRU kopyalandığından emin olun.
 const firebaseConfig = {
   // Sizin güncel anahtarınız buraya gelecek
-  apiKey: "SENIN_YENI_VE_DOGRULANMIS_API_KEYIN_BURAYA", 
+  apiKey: "AIzaSyDadado7dT6SYDywKRCpAc9L7kqkubdadE", 
   authDomain: "ytu-kurdi.firebaseapp.com",
   projectId: "ytu-kurdi",
   storageBucket: "ytu-kurdi.firebasestorage.app",
