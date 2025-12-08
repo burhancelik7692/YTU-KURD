@@ -4,56 +4,25 @@ export const siteContent = {
   // =================================================================
   KU: {
     nav: {
-      sereke: 'Sereke',
-      ziman: 'Ziman',
-      cand: 'Çand',
-      dirok: 'Dîrok',
-      muzik: 'Muzîk',
-      huner: 'Huner',
-      ferheng: 'Ferheng',
-      gallery: 'Wênegeh', // Galeri
-      tekili: 'Têkilî',
-      listik: 'Lîstik',
-      follow: 'Me Bişopînin',
-      join: 'Tevlî Me Bibe'
+      sereke: 'Sereke', ziman: 'Ziman', cand: 'Çand', dirok: 'Dîrok', muzik: 'Muzîk', huner: 'Huner', ferheng: 'Ferheng', gallery: 'Wênegeh', tekili: 'Têkilî', listik: 'Lîstik', follow: 'Me Bişopînin', join: 'Tevlî Me Bibe', admin_content: 'Naverok (Blog/Duyuru)', admin_dict: 'Ferheng', blog: 'Duyurular'
     },
     notFound: {
-      title: "Rêya Xwe Winda Kir?",
-      desc: "Bibore, rûpela ku tu lê digerî me nedît.",
-      backButton: "Vegere Sereke"
+      title: "Rêya Xwe Winda Kir?", desc: "Bibore, rûpela ku tu lê digerî me nedît.", backButton: "Vegere Sereke"
     },
     gallery: {
-      title: 'Wênegeha Me',
-      desc: 'Bîranînên me yên herî xweş û çalakiyên me',
-      cats: { all: 'Hemû', newroz: 'Newroz', calaki: 'Çalakî', taste: 'Taştê', ger: 'Ger' }
+      title: 'Wênegeha Me', desc: 'Bîranînên me yên herî xweş û çalakiyên me', cats: { all: 'Hemû', newroz: 'Newroz', calaki: 'Çalakî', taste: 'Taştê', ger: 'Ger' }
     },
     home: {
-      heroTitle1: 'Li YTÜ', heroTitle2: 'Dengê Me', heroTitle3: 'Rengê Me.',
-      heroSubtitle: 'Zanîngeha Yıldız Teknîk - Komeleya Kurdî',
-      heroButton: 'Tevlî Me Bibe',
-      aboutTitle: 'Derbarê Me',
+      heroTitle1: 'Li YTÜ', heroTitle2: 'Dengê Me', heroTitle3: 'Rengê Me.', heroSubtitle: 'Zanîngeha Yıldız Teknîk - Komeleya Kurdî',
+      heroButton: 'Tevlî Me Bibe', aboutTitle: 'Derbarê Me',
       aboutText1: 'Komeleya Kurdî ya Zanîngeha Yıldız Teknîk (YTU) di sala 2025an de hatiye damezrandin. Armanca me parastina zimanê kurdî, belavkirina çanda kurdî, û hînkirina dîroka me ye.',
       aboutText2: 'Em bi xwendekarên kurd û hemû kesên ku ji zimanê kurdî hez dikin re dixebitin. Em çalakiyên cuda yên çandî, hunerî û perwerdehî organîze dikin.',
-      featuresTitle: 'Beşên Me',
-      ctaTitle: 'Beşdarî Komeleya Me Bibe',
-      ctaText: 'Heke tu dixwazî zimanê kurdî hîn bibî, çanda xwe nas bikî, û bi me re bixebitî, bi me re têkilî dayne!',
-      ctaButton: 'Dest Pê Bike',
-      eventTitle: 'Çalakiya Pêşerojê',
-      eventEmptyTitle: 'Tê Ragihandin',
-      eventEmptyDesc: 'Ji bo çalakiyên nû li bendê bin.',
-      dailyTitle: 'Naveroka Rojê',
-      dailyWord: 'Peyv',
-      dailyQuote: 'Gotin',
-      time: { day: 'Roj', hour: 'Saet', min: 'Deqe', sec: 'Çirk' },
-      quickDict: 'Ferheng',
-      quickGame: 'Bilîze'
+      featuresTitle: 'Beşên Me', ctaTitle: 'Beşdarî Komeleya Me Bibe', ctaText: 'Heke tu dixwazî zimanê kurdî hîn bibî, çanda xwe nas bikî, û bi me re bixebitî, bi me re têkilî dayne!', ctaButton: 'Dest Pê Bike',
+      eventTitle: 'Çalakiya Pêşerojê', eventEmptyTitle: 'Tê Ragihandin', eventEmptyDesc: 'Ji bo çalakiyên nû li bendê bin.', dailyTitle: 'Naveroka Rojê', dailyWord: 'Peyv', dailyQuote: 'Gotin',
+      time: { day: 'Roj', hour: 'Saet', min: 'Deqe', sec: 'Çirk' }, quickDict: 'Ferheng', quickGame: 'Bilîze'
     },
     cards: {
-      zimanTitle: 'Ziman', zimanDesc: 'Hînbûna zimanê kurdî',
-      candTitle: 'Çand', candDesc: 'Çanda dewlemend a gelê kurd',
-      dirokTitle: 'Dîrok', dirokDesc: 'Dîroka kevn a kurdan',
-      muzikTitle: 'Muzîk', muzikDesc: 'Muzîka kurdî û stranan',
-      hunerTitle: 'Huner', hunerDesc: 'Huner û hunermendên kurd'
+      zimanTitle: 'Ziman', zimanDesc: 'Hînbûna zimanê kurdî', candTitle: 'Çand', candDesc: 'Çanda dewlemend', dirokTitle: 'Dîrok', dirokDesc: 'Dîroka kevn', muzikTitle: 'Muzîk', muzikDesc: 'Muzîka kurdî û stranan', hunerTitle: 'Huner', hunerDesc: 'Huner û hunermend'
     },
     pages: {
       tekili: {
@@ -62,7 +31,7 @@ export const siteContent = {
         info: { addressTitle: "Navnîşan", address: "Zanîngeha Yıldız Teknîk, Kampusa Davutpaşa, Esenler/Stenbol", emailTitle: "E-Posta", follow: "Me Bişopînin" }
       },
       dirok: {
-        title: "Dîroka Kurdan", desc: "Ji Medan heta îro, serpêhatiya gelê kevnar.",
+        title: "Dîroka Kurdan", desc: "Ji Medan heta îro, serpêhatiya gelê kevnar ê Mezopotamyayê.",
         sections: [
           { title: "Koka Kurdan", text: "Kurd yek ji gelên herî kevnar ên Mezopotamyayê ne. Di dîrokê de bi navên Gûtî, Hûrî û Med hatine naskirin. Împaratoriya Medan (B.Z. 612) yekem dewleta mezin a pêşiyên Kurdan tê hesibandin." },
           { title: "Mîrektiyên Kurd", text: "Di serdema navîn de Kurdan gelek mîrektî ava kirine. Wekî Merwanî, Şedadî, Botan, Soran û Baban. Van mîrektiyan çand û hunera Kurdî pêş xistine." },
@@ -112,54 +81,26 @@ export const siteContent = {
   // =================================================================
   TR: {
     nav: {
-      sereke: 'Anasayfa',
-      ziman: 'Dil',
-      cand: 'Kültür',
-      dirok: 'Tarih',
-      muzik: 'Müzik',
-      huner: 'Sanat',
-      ferheng: 'Sözlük',
-      gallery: 'Galeri', // Galeri
-      tekili: 'İletişim',
-      listik: 'Oyun',
-      follow: 'Bizi Takip Edin',
-      join: 'Bize Katılın'
+      sereke: 'Anasayfa', ziman: 'Dil', cand: 'Kültür', dirok: 'Tarih', muzik: 'Müzik', huner: 'Sanat', ferheng: 'Sözlük', gallery: 'Galeri', tekili: 'İletişim', listik: 'Oyun', follow: 'Bizi Takip Edin', join: 'Bize Katılın', admin_content: 'İçerik (Blog/Duyuru)', admin_dict: 'Sözlük'
     },
     notFound: {
       title: "Yolunu Mu Kaybettin?", desc: "Üzgünüz, aradığınız sayfayı bulamadık.", backButton: "Ana Sayfaya Dön"
     },
     gallery: {
-      title: 'Galerimiz',
-      desc: 'En güzel anılarımız ve etkinliklerimiz',
-      cats: { all: 'Tümü', newroz: 'Newroz', calaki: 'Etkinlik', taste: 'Kahvaltı', ger: 'Gezi' }
+      title: 'Galerimiz', desc: 'En güzel anılarımız ve etkinliklerimiz', cats: { all: 'Tümü', newroz: 'Newroz', calaki: 'Etkinlik', taste: 'Kahvaltı', ger: 'Gezi' }
     },
     home: {
-      heroTitle1: "YTÜ'de", heroTitle2: 'Sesimiz', heroTitle3: 'Rengimiz.',
-      heroSubtitle: 'Yıldız Teknik Üniversitesi - Kürtçe Topluluğu',
-      heroButton: 'Bize Katıl',
-      aboutTitle: 'Hakkımızda',
+      heroTitle1: "YTÜ'de", heroTitle2: 'Sesimiz', heroTitle3: 'Rengimiz.', heroSubtitle: 'Yıldız Teknik Üniversitesi - Kürtçe Topluluğu',
+      heroButton: 'Bize Katıl', aboutTitle: 'Hakkımızda',
       aboutText1: 'YTÜ Kürtçe Topluluğu, 2025 yılında kurulmuştur. Amacımız Kürt dilini korumak, kültürümüzü tanıtmak ve tarihimizi öğretmektir.',
       aboutText2: 'Kürt öğrenciler ve dile ilgi duyan herkesle birlikte çalışıyoruz. Çeşitli kültürel, sanatsal ve eğitim faaliyetleri düzenliyoruz.',
       featuresTitle: 'Bölümlerimiz',
-      ctaTitle: 'Topluluğumuza Katılın',
-      ctaText: 'Kürtçe öğrenmek, kültürü tanımak ve bizimle birlikte çalışmak istiyorsan, iletişime geç!',
-      ctaButton: 'Başla',
-      eventTitle: 'Sıradaki Etkinlik',
-      eventEmptyTitle: 'Duyurulacak',
-      eventEmptyDesc: 'Yeni etkinlikler için beklemede kalın.',
-      dailyTitle: 'Günün İçeriği',
-      dailyWord: 'Kelime',
-      dailyQuote: 'Söz',
-      time: { day: 'Gün', hour: 'Saat', min: 'Dak', sec: 'San' },
-      quickDict: 'Sözlük',
-      quickGame: 'Oyna'
+      ctaTitle: 'Topluluğumuza Katılın', ctaText: 'Kürtçe öğrenmek, kültürü tanımak ve bizimle birlikte çalışmak istiyorsan, iletişime geç!', ctaButton: 'Başla',
+      eventTitle: 'Sıradaki Etkinlik', eventEmptyTitle: 'Duyurulacak', eventEmptyDesc: 'Yeni etkinlikler için beklemede kalın.', dailyTitle: 'Günün İçeriği', dailyWord: 'Kelime', dailyQuote: 'Söz',
+      time: { day: 'Gün', hour: 'Saat', min: 'Dak', sec: 'San' }, quickDict: 'Sözlük', quickGame: 'Oyna'
     },
     cards: {
-      zimanTitle: 'Dil', zimanDesc: 'Kürtçe dil eğitimi',
-      candTitle: 'Kültür', candDesc: 'Zengin Kürt kültürü',
-      dirokTitle: 'Tarih', dirokDesc: 'Köklü tarih',
-      muzikTitle: 'Müzik', muzikDesc: 'Kürt müziği',
-      hunerTitle: 'Sanat', hunerDesc: 'Kürt sanatı'
+      zimanTitle: 'Dil', zimanDesc: 'Kürtçe dil eğitimi ve gramer', candTitle: 'Kültür', candDesc: 'Zengin Kürt kültürü', dirokTitle: 'Tarih', dirokDesc: 'Köklü tarih', muzikTitle: 'Müzik', muzikDesc: 'Kürt müziği ve şarkıları', hunerTitle: 'Sanat', hunerDesc: 'Kürt sanatı ve sanatçıları'
     },
     pages: {
       tekili: {
@@ -168,27 +109,27 @@ export const siteContent = {
         info: { addressTitle: "Adres", address: "Yıldız Teknik Üniversitesi, Davutpaşa Kampüsü, Esenler/İstanbul", emailTitle: "E-posta", follow: "Bizi Takip Edin" }
       },
       dirok: {
-        title: "Kürt Tarihi", desc: "Medlerden günümüze.",
+        title: "Kürt Tarihi", desc: "Medlerden günümüze, Mezopotamya'nın kadim halkının serüveni.",
         sections: [
-          { title: "Kökenler", text: "Kürtler Mezopotamya'nın kadim halkıdır. Med İmparatorluğu atalarıdır." },
-          { title: "Mirlikler", text: "Mervaniler, Botan ve Baban gibi mirlikler kurulmuştur." },
-          { title: "Modern Dönem", text: "Kürtler bugün dört parçada kültürlerini yaşatmaktadır." }
+          { title: "Kökenler", text: "Kürtler, Mezopotamya'nın en eski halklarından biridir. Tarihte Guti, Huri ve Med isimleriyle anılmışlardır. Med İmparatorluğu (M.Ö. 612), Kürtlerin atalarının kurduğu ilk büyük devlet kabul edilir." },
+          { title: "Kürt Mirlikleri", text: "Ortaçağ'da Kürtler birçok mirlik kurmuştur. Mervaniler, Şeddadiler, Botan, Soran ve Baban gibi mirlikler, Kürt kültürünü ve sanatını geliştirmiştir." },
+          { title: "Modern Dönem", text: "20. yüzyılda Kürtlerin kimlik ve ulusal haklar mücadelesi devam etmiştir. Bugün Kürtler, Kürdistan'ın dört parçasında ve diasporada kültürlerini yaşatmaktadır." }
         ]
       },
       ziman: {
-        title: "Kürt Dili", desc: "Dilimiz kimliğimizdir.",
-        alphabetTitle: "Kürtçe Alfabesi", phrasesTitle: "Önemli Kalıplar",
+        title: "Kürt Dili", desc: "Dilimiz kimliğimizdir. Kürtçe, Hint-Avrupa dil ailesindendir.",
+        alphabetTitle: "Kürtçe Alfabesi (Kurmanci)", phrasesTitle: "Önemli Kalıplar",
         topics: [
-          { id: 'reziman', title: 'Gramer', desc: 'Kurallar', text: 'Kürtçe Hint-Avrupa dil ailesindendir.' },
-          { id: 'axaftin', title: 'Konuşma', desc: 'Günlük', text: 'Selam, Nasılsın...' }
+          { id: 'reziman', title: 'Kürtçe Gramer', desc: 'Dil bilgisi ve kurallar', text: 'Kürtçe Hint-Avrupa dil ailesindendir. Latin (Kurmanci) ve Arap (Sorani) alfabeleri kullanılır.' },
+          { id: 'axaftin', title: 'Günlük Konuşma', desc: 'Günlük diyaloglar', text: 'Selam, Nasılsın, İyiyim, Teşekkürler, Hoş geldin...' }
         ],
         phrases: [{ org: 'Roj baş', mean: 'Günaydın' }, { org: 'Spas', mean: 'Teşekkürler' }]
       },
       cand: {
         title: "Kürt Kültürü", desc: "Renkler ve yaşam.",
         sections: [
-          { title: "Newroz", text: "21 Mart ulusal bayramdır." },
-          { title: "Giyim", text: "Şal û şapik ve fistan yöreseldir." }
+          { title: "Newroz", text: "Newroz (21 Mart), Kürtlerin ulusal bayramıdır. Yeni yılı ve direnişi simgeler. Newroz ateşi özgürlüğün sembolüdür." },
+          { title: "Giyim", text: "Şal û şapik ve fistan yöresel kıyafetlerdir." }
         ]
       },
       muzik: {
@@ -213,36 +154,22 @@ export const siteContent = {
   // =================================================================
   EN: {
     nav: {
-      sereke: 'Home', ziman: 'Language', cand: 'Culture', dirok: 'History', muzik: 'Music', huner: 'Art', ferheng: 'Dictionary', gallery: 'Gallery', listik: 'Game', tekili: 'Contact', follow: 'Follow Us', join: 'Join Us'
+      sereke: 'Home', ziman: 'Language', cand: 'Culture', dirok: 'History', muzik: 'Music', huner: 'Art', ferheng: 'Dictionary', gallery: 'Gallery', listik: 'Game', tekili: 'Contact', follow: 'Follow Us', join: 'Join Us', admin_content: 'Content (Blog/Announce)', admin_dict: 'Dictionary'
     },
     notFound: {
       title: "Lost Your Way?", desc: "Sorry, we couldn't find the page.", backButton: "Back to Home"
     },
     gallery: {
-      title: 'Our Gallery',
-      desc: 'Our best memories',
-      cats: { all: 'All', newroz: 'Newroz', calaki: 'Events', taste: 'Breakfast', ger: 'Trip' }
+      title: 'Our Gallery', desc: 'Our best memories', cats: { all: 'All', newroz: 'Newroz', calaki: 'Events', taste: 'Breakfast', ger: 'Trip' }
     },
     home: {
-      heroTitle1: 'At YTU', heroTitle2: 'Our Voice', heroTitle3: 'Our Color.',
-      heroSubtitle: 'Yildiz Technical University - Kurdish Society',
-      heroButton: 'Join Us',
-      aboutTitle: 'About Us',
+      heroTitle1: 'At YTU', heroTitle2: 'Our Voice', heroTitle3: 'Our Color.', heroSubtitle: 'Yildiz Technical University - Kurdish Society',
+      heroButton: 'Join Us', aboutTitle: 'About Us',
       aboutText1: 'YTU Kurdish Society was established in 2025. Our aim is to protect the Kurdish language.',
-      aboutText2: 'We work with Kurdish students and anyone interested in the language.',
-      featuresTitle: 'Departments',
-      ctaTitle: 'Join Our Community',
-      ctaText: 'Contact us to join!',
-      ctaButton: 'Start Now',
-      eventTitle: 'Upcoming Event',
-      eventEmptyTitle: 'To Be Announced',
-      eventEmptyDesc: 'Stay tuned for new events.',
-      dailyTitle: 'Daily Content',
-      dailyWord: 'Word',
-      dailyQuote: 'Quote',
-      time: { day: 'Day', hour: 'Hr', min: 'Min', sec: 'Sec' },
-      quickDict: 'Dictionary',
-      quickGame: 'Play'
+      aboutText2: 'We work with Kurdish students and anyone interested in the language. We organize activities.',
+      featuresTitle: 'Departments', ctaTitle: 'Join Our Community', ctaText: 'Contact us to join!', ctaButton: 'Start Now',
+      eventTitle: 'Upcoming Event', eventEmptyTitle: 'To Be Announced', eventEmptyDesc: 'Stay tuned for new events.', dailyTitle: 'Daily Content', dailyWord: 'Word', dailyQuote: 'Quote',
+      time: { day: 'Day', hour: 'Hr', min: 'Min', sec: 'Sec' }, quickDict: 'Dictionary', quickGame: 'Play'
     },
     cards: {
       zimanTitle: 'Language', zimanDesc: 'Learning Kurdish', candTitle: 'Culture', candDesc: 'Rich culture', dirokTitle: 'History', dirokDesc: 'Ancient history', muzikTitle: 'Music', muzikDesc: 'Kurdish music', hunerTitle: 'Art', hunerDesc: 'Kurdish art'
@@ -257,8 +184,7 @@ export const siteContent = {
         title: "Kurdish History", desc: "From Medes to today.",
         sections: [
           { title: "Origins", text: "Kurds are ancient people of Mesopotamia." },
-          { title: "Principalities", text: "Kurds established many principalities." },
-          { title: "Modern Era", text: "Kurds continue to keep their culture alive." }
+          { title: "Principalities", text: "Kurds established many principalities." }
         ]
       },
       ziman: {

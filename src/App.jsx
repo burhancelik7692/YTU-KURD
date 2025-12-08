@@ -1,9 +1,8 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
-// Sayfalar
 import Home from "./pages/Home";
 import Culture from "./pages/Culture"; 
 import Music from "./pages/Music";
@@ -15,17 +14,16 @@ import Dictionary from "./pages/Dictionary";
 import NotFound from "./pages/NotFound"; 
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
-// Admin Sayfaları
 import Login from "./pages/admin/Login";
 import Dashboard from "./pages/admin/Dashboard";
 
 import ScrollToTop from "./components/ScrollToTop"; 
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext'; 
-import { AuthProvider, useAuth } from './context/AuthContext'; // Auth Eklendi
+import { AuthProvider, useAuth } from './context/AuthContext';
 import "./index.css";
 
-// Korumalı Rota Bileşeni (Sadece admin girebilir)
+// Korumalı Rota Bileşeni (Admin Girişi)
 const PrivateRoute = ({ children }) => {
   const { currentUser } = useAuth();
   return currentUser ? children : <Navigate to="/admin" />;
@@ -33,14 +31,20 @@ const PrivateRoute = ({ children }) => {
 
 const Layout = ({ children }) => {
   const location = useLocation();
-  // Admin sayfalarında ve oyun sayfasında menü/footer gizle
   const isFullScreen = location.pathname === '/listik' || location.pathname.startsWith('/admin');
 
   return (
+    // Global Dark Mode Sınıfları
     <div className="app-container flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Helmet><title>YTU Kurdî</title></Helmet>
+      
+      {/* Admin ve Oyun sayfalarında Menü ve Footer gizlenir */}
       {!isFullScreen && <Navigation />}
-      <main className="flex-grow">{children}</main>
+      
+      <main className="flex-grow">
+        {children}
+      </main>
+
       {!isFullScreen && <Footer />}
     </div>
   );
@@ -63,11 +67,11 @@ function App() {
                 <Route path="/dirok" element={<History />} />
                 <Route path="/ziman" element={<Language />} />
                 <Route path="/ferheng" element={<Dictionary />} />
-                <Route path="/listik" element={<Listik />} />
                 <Route path="/galeri" element={<Gallery />} />
                 <Route path="/tekili" element={<Contact />} />
+                <Route path="/listik" element={<Listik />} />
                 
-                {/* Admin Sayfaları */}
+                {/* Admin Rotası */}
                 <Route path="/admin" element={<Login />} />
                 <Route path="/admin/dashboard" element={
                   <PrivateRoute>

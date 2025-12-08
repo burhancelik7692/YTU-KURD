@@ -1,14 +1,12 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics"; 
-import { getFirestore } from "firebase/firestore";  // Firestore
-import { getStorage } from "firebase/storage";    // Storage
-import { getAuth } from "firebase/auth";      // KRİTİK: Authentication Servisi
+import { getFirestore } from "firebase/firestore";  // Firestore Veritabanı
+import { getStorage } from "firebase/storage";    // Storage Depolama
+import { getAuth } from "firebase/auth";      // Authentication Servisi
 
-// Web uygulamanızın Firebase yapılandırması
-// DİKKAT: Bu bilgileri .env dosyasına taşımak, genel güvenlik için önerilir.
+// --- KRİTİK: BURAYI KENDİ FIREBASE AYARLARINIZLA DOLDURUN ---
 const firebaseConfig = {
-  // Bu bilgileri kendi Firebase konsolunuzdaki gerçek anahtarlarınızla değiştirin!
-  apiKey: "AIzaSyDadado7dT6SYDywKRCpAc9L7kqkubdadE", 
+  apiKey: "SENIN_YENI_VE_DOGRULANMIS_API_KEYIN_BURAYA", // Hatanın kaynağı burasıydı
   authDomain: "ytu-kurdi.firebaseapp.com",
   projectId: "ytu-kurdi",
   storageBucket: "ytu-kurdi.firebasestorage.app",
@@ -18,23 +16,18 @@ const firebaseConfig = {
 };
 
 
-// 1. Firebase Uygulamasını Başlat
 const app = initializeApp(firebaseConfig);
 
-// 2. Kullanılacak Servisleri Başlat
-// Servisler başlatılırken 'app' değişkeni parametre olarak verilir.
+// Servisleri başlat
 const analytics = getAnalytics(app); 
-const db = getFirestore(app); 
-const storage = getStorage(app); 
-const auth = getAuth(app); // YENİ: Authentication servisi başlatıldı.
+export const auth = getAuth(app); 
+export const db = getFirestore(app); 
+export const storage = getStorage(app); 
 
-
-// 3. Servisleri Dışarı Aktar (Export)
-// Artık 'auth' servisini dışarıya aktarıyoruz!
 export { 
   app, 
   analytics, 
   db, 
   storage,
-  auth // KRİTİK DÜZELTME: Auth servisi artık kullanılabilir.
+  auth
 };

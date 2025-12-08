@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, Instagram, Gamepad2, Book, Mail, Moon, Sun, Image } from 'lucide-react'; // Image ikonu eklendi
+import { Menu, X, Globe, Instagram, Gamepad2, Book, Mail, Moon, Sun, Image } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
@@ -23,7 +23,7 @@ const Navigation = () => {
     { path: '/dirok', label: t.dirok || 'Tarih' },
     { path: '/muzik', label: t.muzik || 'Müzik' },
     { path: '/huner', label: t.huner || 'Sanat' },
-    { path: '/galeri', label: t.gallery || 'Galeri', icon: <Image size={16} /> }, // Galeri
+    { path: '/galeri', label: t.gallery || 'Galeri', icon: <Image size={16} /> },
     { path: '/tekili', label: t.tekili || 'İletişim', icon: <Mail size={16} /> },
     { path: '/listik', label: t.listik || 'Oyun', isGame: true } 
   ];
@@ -45,7 +45,6 @@ const Navigation = () => {
             </div>
           </Link>
 
-          {/* MASAÜSTÜ MENÜ */}
           <div className="hidden xl:flex items-center space-x-1">
             {links.map((link) => {
               const isActive = location.pathname === link.path;
@@ -64,7 +63,6 @@ const Navigation = () => {
               );
             })}
             
-            {/* TEMA & DİL */}
             <button onClick={toggleTheme} className="ml-2 p-2 rounded-lg text-slate-600 dark:text-yellow-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
               {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
             </button>
@@ -76,7 +74,6 @@ const Navigation = () => {
             </motion.a>
           </div>
 
-          {/* MOBİL */}
           <div className="xl:hidden flex items-center gap-2">
             <button onClick={toggleTheme} className="p-2 text-slate-600 dark:text-yellow-400">
               {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
@@ -87,7 +84,6 @@ const Navigation = () => {
         </div>
       </div>
 
-      {/* MOBİL AÇILIR MENÜ */}
       <AnimatePresence>
         {isOpen && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="xl:hidden bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 overflow-hidden shadow-xl">
