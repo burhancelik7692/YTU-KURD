@@ -24,16 +24,19 @@ import ScrollToTop from "./components/ScrollToTop";
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext'; 
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { UserProvider } from './context/UserContext';
 import "./index.css";
 
 // Korumalı Rota Bileşeni (Admin Girişi)
 const PrivateRoute = ({ children }) => {
   const { currentUser } = useAuth();
+  // Kullanıcı yoksa /admin sayfasına yönlendirir
   return currentUser ? children : <Navigate to="/admin" />;
 };
 
 const Layout = ({ children }) => {
   const location = useLocation();
+  // Admin ve Oyun sayfalarında Menü ve Footer gizlenir
   const isFullScreen = location.pathname === '/listik' || location.pathname.startsWith('/admin');
 
   return (
@@ -54,39 +57,41 @@ const Layout = ({ children }) => {
 function App() {
   return (
     <AuthProvider>
-      <LanguageProvider>
-        <ThemeProvider>
-          <Router>
-            <ScrollToTop />
-            <Layout>
-              <Routes>
-                {/* Normal Sayfalar */}
-                <Route path="/" element={<Home />} />
-                <Route path="/cand" element={<Culture />} />
-                <Route path="/muzik" element={<Music />} />
-                <Route path="/huner" element={<Art />} />
-                <Route path="/dirok" element={<History />} />
-                <Route path="/ziman" element={<Language />} />
-                <Route path="/ferheng" element={<Dictionary />} />
-                <Route path="/galeri" element={<Gallery />} />
-                <Route path="/tekili" element={<Contact />} />
-                <Route path="/listik" element={<Listik />} />
-                <Route path="/haberler" element={<Blog />} /> {/* YENİ: Blog/Duyurular Rotası */}
-                
-                {/* Admin Sayfaları */}
-                <Route path="/admin" element={<Login />} />
-                <Route path="/admin/dashboard" element={
-                  <PrivateRoute>
-                    <Dashboard />
-                  </PrivateRoute>
-                } />
+      <UserProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <Router>
+              <ScrollToTop />
+              <Layout>
+                <Routes>
+                  {/* Normal Sayfalar */}
+                  <Route path="/" element={<Home />} />
+                  <Route path="/cand" element={<Culture />} />
+                  <Route path="/muzik" element={<Music />} />
+                  <Route path="/huner" element={<Art />} />
+                  <Route path="/dirok" element={<History />} />
+                  <Route path="/ziman" element={<Language />} />
+                  <Route path="/ferheng" element={<Dictionary />} />
+                  <Route path="/galeri" element={<Gallery />} />
+                  <Route path="/tekili" element={<Contact />} />
+                  <Route path="/listik" element={<Listik />} />
+                  <Route path="/haberler" element={<Blog />} />
+                  
+                  {/* Admin Sayfaları */}
+                  <Route path="/admin" element={<Login />} />
+                  <Route path="/admin/dashboard" element={
+                    <PrivateRoute>
+                      <Dashboard />
+                    </PrivateRoute>
+                  } />
 
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Layout>
-          </Router>
-        </ThemeProvider>
-      </LanguageProvider>
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Layout>
+            </Router>
+          </ThemeProvider>
+        </LanguageProvider>
+      </UserProvider>
     </AuthProvider>
   );
 }

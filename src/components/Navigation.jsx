@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, Instagram, Gamepad2, Book, Mail, Moon, Sun, Image, MessageSquare, BookOpen } from 'lucide-react'; // MessageSquare ve BookOpen eklendi
+import { Menu, X, Globe, Instagram, Gamepad2, Book, Mail, Moon, Sun, Image, MessageSquare } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
@@ -18,8 +18,8 @@ const Navigation = () => {
   const links = [
     { path: '/', label: t.sereke || 'Home' },
     { path: '/ferheng', label: t.ferheng || 'Sözlük', icon: <Book size={16} /> },
+    { path: '/haberler', label: t.blog || 'Duyurular', icon: <MessageSquare size={16} /> }, // Yeni Blog/Duyurular Linki
     { path: '/ziman', label: t.ziman || 'Dil' },
-    { path: '/haberler', label: t.blog || 'Duyurular', icon: <MessageSquare size={16} /> }, // DUYURULAR EKLENDİ
     { path: '/cand', label: t.cand || 'Kültür' },
     { path: '/dirok', label: t.dirok || 'Tarih' },
     { path: '/muzik', label: t.muzik || 'Müzik' },

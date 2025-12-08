@@ -3,7 +3,7 @@ import { useAuth } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../../firebase';
 import { addDynamicContent } from '../../../services/adminService';
-import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, Music, Film, AlertCircle, MessageSquare, Book, Trash2, Link, Edit } from 'lucide-react';
+import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, Music, Film, AlertCircle, MessageSquare, Book, Trash2, Link as LinkIcon, Edit } from 'lucide-react';
 import { useLanguage } from '../../../context/LanguageContext';
 import { siteContent } from '../../../data/locales';
 import { collection, getDocs, deleteDoc, doc, query, orderBy } from 'firebase/firestore';
@@ -49,7 +49,12 @@ const Dashboard = () => {
     try {
         const q = query(collection(db, "dynamicContent"), orderBy("createdAt", "desc"));
         const snapshot = await getDocs(q);
-        const list = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        // NOT: Firebasedeki zaman damgasını (Timestamp) okunabilir tarihe çeviriyoruz.
+        const list = snapshot.docs.map(doc => ({ 
+            id: doc.id, 
+            ...doc.data(),
+            createdAt: doc.data().createdAt?.toDate ? doc.data().createdAt.toDate().toLocaleDateString(lang) : 'Bilinmiyor'
+        }));
         setContentList(list);
     } catch (err) {
         console.error("İçerik listesi çekilemedi:", err);
@@ -87,6 +92,7 @@ const Dashboard = () => {
 
   const setContentTab = (type) => {
       setActiveTab(type);
+      // Sekme değişince formu temizle
       setFormData(prev => ({ ...prev, type: type, category: '', title: '', url: '', desc: '', text: '', ku: '', tr: '' }));
   };
   
@@ -97,11 +103,16 @@ const Dashboard = () => {
       
       let dataToSave = { ...formData };
       
-      if (!dataToSave.title || !dataToSave.url && dataToSave.type !== 'dictionary') {
-        setError("Başlık ve URL boş bırakılamaz!");
-        return;
+      // Zorunlu alan kontrolü
+      if (!dataToSave.title && dataToSave.type !== 'dictionary') {
+          // Galeri, Blog, Video'da URL şart
+          if (!dataToSave.url) {
+              setError("Başlık ve URL boş bırakılamaz!");
+              return;
+          }
       }
       
+      // Sözlük kontrolü
       if (dataToSave.type === 'dictionary' && (!dataToSave.ku || !dataToSave.tr)) {
           setError("Sözlük için Kürtçe ve Türkçe kelime zorunludur!");
           return;
@@ -124,14 +135,21 @@ const Dashboard = () => {
   
   // Dilden bağımsız sabitler
   const T = siteContent[lang]?.nav || {};
-  const GL = GALLERY_CATEGORIES;
-
   const contentHeader = {
     gallery: { icon: Image, label: 'Resim Ekle (Galeri)', color: 'blue' },
     content: { icon: MessageSquare, label: 'Blog/Duyuru Metni Ekle', color: 'green' },
     dictionary: { icon: Book, label: 'Sözlük Kelimesi Ekle', color: 'purple' },
   }[activeTab];
 
+  // İçerik listesi ikonları
+  const typeIcons = {
+      gallery: <Image size={20} className="text-blue-500" />,
+      book: <BookOpen size={20} className="text-yellow-600" />,
+      music: <Music size={20} className="text-indigo-500" />,
+      video: <Film size={20} className="text-red-600" />,
+      dictionary: <Book size={20} className="text-purple-600" />,
+      content: <MessageSquare size={20} className="text-emerald-600" />
+  };
 
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900 flex text-slate-900 dark:text-white transition-colors">
@@ -161,8 +179,8 @@ const Dashboard = () => {
                 Yeni {contentHeader.label}
             </h3>
             
-            {/* SÖZLÜK FORM BÖLÜMÜ */}
             {activeTab === 'dictionary' ? (
+                /* SÖZLÜK FORM */
                 <form onSubmit={handleContentUpload} className="space-y-6">
                     <p className="text-sm text-yellow-500 font-bold flex items-center gap-2"><BookOpen size={16} /> Sözlük içeriği ekliyorsunuz.</p>
                     <div><label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kürtçe Kelime (ku)</label><input type="text" name="ku" value={formData.ku} onChange={handleChange} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="Örn: Serkeftin" required /></div>
@@ -212,7 +230,7 @@ const Dashboard = () => {
                 {contentList.map((item) => (
                     <div key={item.id} className="flex items-center justify-between bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
                         <div className="flex items-center gap-4 truncate flex-1">
-                            {item.type === 'gallery' ? <Image size={20} className="text-blue-500" /> : <MessageSquare size={20} className="text-green-500" />}
+                            {typeIcons[item.type] || <MessageSquare size={20} className="text-slate-500" />}
                             <div className="truncate">
                                 <p className="font-bold text-sm truncate">{item.title || item.ku || 'Başlıksız'}</p>
                                 <p className="text-xs text-slate-400">Tipi: {item.type} | Kategori: {item.category || 'Yok'}</p>
@@ -221,16 +239,12 @@ const Dashboard = () => {
                         <div className="flex items-center gap-3 ml-4 flex-shrink-0">
                             {/* Linke Git */}
                             {item.url && (
-                                <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 transition">
-                                    <Link size={20} />
+                                <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 transition" title="Linke Git">
+                                    <LinkIcon size={20} />
                                 </a>
                             )}
-                            {/* Düzenle (Yakında) */}
-                            <button className="text-yellow-500 hover:text-yellow-600 transition" title="Düzenle (Yakında)">
-                                <Edit size={20} />
-                            </button>
                             {/* Sil */}
-                            <button onClick={() => handleDelete(item.id, item.title)} className="text-red-500 hover:text-red-700 transition" title="Sil">
+                            <button onClick={() => handleDelete(item.id, item.title || item.ku)} className="text-red-500 hover:text-red-700 transition" title="Sil">
                                 <Trash2 size={20} />
                             </button>
                         </div>
@@ -238,8 +252,6 @@ const Dashboard = () => {
                 ))}
             </div>
         )}
-
-
       </main>
     </div>
   );

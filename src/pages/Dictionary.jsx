@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Book, X, ArrowLeft, Loader2, AlertCircle, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { useUser } from '../context/UserContext'; // Kullanıcı Context'i
 import { siteContent } from '../data/locales';
 
 // Firebase bağlantısı
@@ -15,6 +16,9 @@ import { DICTIONARY as STATIC_DICTIONARY } from '../data/dictionary';
 
 const Dictionary = () => {
   const { lang } = useLanguage();
+  // Not: useUser'ı burada çağırmamız gerekiyor.
+  const { userData, updateUserData } = useUser(); 
+
   const t = {
     KU: { title: "Ferhenga Kurdî", search: "Peyvê bigere...", back: "Vegere", count: "peyv hat dîtin", notFound: "Peyv nehat dîtin", fav: "Favorilerim" },
     TR: { title: "Kürtçe Sözlük", search: "Kelime ara...", back: "Geri", count: "kelime bulundu", notFound: "Kelime bulunamadı", fav: "Favorilerim" },
@@ -27,9 +31,7 @@ const Dictionary = () => {
   const [error, setError] = useState(null);
   const [activeList, setActiveList] = useState('all'); // all veya favorites
 
-  // --- Kullanıcı Favori Yönetimi ---
-  const { userData, updateUserData } = useUser(); 
-
+  // --- FAVORİ EKLE/ÇIKAR MANTIĞI ---
   const toggleFavorite = (wordObj) => {
     const wordKey = wordObj.ku;
     const favorites = userData.favoriteWords || [];
@@ -83,7 +85,7 @@ const Dictionary = () => {
     };
 
     fetchDictionary();
-  }, [userData.favoriteWords]); // Favori listesi güncellendiğinde tekrar çek (güncellenmiş user data için)
+  }, [userData.favoriteWords]); 
 
   
   // Arama Mantığı

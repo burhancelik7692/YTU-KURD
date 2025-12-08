@@ -17,7 +17,8 @@ export const siteContent = {
       heroButton: 'Tevlî Me Bibe', aboutTitle: 'Derbarê Me',
       aboutText1: 'Komeleya Kurdî ya Zanîngeha Yıldız Teknîk (YTU) di sala 2025an de hatiye damezrandin. Armanca me parastina zimanê kurdî, belavkirina çanda kurdî, û hînkirina dîroka me ye.',
       aboutText2: 'Em bi xwendekarên kurd û hemû kesên ku ji zimanê kurdî hez dikin re dixebitin. Em çalakiyên cuda yên çandî, hunerî û perwerdehî organîze dikin.',
-      featuresTitle: 'Beşên Me', ctaTitle: 'Beşdarî Komeleya Me Bibe', ctaText: 'Heke tu dixwazî zimanê kurdî hîn bibî, çanda xwe nas bikî, û bi me re bixebitî, bi me re têkilî dayne!', ctaButton: 'Dest Pê Bike',
+      featuresTitle: 'Beşên Me',
+      ctaTitle: 'Beşdarî Komeleya Me Bibe', ctaText: 'Heke tu dixwazî zimanê kurdî hîn bibî, çanda xwe nas bikî, û bi me re bixebitî, bi me re têkilî dayne!', ctaButton: 'Dest Pê Bike',
       eventTitle: 'Çalakiya Pêşerojê', eventEmptyTitle: 'Tê Ragihandin', eventEmptyDesc: 'Ji bo çalakiyên nû li bendê bin.', dailyTitle: 'Naveroka Rojê', dailyWord: 'Peyv', dailyQuote: 'Gotin',
       time: { day: 'Roj', hour: 'Saet', min: 'Deqe', sec: 'Çirk' }, quickDict: 'Ferheng', quickGame: 'Bilîze'
     },
@@ -42,7 +43,7 @@ export const siteContent = {
         title: "Zimanê Kurdî", desc: "Zimanê me nasnameya me ye. Kurdî zimanekî Hînd-Ewropî ye.",
         alphabetTitle: "Alfabeya Kurdî (Kurmancî)", phrasesTitle: "Hevokên Girîng",
         topics: [
-          { id: 'reziman', title: 'Rêzimana Kurdî', desc: 'Rêziman û qawaidên ziman', text: 'Kurdî zimanekî Hînd-Ewropî ye. Alfabeya latînî (Kurmancî) û erebî (Soranî) heye.' },
+          { id: 'reziman', title: 'Rêzimana Kurdî', desc: 'Rêziman û qawaidên ziman', text: 'Zimanê kurdî zimanek Hind-Ewropî ye. Alfabeya latînî (Kurmancî) û erebî (Soranî) heye.' },
           { id: 'axaftin', title: 'Axaftina Rojane', desc: 'Hevokên rojane', text: 'Silav, Çawa yî, Baş im, Spas, Bi xêr hatî...' }
         ],
         phrases: [{ org: 'Roj baş', mean: 'Günaydın' }, { org: 'Spas', mean: 'Teşekkürler' }]
@@ -188,7 +189,8 @@ export const siteContent = {
         topics: [
           { id: 'reziman', title: 'Grammar', desc: 'Rules', text: 'Kurdish is Indo-European.' },
           { id: 'axaftin', title: 'Speaking', desc: 'Daily', text: 'Hello, How are you...' }
-        ]
+        ],
+        phrases: [{ org: 'Roj baş', mean: 'Good morning' }, { org: 'Spas', mean: 'Thanks' }]
       },
       cand: {
         title: "Kurdish Culture", desc: "Life and colors.",
