@@ -4,7 +4,7 @@ export const siteContent = {
   // =================================================================
   KU: {
     nav: {
-      sereke: 'Sereke', ziman: 'Ziman', cand: 'Çand', dirok: 'Dîrok', muzik: 'Muzîk', huner: 'Huner', ferheng: 'Ferheng', gallery: 'Wênegeh', tekili: 'Têkilî', listik: 'Lîstik', follow: 'Me Bişopînin', join: 'Tevlî Me Bibe', admin_content: 'Naverok (Blog/Duyuru)', admin_dict: 'Ferheng', blog: 'Duyurular'
+      sereke: 'Sereke', ziman: 'Ziman', cand: 'Çand', dirok: 'Dîrok', muzik: 'Muzîk', huner: 'Huner', ferheng: 'Ferheng', gallery: 'Wênegeh', tekili: 'Têkilî', listik: 'Lîstik', follow: 'Me Bişopînin', join: 'Tevlî Me Bibe', admin_content: 'Naverok (Blog/Duyuru)', admin_dict: 'Ferheng'
     },
     notFound: {
       title: "Rêya Xwe Winda Kir?", desc: "Bibore, rûpela ku tu lê digerî me nedît.", backButton: "Vegere Sereke"
@@ -22,7 +22,7 @@ export const siteContent = {
       time: { day: 'Roj', hour: 'Saet', min: 'Deqe', sec: 'Çirk' }, quickDict: 'Ferheng', quickGame: 'Bilîze'
     },
     cards: {
-      zimanTitle: 'Ziman', zimanDesc: 'Hînbûna zimanê kurdî', candTitle: 'Çand', candDesc: 'Çanda dewlemend', dirokTitle: 'Dîrok', dirokDesc: 'Dîroka kevn', muzikTitle: 'Muzîk', muzikDesc: 'Muzîka kurdî û stranan', hunerTitle: 'Huner', hunerDesc: 'Huner û hunermend'
+      zimanTitle: 'Ziman', zimanDesc: 'Hînbûna zimanê kurdî û rêzimana wê', candTitle: 'Çand', candDesc: 'Çanda dewlemend a gelê kurd', dirokTitle: 'Dîrok', dirokDesc: 'Dîroka kevn a kurdan', muzikTitle: 'Muzîk', muzikDesc: 'Muzîka kurdî û stranan', hunerTitle: 'Huner', hunerDesc: 'Huner û hunermendên kurd'
     },
     pages: {
       tekili: {
@@ -42,10 +42,8 @@ export const siteContent = {
         title: "Zimanê Kurdî", desc: "Zimanê me nasnameya me ye. Kurdî zimanekî Hînd-Ewropî ye.",
         alphabetTitle: "Alfabeya Kurdî (Kurmancî)", phrasesTitle: "Hevokên Girîng",
         topics: [
-          { id: 'reziman', title: 'Rêzimana Kurdî', desc: 'Rêziman û qawaidên ziman', text: 'Zimanê kurdî zimanek Hind-Ewropî ye. Alfabeya latînî (Kurmancî) û erebî (Soranî) heye.' },
-          { id: 'axaftin', title: 'Axaftina Rojane', desc: 'Hevokên rojane', text: 'Silav, Çawa yî, Baş im, Spas, Bi xêr hatî...' },
-          { id: 'peyv', title: 'Peyv û Bêje', desc: 'Peyvên girîng', text: 'Mal, Dê, Bav, Dibistan, Nan, Av, Jiyan...' },
-          { id: 'guhdari', title: 'Guhdarî û Axaftin', desc: 'Pratîka ziman', text: 'Ji bo hînbûnê divê hûn her roj guhdarî bikin û biaxivin.' }
+          { id: 'reziman', title: 'Rêzimana Kurdî', desc: 'Rêziman û qawaidên ziman', text: 'Kurdî zimanekî Hînd-Ewropî ye. Alfabeya latînî (Kurmancî) û erebî (Soranî) heye.' },
+          { id: 'axaftin', title: 'Axaftina Rojane', desc: 'Hevokên rojane', text: 'Silav, Çawa yî, Baş im, Spas, Bi xêr hatî...' }
         ],
         phrases: [{ org: 'Roj baş', mean: 'Günaydın' }, { org: 'Spas', mean: 'Teşekkürler' }]
       },
@@ -53,24 +51,21 @@ export const siteContent = {
         title: "Çanda Kurdî", desc: "Reng, deng û jiyana gelê Kurd.",
         sections: [
           { title: "Newroz", text: "Newroz (21ê Adarê) cejna neteweyî ya Kurdan e. Sersala nû û sembola berxwedanê ye. Agirê Newrozê nîşana azadiyê ye." },
-          { title: "Cil û Berg", text: "Cilên Kurdî bi rengên xwe yên zindî têne naskirin. Şal û şapik (ji bo mêran) û kiras û fîstan (ji bo jinan) parçeyên sereke ne." },
-          { title: "Mêvanperwerî", text: "Di çanda Kurdî de mêvan pîroz e. Deriyê Kurdan her tim ji mêvanan re vekirî ye û xwarinên herî xweş ji bo wan têne amadekirin." }
+          { title: "Cil û Berg", text: "Cilên Kurdî bi rengên xwe yên zindî têne naskirin. Şal û şapik (ji bo mêran) û kiras û fîstan (ji bo jinan) parçeyên sereke ne." }
         ]
       },
       muzik: {
         title: "Muzîka Kurdî", desc: "Dengê çiya û evînê.",
         sections: [
           { title: "Dengbêjî", text: "Dengbêjî stûna muzîka Kurdî ye. Dengbêj, dîrok û êşên gel bi tenê bi dengê xwe vedibêjin. Şakiro, Evdalê Zeynikê mînakên mezin in." },
-          { title: "Amûrên Muzîkê", text: "Tembûr, def, zirne û bilûr amûrên sereke ne. Bi taybetî tembûr di muzîka Kurdî de xwedî cihekî pîroz e." },
-          { title: "Muzîka Nûjen", text: "Îro hunermendên wekî Şivan Perwer, Ciwan Haco, Aynur Doğan muzîka Kurdî bi şêwazên nûjen (Rock, Jazz) digihîjînin cîhanê." }
+          { title: "Amûrên Muzîkê", text: "Tembûr, def, zirne û bilûr amûrên sereke ne. Bi taybetî tembûr di muzîka Kurdî de xwedî cihekî pîroz e." }
         ]
       },
       huner: {
         title: "Huner û Sînema", desc: "Dîtina cîhanê bi çavên Kurdan.",
         sections: [
           { title: "Sînemaya Kurdî", text: "Yilmaz Güney bavê sînemaya Kurdî tê hesibandin. Fîlmên wekî 'Yol' û 'Sûrî' di cîhanê de deng vedane." },
-          { title: "Wênesazî", text: "Hunermendên Kurd êş û hêviyên gelê xwe li ser tûwalê nîşan didin. Ehmedê Xanî di heman demê de xetatekî mezin bû." },
-          { title: "Govend", text: "Reqsên Kurdî (Govend) beşeke girîng a jiyana civakî ye. Her herêmek (Serhed, Botan, Amed) xwedî şêwazek taybet e." }
+          { title: "Wênesazî", text: "Hunermendên Kurd êş û hêviyên gelê xwe li ser tûwalê nîşan didin. Ehmedê Xanî di heman demê de xetatekî mezin bû." }
         ]
       }
     }
@@ -193,8 +188,7 @@ export const siteContent = {
         topics: [
           { id: 'reziman', title: 'Grammar', desc: 'Rules', text: 'Kurdish is Indo-European.' },
           { id: 'axaftin', title: 'Speaking', desc: 'Daily', text: 'Hello, How are you...' }
-        ],
-        phrases: [{ org: 'Roj baş', mean: 'Good morning' }, { org: 'Spas', mean: 'Thanks' }]
+        ]
       },
       cand: {
         title: "Kurdish Culture", desc: "Life and colors.",

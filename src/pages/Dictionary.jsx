@@ -1,25 +1,71 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Book, X, ArrowLeft } from 'lucide-react';
+import { Search, Book, X, ArrowLeft, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import { DICTIONARY } from '../data/dictionary';
+import { siteContent } from '../data/locales';
+
+// Firebase bağlantısı
+import { db } from '../firebase';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+
+// Statik kelimeler (Veritabanı boşsa gösterilir, tercihen kaldırılır)
+import { DICTIONARY as STATIC_DICTIONARY } from '../data/dictionary';
 
 const Dictionary = () => {
   const { lang } = useLanguage();
-  const [searchTerm, setSearchTerm] = useState("");
-
   const t = {
     KU: { title: "Ferhenga Kurdî", search: "Peyvê bigere...", back: "Vegere", count: "peyv hat dîtin", notFound: "Peyv nehat dîtin" },
     TR: { title: "Kürtçe Sözlük", search: "Kelime ara...", back: "Geri", count: "kelime bulundu", notFound: "Kelime bulunamadı" },
     EN: { title: "Kurdish Dictionary", search: "Search word...", back: "Back", count: "words found", notFound: "Word not found" }
   }[lang] || { title: "Ferhenga Kurdî" };
 
-  const filteredWords = DICTIONARY.filter(item => 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [dictionaryData, setDictionaryData] = useState(STATIC_DICTIONARY); // Başlangıçta statik
+  const [loading, setLoading] = useState(true);
+
+  // --- FIREBASE'DEN VERİ ÇEKME ---
+  useEffect(() => {
+    const fetchDictionary = async () => {
+      try {
+        const contentRef = collection(db, "dynamicContent");
+        // Sadece 'dictionary' tipindeki verileri çek
+        const q = query(contentRef, where("type", "==", "dictionary"));
+        const querySnapshot = await getDocs(q);
+        
+        const firebaseWords = [];
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          // Admin panelinden gelen 'ku' ve 'tr' kelimelerini al
+          if (data.ku && data.tr) {
+              firebaseWords.push({ ku: data.ku, tr: data.tr });
+          }
+        });
+
+        // Dinamik kelimeleri statik kelimelerle birleştir
+        const combined = [...STATIC_DICTIONARY, ...firebaseWords];
+        
+        // Tekrarlayanları temizlemek isterseniz burada Set kullanabilirsiniz.
+        setDictionaryData(combined); 
+
+      } catch (err) {
+        console.error("Sözlük verisi çekilemedi:", err);
+        // Hata durumunda statik veriler zaten gösteriliyor
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDictionary();
+  }, []);
+  
+  // Arama Mantığı (KU ve TR kelimeleri içinde arama yapar)
+  const filteredWords = dictionaryData.filter(item => 
     item.ku.toLowerCase().includes(searchTerm.toLowerCase()) || 
     item.tr.toLowerCase().includes(searchTerm.toLowerCase())
   ).sort((a, b) => a.ku.localeCompare(b.ku));
+
 
   return (
     <>
@@ -37,26 +83,39 @@ const Dictionary = () => {
             
             <div className="relative max-w-lg mx-auto">
               <input type="text" placeholder={t.search} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-12 py-4 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 text-slate-900 dark:text-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all text-lg font-medium" />
+                className="w-full pl-12 pr-12 py-4 rounded-xl border-2 border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900/50 text-slate-900 dark:text-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all text-lg font-medium" />
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" size={24} />
               {searchTerm && <button onClick={() => setSearchTerm("")} className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-red-500"><X size={20} /></button>}
             </div>
-            <p className="mt-4 text-sm text-slate-400 font-medium">{filteredWords.length} {t.count}</p>
+            <p className="mt-4 text-sm text-slate-400 dark:text-slate-500 font-medium">
+                {loading ? <Loader2 className="animate-spin inline-block mr-2" size={16} /> : `${filteredWords.length} ${t.count}`}
+            </p>
           </div>
 
+          {/* Sonuç Listesi */}
           <motion.div layout className="grid gap-3">
             <AnimatePresence>
               {filteredWords.length > 0 ? (
                 filteredWords.map((word, index) => (
-                  <motion.div key={index} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.2 }}
-                    className="bg-white dark:bg-slate-800 p-5 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex justify-between items-center group">
+                  <motion.div
+                    key={word.ku + word.tr} // Benzersiz bir anahtar
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                    className="bg-white dark:bg-slate-800 p-5 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex justify-between items-center group cursor-default"
+                  >
                     <div className="flex-1"><span className="text-xl font-bold text-blue-900 dark:text-blue-300 block">{word.ku}</span><span className="text-xs text-slate-400 font-bold tracking-wider uppercase">Kurdî</span></div>
                     <div className="text-slate-300 dark:text-slate-600 mx-4"><ArrowLeft size={20} className="rotate-180" /></div>
                     <div className="flex-1 text-right"><span className="text-lg font-medium text-slate-600 dark:text-slate-300 block">{word.tr}</span><span className="text-xs text-slate-400 font-bold tracking-wider uppercase">Tirkî</span></div>
                   </motion.div>
                 ))
               ) : (
-                <div className="text-center py-12"><div className="text-6xl mb-4">🔍</div><h3 className="text-xl font-bold text-slate-700 dark:text-slate-300 mb-2">{t.notFound}</h3></div>
+                <div className="text-center py-12">
+                  <div className="text-6xl mb-4">🔍</div>
+                  <h3 className="text-xl font-bold text-slate-700 dark:text-slate-300 mb-2">{t.notFound}</h3>
+                  <p className="text-slate-500 dark:text-slate-400">Ji kerema xwe peyveke din biceribîne.</p>
+                </div>
               )}
             </AnimatePresence>
           </motion.div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
@@ -14,6 +14,9 @@ import Dictionary from "./pages/Dictionary";
 import NotFound from "./pages/NotFound"; 
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
+import Blog from "./pages/Blog"; // Blog/Haberler eklendi
+
+// Admin Sayfaları
 import Login from "./pages/admin/Login";
 import Dashboard from "./pages/admin/Dashboard";
 
@@ -34,11 +37,9 @@ const Layout = ({ children }) => {
   const isFullScreen = location.pathname === '/listik' || location.pathname.startsWith('/admin');
 
   return (
-    // Global Dark Mode Sınıfları
     <div className="app-container flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Helmet><title>YTU Kurdî</title></Helmet>
       
-      {/* Admin ve Oyun sayfalarında Menü ve Footer gizlenir */}
       {!isFullScreen && <Navigation />}
       
       <main className="flex-grow">
@@ -70,8 +71,9 @@ function App() {
                 <Route path="/galeri" element={<Gallery />} />
                 <Route path="/tekili" element={<Contact />} />
                 <Route path="/listik" element={<Listik />} />
+                <Route path="/haberler" element={<Blog />} /> {/* YENİ: Blog/Duyurular Rotası */}
                 
-                {/* Admin Rotası */}
+                {/* Admin Sayfaları */}
                 <Route path="/admin" element={<Login />} />
                 <Route path="/admin/dashboard" element={
                   <PrivateRoute>
