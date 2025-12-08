@@ -1,7 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { ArrowLeft } from 'lucide-react'; // Link kaldırıldı
+// Link kaldırıldı
+import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const PageLayout = ({ icon: Icon, title, description, color, children }) => {
@@ -13,7 +14,7 @@ const PageLayout = ({ icon: Icon, title, description, color, children }) => {
   // Arka plan ve kenarlık renklerini ayarla
   const bgColor = `bg-${color}-600`;
 
-  // Sayfadan çıkış ve bir önceki sayfaya yönlendirme (Kesin çözüm)
+  // KRİTİK DÜZELTME: Tarayıcı geçmişinde bir adım geri git
   const handleBack = () => {
     window.history.back();
   };
@@ -28,7 +29,7 @@ const PageLayout = ({ icon: Icon, title, description, color, children }) => {
       <div className="min-h-screen bg-slate-50 dark:bg-slate-900 pt-24 pb-12 px-4 transition-colors duration-300">
         <div className="max-w-4xl mx-auto">
           
-          {/* GERİ DÖN BUTONU DÜZELTİLDİ: Artık Button ve history.back kullanır */}
+          {/* GERİ DÖN TUŞU DÜZELTİLDİ */}
           <button onClick={handleBack} className="inline-flex items-center text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-white mb-6 transition group">
             <ArrowLeft size={20} className="mr-1 group-hover:-translate-x-1 transition-transform" /> 
             {goBackText} 

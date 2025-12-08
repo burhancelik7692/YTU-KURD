@@ -20,15 +20,13 @@ const Gallery = () => {
   const [filter, setFilter] = useState('all');
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // --- FIREBASE'DEN VERİ ÇEKME ---
   useEffect(() => {
     const fetchGallery = async () => {
-      // Veri çekimi sırasında Auth hatası vermemesi için korumalı try-catch bloğu
       try {
+        setError(null);
         // dynamicContent koleksiyonundan sadece 'gallery' tipindeki verileri çek
         const contentRef = collection(db, "dynamicContent");
         
-        // Sadece 'gallery' tipinde olan ve en son eklenenleri çeker
         const q = query(
           contentRef, 
           where("type", "==", "gallery"), 
@@ -39,7 +37,6 @@ const Gallery = () => {
         const firebaseImages = [];
         querySnapshot.forEach((doc) => {
           const data = doc.data();
-          // NOT: Admin panelinden eklenen URL'ler data.url olarak geliyor
           firebaseImages.push({ 
               id: doc.id, 
               src: data.url, 
@@ -55,16 +52,15 @@ const Gallery = () => {
 
       } catch (err) {
         console.error("Galeri verisi çekilemedi (Firebase Hatası):", err);
-        setError("Veritabanı bağlantı hatası veya erişim reddedildi.");
+        setError("Veritabanı bağlantı hatası veya erişim reddedildi. Firebase ayarlarını kontrol edin.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchGallery();
-  }, []); // Sadece bir kere çalışır
+  }, []);
 
-  // Filtreleme Mantığı
   const filteredImages = filter === 'all' 
     ? images 
     : images.filter(img => img.category === filter);
@@ -79,14 +75,11 @@ const Gallery = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{t.title} - YTU Kurdî</title>
-      </Helmet>
+      <Helmet><title>{t.title} - YTU Kurdî</title></Helmet>
 
       <div className="min-h-screen bg-slate-50 dark:bg-slate-900 pt-24 pb-12 px-4 transition-colors duration-300">
         <div className="max-w-7xl mx-auto">
           
-          {/* Başlık */}
           <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
             <Link to="/" className="inline-flex items-center text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-white transition">
               <ArrowLeft size={20} className="mr-2" /> {lang === 'KU' ? 'Vegere' : 'Geri'}
@@ -96,7 +89,7 @@ const Gallery = () => {
               <p className="text-slate-500 dark:text-slate-400">{t.desc}</p>
             </div>
             <Link to="/admin" className="flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-blue-600 dark:hover:text-cyan-400 transition">
-               Admin <ImageIcon size={14} />
+               Admin Girişi
             </Link>
           </div>
 
