@@ -31,8 +31,43 @@ import "./index.css";
 // Korumalı Rota Bileşeni (Admin Girişi)
 const PrivateRoute = ({ children }) => {
   const { currentUser } = useAuth();
-  // Kullanıcı yoksa /admin sayfasına yönlendirir
+  // Yükleme anında ekranda kalmayı veya Navigate'in çalışmasını bekler
   return currentUser ? children : <Navigate to="/admin" />;
+};
+
+// Uygulama yapısını tanımlayan bileşen
+const AppContent = () => {
+    const location = useLocation();
+    const isFullScreen = location.pathname === '/listik' || location.pathname.startsWith('/admin');
+
+    return (
+        <Layout>
+            <Routes>
+                {/* Normal Sayfalar */}
+                <Route path="/" element={<Home />} />
+                <Route path="/cand" element={<Culture />} />
+                <Route path="/muzik" element={<Music />} />
+                <Route path="/huner" element={<Art />} />
+                <Route path="/dirok" element={<History />} />
+                <Route path="/ziman" element={<Language />} />
+                <Route path="/ferheng" element={<Dictionary />} />
+                <Route path="/galeri" element={<Gallery />} />
+                <Route path="/tekili" element={<Contact />} />
+                <Route path="/listik" element={<Listik />} />
+                <Route path="/haberler" element={<Blog />} />
+                
+                {/* Admin Sayfaları */}
+                <Route path="/admin" element={<Login />} />
+                <Route path="/admin/dashboard" element={
+                    <PrivateRoute>
+                        <Dashboard />
+                    </PrivateRoute>
+                } />
+
+                <Route path="*" element={<NotFound />} />
+            </Routes>
+        </Layout>
+    );
 };
 
 const Layout = ({ children }) => {
@@ -54,51 +89,17 @@ const Layout = ({ children }) => {
   );
 };
 
+
 function App() {
-  const { currentUser, loading } = useAuth(); // AuthContext'ten yükleme durumunu çek
-
-  // Eğer Auth verisi yükleniyorsa boş bir ekran göster (Bu, yönlendirmenin çakışmasını engeller)
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-slate-900">
-        <Loader2 className="animate-spin text-yellow-500" size={50} />
-      </div>
-    );
-  }
-
   return (
+    // Context'ler dışarıda, bileşenler içeride tanımlanıyor
     <AuthProvider>
       <UserProvider>
         <LanguageProvider>
           <ThemeProvider>
             <Router>
               <ScrollToTop />
-              <Layout>
-                <Routes>
-                  {/* Normal Sayfalar */}
-                  <Route path="/" element={<Home />} />
-                  <Route path="/cand" element={<Culture />} />
-                  <Route path="/muzik" element={<Music />} />
-                  <Route path="/huner" element={<Art />} />
-                  <Route path="/dirok" element={<History />} />
-                  <Route path="/ziman" element={<Language />} />
-                  <Route path="/ferheng" element={<Dictionary />} />
-                  <Route path="/galeri" element={<Gallery />} />
-                  <Route path="/tekili" element={<Contact />} />
-                  <Route path="/listik" element={<Listik />} />
-                  <Route path="/haberler" element={<Blog />} />
-                  
-                  {/* Admin Sayfaları */}
-                  <Route path="/admin" element={<Login />} />
-                  <Route path="/admin/dashboard" element={
-                    <PrivateRoute>
-                      <Dashboard />
-                    </PrivateRoute>
-                  } />
-
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Layout>
+              <AppContent /> {/* Yönlendirme ve içeriği buraya aldık */}
             </Router>
           </ThemeProvider>
         </LanguageProvider>
