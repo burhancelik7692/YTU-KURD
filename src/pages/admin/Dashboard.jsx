@@ -3,18 +3,10 @@ import { useAuth } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../../firebase';
 import { addDynamicContent } from '../../../services/adminService';
-import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, Music, Film, AlertCircle, MessageSquare, Book, Trash2, Link as LinkIcon, Edit } from 'lucide-react';
+import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, MessageSquare, Book, Trash2, Link as LinkIcon, Edit, AlertCircle, Music, Film } from 'lucide-react';
 import { useLanguage } from '../../../context/LanguageContext';
 import { siteContent } from '../../../data/locales';
-import { collection, getDocs, deleteDoc, doc, query, orderBy } from 'firebase/firestore';
-
-// --- SABİT KATEGORİLER ---
-const GALLERY_CATEGORIES = [
-  { value: "newroz", label: "Newroz" },
-  { value: "calaki", label: "Çalakî (Etkinlik)" },
-  { value: "taste", label: "Taştê (Kahvaltı)" },
-  { value: "ger", label: "Ger (Gezi)" },
-];
+import { collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc } from 'firebase/firestore'; 
 
 const Dashboard = () => {
   const { logout, currentUser } = useAuth();
@@ -25,31 +17,25 @@ const Dashboard = () => {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('gallery');
-  const [contentList, setContentList] = useState([]); // Tüm içeriklerin listesi
+  const [contentList, setContentList] = useState([]);
+  const [editingId, setEditingId] = useState(null); // Düzenlenen içeriğin ID'si
   
   // Form State'leri
   const [formData, setFormData] = useState({ 
-    title: '', 
-    url: '', 
-    category: '', 
-    desc: '',
-    type: 'gallery', // content, dictionary
-    text: '', // Blog ve Sözlük için ek metin alanı
-    ku: '', // Sözlük için Kürtçe
-    tr: '' // Sözlük için Türkçe
+    title: '', url: '', category: '', desc: '', type: 'gallery', text: '', ku: '', tr: ''
   });
 
   // --- 1. İÇERİK LİSTESİNİ ÇEKME ---
   useEffect(() => {
     fetchContentList();
-  }, [success]); // Yeni bir içerik eklendiğinde veya silindiğinde listeyi yenile
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [success]); 
 
   const fetchContentList = async () => {
     setLoading(true);
     try {
         const q = query(collection(db, "dynamicContent"), orderBy("createdAt", "desc"));
         const snapshot = await getDocs(q);
-        // NOT: Firebasedeki zaman damgasını (Timestamp) okunabilir tarihe çeviriyoruz.
         const list = snapshot.docs.map(doc => ({ 
             id: doc.id, 
             ...doc.data(),
@@ -69,17 +55,70 @@ const Dashboard = () => {
     if (!window.confirm(`'${title}' başlıklı içeriği silmek istediğinizden emin misiniz?`)) {
         return;
     }
+    setEditingId(null);
     try {
         await deleteDoc(doc(db, "dynamicContent", id));
         setSuccess(true);
-        // Listeyi anında güncelle
         fetchContentList();
     } catch (err) {
         setError("Silme işlemi başarısız oldu.");
     }
   };
+  
+  // --- 3. DÜZENLEME BAŞLATMA İŞLEVİ ---
+  const handleEdit = (item) => {
+      setEditingId(item.id);
+      setActiveTab(item.type === 'dictionary' ? 'dictionary' : item.type === 'gallery' ? 'gallery' : 'content');
+      setFormData({ 
+          title: item.title || '', 
+          url: item.url || '', 
+          category: item.category || '', 
+          desc: item.desc || '',
+          type: item.type,
+          text: item.text || '', 
+          ku: item.ku || '', 
+          tr: item.tr || ''
+      });
+  };
 
-
+  // --- 4. GÜNCELLEME VEYA EKLEME İŞLEVİ ---
+  const handleContentUpload = async (e) => {
+      e.preventDefault();
+      setError(null);
+      
+      let dataToSave = { ...formData };
+      
+      if (!dataToSave.title && dataToSave.type !== 'dictionary') {
+          if (!dataToSave.url) { setError("Başlık ve URL boş bırakılamaz!"); return; }
+      }
+      if (dataToSave.type === 'dictionary' && (!dataToSave.ku || !dataToSave.tr)) {
+          setError("Sözlük için Kürtçe ve Türkçe kelime zorunludur!");
+          return;
+      }
+      
+      setLoading(true);
+      try {
+          if (editingId) {
+              // GÜNCELLEME İŞLEMİ
+              const docRef = doc(db, "dynamicContent", editingId);
+              await updateDoc(docRef, dataToSave);
+              setEditingId(null);
+          } else {
+              // EKLEME İŞLEMİ
+              await addDynamicContent(dataToSave);
+          }
+          
+          setSuccess(true);
+          setFormData(prev => ({ ...prev, title: '', url: '', category: '', desc: '', text: '', ku: '', tr: '' }));
+          fetchContentList(); 
+          
+          setTimeout(() => setSuccess(false), 3000);
+      } catch (err) {
+          setError("İşlem başarısız oldu: " + err.message);
+      }
+      setLoading(false);
+  };
+  
   const handleLogout = async () => {
     await logout();
     navigate('/admin');
@@ -91,65 +130,36 @@ const Dashboard = () => {
   };
 
   const setContentTab = (type) => {
+      setEditingId(null); 
       setActiveTab(type);
-      // Sekme değişince formu temizle
       setFormData(prev => ({ ...prev, type: type, category: '', title: '', url: '', desc: '', text: '', ku: '', tr: '' }));
   };
   
-  // --- HARİCİ İÇERİK YÜKLEME (URL TABANLI) ---
-  const handleContentUpload = async (e) => {
-      e.preventDefault();
-      setError(null);
-      
-      let dataToSave = { ...formData };
-      
-      // Zorunlu alan kontrolü
-      if (!dataToSave.title && dataToSave.type !== 'dictionary') {
-          // Galeri, Blog, Video'da URL şart
-          if (!dataToSave.url) {
-              setError("Başlık ve URL boş bırakılamaz!");
-              return;
-          }
-      }
-      
-      // Sözlük kontrolü
-      if (dataToSave.type === 'dictionary' && (!dataToSave.ku || !dataToSave.tr)) {
-          setError("Sözlük için Kürtçe ve Türkçe kelime zorunludur!");
-          return;
-      }
-      
-      setLoading(true);
-      try {
-          await addDynamicContent(dataToSave);
-          setSuccess(true);
-          // Formu temizle ve listeyi yenile
-          setFormData(prev => ({ ...prev, title: '', url: '', category: '', desc: '', text: '', ku: '', tr: '' }));
-          fetchContentList(); 
-          
-          setTimeout(() => setSuccess(false), 3000);
-      } catch (err) {
-          setError("Ekleme başarısız oldu: " + err.message);
-      }
-      setLoading(false);
-  };
-  
-  // Dilden bağımsız sabitler
   const T = siteContent[lang]?.nav || {};
   const contentHeader = {
-    gallery: { icon: Image, label: 'Resim Ekle (Galeri)', color: 'blue' },
-    content: { icon: MessageSquare, label: 'Blog/Duyuru Metni Ekle', color: 'green' },
-    dictionary: { icon: Book, label: 'Sözlük Kelimesi Ekle', color: 'purple' },
+    gallery: { icon: Image, label: editingId ? 'Galeri Öğesini Güncelle' : 'Resim Ekle (Galeri)', color: 'blue' },
+    content: { icon: MessageSquare, label: editingId ? 'İçeriği Güncelle' : 'Blog/Duyuru Metni Ekle', color: 'green' },
+    dictionary: { icon: Book, label: editingId ? 'Sözlük Kelimesini Güncelle' : 'Sözlük Kelimesi Ekle', color: 'purple' },
   }[activeTab];
 
-  // İçerik listesi ikonları
   const typeIcons = {
-      gallery: <Image size={20} className="text-blue-500" />,
-      book: <BookOpen size={20} className="text-yellow-600" />,
-      music: <Music size={20} className="text-indigo-500" />,
-      video: <Film size={20} className="text-red-600" />,
-      dictionary: <Book size={20} className="text-purple-600" />,
-      content: <MessageSquare size={20} className="text-emerald-600" />
+      gallery: <Image size={20} className="text-blue-500" />, book: <BookOpen size={20} className="text-yellow-600" />,
+      music: <Music size={20} className="text-indigo-500" />, video: <Film size={20} className="text-red-600" />,
+      dictionary: <Book size={20} className="text-purple-600" />, content: <MessageSquare size={20} className="text-emerald-600" />
   };
+  
+  const formatTitle = (item) => {
+    if (item.type === 'dictionary') return `${item.ku} -> ${item.tr}`;
+    return item.title;
+  };
+  
+  const formatDesc = (item) => {
+      if (item.desc) return item.desc.substring(0, 50) + '...';
+      if (item.category) return item.category;
+      if (item.url) return item.url.substring(0, 30) + '...';
+      return 'Açıklama yok';
+  };
+
 
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900 flex text-slate-900 dark:text-white transition-colors">
@@ -172,11 +182,11 @@ const Dashboard = () => {
         {error && (<div className="bg-red-500/20 text-red-200 p-4 rounded-lg mb-6 flex items-center gap-2"><AlertCircle size={20} /> {error}</div>)}
         {success && (<div className="bg-green-600 text-white p-4 rounded-lg mb-6 flex items-center gap-2"><CheckCircle size={20} /> Başarıyla Eklendi ve Yayınlandı!</div>)}
 
-        {/* --- 1. YENİ İÇERİK EKLEME FORMU --- */}
+        {/* --- 1. YENİ İÇERİK EKLEME/GÜNCELLEME FORMU --- */}
         <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl max-w-2xl border border-slate-200 dark:border-slate-700 mb-12">
             <h3 className="text-2xl font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
                 <contentHeader.icon size={24} className={`text-${contentHeader.color}-600`} />
-                Yeni {contentHeader.label}
+                {contentHeader.label}
             </h3>
             
             {activeTab === 'dictionary' ? (
@@ -186,8 +196,9 @@ const Dashboard = () => {
                     <div><label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kürtçe Kelime (ku)</label><input type="text" name="ku" value={formData.ku} onChange={handleChange} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="Örn: Serkeftin" required /></div>
                     <div><label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Türkçe Anlamı (tr)</label><input type="text" name="tr" value={formData.tr} onChange={handleChange} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="Örn: Başarı" required /></div>
                     <button type="submit" disabled={loading} className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-lg flex items-center justify-center gap-2 disabled:opacity-50">
-                        {loading ? <><Loader2 className="animate-spin" /> Yükleniyor...</> : <><Plus /> Sözlük Kelimesini Ekle</>}
+                        {loading ? <><Loader2 className="animate-spin" /> Yükleniyor...</> : <><Plus /> {editingId ? 'Güncelle' : 'Ekle'}</>}
                     </button>
+                    {editingId && <button type="button" onClick={() => setEditingId(null)} className="w-full mt-2 py-2 bg-slate-200 text-slate-800 rounded-xl font-bold transition">Düzenlemeyi İptal Et</button>}
                 </form>
             ) : (
                 
@@ -213,8 +224,9 @@ const Dashboard = () => {
                     )}
 
                     <button type="submit" disabled={loading} className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-lg flex items-center justify-center gap-2 disabled:opacity-50">
-                        {loading ? <><Loader2 className="animate-spin" /> Yükleniyor...</> : <><Plus /> Ekle ve Yayınla</>}
+                        {loading ? <><Loader2 className="animate-spin" /> Yükleniyor...</> : <>{editingId ? 'Güncelle' : 'Ekle'} ve Yayınla</>}
                     </button>
+                    {editingId && <button type="button" onClick={() => setEditingId(null)} className="w-full mt-2 py-2 bg-slate-200 text-slate-800 rounded-xl font-bold transition">Düzenlemeyi İptal Et</button>}
                 </form>
             )}
         </div>
@@ -233,7 +245,7 @@ const Dashboard = () => {
                             {typeIcons[item.type] || <MessageSquare size={20} className="text-slate-500" />}
                             <div className="truncate">
                                 <p className="font-bold text-sm truncate">{item.title || item.ku || 'Başlıksız'}</p>
-                                <p className="text-xs text-slate-400">Tipi: {item.type} | Kategori: {item.category || 'Yok'}</p>
+                                <p className="text-xs text-slate-400">Tipi: {item.type} | Kategori: {item.category || 'Yok'} | Tarih: {item.createdAt}</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-3 ml-4 flex-shrink-0">
@@ -243,6 +255,10 @@ const Dashboard = () => {
                                     <LinkIcon size={20} />
                                 </a>
                             )}
+                            {/* Düzenle */}
+                            <button onClick={() => handleEdit(item)} className="text-yellow-500 hover:text-yellow-600 transition" title="Düzenle">
+                                <Edit size={20} />
+                            </button>
                             {/* Sil */}
                             <button onClick={() => handleDelete(item.id, item.title || item.ku)} className="text-red-500 hover:text-red-700 transition" title="Sil">
                                 <Trash2 size={20} />

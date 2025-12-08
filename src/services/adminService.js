@@ -1,16 +1,18 @@
 import { db } from '../firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
-// Tüm içerikleri (Galeri, Kitap, Video) bu tek koleksiyonda tutacağız.
 const CONTENT_COLLECTION = "dynamicContent"; 
 
 /**
  * Harici linke dayalı içerik öğesi ekler (Storage kullanmadan).
- * @param {object} data - İçerik verisi (title, url, type, category, desc)
+ * @param {object} data - İçerik verisi (title, url, type, category, desc, ku, tr vb.)
  */
 export const addDynamicContent = async (data) => {
-    if (!data.title || !data.url) {
-        throw new Error("Başlık ve URL (Link) boş bırakılamaz.");
+    // Sözlük veya Galeri/Blog/Video ekleniyorsa zorunlu alan kontrolü
+    if (data.type === 'dictionary') {
+        if (!data.ku || !data.tr) throw new Error("Sözlük kelimeleri (KU ve TR) zorunludur.");
+    } else if (!data.title || !data.url) {
+        throw new Error("Başlık ve Harici URL zorunludur.");
     }
     
     // Firestore'a kaydetme
@@ -21,8 +23,3 @@ export const addDynamicContent = async (data) => {
 
     return true;
 };
-
-/**
- * NOT: Artık Storage'a dosya yükleme fonksiyonları bu serviste YOKTUR.
- * Yönetici paneli tamamen URL girişi üzerinden çalışır.
- */
