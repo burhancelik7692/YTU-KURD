@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { db } from '../../firebase';
-import { addDynamicContent } from '../../../services/adminService';
+import { addDynamicContent } from '../../services/adminService';
 import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, MessageSquare, Book, Trash2, Link as LinkIcon, Edit, AlertCircle, Music, Film, Settings } from 'lucide-react';
 import { useLanguage } from '../../../context/LanguageContext';
 import { siteContent } from '../../../data/locales';
