@@ -13,7 +13,6 @@ import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
 const Blog = () => {
   const { lang } = useLanguage();
   
-  // Locales metinlerini çekiyoruz
   const t = {
     KU: { title: 'Duyurular & İçerikler', desc: 'Blog, makale, video ve önerilen kitaplar', back: 'Vegere', noContent: 'Henüz içerik eklenmemiş.', admin: 'Admin Panelinden içerik ekle' },
     TR: { title: 'Duyurular & İçerikler', desc: 'Blog, makale, video ve önerilen kitaplar', back: 'Geri', noContent: 'Henüz içerik eklenmemiş.', admin: 'Admin Panelinden içerik ekle' },
@@ -31,7 +30,7 @@ const Blog = () => {
         setError(null);
         const contentRef = collection(db, "dynamicContent");
         
-        // Sadece 'content', 'book', 'video', 'music' tiplerini çek
+        // Sadece 'content', 'book', 'video', 'music' tiplerini çek ve tarihe göre sırala
         const q = query(
           contentRef, 
           where("type", "in", ["content", "book", "video", "music"]), 
@@ -95,13 +94,13 @@ const Blog = () => {
           {error && (<div className="text-center bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 p-4 rounded-xl flex items-center justify-center gap-2 my-8"><AlertCircle size={20} /> {error}</div>)}
 
           {loading ? (
-            <div className="flex justify-center my-12"><Loader2 className="animate-spin text-blue-600 dark:text-blue-400" size={40} /></div>
+            <div className="flex justify-center my-12"><Loader2 className="animate-spin text-blue-600" size={40} /></div>
           ) : (
             <div className="space-y-6">
               {contentList.length === 0 ? (
                 <div className="text-center py-12 text-slate-400 border border-slate-200 dark:border-slate-800 rounded-2xl bg-white dark:bg-slate-800">
                     <p className="font-bold">{t.noContent}</p>
-                    <Link to="/admin" className="text-blue-600 dark:text-blue-400 hover:underline text-sm mt-2 block">{t.admin}</Link>
+                    <Link to="/admin" className="text-blue-600 dark:text-blue-400 hover:underline text-sm mt-2 block">Admin Panelinden içerik ekle</Link>
                 </div>
               ) : (
                 contentList.map((item, index) => {
@@ -122,12 +121,10 @@ const Blog = () => {
                         </div>
                         <div className="flex-1 overflow-hidden">
                             <h3 className="text-lg font-bold text-slate-900 dark:text-white truncate">{item.title}</h3>
-                            {/* Eğer metin içeriği varsa göster (örneğin blog yazısı) */}
-                            {item.text && (
-                                <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-1">{item.text}</p>
+                            {item.desc && (
+                                <p className="text-sm text-slate-500 dark:text-slate-400 line-clamp-1">{item.desc}</p>
                             )}
-                            {/* Metin yoksa kategori veya URL'yi göster */}
-                            {(!item.text && item.category) && (
+                            {(!item.desc && item.category) && (
                                 <p className="text-xs font-bold uppercase text-slate-500 dark:text-slate-400">{item.category}</p>
                             )}
                         </div>

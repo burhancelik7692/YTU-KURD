@@ -4,13 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Book, X, ArrowLeft, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import { siteContent } from '../data/locales';
 
 // Firebase bağlantısı
 import { db } from '../firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 
-// Statik kelimeler (Veritabanı boşsa gösterilir, tercihen kaldırılır)
+// Statik kelimeler (Veritabanı boşsa veya yavaşsa bunlar görünür)
 import { DICTIONARY as STATIC_DICTIONARY } from '../data/dictionary';
 
 const Dictionary = () => {
@@ -44,14 +43,13 @@ const Dictionary = () => {
         });
 
         // Dinamik kelimeleri statik kelimelerle birleştir
+        // NOT: İki listeyi birleştiriyoruz
         const combined = [...STATIC_DICTIONARY, ...firebaseWords];
         
-        // Tekrarlayanları temizlemek isterseniz burada Set kullanabilirsiniz.
         setDictionaryData(combined); 
 
       } catch (err) {
         console.error("Sözlük verisi çekilemedi:", err);
-        // Hata durumunda statik veriler zaten gösteriliyor
       } finally {
         setLoading(false);
       }
@@ -98,7 +96,7 @@ const Dictionary = () => {
               {filteredWords.length > 0 ? (
                 filteredWords.map((word, index) => (
                   <motion.div
-                    key={word.ku + word.tr} // Benzersiz bir anahtar
+                    key={word.ku + word.tr} 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95 }}
@@ -119,6 +117,7 @@ const Dictionary = () => {
               )}
             </AnimatePresence>
           </motion.div>
+
         </div>
       </div>
     </>
