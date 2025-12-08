@@ -4,19 +4,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Book, X, ArrowLeft, Loader2, AlertCircle, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import { useUser } from '../context/UserContext';
+import { siteContent } from '../data/locales';
 
 // Firebase bağlantısı
 import { db } from '../firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 
-// Statik kelimeler
+// Statik kelimeler (Veritabanı boşsa veya yavaşsa bunlar görünür)
 import { DICTIONARY as STATIC_DICTIONARY } from '../data/dictionary';
 
 const Dictionary = () => {
   const { lang } = useLanguage();
-  const { userData, updateUserData } = useUser();
-  
   const t = {
     KU: { title: "Ferhenga Kurdî", search: "Peyvê bigere...", back: "Vegere", count: "peyv hat dîtin", notFound: "Peyv nehat dîtin", fav: "Favorilerim" },
     TR: { title: "Kürtçe Sözlük", search: "Kelime ara...", back: "Geri", count: "kelime bulundu", notFound: "Kelime bulunamadı", fav: "Favorilerim" },
@@ -24,12 +22,14 @@ const Dictionary = () => {
   }[lang] || { title: "Ferhenga Kurdî" };
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [dictionaryData, setDictionaryData] = useState(STATIC_DICTIONARY); 
+  const [dictionaryData, setDictionaryData] = useState(STATIC_DICTIONARY); // Başlangıçta statik
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeList, setActiveList] = useState('all'); 
+  const [activeList, setActiveList] = useState('all'); // all veya favorites
 
-  // --- FAVORİ EKLE/ÇIKAR MANTIĞI ---
+  // --- Kullanıcı Favori Yönetimi ---
+  const { userData, updateUserData } = useUser(); 
+
   const toggleFavorite = (wordObj) => {
     const wordKey = wordObj.ku;
     const favorites = userData.favoriteWords || [];
@@ -53,16 +53,23 @@ const Dictionary = () => {
     const fetchDictionary = async () => {
       try {
         const contentRef = collection(db, "dynamicContent");
+        
+        // Sadece 'dictionary' tipindeki verileri çek
         const q = query(contentRef, where("type", "==", "dictionary"));
         const querySnapshot = await getDocs(q);
         
         const firebaseWords = [];
         querySnapshot.forEach((doc) => {
           const data = doc.data();
-          if (data.ku && data.tr) { firebaseWords.push({ ku: data.ku, tr: data.tr }); }
+          if (data.ku && data.tr) { 
+              firebaseWords.push({ ku: data.ku, tr: data.tr }); 
+          }
         });
 
+        // Statik ve dinamik kelimeleri birleştir
         const combined = [...STATIC_DICTIONARY, ...firebaseWords];
+        
+        // Tekrarlayanları temizle
         const uniqueWords = Array.from(new Set(combined.map(w => w.ku))).map(ku => combined.find(w => w.ku === ku));
         
         setDictionaryData(uniqueWords); 
@@ -76,18 +83,19 @@ const Dictionary = () => {
     };
 
     fetchDictionary();
-  }, [updateUserData]);
+  }, [userData.favoriteWords]); // Favori listesi güncellendiğinde tekrar çek (güncellenmiş user data için)
 
   
-  // --- FİLTRELEME VE ARAMA ---
-  const allFiltered = dictionaryData.filter(item => 
+  // Arama Mantığı
+  const filteredWords = dictionaryData.filter(item => 
     item.ku.toLowerCase().includes(searchTerm.toLowerCase()) || 
     item.tr.toLowerCase().includes(searchTerm.toLowerCase())
   ).sort((a, b) => a.ku.localeCompare(b.ku));
-  
-  const favoriteFiltered = allFiltered.filter(item => isFavorite(item.ku));
 
-  const wordsToShow = activeList === 'all' ? allFiltered : favoriteFiltered;
+  
+  // Hangi liste gösterilecek?
+  const wordsToShow = activeList === 'all' ? filteredWords : filteredWords.filter(item => isFavorite(item.ku));
+
 
   return (
     <>
@@ -110,7 +118,7 @@ const Dictionary = () => {
               {searchTerm && <button onClick={() => setSearchTerm("")} className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-red-500"><X size={20} /></button>}
             </div>
             <p className="mt-4 text-sm text-slate-400 dark:text-slate-500 font-medium">
-                {loading ? <Loader2 className="animate-spin inline-block mr-2" size={16} /> : `${filteredWords.length} ${t.count}`}
+                {loading ? <Loader2 className="animate-spin inline-block mr-2" size={16} /> : `${wordsToShow.length} ${t.count}`}
             </p>
             {error && (
                <div className="text-center bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 p-2 rounded-xl flex items-center justify-center gap-1 mt-4 text-xs">
@@ -144,7 +152,7 @@ const Dictionary = () => {
                   const isFav = isFavorite(word.ku);
                   return (
                     <motion.div
-                      key={word.ku + word.tr} // Benzersiz bir anahtar
+                      key={word.ku + word.tr} 
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}
