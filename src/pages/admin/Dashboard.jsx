@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from '../../context/AuthContext'; // YOL DÜZELTİLDİ
 import { useNavigate } from 'react-router-dom';
-import { db } from '../../../firebase';
+import { db } from '../../../firebase'; // Bu yol doğru
 import { addDynamicContent } from '../../../services/adminService';
 import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, MessageSquare, Book, Trash2, Link as LinkIcon, Edit, AlertCircle, Music, Film } from 'lucide-react';
-import { useLanguage } from '../../../context/LanguageContext';
+import { useLanguage } from '../../../context/LanguageContext'; // YOL DÜZELTİLDİ
 import { siteContent } from '../../../data/locales';
 import { collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc } from 'firebase/firestore'; 
+
+// --- SABİT KATEGORİLER ---
+const GALLERY_CATEGORIES = [
+  { value: "newroz", label: "Newroz" },
+  { value: "calaki", label: "Çalakî (Etkinlik)" },
+  { value: "taste", label: "Taştê (Kahvaltı)" },
+  { value: "ger", label: "Ger (Gezi)" },
+];
 
 const Dashboard = () => {
   const { logout, currentUser } = useAuth();
@@ -99,12 +107,10 @@ const Dashboard = () => {
       setLoading(true);
       try {
           if (editingId) {
-              // GÜNCELLEME İŞLEMİ
               const docRef = doc(db, "dynamicContent", editingId);
               await updateDoc(docRef, dataToSave);
               setEditingId(null);
           } else {
-              // EKLEME İŞLEMİ
               await addDynamicContent(dataToSave);
           }
           
@@ -244,7 +250,7 @@ const Dashboard = () => {
                         <div className="flex items-center gap-4 truncate flex-1">
                             {typeIcons[item.type] || <MessageSquare size={20} className="text-slate-500" />}
                             <div className="truncate">
-                                <p className="font-bold text-sm truncate">{item.title || item.ku || 'Başlıksız'}</p>
+                                <p className="font-bold text-sm truncate">{formatTitle(item)}</p>
                                 <p className="text-xs text-slate-400">Tipi: {item.type} | Kategori: {item.category || 'Yok'} | Tarih: {item.createdAt}</p>
                             </div>
                         </div>
