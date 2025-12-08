@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "r
 import { Helmet } from "react-helmet";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
+// Sayfalar
 import Home from "./pages/Home";
 import Culture from "./pages/Culture"; 
 import Music from "./pages/Music";
@@ -20,11 +21,11 @@ import Blog from "./pages/Blog"; // Blog/Duyurular Eklendi
 import Login from "./pages/admin/Login";
 import Dashboard from "./pages/admin/Dashboard";
 
-import ScrollToTop from "./components/ScrollToTop"; 
+import ScrollToTop from "./components/ScrollToTop"; // Sayfa geçişlerinde üste kaydırır
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext'; 
 import { AuthProvider, useAuth } from './context/AuthContext';
-import { UserProvider } from './context/UserContext';
+import { UserProvider } from './context/UserContext'; // Misafir/Favori yönetimini sağlar
 import "./index.css";
 
 // Korumalı Rota Bileşeni (Admin Girişi)
@@ -40,15 +41,18 @@ const Layout = ({ children }) => {
   const isFullScreen = location.pathname === '/listik' || location.pathname.startsWith('/admin');
 
   return (
+    // Global Dark Mode Sınıfları
     <div className="app-container flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Helmet><title>YTU Kurdî</title></Helmet>
       
+      {/* Menü ve Footer sadece tam ekran olmayan sayfalarda görünür */}
       {!isFullScreen && <Navigation />}
       
       <main className="flex-grow">
         {children}
       </main>
 
+      {/* Footer'ı Admin ve Oyun sayfalarında gösterme */}
       {!(isFullScreen || location.pathname.startsWith('/admin')) && <Footer />}
     </div>
   );
@@ -56,12 +60,13 @@ const Layout = ({ children }) => {
 
 function App() {
   return (
+    // Tüm Context'ler uygulamayı sarmalar
     <AuthProvider>
       <UserProvider>
         <LanguageProvider>
           <ThemeProvider>
             <Router>
-              <ScrollToTop />
+              <ScrollToTop /> {/* Sayfa geçişlerinde scroll'u sıfırlar */}
               <Layout>
                 <Routes>
                   {/* Normal Sayfalar */}

@@ -1,12 +1,10 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
-// 'path' modülünü kullanabilmek için import ediyoruz
-import * as path from 'path'; 
+import * as path from 'path'; // path modülü import edilmeli
 
 export default defineConfig({
-  root: './',
-  // KRİTİK DÜZELTME: Yol çözünürlüğü için alias ekliyoruz
+  root: './', // KRİTİK: Kök dizini belirtiyoruz
   resolve: {
     alias: {
       // Vercel'in /src yolunu kesin olarak proje köküne (main) yönlendirir.
