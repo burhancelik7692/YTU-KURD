@@ -1,69 +1,92 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Book, X, ArrowLeft, Loader2 } from 'lucide-react';
+import { Search, Book, X, ArrowLeft, Loader2, AlertCircle, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
+import { useUser } from '../context/UserContext'; // YENİ: Kullanıcı Context'i
+import { siteContent } from '../data/locales';
 
 // Firebase bağlantısı
 import { db } from '../firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 
-// Statik kelimeler (Veritabanı boşsa veya yavaşsa bunlar görünür)
+// Statik kelimeler
 import { DICTIONARY as STATIC_DICTIONARY } from '../data/dictionary';
 
 const Dictionary = () => {
   const { lang } = useLanguage();
+  const { userData, updateUserData } = useUser(); // YENİ: Kullanıcı verisi ve güncelleme fonksiyonu
+  
   const t = {
-    KU: { title: "Ferhenga Kurdî", search: "Peyvê bigere...", back: "Vegere", count: "peyv hat dîtin", notFound: "Peyv nehat dîtin" },
-    TR: { title: "Kürtçe Sözlük", search: "Kelime ara...", back: "Geri", count: "kelime bulundu", notFound: "Kelime bulunamadı" },
-    EN: { title: "Kurdish Dictionary", search: "Search word...", back: "Back", count: "words found", notFound: "Word not found" }
+    KU: { title: "Ferhenga Kurdî", search: "Peyvê bigere...", back: "Vegere", count: "peyv hat dîtin", notFound: "Peyv nehat dîtin", fav: "Favorilerim" },
+    TR: { title: "Kürtçe Sözlük", search: "Kelime ara...", back: "Geri", count: "kelime bulundu", notFound: "Kelime bulunamadı", fav: "Favorilerim" },
+    EN: { title: "Kurdish Dictionary", search: "Search word...", back: "Back", count: "words found", notFound: "Word not found", fav: "My Favorites" }
   }[lang] || { title: "Ferhenga Kurdî" };
 
   const [searchTerm, setSearchTerm] = useState("");
-  const [dictionaryData, setDictionaryData] = useState(STATIC_DICTIONARY); // Başlangıçta statik
+  const [dictionaryData, setDictionaryData] = useState(STATIC_DICTIONARY); 
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [activeList, setActiveList] = useState('all'); // all veya favorites
 
+  // --- FAVORİ EKLE/ÇIKAR MANTIĞI ---
+  const toggleFavorite = (wordObj) => {
+    const wordKey = wordObj.ku;
+    const favorites = userData.favoriteWords || [];
+    let newFavorites;
+
+    if (favorites.includes(wordKey)) {
+      newFavorites = favorites.filter(key => key !== wordKey);
+    } else {
+      newFavorites = [...favorites, wordKey];
+    }
+    
+    updateUserData({ favoriteWords: newFavorites });
+  };
+  
+  const isFavorite = (wordKey) => {
+    return userData.favoriteWords?.includes(wordKey);
+  };
+  
   // --- FIREBASE'DEN VERİ ÇEKME ---
   useEffect(() => {
     const fetchDictionary = async () => {
       try {
         const contentRef = collection(db, "dynamicContent");
-        // Sadece 'dictionary' tipindeki verileri çek
         const q = query(contentRef, where("type", "==", "dictionary"));
         const querySnapshot = await getDocs(q);
         
         const firebaseWords = [];
         querySnapshot.forEach((doc) => {
           const data = doc.data();
-          // Admin panelinden gelen 'ku' ve 'tr' kelimelerini al
-          if (data.ku && data.tr) {
-              firebaseWords.push({ ku: data.ku, tr: data.tr });
-          }
+          if (data.ku && data.tr) { firebaseWords.push({ ku: data.ku, tr: data.tr }); }
         });
 
-        // Dinamik kelimeleri statik kelimelerle birleştir
-        // NOT: İki listeyi birleştiriyoruz
         const combined = [...STATIC_DICTIONARY, ...firebaseWords];
-        
-        setDictionaryData(combined); 
+        const uniqueWords = Array.from(new Set(combined.map(w => w.ku))).map(ku => combined.find(w => w.ku === ku));
+        setDictionaryData(uniqueWords); 
 
       } catch (err) {
         console.error("Sözlük verisi çekilemedi:", err);
+        setError("Veritabanı bağlantı hatası.");
       } finally {
         setLoading(false);
       }
     };
-
     fetchDictionary();
-  }, []);
+  }, [updateUserData]); // UpdateUserData değiştiğinde tekrar çalışır
+
   
-  // Arama Mantığı (KU ve TR kelimeleri içinde arama yapar)
-  const filteredWords = dictionaryData.filter(item => 
+  // --- FİLTRELEME VE ARAMA ---
+  const allFiltered = dictionaryData.filter(item => 
     item.ku.toLowerCase().includes(searchTerm.toLowerCase()) || 
     item.tr.toLowerCase().includes(searchTerm.toLowerCase())
   ).sort((a, b) => a.ku.localeCompare(b.ku));
+  
+  const favoriteFiltered = allFiltered.filter(item => isFavorite(item.ku));
 
+  const wordsToShow = activeList === 'all' ? allFiltered : favoriteFiltered;
 
   return (
     <>
@@ -85,29 +108,62 @@ const Dictionary = () => {
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" size={24} />
               {searchTerm && <button onClick={() => setSearchTerm("")} className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-red-500"><X size={20} /></button>}
             </div>
+
             <p className="mt-4 text-sm text-slate-400 dark:text-slate-500 font-medium">
-                {loading ? <Loader2 className="animate-spin inline-block mr-2" size={16} /> : `${filteredWords.length} ${t.count}`}
+                {loading ? <Loader2 className="animate-spin inline-block mr-2" size={16} /> : `${wordsToShow.length} ${t.count}`}
             </p>
           </div>
+          
+          {/* FİLTRE TABS (Tüm Kelimeler / Favoriler) */}
+          <div className="flex justify-center gap-3 mb-6">
+              <button 
+                  onClick={() => setActiveList('all')} 
+                  className={`px-5 py-2 rounded-full font-bold text-sm transition-all ${activeList === 'all' ? 'bg-blue-600 text-white shadow-md' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border'}`}
+              >
+                  {lang === 'KU' ? 'Hemû Peyv' : 'Tüm Kelimeler'}
+              </button>
+              <button 
+                  onClick={() => setActiveList('favorites')} 
+                  className={`px-5 py-2 rounded-full font-bold text-sm transition-all flex items-center gap-2 ${activeList === 'favorites' ? 'bg-pink-600 text-white shadow-md' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 border'}`}
+              >
+                  <Heart size={16} fill="currentColor" /> {t.fav} ({userData.favoriteWords?.length || 0})
+              </button>
+          </div>
+
 
           {/* Sonuç Listesi */}
           <motion.div layout className="grid gap-3">
             <AnimatePresence>
-              {filteredWords.length > 0 ? (
-                filteredWords.map((word, index) => (
-                  <motion.div
-                    key={word.ku + word.tr} 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    transition={{ duration: 0.2 }}
-                    className="bg-white dark:bg-slate-800 p-5 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex justify-between items-center group cursor-default"
-                  >
-                    <div className="flex-1"><span className="text-xl font-bold text-blue-900 dark:text-blue-300 block">{word.ku}</span><span className="text-xs text-slate-400 font-bold tracking-wider uppercase">Kurdî</span></div>
-                    <div className="text-slate-300 dark:text-slate-600 mx-4"><ArrowLeft size={20} className="rotate-180" /></div>
-                    <div className="flex-1 text-right"><span className="text-lg font-medium text-slate-600 dark:text-slate-300 block">{word.tr}</span><span className="text-xs text-slate-400 font-bold tracking-wider uppercase">Tirkî</span></div>
-                  </motion.div>
-                ))
+              {wordsToShow.length > 0 ? (
+                wordsToShow.map((word, index) => {
+                  const isFav = isFavorite(word.ku);
+                  return (
+                    <motion.div
+                      key={word.ku + word.tr} 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.2 }}
+                      className="bg-white dark:bg-slate-800 p-5 rounded-xl shadow-sm border border-slate-100 dark:border-slate-700 flex justify-between items-center group cursor-default"
+                    >
+                      <div className="flex-1"><span className="text-xl font-bold text-blue-900 dark:text-blue-300 block">{word.ku}</span><span className="text-xs text-slate-400 font-bold tracking-wider uppercase">Kurdî</span></div>
+                      
+                      <div className="flex items-center gap-4">
+                          {/* FAVORİ BUTONU */}
+                          <button onClick={() => toggleFavorite(word)} className="p-2 rounded-full hover:bg-pink-100 dark:hover:bg-pink-900/30 transition-colors">
+                              <Heart size={20} className={isFav ? "text-pink-600 fill-pink-600" : "text-slate-300 dark:text-slate-600"} />
+                          </button>
+                          
+                          <div className="text-slate-300 dark:text-slate-600 mx-2"><ArrowLeft size={20} className="rotate-180" /></div>
+                          
+                          <div className="flex-1 text-right">
+                              <span className="text-lg font-medium text-slate-600 dark:text-slate-300 block">{word.tr}</span>
+                              <span className="text-xs text-slate-400 font-bold tracking-wider uppercase">Tirkî</span>
+                          </div>
+                      </div>
+                    </motion.div>
+                  );
+                })
               ) : (
                 <div className="text-center py-12">
                   <div className="text-6xl mb-4">🔍</div>
