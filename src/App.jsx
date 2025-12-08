@@ -12,9 +12,11 @@ import Language from "./pages/Language";
 import Listik from "./pages/Listik"; 
 import Dictionary from "./pages/Dictionary"; 
 import NotFound from "./pages/NotFound"; 
-import Contact from "./pages/Contact"; // YENİ: İletişim Sayfası
+import Contact from "./pages/Contact";
+import Gallery from "./pages/Gallery"; // Galeri
 import ScrollToTop from "./components/ScrollToTop"; 
 import { LanguageProvider } from './context/LanguageContext';
+import { ThemeProvider } from './context/ThemeContext'; 
 import "./index.css";
 
 const Layout = ({ children }) => {
@@ -22,7 +24,7 @@ const Layout = ({ children }) => {
   const isGamePage = location.pathname === '/listik';
 
   return (
-    <div className="app-container flex flex-col min-h-screen">
+    <div className="app-container flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Helmet>
         <title>YTU Kurdî</title>
       </Helmet>
@@ -41,23 +43,26 @@ const Layout = ({ children }) => {
 function App() {
   return (
     <LanguageProvider>
-      <Router>
-        <ScrollToTop />
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/cand" element={<Culture />} />
-            <Route path="/muzik" element={<Music />} />
-            <Route path="/huner" element={<Art />} />
-            <Route path="/dirok" element={<History />} />
-            <Route path="/ziman" element={<Language />} />
-            <Route path="/ferheng" element={<Dictionary />} />
-            <Route path="/listik" element={<Listik />} />
-            <Route path="/tekili" element={<Contact />} /> {/* YENİ ROTA */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
-      </Router>
+      <ThemeProvider>
+        <Router>
+          <ScrollToTop />
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/cand" element={<Culture />} />
+              <Route path="/muzik" element={<Music />} />
+              <Route path="/huner" element={<Art />} />
+              <Route path="/dirok" element={<History />} />
+              <Route path="/ziman" element={<Language />} />
+              <Route path="/ferheng" element={<Dictionary />} />
+              <Route path="/listik" element={<Listik />} />
+              <Route path="/galeri" element={<Gallery />} />
+              <Route path="/tekili" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Layout>
+        </Router>
+      </ThemeProvider>
     </LanguageProvider>
   );
 }
