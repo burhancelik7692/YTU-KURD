@@ -1,20 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../../firebase';
-import { addDynamicContent } from '../../services/adminService';
-import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, MessageSquare, Book, Trash2, Link as LinkIcon, Edit, AlertCircle, Settings, Users, ArrowRight } from 'lucide-react';
-import { useLanguage } from '../../context/LanguageContext';
-import { siteContent } from '../../data/locales';
-import { collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc, getDoc, setDoc } from 'firebase/firestore'; // getDoc, setDoc eklendi
-
-// --- SABİT KATEGORİLER ---
-const GALLERY_CATEGORIES = [
-  { value: "newroz", label: "Newroz" },
-  { value: "calaki", label: "Çalakî (Etkinlik)" },
-  { value: "taste", label: "Taştê (Kahvaltı)" },
-  { value: "ger", label: "Ger (Gezi)" },
-];
+import { db } from '../../../firebase';
+import { addDynamicContent } from '../../../services/adminService';
+import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, MessageSquare, Book, Trash2, Link as LinkIcon, Edit, AlertCircle, Music, Film, Settings } from 'lucide-react';
+import { useLanguage } from '../../../context/LanguageContext';
+import { siteContent } from '../../../data/locales';
+import { collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc } from 'firebase/firestore'; 
 
 const Dashboard = () => {
   const { logout, currentUser } = useAuth();
@@ -28,46 +20,10 @@ const Dashboard = () => {
   const [contentList, setContentList] = useState([]);
   const [editingId, setEditingId] = useState(null); 
   
-  // Ayarlar State'i
-  const [settings, setSettings] = useState({ aboutText1: '', aboutText2: '' });
-  
   // Form State'leri
   const [formData, setFormData] = useState({ 
     title: '', url: '', category: '', desc: '', type: 'gallery', text: '', ku: '', tr: ''
   });
-  
-  // --- YENİ: AYARLARI ÇEKME (Hakkımızda Metinleri) ---
-  useEffect(() => {
-      fetchSettings();
-  }, []);
-
-  const fetchSettings = async () => {
-      try {
-          const settingsRef = doc(db, "settings", "home");
-          const docSnap = await getDoc(settingsRef);
-          if (docSnap.exists()) {
-              setSettings(docSnap.data());
-          }
-      } catch (err) {
-          console.error("Ayarlar çekilemedi:", err);
-      }
-  };
-
-  // --- YENİ: AYARLARI GÜNCELLEME ---
-  const handleSettingsUpdate = async (e) => {
-      e.preventDefault();
-      setLoading(true);
-      try {
-          const settingsRef = doc(db, "settings", "home");
-          await setDoc(settingsRef, settings, { merge: true });
-          setSuccess(true);
-          setTimeout(() => setSuccess(false), 3000);
-      } catch (err) {
-          setError("Ayarlar güncellenirken hata oluştu.");
-      }
-      setLoading(false);
-  };
-
 
   // --- İÇERİK LİSTESİNİ ÇEKME ---
   useEffect(() => {
@@ -143,10 +99,12 @@ const Dashboard = () => {
       setLoading(true);
       try {
           if (editingId) {
+              // GÜNCELLEME İŞLEMİ
               const docRef = doc(db, "dynamicContent", editingId);
               await updateDoc(docRef, dataToSave);
               setEditingId(null);
           } else {
+              // EKLEME İŞLEMİ
               await addDynamicContent(dataToSave);
           }
           
@@ -221,38 +179,31 @@ const Dashboard = () => {
 
       {/* ANA İÇERİK */}
       <main className="flex-1 p-8 dark:bg-slate-900">
-        <h2 className="text-3xl font-bold text-slate-800 dark:text-white mb-6">Yönetim Paneli</h2>
-        <p className="text-sm text-slate-500 dark:text-slate-400 mb-8">Hoş geldiniz, {currentUser?.email}.</p>
+        <h2 className="text-3xl font-bold text-slate-800 dark:text-white mb-6">İçerik Yönetimi</h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mb-8">Hoş geldiniz, {currentUser?.email}. Lütfen içeriğinizi harici linkler üzerinden ekleyin.</p>
 
         {error && (<div className="bg-red-500/20 text-red-200 p-4 rounded-lg mb-6 flex items-center gap-2"><AlertCircle size={20} /> {error}</div>)}
         {success && (<div className="bg-green-600 text-white p-4 rounded-lg mb-6 flex items-center gap-2"><CheckCircle size={20} /> İşlem Başarılı!</div>)}
 
-        {/* --- YENİ İÇERİK EKLEME/GÜNCELLEME FORMU (AYARLAR DAHİL) --- */}
+        {/* --- 1. YENİ İÇERİK EKLEME/GÜNCELLEME FORMU --- */}
         <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl max-w-2xl border border-slate-200 dark:border-slate-700 mb-12">
-            
             <h3 className="text-2xl font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
                 <contentHeader.icon size={24} className={`text-${contentHeader.color}-600`} />
                 {contentHeader.label}
             </h3>
 
             {activeTab === 'settings' ? (
-                /* AYARLAR FORMU */
-                <form onSubmit={handleSettingsUpdate} className="space-y-6">
-                    <p className="text-sm text-yellow-500 font-bold flex items-center gap-2"><Settings size={16} /> Site Hakkında Metinlerini Güncelleyin</p>
-                    
-                    <div>
-                        <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Hakkımızda Metni 1 (Kısa Başlık)</label>
-                        <textarea name="aboutText1" value={settings.aboutText1} onChange={(e) => setSettings({...settings, aboutText1: e.target.value})} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="Örn: YTÜ Kürtçe Topluluğu 2025'te kurulmuştur." required></textarea>
-                    </div>
-                    <div>
-                        <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Hakkımızda Metni 2 (Detay)</label>
-                        <textarea name="aboutText2" value={settings.aboutText2} onChange={(e) => setSettings({...settings, aboutText2: e.target.value})} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="Örn: Amacımız Kürt dilini korumaktır..." required></textarea>
-                    </div>
+                 /* AYARLAR FORMU (Hakkımızda Metinleri) */
+                 <form onSubmit={handleSettingsUpdate} className="space-y-6">
+                     <p className="text-sm text-yellow-500 font-bold flex items-center gap-2"><Settings size={16} /> Site Hakkında Metinlerini Güncelleyin</p>
+                     
+                     <div><label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Hakkımızda Metni 1 (Kısa Başlık)</label><textarea name="aboutText1" value={settings.aboutText1} onChange={(e) => setSettings({...settings, aboutText1: e.target.value})} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="Örn: YTÜ Kürtçe Topluluğu 2025'te kurulmuştur." required></textarea></div>
+                     <div><label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Hakkımızda Metni 2 (Detay)</label><textarea name="aboutText2" value={settings.aboutText2} onChange={(e) => setSettings({...settings, aboutText2: e.target.value})} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="Örn: Amacımız Kürt dilini korumaktır..." required></textarea></div>
 
-                    <button type="submit" disabled={loading} className="w-full py-4 bg-yellow-600 text-slate-900 rounded-xl font-bold text-lg hover:bg-yellow-700 transition shadow-lg flex items-center justify-center gap-2 disabled:opacity-50">
-                        {loading ? <><Loader2 className="animate-spin" /> Güncelleniyor...</> : <><CheckCircle /> Ayarları Kaydet</>}
-                    </button>
-                </form>
+                     <button type="submit" disabled={loading} className="w-full py-4 bg-yellow-600 text-slate-900 rounded-xl font-bold text-lg hover:bg-yellow-700 transition shadow-lg flex items-center justify-center gap-2 disabled:opacity-50">
+                         {loading ? <><Loader2 className="animate-spin" /> Güncelleniyor...</> : <><CheckCircle /> Ayarları Kaydet</>}
+                     </button>
+                 </form>
             ) : activeTab === 'dictionary' ? (
                 /* SÖZLÜK FORM */
                 <form onSubmit={handleContentUpload} className="space-y-6">
