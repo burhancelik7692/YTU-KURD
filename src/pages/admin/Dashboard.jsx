@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../context/AuthContext'; // YOL DÜZELTİLDİ
+import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../../firebase'; // Bu yol doğru
-import { addDynamicContent } from '../../../services/adminService';
-import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, MessageSquare, Book, Trash2, Link as LinkIcon, Edit, AlertCircle, Music, Film } from 'lucide-react';
-import { useLanguage } from '../../../context/LanguageContext'; // YOL DÜZELTİLDİ
-import { siteContent } from '../../../data/locales';
-import { collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc, where } from 'firebase/firestore'; // where eklendi
+import { db } from '../../firebase';
+import { addDynamicContent } from '../../services/adminService';
+import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, MessageSquare, Book, Trash2, Link as LinkIcon, Edit, AlertCircle, Settings, Users, ArrowRight } from 'lucide-react';
+import { useLanguage } from '../../context/LanguageContext';
+import { siteContent } from '../../data/locales';
+import { collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc, getDoc, setDoc } from 'firebase/firestore'; // getDoc, setDoc eklendi
 
 // --- SABİT KATEGORİLER ---
 const GALLERY_CATEGORIES = [
@@ -27,14 +27,49 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('gallery');
   const [contentList, setContentList] = useState([]);
   const [editingId, setEditingId] = useState(null); 
-  const [filterType, setFilterType] = useState('all'); // YENİ: Filtreleme için state
+  
+  // Ayarlar State'i
+  const [settings, setSettings] = useState({ aboutText1: '', aboutText2: '' });
   
   // Form State'leri
   const [formData, setFormData] = useState({ 
     title: '', url: '', category: '', desc: '', type: 'gallery', text: '', ku: '', tr: ''
   });
+  
+  // --- YENİ: AYARLARI ÇEKME (Hakkımızda Metinleri) ---
+  useEffect(() => {
+      fetchSettings();
+  }, []);
 
-  // --- 1. İÇERİK LİSTESİNİ ÇEKME ---
+  const fetchSettings = async () => {
+      try {
+          const settingsRef = doc(db, "settings", "home");
+          const docSnap = await getDoc(settingsRef);
+          if (docSnap.exists()) {
+              setSettings(docSnap.data());
+          }
+      } catch (err) {
+          console.error("Ayarlar çekilemedi:", err);
+      }
+  };
+
+  // --- YENİ: AYARLARI GÜNCELLEME ---
+  const handleSettingsUpdate = async (e) => {
+      e.preventDefault();
+      setLoading(true);
+      try {
+          const settingsRef = doc(db, "settings", "home");
+          await setDoc(settingsRef, settings, { merge: true });
+          setSuccess(true);
+          setTimeout(() => setSuccess(false), 3000);
+      } catch (err) {
+          setError("Ayarlar güncellenirken hata oluştu.");
+      }
+      setLoading(false);
+  };
+
+
+  // --- İÇERİK LİSTESİNİ ÇEKME ---
   useEffect(() => {
     fetchContentList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,14 +78,7 @@ const Dashboard = () => {
   const fetchContentList = async () => {
     setLoading(true);
     try {
-        const contentRef = collection(db, "dynamicContent");
-        let q = query(contentRef, orderBy("createdAt", "desc"));
-        
-        // Filtreleme uygulanır
-        if (filterType !== 'all') {
-             q = query(contentRef, where("type", "==", filterType), orderBy("createdAt", "desc"));
-        }
-
+        const q = query(collection(db, "dynamicContent"), orderBy("createdAt", "desc"));
         const snapshot = await getDocs(q);
         const list = snapshot.docs.map(doc => ({ 
             id: doc.id, 
@@ -66,7 +94,7 @@ const Dashboard = () => {
     }
   };
 
-  // --- 2. SİLME İŞLEVİ ---
+  // --- SİLME İŞLEVİ ---
   const handleDelete = async (id, title) => {
     if (!window.confirm(`'${title}' başlıklı içeriği silmek istediğinizden emin misiniz?`)) {
         return;
@@ -81,7 +109,7 @@ const Dashboard = () => {
     }
   };
   
-  // --- 3. DÜZENLEME BAŞLATMA İŞLEVİ ---
+  // --- DÜZENLEME BAŞLATMA İŞLEVİ ---
   const handleEdit = (item) => {
       setEditingId(item.id);
       setActiveTab(item.type === 'dictionary' ? 'dictionary' : item.type === 'gallery' ? 'gallery' : 'content');
@@ -97,7 +125,7 @@ const Dashboard = () => {
       });
   };
 
-  // --- 4. GÜNCELLEME VEYA EKLEME İŞLEVİ ---
+  // --- GÜNCELLEME VEYA EKLEME İŞLEVİ ---
   const handleContentUpload = async (e) => {
       e.preventDefault();
       setError(null);
@@ -142,13 +170,6 @@ const Dashboard = () => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
-  const handleFilterChange = (type) => {
-    setFilterType(type);
-    setEditingId(null); // Filtre değişince düzenlemeyi sıfırla
-    fetchContentList(type);
-  };
-
 
   const setContentTab = (type) => {
       setEditingId(null); 
@@ -161,6 +182,7 @@ const Dashboard = () => {
     gallery: { icon: Image, label: editingId ? 'Galeri Öğesini Güncelle' : 'Resim Ekle (Galeri)', color: 'blue' },
     content: { icon: MessageSquare, label: editingId ? 'İçeriği Güncelle' : 'Blog/Duyuru Metni Ekle', color: 'green' },
     dictionary: { icon: Book, label: editingId ? 'Sözlük Kelimesini Güncelle' : 'Sözlük Kelimesi Ekle', color: 'purple' },
+    settings: { icon: Settings, label: 'Site Ayarları', color: 'yellow' }
   }[activeTab];
 
   const typeIcons = {
@@ -191,26 +213,47 @@ const Dashboard = () => {
           <button onClick={() => setContentTab('gallery')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${activeTab === 'gallery' ? 'bg-blue-600' : 'hover:bg-slate-800 text-slate-400'}`}><Image size={18} /> Galeri Yönetimi</button>
           <button onClick={() => setContentTab('content')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${activeTab === 'content' ? 'bg-blue-600' : 'hover:bg-slate-800 text-slate-400'}`}><MessageSquare size={18} /> {T.admin_content || 'İçerik/Blog'}</button>
           <button onClick={() => setContentTab('dictionary')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${activeTab === 'dictionary' ? 'bg-blue-600' : 'hover:bg-slate-800 text-slate-400'}`}><Book size={18} /> {T.admin_dict || 'Sözlük'}</button>
+          <div className="border-t border-slate-700 my-4"></div>
+          <button onClick={() => setActiveTab('settings')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${activeTab === 'settings' ? 'bg-yellow-600' : 'hover:bg-slate-800 text-slate-400'}`}><Settings size={18} /> Site Ayarları</button>
         </nav>
         <button onClick={handleLogout} className="mt-12 flex items-center gap-2 text-red-400 hover:text-red-300 font-bold text-sm"><LogOut size={18} /> Çıkış Yap</button>
       </aside>
 
       {/* ANA İÇERİK */}
       <main className="flex-1 p-8 dark:bg-slate-900">
-        <h2 className="text-3xl font-bold text-slate-800 dark:text-white mb-6">İçerik Yönetimi</h2>
-        <p className="text-sm text-slate-500 dark:text-slate-400 mb-8">Hoş geldiniz, {currentUser?.email}. Lütfen içeriğinizi harici linkler üzerinden ekleyin.</p>
+        <h2 className="text-3xl font-bold text-slate-800 dark:text-white mb-6">Yönetim Paneli</h2>
+        <p className="text-sm text-slate-500 dark:text-slate-400 mb-8">Hoş geldiniz, {currentUser?.email}.</p>
 
         {error && (<div className="bg-red-500/20 text-red-200 p-4 rounded-lg mb-6 flex items-center gap-2"><AlertCircle size={20} /> {error}</div>)}
-        {success && (<div className="bg-green-600 text-white p-4 rounded-lg mb-6 flex items-center gap-2"><CheckCircle size={20} /> Başarıyla Eklendi ve Yayınlandı!</div>)}
+        {success && (<div className="bg-green-600 text-white p-4 rounded-lg mb-6 flex items-center gap-2"><CheckCircle size={20} /> İşlem Başarılı!</div>)}
 
-        {/* --- 1. YENİ İÇERİK EKLEME/GÜNCELLEME FORMU --- */}
+        {/* --- YENİ İÇERİK EKLEME/GÜNCELLEME FORMU (AYARLAR DAHİL) --- */}
         <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl max-w-2xl border border-slate-200 dark:border-slate-700 mb-12">
+            
             <h3 className="text-2xl font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
                 <contentHeader.icon size={24} className={`text-${contentHeader.color}-600`} />
                 {contentHeader.label}
             </h3>
-            
-            {activeTab === 'dictionary' ? (
+
+            {activeTab === 'settings' ? (
+                /* AYARLAR FORMU */
+                <form onSubmit={handleSettingsUpdate} className="space-y-6">
+                    <p className="text-sm text-yellow-500 font-bold flex items-center gap-2"><Settings size={16} /> Site Hakkında Metinlerini Güncelleyin</p>
+                    
+                    <div>
+                        <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Hakkımızda Metni 1 (Kısa Başlık)</label>
+                        <textarea name="aboutText1" value={settings.aboutText1} onChange={(e) => setSettings({...settings, aboutText1: e.target.value})} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="Örn: YTÜ Kürtçe Topluluğu 2025'te kurulmuştur." required></textarea>
+                    </div>
+                    <div>
+                        <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Hakkımızda Metni 2 (Detay)</label>
+                        <textarea name="aboutText2" value={settings.aboutText2} onChange={(e) => setSettings({...settings, aboutText2: e.target.value})} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="Örn: Amacımız Kürt dilini korumaktır..." required></textarea>
+                    </div>
+
+                    <button type="submit" disabled={loading} className="w-full py-4 bg-yellow-600 text-slate-900 rounded-xl font-bold text-lg hover:bg-yellow-700 transition shadow-lg flex items-center justify-center gap-2 disabled:opacity-50">
+                        {loading ? <><Loader2 className="animate-spin" /> Güncelleniyor...</> : <><CheckCircle /> Ayarları Kaydet</>}
+                    </button>
+                </form>
+            ) : activeTab === 'dictionary' ? (
                 /* SÖZLÜK FORM */
                 <form onSubmit={handleContentUpload} className="space-y-6">
                     <p className="text-sm text-yellow-500 font-bold flex items-center gap-2"><BookOpen size={16} /> Sözlük içeriği ekliyorsunuz.</p>
