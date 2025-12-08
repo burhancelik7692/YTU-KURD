@@ -4,8 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Book, X, ArrowLeft, Loader2, AlertCircle, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import { useUser } from '../context/UserContext'; // YENİ: Kullanıcı Context'i
-import { siteContent } from '../data/locales';
+import { useUser } from '../context/UserContext';
 
 // Firebase bağlantısı
 import { db } from '../firebase';
@@ -16,7 +15,7 @@ import { DICTIONARY as STATIC_DICTIONARY } from '../data/dictionary';
 
 const Dictionary = () => {
   const { lang } = useLanguage();
-  const { userData, updateUserData } = useUser(); // YENİ: Kullanıcı verisi ve güncelleme fonksiyonu
+  const { userData, updateUserData } = useUser();
   
   const t = {
     KU: { title: "Ferhenga Kurdî", search: "Peyvê bigere...", back: "Vegere", count: "peyv hat dîtin", notFound: "Peyv nehat dîtin", fav: "Favorilerim" },
@@ -28,7 +27,7 @@ const Dictionary = () => {
   const [dictionaryData, setDictionaryData] = useState(STATIC_DICTIONARY); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [activeList, setActiveList] = useState('all'); // all veya favorites
+  const [activeList, setActiveList] = useState('all'); 
 
   // --- FAVORİ EKLE/ÇIKAR MANTIĞI ---
   const toggleFavorite = (wordObj) => {
@@ -65,6 +64,7 @@ const Dictionary = () => {
 
         const combined = [...STATIC_DICTIONARY, ...firebaseWords];
         const uniqueWords = Array.from(new Set(combined.map(w => w.ku))).map(ku => combined.find(w => w.ku === ku));
+        
         setDictionaryData(uniqueWords); 
 
       } catch (err) {
@@ -74,8 +74,9 @@ const Dictionary = () => {
         setLoading(false);
       }
     };
+
     fetchDictionary();
-  }, [updateUserData]); // UpdateUserData değiştiğinde tekrar çalışır
+  }, [updateUserData]);
 
   
   // --- FİLTRELEME VE ARAMA ---
@@ -108,12 +109,16 @@ const Dictionary = () => {
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" size={24} />
               {searchTerm && <button onClick={() => setSearchTerm("")} className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-red-500"><X size={20} /></button>}
             </div>
-
             <p className="mt-4 text-sm text-slate-400 dark:text-slate-500 font-medium">
-                {loading ? <Loader2 className="animate-spin inline-block mr-2" size={16} /> : `${wordsToShow.length} ${t.count}`}
+                {loading ? <Loader2 className="animate-spin inline-block mr-2" size={16} /> : `${filteredWords.length} ${t.count}`}
             </p>
+            {error && (
+               <div className="text-center bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 p-2 rounded-xl flex items-center justify-center gap-1 mt-4 text-xs">
+                 <AlertCircle size={16} /> {error}
+               </div>
+            )}
           </div>
-          
+
           {/* FİLTRE TABS (Tüm Kelimeler / Favoriler) */}
           <div className="flex justify-center gap-3 mb-6">
               <button 
@@ -139,7 +144,7 @@ const Dictionary = () => {
                   const isFav = isFavorite(word.ku);
                   return (
                     <motion.div
-                      key={word.ku + word.tr} 
+                      key={word.ku + word.tr} // Benzersiz bir anahtar
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}

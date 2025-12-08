@@ -8,8 +8,9 @@ import { getAuth } from "firebase/auth";      // Authentication
 // Lütfen bu bilgilerin KONSOLDAN DOĞRU kopyalandığından emin olun.
 const firebaseConfig = {
   // Sizin güncel anahtarınız buraya gelecek
-  apiKey: "AIzaSyDadado7dT6SYDywKRCpAc9L7kqkubdadE", 
+  apiKey: "AIzaSyDadado7dT6SYDywKRCpAc9L7kqkubdadE",
   authDomain: "ytu-kurdi.firebaseapp.com",
+  databaseURL: "https://ytu-kurdi-default-rtdb.firebaseio.com",
   projectId: "ytu-kurdi",
   storageBucket: "ytu-kurdi.firebasestorage.app",
   messagingSenderId: "384217788430",

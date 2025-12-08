@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Loader2, BookOpen, Film, Music as MusicIcon, MessageSquare, ChevronRight, AlertCircle, Image as ImageIcon } from 'lucide-react';
+import { ArrowLeft, Loader2, BookOpen, Film, Music as MusicIcon, MessageSquare, ChevronRight, AlertCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { siteContent } from '../data/locales';
 
