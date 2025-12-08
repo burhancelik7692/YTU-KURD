@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, Instagram, Gamepad2 } from 'lucide-react'; // Gamepad2 ikonu eklendi
+import { Menu, X, Globe, Instagram, Gamepad2, Book } from 'lucide-react'; // Book ikonu eklendi (Sözlük için)
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { siteContent } from '../data/locales';
@@ -11,19 +11,21 @@ const Navigation = () => {
   
   const { lang, toggleLanguage } = useLanguage();
   
-  // Sözlükten navigasyon kısmını alıyoruz
-  const t = siteContent[lang].nav;
+  // Veritabanından (locales.js) 'nav' kısmını çekiyoruz
+  // Eğer veri yüklenmemişse hata vermemesi için boş obje kontrolü yapıyoruz
+  const t = siteContent[lang]?.nav || {};
 
-  // Linkler listesine 'listik'i (Oyun) ekledik
+  // --- LİNKLER LİSTESİ ---
   const links = [
-    { path: '/', label: t.sereke },
-    { path: '/ziman', label: t.ziman },
-    { path: '/cand', label: t.cand },
-    { path: '/dirok', label: t.dirok },
-    { path: '/muzik', label: t.muzik },
-    { path: '/huner', label: t.huner },
-    // OYUN LİNKİ (Özel İşaretli)
-    { path: '/listik', label: t.listik, isGame: true } 
+    { path: '/', label: t.sereke || 'Home' }, // Ana Sayfa
+    { path: '/ferheng', label: t.ferheng || 'Sözlük', icon: <Book size={16} /> }, // YENİ: Sözlük
+    { path: '/ziman', label: t.ziman || 'Dil' },
+    { path: '/cand', label: t.cand || 'Kültür' },
+    { path: '/dirok', label: t.dirok || 'Tarih' },
+    { path: '/muzik', label: t.muzik || 'Müzik' },
+    { path: '/huner', label: t.huner || 'Sanat' },
+    // OYUN LİNKİ (Özel Tasarım)
+    { path: '/listik', label: t.listik || 'Oyun', isGame: true } 
   ];
 
   return (
@@ -45,11 +47,11 @@ const Navigation = () => {
           </Link>
 
           {/* MASAÜSTÜ MENÜ */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden lg:flex items-center space-x-1">
             {links.map((link) => {
               const isActive = location.pathname === link.path;
               
-              // OYUN LİNKİ İÇİN ÖZEL GÖRÜNÜM (Sarı Buton + İkon)
+              // OYUN LİNKİ İÇİN ÖZEL GÖRÜNÜM
               if (link.isGame) {
                 return (
                   <Link
@@ -67,17 +69,18 @@ const Navigation = () => {
                 );
               }
 
-              // Normal Linkler
+              // SÖZLÜK VE DİĞER LİNKLER
               return (
                 <Link
                   key={link.path}
                   to={link.path}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                     isActive
                       ? 'bg-blue-50 text-blue-600'
                       : 'text-gray-600 hover:bg-gray-50 hover:text-blue-600'
                   }`}
                 >
+                  {link.icon && <span className="opacity-70">{link.icon}</span>}
                   {link.label}
                 </Link>
               );
@@ -86,7 +89,7 @@ const Navigation = () => {
             {/* DİL BUTONU */}
             <button 
               onClick={toggleLanguage} 
-              className="ml-2 flex items-center gap-1 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-blue-600 transition-colors border border-gray-200"
+              className="ml-4 flex items-center gap-1 px-3 py-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-blue-600 transition-colors border border-gray-200"
             >
               <Globe size={18} />
               <span className="font-bold text-sm">{lang}</span>
@@ -97,16 +100,16 @@ const Navigation = () => {
               href="https://instagram.com/ytukurdi" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="ml-3 bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-[#833ab4] hover:via-[#fd1d1d] hover:to-[#fcb045] text-white px-5 py-2 rounded-full text-sm font-bold shadow-md flex items-center gap-2 cursor-pointer transition-all duration-500"
-              whileHover={{ scale: 1.1 }}
+              className="ml-2 bg-gradient-to-r from-blue-600 to-emerald-600 hover:from-[#833ab4] hover:via-[#fd1d1d] hover:to-[#fcb045] text-white px-4 py-2 rounded-full text-sm font-bold shadow-md flex items-center gap-2 cursor-pointer transition-all duration-500"
+              whileHover={{ scale: 1.05 }}
             >
-              <Instagram size={20} />
-              <span>{t.follow}</span>
+              <Instagram size={18} />
+              <span className="hidden xl:inline">{t.follow}</span>
             </motion.a>
           </div>
 
           {/* MOBİL İÇİN HAMBURGER VE DİL BUTONU */}
-          <div className="md:hidden flex items-center gap-2">
+          <div className="lg:hidden flex items-center gap-2">
             <button 
               onClick={toggleLanguage}
               className="flex items-center gap-1 px-2 py-2 text-gray-600 font-bold border border-gray-200 rounded-lg"
@@ -131,7 +134,7 @@ const Navigation = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-t overflow-hidden"
+            className="lg:hidden bg-white border-t overflow-hidden shadow-xl"
           >
             <div className="px-4 pt-2 pb-6 space-y-1">
               {links.map((link) => (
@@ -139,14 +142,14 @@ const Navigation = () => {
                   key={link.path}
                   to={link.path}
                   onClick={() => setIsOpen(false)}
-                  // Mobilde oyun linki daha belirgin olsun
                   className={`flex items-center gap-2 px-4 py-3 rounded-lg text-base font-medium ${
                      link.isGame 
-                     ? 'text-yellow-600 bg-yellow-50 font-bold' 
+                     ? 'text-yellow-700 bg-yellow-50 font-bold' 
                      : 'text-gray-600 hover:bg-gray-50 hover:text-blue-600'
                   }`}
                 >
                   {link.isGame && <Gamepad2 size={20} />}
+                  {link.icon && <span className="text-blue-500">{link.icon}</span>}
                   {link.label}
                 </Link>
               ))}

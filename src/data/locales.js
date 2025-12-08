@@ -3,7 +3,7 @@ export const siteContent = {
   // KÜRTÇE (KU)
   // =================================================================
   KU: {
-    // --- MENÜ (NAVBAR) ---
+    // --- MENÜ ---
     nav: {
       sereke: 'Sereke',
       ziman: 'Ziman',
@@ -11,11 +11,18 @@ export const siteContent = {
       dirok: 'Dîrok',
       muzik: 'Muzîk',
       huner: 'Huner',
+      ferheng: 'Ferheng', // Sözlük Linki
       listik: 'Lîstik',
       follow: 'Me Bişopînin',
       join: 'Tevlî Me Bibe'
     },
-    // --- ANA SAYFA (HOME) ---
+    // --- 404 SAYFASI ---
+    notFound: {
+      title: "Rêya Xwe Winda Kir?",
+      desc: "Bibore, rûpela ku tu lê digerî me nedît. Dibe ku hatiye jêbirin an jî navnîşan şaş e.",
+      backButton: "Vegere Sereke"
+    },
+    // --- ANA SAYFA ---
     home: {
       heroTitle1: 'Li YTÜ',
       heroTitle2: 'Dengê Me',
@@ -29,7 +36,7 @@ export const siteContent = {
       ctaTitle: 'Beşdarî Komeleya Me Bibe',
       ctaText: 'Heke tu dixwazî zimanê kurdî hîn bibî, çanda xwe nas bikî, û bi me re bixebitî, bi me re têkilî dayne!',
       ctaButton: 'Dest Pê Bike',
-      // Yeni Eklenenler (Sayaç ve Günün Sözü için)
+      // Yeni: Sayaç ve Günün Sözü
       eventTitle: 'Çalakiya Pêşerojê',
       eventEmptyTitle: 'Tê Ragihandin',
       eventEmptyDesc: 'Ji bo çalakiyên nû li bendê bin.',
@@ -38,7 +45,7 @@ export const siteContent = {
       dailyQuote: 'Gotin',
       time: { day: 'Roj', hour: 'Saet', min: 'Deqe', sec: 'Çirk' }
     },
-    // --- KARTLAR (HOME SAYFASINDAKİ ÖZETLER) ---
+    // --- KARTLAR ---
     cards: {
       zimanTitle: 'Ziman', zimanDesc: 'Hînbûna zimanê kurdî û rêzimana wê',
       candTitle: 'Çand', candDesc: 'Çanda dewlemend a gelê kurd',
@@ -46,7 +53,7 @@ export const siteContent = {
       muzikTitle: 'Muzîk', muzikDesc: 'Muzîka kurdî û stranan',
       hunerTitle: 'Huner', hunerDesc: 'Huner û hunermendên kurd'
     },
-    // --- ALT SAYFALAR (DETAYLAR) ---
+    // --- SAYFA İÇERİKLERİ ---
     pages: {
       dirok: {
         title: "Dîroka Kurdan",
@@ -69,12 +76,9 @@ export const siteContent = {
           { id: 'guhdari', title: 'Guhdarî û Axaftin', desc: 'Pratîka ziman', text: 'Ji bo hînbûnê divê hûn her roj guhdarî bikin û biaxivin.' }
         ],
         phrases: [
-          { org: 'Roj baş', mean: 'Günaydın' },
-          { org: 'Şev baş', mean: 'İyi geceler' },
-          { org: 'Spas', mean: 'Teşekkürler' },
-          { org: 'Tu çawa yî?', mean: 'Nasılsın?' },
-          { org: 'Ez baş im', mean: 'İyiyim' },
-          { org: 'Navê te çi ye?', mean: 'Adın ne?' }
+          { org: 'Roj baş', mean: 'Günaydın' }, { org: 'Şev baş', mean: 'İyi geceler' },
+          { org: 'Spas', mean: 'Teşekkürler' }, { org: 'Tu çawa yî?', mean: 'Nasılsın?' },
+          { org: 'Ez baş im', mean: 'İyiyim' }, { org: 'Navê te çi ye?', mean: 'Adın ne?' }
         ]
       },
       cand: {
@@ -118,9 +122,15 @@ export const siteContent = {
       dirok: 'Tarih',
       muzik: 'Müzik',
       huner: 'Sanat',
+      ferheng: 'Sözlük',
       listik: 'Oyun',
       follow: 'Bizi Takip Edin',
       join: 'Bize Katılın'
+    },
+    notFound: {
+      title: "Yolunu Mu Kaybettin?",
+      desc: "Üzgünüz, aradığınız sayfayı bulamadık. Silinmiş veya adres yanlış olabilir.",
+      backButton: "Ana Sayfaya Dön"
     },
     home: {
       heroTitle1: "YTÜ'de",
@@ -182,29 +192,29 @@ export const siteContent = {
       },
       cand: {
         title: "Kürt Kültürü",
-        desc: "Kürt halkının renkleri, sesleri ve yaşamı.",
+        desc: "Renkler ve yaşam.",
         sections: [
-          { title: "Newroz", text: "Newroz (21 Mart), Kürtlerin ulusal bayramıdır. Yeni yılı ve direnişi simgeler. Newroz ateşi özgürlüğün sembolüdür." },
-          { title: "Giyim Kuşam", text: "Kürt kıyafetleri canlı renkleriyle tanınır. Şal û şapik (erkekler için) ve kiras û fîstan (kadınlar için) temel parçalardır." },
-          { title: "Misafirperverlik", text: "Kürt kültüründe misafir kutsaldır. Kürtlerin kapısı misafire her zaman açıktır ve en güzel yemekler onlar için hazırlanır." }
+          { title: "Newroz", text: "21 Mart ulusal bayramdır." },
+          { title: "Giyim", text: "Şal û şapik ve fistan yöresel kıyafetlerdir." },
+          { title: "Misafirperverlik", text: "Kürt kültüründe misafir kutsaldır." }
         ]
       },
       muzik: {
         title: "Kürt Müziği",
-        desc: "Dağların ve aşkın sesi.",
+        desc: "Dağların sesi.",
         sections: [
-          { title: "Dengbêjlik", text: "Dengbêjlik Kürt müziğinin temel direğidir. Dengbêjler, halkın tarihini ve acılarını sadece sesleriyle anlatır. Şakiro ve Evdalê Zeynikê büyük örneklerdir." },
-          { title: "Enstrümanlar", text: "Tembur (Saz), erbane (def), zurna ve kaval temel çalgılardır. Özellikle tembur, Kürt müziğinde kutsal bir yere sahiptir." },
-          { title: "Modern Müzik", text: "Günümüzde Şivan Perwer, Ciwan Haco, Aynur Doğan gibi sanatçılar Kürt müziğini modern tarzlarla (Rock, Caz) dünyaya ulaştırmaktadır." }
+          { title: "Dengbêjlik", text: "Müziğin temelidir. Şakiro önemli bir örnektir." },
+          { title: "Enstrümanlar", text: "Tembur ve erbane başı çeker." },
+          { title: "Modern Müzik", text: "Şivan Perwer, Ciwan Haco gibi sanatçılar modern tarzları kullanır." }
         ]
       },
       huner: {
-        title: "Sanat ve Sinema",
-        desc: "Dünyayı Kürtlerin gözünden görmek.",
+        title: "Sanat",
+        desc: "Kürtlerin gözünden dünya.",
         sections: [
-          { title: "Kürt Sineması", text: "Yılmaz Güney, Kürt sinemasının babası kabul edilir. 'Yol' ve 'Sürü' gibi filmler dünyada ses getirmiştir." },
-          { title: "Resim", text: "Kürt ressamlar halklarının acılarını ve umutlarını tuvale yansıtır. Ehmedê Xanî aynı zamanda büyük bir hattattı." },
-          { title: "Halk Oyunları (Govend)", text: "Kürt dansları (Govend), sosyal yaşamın önemli bir parçasıdır. Her bölgenin (Serhat, Botan, Amed) kendine has bir tarzı vardır." }
+          { title: "Sinema", text: "Yılmaz Güney öncüdür." },
+          { title: "Resim", text: "Acı ve umut tuvale yansır." },
+          { title: "Govend", text: "Yöresel danslar yaşamın parçasıdır." }
         ]
       }
     }
@@ -221,9 +231,15 @@ export const siteContent = {
       dirok: 'History',
       muzik: 'Music',
       huner: 'Art',
+      ferheng: 'Dictionary',
       listik: 'Game',
       follow: 'Follow Us',
       join: 'Join Us'
+    },
+    notFound: {
+      title: "Lost Your Way?",
+      desc: "Sorry, we couldn't find the page you're looking for. It might have been removed.",
+      backButton: "Back to Home"
     },
     home: {
       heroTitle1: 'At YTU',
