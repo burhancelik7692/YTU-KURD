@@ -1,72 +1,107 @@
-import React from 'react';
-import { Instagram, Youtube, Mail } from 'lucide-react'; // İkonları ekledik
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Instagram, ArrowUp, Mail, Globe } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useLanguage } from '../context/LanguageContext';
+import { siteContent } from '../data/locales'; // Site content'i menü için çekiyoruz
 
 const Footer = () => {
+  const { lang } = useLanguage();
+  const t = siteContent[lang]?.nav || {}; // Menü çevirilerini al
+  
+  // Footer Linkleri (Menüden Dinamik Oluşturma)
+  const footerLinks = [
+    { path: '/', label: t.sereke },
+    { path: '/ferheng', label: t.ferheng },
+    { path: '/galeri', label: t.gallery },
+    { path: '/haberler', label: t.blog || 'Duyurular' },
+    { path: '/tekili', label: t.tekili },
+    { path: '/admin', label: 'Admin Girişi' }
+  ].filter(link => link.label); // Eğer çevirisi yoksa gösterme
+
+  // --- SCROLL TO TOP MANTIĞI ---
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // 300px aşağı kaydırıldığında butonu göster
+    const toggleVisibility = () => {
+      if (window.scrollY > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
-    <footer className="bg-gray-900 text-white py-12 px-4 mt-auto border-t border-gray-800">
-      <div className="max-w-7xl mx-auto text-center">
+    <footer className="bg-slate-900 dark:bg-black text-white pt-16 pb-8 border-t border-slate-700 dark:border-slate-800 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Logo ve Başlık */}
-        <img src="/logo.png" alt="YTU Kurdî" className="w-20 h-20 mx-auto mb-6 rounded-full shadow-lg shadow-white/10" />
-        <p className="text-lg mb-8 text-gray-300">Zanîngeha Yıldız Teknîk - Komeleya Kurdî</p>
-        
-        {/* --- SOSYAL MEDYA BUTONLARI (YAN YANA) --- */}
-        <div className="mb-10 flex flex-wrap justify-center gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           
-          {/* 1. INSTAGRAM BUTONU */}
-          <a 
-            href="https://instagram.com/ytukurdi" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 bg-white/5 border border-white/10 px-5 py-3 rounded-full hover:bg-gradient-to-tr hover:from-[#833ab4] hover:via-[#fd1d1d] hover:to-[#fcb045] transition-all duration-500 group"
-          >
-            <motion.div
-              animate={{ scale: [1, 1.15, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <Instagram size={24} className="text-white" />
-            </motion.div>
-            <span className="font-bold tracking-wide">Instagram</span>
-          </a>
+          {/* 1. Kurumsal Bilgi */}
+          <div>
+            <span className="text-2xl font-bold text-white tracking-tight block mb-4">
+              YTU <span className="text-yellow-500">Kurdî</span>
+            </span>
+            <p className="text-slate-400 text-sm leading-relaxed">
+              {lang === 'KU' ? 'Komeleya xwendekarên Kurd li Zanîngeha Yıldız Teknîk.' : 'Yıldız Teknik Üniversitesi Kürtçe Topluluğu.'}
+            </p>
+          </div>
+          
+          {/* 2. Hızlı Linkler (Dinamik) */}
+          <div className="md:col-span-2">
+            <h4 className="text-lg font-bold mb-4 text-yellow-500">{lang === 'KU' ? 'Zû Gihîştin' : 'Hızlı Erişim'}</h4>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-2 text-sm">
+              {footerLinks.map((link, i) => (
+                <Link key={i} to={link.path} className="text-slate-400 hover:text-white transition">
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
 
-          {/* 2. YOUTUBE BUTONU (Kırmızı Efekt) */}
-          <a 
-            href="https://www.youtube.com/channel/UCmj55cxwMKHvVgxhR1v7Ljg" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="flex items-center space-x-2 bg-white/5 border border-white/10 px-5 py-3 rounded-full hover:bg-red-600 transition-all duration-500 group"
-          >
-            <motion.div
-              animate={{ scale: [1, 1.15, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.3 }} // Hafif gecikmeli animasyon
-            >
-              <Youtube size={24} className="text-white" />
-            </motion.div>
-            <span className="font-bold tracking-wide">YouTube</span>
-          </a>
-
-          {/* 3. MAIL BUTONU (Sarı/Mavi Efekt) */}
-          <a 
-            href="mailto:ytukurdidrive@gmail.com" 
-            className="flex items-center space-x-2 bg-white/5 border border-white/10 px-5 py-3 rounded-full hover:bg-blue-600 transition-all duration-500 group"
-          >
-            <motion.div
-              animate={{ scale: [1, 1.15, 1] }}
-              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }} // Hafif gecikmeli animasyon
-            >
-              <Mail size={24} className="text-white" />
-            </motion.div>
-            <span className="font-bold tracking-wide">E-Mail</span>
-          </a>
-
+          {/* 3. İletişim / Sosyal Medya */}
+          <div>
+            <h4 className="text-lg font-bold mb-4 text-yellow-500">{lang === 'KU' ? 'Têkilî' : 'İletişim'}</h4>
+            <p className="text-slate-400 text-sm mb-2 flex items-center gap-2">
+              <Mail size={16} className="text-slate-500" /> ytukurdidrive@gmail.com
+            </p>
+            <div className="flex gap-3 mt-4">
+              <a href="https://instagram.com/ytukurdi" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-pink-500 transition"><Instagram size={20} /></a>
+              <a href="https://www.youtube.com/@ytukurdi" target="_blank" rel="noreferrer" className="text-slate-400 hover:text-red-600 transition"><Youtube size={20} /></a>
+            </div>
+          </div>
+          
         </div>
-        {/* --- BÖLÜM SONU --- */}
-
-        <div className="border-t border-gray-800 pt-8">
-          <p className="text-gray-500 text-sm">© 2025 YTU Kurdî. Hemû mafên parastî ne.</p>
+        
+        {/* Telif Hakkı */}
+        <div className="border-t border-slate-800 pt-8 text-center">
+          <p className="text-slate-500 text-sm">© 2025 YTU Kurdî. Hemû mafên parastî ne.</p>
         </div>
       </div>
+
+      {/* --- YUKARI ÇIK BUTONU --- */}
+      <motion.button
+        onClick={scrollToTop}
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: isVisible ? 1 : 0, scale: isVisible ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="fixed bottom-6 right-6 bg-yellow-500 text-slate-900 p-4 rounded-full shadow-xl hover:bg-yellow-400 transition-colors z-40"
+      >
+        <ArrowUp size={24} />
+      </motion.button>
     </footer>
   );
 };

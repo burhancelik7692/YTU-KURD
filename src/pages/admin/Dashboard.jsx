@@ -1,30 +1,93 @@
-import React, { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import React, { useState, useEffect } from 'react';
+import { useAuth } from '../../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { addDynamicContent } from '../../services/adminService';
-import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, Music, Film, AlertCircle } from 'lucide-react';
+import { db } from '../../../firebase';
+import { addDynamicContent } from '../../../services/adminService';
+import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, Music, Film, AlertCircle, MessageSquare, Book, Trash2, Link, Edit } from 'lucide-react';
+import { useLanguage } from '../../../context/LanguageContext';
+import { siteContent } from '../../../data/locales';
+import { collection, getDocs, deleteDoc, doc, query, orderBy } from 'firebase/firestore';
+
+// --- SABİT KATEGORİLER ---
+const GALLERY_CATEGORIES = [
+  { value: "newroz", label: "Newroz" },
+  { value: "calaki", label: "Çalakî (Etkinlik)" },
+  { value: "taste", label: "Taştê (Kahvaltı)" },
+  { value: "ger", label: "Ger (Gezi)" },
+];
 
 const Dashboard = () => {
   const { logout, currentUser } = useAuth();
   const navigate = useNavigate();
+  const { lang } = useLanguage();
   
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
-  const [activeTab, setActiveTab] = useState('gallery'); // gallery, content
+  const [activeTab, setActiveTab] = useState('gallery');
+  const [contentList, setContentList] = useState([]); // Tüm içeriklerin listesi
   
-  // İçerik Form State'leri
-  const [contentData, setContentData] = useState({ 
+  // Form State'leri
+  const [formData, setFormData] = useState({ 
     title: '', 
     url: '', 
     category: '', 
     desc: '',
-    type: 'gallery' // Varsayılan: Galeri
+    type: 'gallery', // content, dictionary
+    text: '', // Blog ve Sözlük için ek metin alanı
+    ku: '', // Sözlük için Kürtçe
+    tr: '' // Sözlük için Türkçe
   });
+
+  // --- 1. İÇERİK LİSTESİNİ ÇEKME ---
+  useEffect(() => {
+    fetchContentList();
+  }, [success]); // Yeni bir içerik eklendiğinde veya silindiğinde listeyi yenile
+
+  const fetchContentList = async () => {
+    setLoading(true);
+    try {
+        const q = query(collection(db, "dynamicContent"), orderBy("createdAt", "desc"));
+        const snapshot = await getDocs(q);
+        const list = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setContentList(list);
+    } catch (err) {
+        console.error("İçerik listesi çekilemedi:", err);
+        setError("İçerik listesi yüklenirken bir hata oluştu.");
+    } finally {
+        setLoading(false);
+    }
+  };
+
+  // --- 2. SİLME İŞLEVİ ---
+  const handleDelete = async (id, title) => {
+    if (!window.confirm(`'${title}' başlıklı içeriği silmek istediğinizden emin misiniz?`)) {
+        return;
+    }
+    try {
+        await deleteDoc(doc(db, "dynamicContent", id));
+        setSuccess(true);
+        // Listeyi anında güncelle
+        fetchContentList();
+    } catch (err) {
+        setError("Silme işlemi başarısız oldu.");
+    }
+  };
+
 
   const handleLogout = async () => {
     await logout();
     navigate('/admin');
+  };
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const setContentTab = (type) => {
+      setActiveTab(type);
+      setFormData(prev => ({ ...prev, type: type, category: '', title: '', url: '', desc: '', text: '', ku: '', tr: '' }));
   };
   
   // --- HARİCİ İÇERİK YÜKLEME (URL TABANLI) ---
@@ -32,17 +95,25 @@ const Dashboard = () => {
       e.preventDefault();
       setError(null);
       
-      if (!contentData.title || !contentData.url) {
-        setError("Başlık ve URL (Link) boş bırakılamaz!");
+      let dataToSave = { ...formData };
+      
+      if (!dataToSave.title || !dataToSave.url && dataToSave.type !== 'dictionary') {
+        setError("Başlık ve URL boş bırakılamaz!");
         return;
+      }
+      
+      if (dataToSave.type === 'dictionary' && (!dataToSave.ku || !dataToSave.tr)) {
+          setError("Sözlük için Kürtçe ve Türkçe kelime zorunludur!");
+          return;
       }
       
       setLoading(true);
       try {
-          await addDynamicContent(contentData); // Servis artık sadece objeyi bekliyor
+          await addDynamicContent(dataToSave);
           setSuccess(true);
-          // Formu temizle
-          setContentData({ title: '', url: '', category: '', desc: '', type: contentData.type });
+          // Formu temizle ve listeyi yenile
+          setFormData(prev => ({ ...prev, title: '', url: '', category: '', desc: '', text: '', ku: '', tr: '' }));
+          fetchContentList(); 
           
           setTimeout(() => setSuccess(false), 3000);
       } catch (err) {
@@ -50,14 +121,17 @@ const Dashboard = () => {
       }
       setLoading(false);
   };
+  
+  // Dilden bağımsız sabitler
+  const T = siteContent[lang]?.nav || {};
+  const GL = GALLERY_CATEGORIES;
 
-  const setContentTab = (type) => {
-      setActiveTab(type === 'gallery' ? 'gallery' : 'content');
-      setContentData(prev => ({ ...prev, type: type, category: '', title: '', url: '', desc: '' }));
-  };
+  const contentHeader = {
+    gallery: { icon: Image, label: 'Resim Ekle (Galeri)', color: 'blue' },
+    content: { icon: MessageSquare, label: 'Blog/Duyuru Metni Ekle', color: 'green' },
+    dictionary: { icon: Book, label: 'Sözlük Kelimesi Ekle', color: 'purple' },
+  }[activeTab];
 
-  const isContentTab = activeTab === 'content';
-  const currentContentType = contentData.type;
 
   return (
     <div className="min-h-screen bg-slate-100 dark:bg-slate-900 flex text-slate-900 dark:text-white transition-colors">
@@ -65,10 +139,9 @@ const Dashboard = () => {
       <aside className="w-64 bg-slate-900 text-white p-6 hidden md:block border-r border-slate-700">
         <h1 className="text-2xl font-black text-yellow-500 mb-8">YTU Admin</h1>
         <nav className="space-y-2">
-          <button onClick={() => setContentTab('gallery')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${currentContentType === 'gallery' ? 'bg-blue-600' : 'hover:bg-slate-800 text-slate-400'}`}><Image size={18} /> Galeri (Resim URL)</button>
-          <button onClick={() => setContentTab('book')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${currentContentType === 'book' ? 'bg-blue-600' : 'hover:bg-slate-800 text-slate-400'}`}><BookOpen size={18} /> Kitap / Makale (PDF)</button>
-          <button onClick={() => setContentTab('music')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${currentContentType === 'music' ? 'bg-blue-600' : 'hover:bg-slate-800 text-slate-400'}`}><Music size={18} /> Müzik / Podcast (MP3/Link)</button>
-          <button onClick={() => setContentTab('video')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${currentContentType === 'video' ? 'bg-blue-600' : 'hover:bg-slate-800 text-slate-400'}`}><Film size={18} /> Video (YouTube)</button>
+          <button onClick={() => setContentTab('gallery')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${activeTab === 'gallery' ? 'bg-blue-600' : 'hover:bg-slate-800 text-slate-400'}`}><Image size={18} /> Galeri Yönetimi</button>
+          <button onClick={() => setContentTab('content')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${activeTab === 'content' ? 'bg-blue-600' : 'hover:bg-slate-800 text-slate-400'}`}><MessageSquare size={18} /> {T.admin_content || 'İçerik/Blog'}</button>
+          <button onClick={() => setContentTab('dictionary')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${activeTab === 'dictionary' ? 'bg-blue-600' : 'hover:bg-slate-800 text-slate-400'}`}><Book size={18} /> {T.admin_dict || 'Sözlük'}</button>
         </nav>
         <button onClick={handleLogout} className="mt-12 flex items-center gap-2 text-red-400 hover:text-red-300 font-bold text-sm"><LogOut size={18} /> Çıkış Yap</button>
       </aside>
@@ -81,45 +154,92 @@ const Dashboard = () => {
         {error && (<div className="bg-red-500/20 text-red-200 p-4 rounded-lg mb-6 flex items-center gap-2"><AlertCircle size={20} /> {error}</div>)}
         {success && (<div className="bg-green-600 text-white p-4 rounded-lg mb-6 flex items-center gap-2"><CheckCircle size={20} /> Başarıyla Eklendi ve Yayınlandı!</div>)}
 
-        {/* ANA FORM (URL ODAKLI) */}
-        <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl max-w-2xl border border-slate-200 dark:border-slate-700">
+        {/* --- 1. YENİ İÇERİK EKLEME FORMU --- */}
+        <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl max-w-2xl border border-slate-200 dark:border-slate-700 mb-12">
             <h3 className="text-2xl font-bold text-slate-800 dark:text-white mb-6 flex items-center gap-2">
-                {currentContentType === 'gallery' ? <Image /> : currentContentType === 'book' ? <BookOpen /> : currentContentType === 'music' ? <Music /> : <Film />}
-                Yeni {currentContentType.toUpperCase()} Ekle
+                <contentHeader.icon size={24} className={`text-${contentHeader.color}-600`} />
+                Yeni {contentHeader.label}
             </h3>
             
-            <form onSubmit={handleContentUpload} className="space-y-6">
+            {/* SÖZLÜK FORM BÖLÜMÜ */}
+            {activeTab === 'dictionary' ? (
+                <form onSubmit={handleContentUpload} className="space-y-6">
+                    <p className="text-sm text-yellow-500 font-bold flex items-center gap-2"><BookOpen size={16} /> Sözlük içeriği ekliyorsunuz.</p>
+                    <div><label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kürtçe Kelime (ku)</label><input type="text" name="ku" value={formData.ku} onChange={handleChange} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="Örn: Serkeftin" required /></div>
+                    <div><label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Türkçe Anlamı (tr)</label><input type="text" name="tr" value={formData.tr} onChange={handleChange} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="Örn: Başarı" required /></div>
+                    <button type="submit" disabled={loading} className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-lg flex items-center justify-center gap-2 disabled:opacity-50">
+                        {loading ? <><Loader2 className="animate-spin" /> Yükleniyor...</> : <><Plus /> Sözlük Kelimesini Ekle</>}
+                    </button>
+                </form>
+            ) : (
                 
-                {/* BAŞLIK */}
-                <div>
-                    <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Başlık</label>
-                    <input type="text" value={contentData.title} onChange={(e) => setContentData({...contentData, title: e.target.value})} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="Örn: Newroz Kutlaması 2025" required />
-                </div>
+                /* GALERİ VE CONTENT FORMLARI */
+                <form onSubmit={handleContentUpload} className="space-y-6">
+                    <div><label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Başlık</label><input type="text" name="title" value={formData.title} onChange={handleChange} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="Örn: Newroz Kutlaması 2025" required /></div>
+                    <div>
+                        <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Harici URL (Resim/Video/PDF Linki)</label>
+                        <input type="url" name="url" value={formData.url} onChange={handleChange} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="https://drive.google.com/linkiniz" required />
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">⚠️ Maliyet için lütfen harici (Imgur, YouTube vb.) link kullanın.</p>
+                    </div>
 
-                {/* URL (Link) */}
-                <div>
-                    <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Harici URL (Resim Linki, YouTube, PDF Linki)</label>
-                    <input type="url" value={contentData.url} onChange={(e) => setContentData({...contentData, url: e.target.value})} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="https://drive.google.com/linkiniz.pdf" required />
-                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">⚠️ Bu link doğrudan içeriğin kendisi olmalıdır (Firebase Storage kullanılmaz).</p>
-                </div>
+                    <div>
+                        <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kategori (Örn: Wêje, Dîrok)</label>
+                        <input type="text" name="category" value={formData.category} onChange={handleChange} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="Örn: Edebiyat, Folklor" />
+                    </div>
+                    
+                    {activeTab === 'content' && (
+                        <div>
+                            <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Blog/Duyuru Metni</label>
+                            <textarea name="desc" value={formData.desc} onChange={handleChange} rows="5" className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none resize-none" placeholder="Kısa açıklama veya duyuru metni..."></textarea>
+                        </div>
+                    )}
 
-                {/* KATEGORİ */}
-                <div>
-                    <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kategori (Örn: Wêje, Dîrok)</label>
-                    <input type="text" value={contentData.category} onChange={(e) => setContentData({...contentData, category: e.target.value})} className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none" placeholder="Örn: Edebiyat, Folklor, Bîranîn" />
-                </div>
-                
-                {/* AÇIKLAMA */}
-                <div>
-                    <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Kısa Açıklama</label>
-                    <textarea value={contentData.desc} onChange={(e) => setContentData({...contentData, desc: e.target.value})} rows="3" className="w-full p-4 rounded-xl bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-600 outline-none resize-none" placeholder="Bu içerik ne hakkında..."></textarea>
-                </div>
-
-                <button type="submit" disabled={loading} className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-lg flex items-center justify-center gap-2 disabled:opacity-50">
-                    {loading ? <><Loader2 className="animate-spin" /> Yükleniyor...</> : <><Plus /> Ekle ve Yayınla</>}
-                </button>
-            </form>
+                    <button type="submit" disabled={loading} className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-blue-700 transition shadow-lg flex items-center justify-center gap-2 disabled:opacity-50">
+                        {loading ? <><Loader2 className="animate-spin" /> Yükleniyor...</> : <><Plus /> Ekle ve Yayınla</>}
+                    </button>
+                </form>
+            )}
         </div>
+
+
+        {/* --- 2. İÇERİK LİSTESİ VE YÖNETİMİ --- */}
+        <h3 className="text-2xl font-bold text-slate-800 dark:text-white mt-12 mb-6">Mevcut İçerikler ({contentList.length})</h3>
+        
+        {loading ? (
+             <p className="text-slate-500 dark:text-slate-400">Yükleniyor...</p>
+        ) : (
+            <div className="space-y-4">
+                {contentList.map((item) => (
+                    <div key={item.id} className="flex items-center justify-between bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700">
+                        <div className="flex items-center gap-4 truncate flex-1">
+                            {item.type === 'gallery' ? <Image size={20} className="text-blue-500" /> : <MessageSquare size={20} className="text-green-500" />}
+                            <div className="truncate">
+                                <p className="font-bold text-sm truncate">{item.title || item.ku || 'Başlıksız'}</p>
+                                <p className="text-xs text-slate-400">Tipi: {item.type} | Kategori: {item.category || 'Yok'}</p>
+                            </div>
+                        </div>
+                        <div className="flex items-center gap-3 ml-4 flex-shrink-0">
+                            {/* Linke Git */}
+                            {item.url && (
+                                <a href={item.url} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 transition">
+                                    <Link size={20} />
+                                </a>
+                            )}
+                            {/* Düzenle (Yakında) */}
+                            <button className="text-yellow-500 hover:text-yellow-600 transition" title="Düzenle (Yakında)">
+                                <Edit size={20} />
+                            </button>
+                            {/* Sil */}
+                            <button onClick={() => handleDelete(item.id, item.title)} className="text-red-500 hover:text-red-700 transition" title="Sil">
+                                <Trash2 size={20} />
+                            </button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        )}
+
+
       </main>
     </div>
   );
