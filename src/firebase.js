@@ -8,7 +8,7 @@ import { getAuth } from "firebase/auth";      // KRİTİK: Authentication Servis
 // DİKKAT: Bu bilgileri .env dosyasına taşımak, genel güvenlik için önerilir.
 const firebaseConfig = {
   // Bu bilgileri kendi Firebase konsolunuzdaki gerçek anahtarlarınızla değiştirin!
-  apiKey: "AIzaSyDadado7dT6SYDywKRCpAcL7kqkubdadE", 
+  apiKey: "AIzaSyDadado7dT6SYDywKRCpAc9L7kqkubdadE", 
   authDomain: "ytu-kurdi.firebaseapp.com",
   projectId: "ytu-kurdi",
   storageBucket: "ytu-kurdi.firebasestorage.app",
