@@ -15,17 +15,17 @@ import Dictionary from "./pages/Dictionary";
 import NotFound from "./pages/NotFound"; 
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
-import Blog from "./pages/Blog"; // Blog/Duyurular Eklendi
+import Blog from "./pages/Blog";
 
 // Admin Sayfaları
 import Login from "./pages/admin/Login";
 import Dashboard from "./pages/admin/Dashboard";
 
-import ScrollToTop from "./components/ScrollToTop"; // Sayfa geçişlerinde üste kaydırır
+import ScrollToTop from "./components/ScrollToTop"; 
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext'; 
 import { AuthProvider, useAuth } from './context/AuthContext';
-import { UserProvider } from './context/UserContext'; // Misafir/Favori yönetimini sağlar
+import { UserProvider } from './context/UserContext'; 
 import "./index.css";
 
 // Korumalı Rota Bileşeni (Admin Girişi)
@@ -37,36 +37,42 @@ const PrivateRoute = ({ children }) => {
 
 const Layout = ({ children }) => {
   const location = useLocation();
-  // Admin ve Oyun sayfalarında Menü ve Footer gizlenir
   const isFullScreen = location.pathname === '/listik' || location.pathname.startsWith('/admin');
 
   return (
-    // Global Dark Mode Sınıfları
     <div className="app-container flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Helmet><title>YTU Kurdî</title></Helmet>
       
-      {/* Menü ve Footer sadece tam ekran olmayan sayfalarda görünür */}
       {!isFullScreen && <Navigation />}
       
       <main className="flex-grow">
         {children}
       </main>
 
-      {/* Footer'ı Admin ve Oyun sayfalarında gösterme */}
       {!(isFullScreen || location.pathname.startsWith('/admin')) && <Footer />}
     </div>
   );
 };
 
 function App() {
+  const { currentUser, loading } = useAuth(); // AuthContext'ten yükleme durumunu çek
+
+  // Eğer Auth verisi yükleniyorsa boş bir ekran göster (Bu, yönlendirmenin çakışmasını engeller)
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-slate-900">
+        <Loader2 className="animate-spin text-yellow-500" size={50} />
+      </div>
+    );
+  }
+
   return (
-    // Tüm Context'ler uygulamayı sarmalar
     <AuthProvider>
       <UserProvider>
         <LanguageProvider>
           <ThemeProvider>
             <Router>
-              <ScrollToTop /> {/* Sayfa geçişlerinde scroll'u sıfırlar */}
+              <ScrollToTop />
               <Layout>
                 <Routes>
                   {/* Normal Sayfalar */}
