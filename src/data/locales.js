@@ -3,109 +3,79 @@ export const siteContent = {
   // KÜRTÇE (KU)
   // =================================================================
   KU: {
-    // --- MENÜ ---
     nav: {
-      sereke: 'Sereke',
-      ziman: 'Ziman',
-      cand: 'Çand',
-      dirok: 'Dîrok',
-      muzik: 'Muzîk',
-      huner: 'Huner',
-      ferheng: 'Ferheng', // Sözlük Linki
-      listik: 'Lîstik',
-      follow: 'Me Bişopînin',
-      join: 'Tevlî Me Bibe'
+      sereke: 'Sereke', ziman: 'Ziman', cand: 'Çand', dirok: 'Dîrok', muzik: 'Muzîk', huner: 'Huner', ferheng: 'Ferheng', listik: 'Lîstik', follow: 'Me Bişopînin', join: 'Tevlî Me Bibe'
     },
-    // --- 404 SAYFASI ---
     notFound: {
-      title: "Rêya Xwe Winda Kir?",
-      desc: "Bibore, rûpela ku tu lê digerî me nedît. Dibe ku hatiye jêbirin an jî navnîşan şaş e.",
-      backButton: "Vegere Sereke"
+      title: "Rêya Xwe Winda Kir?", desc: "Bibore, rûpela ku tu lê digerî me nedît.", backButton: "Vegere Sereke"
     },
-    // --- ANA SAYFA ---
     home: {
-      heroTitle1: 'Li YTÜ',
-      heroTitle2: 'Dengê Me',
-      heroTitle3: 'Rengê Me.',
+      heroTitle1: 'Li YTÜ', heroTitle2: 'Dengê Me', heroTitle3: 'Rengê Me.',
       heroSubtitle: 'Zanîngeha Yıldız Teknîk - Komeleya Kurdî',
       heroButton: 'Tevlî Me Bibe',
       aboutTitle: 'Derbarê Me',
-      aboutText1: 'Komeleya Kurdî ya Zanîngeha Yıldız Teknîk (YTU) di sala 2025an de hatiye damezrandin. Armanca me parastina zimanê kurdî, belavkirina çanda kurdî, û hînkirina dîroka me ye.',
-      aboutText2: 'Em bi xwendekarên kurd û hemû kesên ku ji zimanê kurdî hez dikin re dixebitin. Em çalakiyên cuda yên çandî, hunerî û perwerdehî organîze dikin.',
+      aboutText1: 'Komeleya Kurdî ya Zanîngeha Yıldız Teknîk (YTU) di sala 2025an de hatiye damezrandin.',
+      aboutText2: 'Em bi xwendekarên kurd û hemû kesên ku ji zimanê kurdî hez dikin re dixebitin.',
       featuresTitle: 'Beşên Me',
       ctaTitle: 'Beşdarî Komeleya Me Bibe',
-      ctaText: 'Heke tu dixwazî zimanê kurdî hîn bibî, çanda xwe nas bikî, û bi me re bixebitî, bi me re têkilî dayne!',
+      ctaText: 'Heke tu dixwazî zimanê kurdî hîn bibî, çanda xwe nas bikî, bi me re têkilî dayne!',
       ctaButton: 'Dest Pê Bike',
-      // Yeni: Sayaç ve Günün Sözü
       eventTitle: 'Çalakiya Pêşerojê',
       eventEmptyTitle: 'Tê Ragihandin',
       eventEmptyDesc: 'Ji bo çalakiyên nû li bendê bin.',
       dailyTitle: 'Naveroka Rojê',
       dailyWord: 'Peyv',
       dailyQuote: 'Gotin',
-      time: { day: 'Roj', hour: 'Saet', min: 'Deqe', sec: 'Çirk' }
+      time: { day: 'Roj', hour: 'Saet', min: 'Deqe', sec: 'Çirk' },
+      // --- YENİ EKLENEN BUTON ÇEVİRİLERİ ---
+      quickDict: 'Ferheng',
+      quickGame: 'Bilîze'
     },
-    // --- KARTLAR ---
     cards: {
-      zimanTitle: 'Ziman', zimanDesc: 'Hînbûna zimanê kurdî û rêzimana wê',
-      candTitle: 'Çand', candDesc: 'Çanda dewlemend a gelê kurd',
-      dirokTitle: 'Dîrok', dirokDesc: 'Dîroka kevn a kurdan',
-      muzikTitle: 'Muzîk', muzikDesc: 'Muzîka kurdî û stranan',
-      hunerTitle: 'Huner', hunerDesc: 'Huner û hunermendên kurd'
+      zimanTitle: 'Ziman', zimanDesc: 'Hînbûna zimanê kurdî', candTitle: 'Çand', candDesc: 'Çanda dewlemend', dirokTitle: 'Dîrok', dirokDesc: 'Dîroka kevn', muzikTitle: 'Muzîk', muzikDesc: 'Muzîk û stran', hunerTitle: 'Huner', hunerDesc: 'Huner û hunermend'
     },
-    // --- SAYFA İÇERİKLERİ ---
     pages: {
       dirok: {
-        title: "Dîroka Kurdan",
-        desc: "Ji Medan heta îro, serpêhatiya gelê kevnar ê Mezopotamyayê.",
+        title: "Dîroka Kurdan", desc: "Ji Medan heta îro.",
         sections: [
-          { title: "Koka Kurdan", text: "Kurd yek ji gelên herî kevnar ên Mezopotamyayê ne. Di dîrokê de bi navên Gûtî, Hûrî û Med hatine naskirin. Împaratoriya Medan (B.Z. 612) yekem dewleta mezin a pêşiyên Kurdan tê hesibandin." },
-          { title: "Mîrektiyên Kurd", text: "Di serdema navîn de Kurdan gelek mîrektî ava kirine. Wekî Merwanî, Şedadî, Botan, Soran û Baban. Van mîrektiyan çand û hunera Kurdî pêş xistine." },
-          { title: "Serdema Nûjen", text: "Di sedsala 20an de têkoşîna Kurdan a ji bo nasname û mafên neteweyî berdewam kir. Îro Kurd li çar parçeyên Kurdistanê û li diyasporayê çanda xwe didin jiyîn." }
+          { title: "Koka Kurdan", text: "Kurd yek ji gelên herî kevnar ên Mezopotamyayê ne." },
+          { title: "Mîrektiyên Kurd", text: "Kurdan gelek mîrektî ava kirine wekî Merwanî û Botan." },
+          { title: "Serdema Nûjen", text: "Îro Kurd li çar parçeyên Kurdistanê çanda xwe didin jiyîn." }
         ]
       },
       ziman: {
-        title: "Zimanê Kurdî",
-        desc: "Zimanê me nasnameya me ye. Kurdî zimanekî Hînd-Ewropî ye.",
-        alphabetTitle: "Alfabeya Kurdî (Kurmancî)",
-        phrasesTitle: "Hevokên Girîng",
+        title: "Zimanê Kurdî", desc: "Zimanê me nasnameya me ye.",
+        alphabetTitle: "Alfabeya Kurdî (Kurmancî)", phrasesTitle: "Hevokên Girîng",
         topics: [
-          { id: 'reziman', title: 'Rêzimana Kurdî', desc: 'Rêziman û qawaidên ziman', text: 'Zimanê kurdî zimanek Hind-Ewropî ye. Alfabeya latînî (Kurmancî) û erebî (Soranî) heye.' },
-          { id: 'axaftin', title: 'Axaftina Rojane', desc: 'Hevokên rojane', text: 'Silav, Çawa yî, Baş im, Spas, Bi xêr hatî...' },
-          { id: 'peyv', title: 'Peyv û Bêje', desc: 'Peyvên girîng', text: 'Mal, Dê, Bav, Dibistan, Nan, Av, Jiyan...' },
-          { id: 'guhdari', title: 'Guhdarî û Axaftin', desc: 'Pratîka ziman', text: 'Ji bo hînbûnê divê hûn her roj guhdarî bikin û biaxivin.' }
+          { id: 'reziman', title: 'Rêziman', desc: 'Qawaid', text: 'Kurdî zimanekî Hînd-Ewropî ye.' },
+          { id: 'axaftin', title: 'Axaftin', desc: 'Rojane', text: 'Silav, Çawa yî, Baş im...' },
+          { id: 'peyv', title: 'Peyv û Bêje', desc: 'Peyvên girîng', text: 'Mal, Dê, Bav, Nan, Av...' },
+          { id: 'guhdari', title: 'Guhdarî', desc: 'Pratîka ziman', text: 'Divê hûn her roj guhdarî bikin.' }
         ],
-        phrases: [
-          { org: 'Roj baş', mean: 'Günaydın' }, { org: 'Şev baş', mean: 'İyi geceler' },
-          { org: 'Spas', mean: 'Teşekkürler' }, { org: 'Tu çawa yî?', mean: 'Nasılsın?' },
-          { org: 'Ez baş im', mean: 'İyiyim' }, { org: 'Navê te çi ye?', mean: 'Adın ne?' }
-        ]
+        phrases: [{ org: 'Roj baş', mean: 'Günaydın' }, { org: 'Spas', mean: 'Teşekkürler' }]
       },
       cand: {
-        title: "Çanda Kurdî",
-        desc: "Reng, deng û jiyana gelê Kurd.",
+        title: "Çanda Kurdî", desc: "Reng, deng û jiyan.",
         sections: [
-          { title: "Newroz", text: "Newroz (21ê Adarê) cejna neteweyî ya Kurdan e. Sersala nû û sembola berxwedanê ye. Agirê Newrozê nîşana azadiyê ye." },
-          { title: "Cil û Berg", text: "Cilên Kurdî bi rengên xwe yên zindî têne naskirin. Şal û şapik (ji bo mêran) û kiras û fîstan (ji bo jinan) parçeyên sereke ne." },
-          { title: "Mêvanperwerî", text: "Di çanda Kurdî de mêvan pîroz e. Deriyê Kurdan her tim ji mêvanan re vekirî ye û xwarinên herî xweş ji bo wan têne amadekirin." }
+          { title: "Newroz", text: "Newroz (21ê Adarê) cejna neteweyî ye." },
+          { title: "Cil û Berg", text: "Şal û şapik, kiras û fîstan cilên me ne." },
+          { title: "Mêvanperwerî", text: "Mêvan li ba Kurdan pîroz e." }
         ]
       },
       muzik: {
-        title: "Muzîka Kurdî",
-        desc: "Dengê çiya û evînê.",
+        title: "Muzîka Kurdî", desc: "Dengê çiya û evînê.",
         sections: [
-          { title: "Dengbêjî", text: "Dengbêjî stûna muzîka Kurdî ye. Dengbêj, dîrok û êşên gel bi tenê bi dengê xwe vedibêjin. Şakiro, Evdalê Zeynikê mînakên mezin in." },
-          { title: "Amûrên Muzîkê", text: "Tembûr, def, zirne û bilûr amûrên sereke ne. Bi taybetî tembûr di muzîka Kurdî de xwedî cihekî pîroz e." },
-          { title: "Muzîka Nûjen", text: "Îro hunermendên wekî Şivan Perwer, Ciwan Haco, Aynur Doğan muzîka Kurdî bi şêwazên nûjen (Rock, Jazz) digihîjînin cîhanê." }
+          { title: "Dengbêjî", text: "Dengbêjî stûna muzîka Kurdî ye. Şakiro mînakek mezin e." },
+          { title: "Amûr", text: "Tembûr û bilûr amûrên sereke ne." },
+          { title: "Muzîka Nûjen", text: "Hunermendên wekî Şivan Perwer muzîka me gihandin cîhanê." }
         ]
       },
       huner: {
-        title: "Huner û Sînema",
-        desc: "Dîtina cîhanê bi çavên Kurdan.",
+        title: "Huner û Sînema", desc: "Dîtina cîhanê bi çavên Kurdan.",
         sections: [
-          { title: "Sînemaya Kurdî", text: "Yilmaz Güney bavê sînemaya Kurdî tê hesibandin. Fîlmên wekî 'Yol' û 'Sûrî' di cîhanê de deng vedane." },
-          { title: "Wênesazî", text: "Hunermendên Kurd êş û hêviyên gelê xwe li ser tûwalê nîşan didin. Ehmedê Xanî di heman demê de xetatekî mezin bû." },
-          { title: "Govend", text: "Reqsên Kurdî (Govend) beşeke girîng a jiyana civakî ye. Her herêmek (Serhed, Botan, Amed) xwedî şêwazek taybet e." }
+          { title: "Sînema", text: "Yilmaz Güney bavê sînemaya Kurdî ye." },
+          { title: "Wênesazî", text: "Hunermend êş û hêviyên gelê xwe xêz dikin." },
+          { title: "Govend", text: "Reqsên Kurdî beşeke girîng a jiyanê ye." }
         ]
       }
     }
@@ -116,34 +86,21 @@ export const siteContent = {
   // =================================================================
   TR: {
     nav: {
-      sereke: 'Anasayfa',
-      ziman: 'Dil',
-      cand: 'Kültür',
-      dirok: 'Tarih',
-      muzik: 'Müzik',
-      huner: 'Sanat',
-      ferheng: 'Sözlük',
-      listik: 'Oyun',
-      follow: 'Bizi Takip Edin',
-      join: 'Bize Katılın'
+      sereke: 'Anasayfa', ziman: 'Dil', cand: 'Kültür', dirok: 'Tarih', muzik: 'Müzik', huner: 'Sanat', ferheng: 'Sözlük', listik: 'Oyun', follow: 'Bizi Takip Edin', join: 'Bize Katılın'
     },
     notFound: {
-      title: "Yolunu Mu Kaybettin?",
-      desc: "Üzgünüz, aradığınız sayfayı bulamadık. Silinmiş veya adres yanlış olabilir.",
-      backButton: "Ana Sayfaya Dön"
+      title: "Yolunu Mu Kaybettin?", desc: "Üzgünüz, aradığınız sayfayı bulamadık.", backButton: "Ana Sayfaya Dön"
     },
     home: {
-      heroTitle1: "YTÜ'de",
-      heroTitle2: 'Sesimiz',
-      heroTitle3: 'Rengimiz.',
+      heroTitle1: "YTÜ'de", heroTitle2: 'Sesimiz', heroTitle3: 'Rengimiz.',
       heroSubtitle: 'Yıldız Teknik Üniversitesi - Kürtçe Topluluğu',
       heroButton: 'Bize Katıl',
       aboutTitle: 'Hakkımızda',
-      aboutText1: 'YTÜ Kürtçe Topluluğu, 2025 yılında kurulmuştur. Amacımız Kürt dilini korumak, kültürümüzü tanıtmak ve tarihimizi öğretmektir.',
-      aboutText2: 'Kürt öğrenciler ve dile ilgi duyan herkesle birlikte çalışıyoruz. Çeşitli kültürel, sanatsal ve eğitim faaliyetleri düzenliyoruz.',
+      aboutText1: 'YTÜ Kürtçe Topluluğu, 2025 yılında kurulmuştur.',
+      aboutText2: 'Kürt öğrenciler ve dile ilgi duyan herkesle birlikte çalışıyoruz.',
       featuresTitle: 'Bölümlerimiz',
       ctaTitle: 'Topluluğumuza Katılın',
-      ctaText: 'Kürtçe öğrenmek, kültürü tanımak ve bizimle birlikte çalışmak istiyorsan, iletişime geç!',
+      ctaText: 'Kürtçe öğrenmek ve kültürü tanımak istiyorsan iletişime geç!',
       ctaButton: 'Başla',
       eventTitle: 'Sıradaki Etkinlik',
       eventEmptyTitle: 'Duyurulacak',
@@ -151,70 +108,56 @@ export const siteContent = {
       dailyTitle: 'Günün İçeriği',
       dailyWord: 'Kelime',
       dailyQuote: 'Söz',
-      time: { day: 'Gün', hour: 'Saat', min: 'Dak', sec: 'San' }
+      time: { day: 'Gün', hour: 'Saat', min: 'Dak', sec: 'San' },
+      // --- YENİ EKLENENLER ---
+      quickDict: 'Sözlük',
+      quickGame: 'Oyna'
     },
     cards: {
-      zimanTitle: 'Dil', zimanDesc: 'Kürtçe dil eğitimi ve gramer',
-      candTitle: 'Kültür', candDesc: 'Zengin Kürt kültürü',
-      dirokTitle: 'Tarih', dirokDesc: 'Köklü tarih',
-      muzikTitle: 'Müzik', muzikDesc: 'Kürt müziği ve şarkıları',
-      hunerTitle: 'Sanat', hunerDesc: 'Kürt sanatı ve sanatçıları'
+      zimanTitle: 'Dil', zimanDesc: 'Kürtçe dil eğitimi', candTitle: 'Kültür', candDesc: 'Zengin Kürt kültürü', dirokTitle: 'Tarih', dirokDesc: 'Köklü tarih', muzikTitle: 'Müzik', muzikDesc: 'Kürt müziği', hunerTitle: 'Sanat', hunerDesc: 'Kürt sanatı'
     },
     pages: {
       dirok: {
-        title: "Kürt Tarihi",
-        desc: "Medlerden günümüze, Mezopotamya'nın kadim halkının serüveni.",
+        title: "Kürt Tarihi", desc: "Medlerden günümüze.",
         sections: [
-          { title: "Kökenler", text: "Kürtler, Mezopotamya'nın en eski halklarından biridir. Tarihte Guti, Huri ve Med isimleriyle anılmışlardır. Med İmparatorluğu (M.Ö. 612), Kürtlerin atalarının kurduğu ilk büyük devlet kabul edilir." },
-          { title: "Kürt Mirlikleri", text: "Ortaçağ'da Kürtler birçok mirlik kurmuştur. Mervaniler, Şeddadiler, Botan, Soran ve Baban gibi mirlikler, Kürt kültürünü ve sanatını geliştirmiştir." },
-          { title: "Modern Dönem", text: "20. yüzyılda Kürtlerin kimlik ve ulusal haklar mücadelesi devam etmiştir. Bugün Kürtler, Kürdistan'ın dört parçasında ve diasporada kültürlerini yaşatmaktadır." }
+          { title: "Kökenler", text: "Kürtler Mezopotamya'nın kadim halkıdır." },
+          { title: "Mirlikler", text: "Mervaniler ve Botan gibi mirlikler kurulmuştur." },
+          { title: "Modern Dönem", text: "Kürtler bugün kültürlerini yaşatmaktadır." }
         ]
       },
       ziman: {
-        title: "Kürt Dili",
-        desc: "Dilimiz kimliğimizdir. Kürtçe, Hint-Avrupa dil ailesindendir.",
-        alphabetTitle: "Kürtçe Alfabesi (Kurmanci)",
-        phrasesTitle: "Önemli Kalıplar",
+        title: "Kürt Dili", desc: "Dilimiz kimliğimizdir.",
+        alphabetTitle: "Kürtçe Alfabesi", phrasesTitle: "Önemli Kalıplar",
         topics: [
-          { id: 'reziman', title: 'Kürtçe Gramer', desc: 'Dil bilgisi ve kurallar', text: 'Kürtçe Hint-Avrupa dil ailesindendir. Latin (Kurmanci) ve Arap (Sorani) alfabeleri kullanılır.' },
-          { id: 'axaftin', title: 'Günlük Konuşma', desc: 'Günlük diyaloglar', text: 'Selam, Nasılsın, İyiyim, Teşekkürler, Hoş geldin...' },
-          { id: 'peyv', title: 'Kelime Bilgisi', desc: 'Önemli kelimeler', text: 'Ev, Anne, Baba, Okul, Ekmek, Su, Hayat...' },
-          { id: 'guhdari', title: 'Dinleme ve Konuşma', desc: 'Dil pratiği', text: 'Öğrenmek için her gün dinlemeli ve konuşmalısınız.' }
+          { id: 'reziman', title: 'Gramer', desc: 'Kurallar', text: 'Kürtçe Hint-Avrupa dil ailesindendir.' },
+          { id: 'axaftin', title: 'Konuşma', desc: 'Günlük', text: 'Selam, Nasılsın...' },
+          { id: 'peyv', title: 'Kelime', desc: 'Sözcükler', text: 'Ev, Anne, Baba...' },
+          { id: 'guhdari', title: 'Dinleme', desc: 'Pratik', text: 'Dinlemek ve konuşmak önemlidir.' }
         ],
-        phrases: [
-          { org: 'Roj baş', mean: 'Günaydın' },
-          { org: 'Şev baş', mean: 'İyi geceler' },
-          { org: 'Spas', mean: 'Teşekkürler' },
-          { org: 'Tu çawa yî?', mean: 'Nasılsın?' },
-          { org: 'Ez baş im', mean: 'İyiyim' },
-          { org: 'Navê te çi ye?', mean: 'Adın ne?' }
-        ]
+        phrases: [{ org: 'Roj baş', mean: 'Günaydın' }, { org: 'Spas', mean: 'Teşekkürler' }]
       },
       cand: {
-        title: "Kürt Kültürü",
-        desc: "Renkler ve yaşam.",
+        title: "Kürt Kültürü", desc: "Renkler ve yaşam.",
         sections: [
           { title: "Newroz", text: "21 Mart ulusal bayramdır." },
-          { title: "Giyim", text: "Şal û şapik ve fistan yöresel kıyafetlerdir." },
-          { title: "Misafirperverlik", text: "Kürt kültüründe misafir kutsaldır." }
+          { title: "Giyim", text: "Şal û şapik ve fistan yöreseldir." },
+          { title: "Misafirperverlik", text: "Misafir kutsaldır." }
         ]
       },
       muzik: {
-        title: "Kürt Müziği",
-        desc: "Dağların sesi.",
+        title: "Kürt Müziği", desc: "Dağların sesi.",
         sections: [
-          { title: "Dengbêjlik", text: "Müziğin temelidir. Şakiro önemli bir örnektir." },
-          { title: "Enstrümanlar", text: "Tembur ve erbane başı çeker." },
-          { title: "Modern Müzik", text: "Şivan Perwer, Ciwan Haco gibi sanatçılar modern tarzları kullanır." }
+          { title: "Dengbêjlik", text: "Müziğin temelidir." },
+          { title: "Enstrümanlar", text: "Tembur ve erbane önemlidir." },
+          { title: "Modern Müzik", text: "Modern sanatçılar müziği dünyaya taşır." }
         ]
       },
       huner: {
-        title: "Sanat",
-        desc: "Kürtlerin gözünden dünya.",
+        title: "Sanat", desc: "Kürtlerin gözünden dünya.",
         sections: [
           { title: "Sinema", text: "Yılmaz Güney öncüdür." },
           { title: "Resim", text: "Acı ve umut tuvale yansır." },
-          { title: "Govend", text: "Yöresel danslar yaşamın parçasıdır." }
+          { title: "Halk Oyunları", text: "Govend sosyal yaşamın parçasıdır." }
         ]
       }
     }
@@ -225,34 +168,21 @@ export const siteContent = {
   // =================================================================
   EN: {
     nav: {
-      sereke: 'Home',
-      ziman: 'Language',
-      cand: 'Culture',
-      dirok: 'History',
-      muzik: 'Music',
-      huner: 'Art',
-      ferheng: 'Dictionary',
-      listik: 'Game',
-      follow: 'Follow Us',
-      join: 'Join Us'
+      sereke: 'Home', ziman: 'Language', cand: 'Culture', dirok: 'History', muzik: 'Music', huner: 'Art', ferheng: 'Dictionary', listik: 'Game', follow: 'Follow Us', join: 'Join Us'
     },
     notFound: {
-      title: "Lost Your Way?",
-      desc: "Sorry, we couldn't find the page you're looking for. It might have been removed.",
-      backButton: "Back to Home"
+      title: "Lost Your Way?", desc: "Sorry, we couldn't find the page.", backButton: "Back to Home"
     },
     home: {
-      heroTitle1: 'At YTU',
-      heroTitle2: 'Our Voice',
-      heroTitle3: 'Our Color.',
+      heroTitle1: 'At YTU', heroTitle2: 'Our Voice', heroTitle3: 'Our Color.',
       heroSubtitle: 'Yildiz Technical University - Kurdish Society',
       heroButton: 'Join Us',
       aboutTitle: 'About Us',
-      aboutText1: 'YTU Kurdish Society was established in 2025. Our aim is to protect the Kurdish language, promote our culture, and teach our history.',
-      aboutText2: 'We work with Kurdish students and anyone interested in the language. We organize various cultural, artistic, and educational activities.',
+      aboutText1: 'YTU Kurdish Society was established in 2025.',
+      aboutText2: 'We work with Kurdish students and anyone interested in the language.',
       featuresTitle: 'Our Departments',
       ctaTitle: 'Join Our Community',
-      ctaText: 'If you want to learn Kurdish, discover the culture, and work with us, contact us!',
+      ctaText: 'Contact us to join!',
       ctaButton: 'Start Now',
       eventTitle: 'Upcoming Event',
       eventEmptyTitle: 'To Be Announced',
@@ -260,70 +190,56 @@ export const siteContent = {
       dailyTitle: 'Daily Content',
       dailyWord: 'Word',
       dailyQuote: 'Quote',
-      time: { day: 'Day', hour: 'Hr', min: 'Min', sec: 'Sec' }
+      time: { day: 'Day', hour: 'Hr', min: 'Min', sec: 'Sec' },
+      // --- YENİ EKLENENLER (İNGİLİZCE İÇİN) ---
+      quickDict: 'Dictionary',
+      quickGame: 'Play'
     },
     cards: {
-      zimanTitle: 'Language', zimanDesc: 'Kurdish language learning and grammar',
-      candTitle: 'Culture', candDesc: 'The rich culture of the Kurdish people',
-      dirokTitle: 'History', dirokDesc: 'Ancient history of the Kurds',
-      muzikTitle: 'Music', muzikDesc: 'Kurdish music and songs',
-      hunerTitle: 'Art', hunerDesc: 'Kurdish art and artists'
+      zimanTitle: 'Language', zimanDesc: 'Learning Kurdish', candTitle: 'Culture', candDesc: 'Rich culture', dirokTitle: 'History', dirokDesc: 'Ancient history', muzikTitle: 'Music', muzikDesc: 'Kurdish music', hunerTitle: 'Art', hunerDesc: 'Kurdish art'
     },
     pages: {
       dirok: {
-        title: "Kurdish History",
-        desc: "From Medes to today, the journey of the ancient people of Mesopotamia.",
+        title: "Kurdish History", desc: "From Medes to today.",
         sections: [
-          { title: "Origins", text: "Kurds are one of the most ancient peoples of Mesopotamia. Known in history as Guti, Hurrian, and Medes." },
-          { title: "Kurdish Principalities", text: "In the middle ages, Kurds established many principalities like Marwanids, Shaddadids, Botan, Soran, and Baban." },
-          { title: "Modern Era", text: "Today Kurds continue their struggle for identity and rights in four parts of Kurdistan and diaspora." }
+          { title: "Origins", text: "Kurds are ancient people of Mesopotamia." },
+          { title: "Principalities", text: "Kurds established many principalities." },
+          { title: "Modern Era", text: "Kurds continue to keep their culture alive." }
         ]
       },
       ziman: {
-        title: "Kurdish Language",
-        desc: "Our language is our identity. Kurdish is an Indo-European language.",
-        alphabetTitle: "Kurdish Alphabet (Kurmanci)",
-        phrasesTitle: "Important Phrases",
+        title: "Kurdish Language", desc: "Language is identity.",
+        alphabetTitle: "Kurdish Alphabet", phrasesTitle: "Phrases",
         topics: [
-          { id: 'reziman', title: 'Grammar', desc: 'Grammar rules', text: 'Kurdish belongs to the Indo-European language family. Written in Latin and Arabic scripts.' },
-          { id: 'axaftin', title: 'Daily Speech', desc: 'Daily phrases', text: 'Hello, How are you, I am fine, Thanks, Welcome...' },
-          { id: 'peyv', title: 'Vocabulary', desc: 'Important words', text: 'Home, Mother, Father, School, Bread, Water, Life...' },
-          { id: 'guhdari', title: 'Listening & Speaking', desc: 'Language practice', text: 'To learn well, you must listen and speak Kurdish every day.' }
+          { id: 'reziman', title: 'Grammar', desc: 'Rules', text: 'Kurdish is Indo-European.' },
+          { id: 'axaftin', title: 'Speaking', desc: 'Daily', text: 'Hello, How are you...' },
+          { id: 'peyv', title: 'Vocabulary', desc: 'Words', text: 'Home, Mother, Father...' },
+          { id: 'guhdari', title: 'Listening', desc: 'Practice', text: 'Listen and speak every day.' }
         ],
-        phrases: [
-          { org: 'Roj baş', mean: 'Good morning' },
-          { org: 'Şev baş', mean: 'Good night' },
-          { org: 'Spas', mean: 'Thanks' },
-          { org: 'Tu çawa yî?', mean: 'How are you?' },
-          { org: 'Ez baş im', mean: 'I am fine' },
-          { org: 'Navê te çi ye?', mean: 'What is your name?' }
-        ]
+        phrases: [{ org: 'Roj baş', mean: 'Good morning' }, { org: 'Spas', mean: 'Thanks' }]
       },
       cand: {
-        title: "Kurdish Culture",
-        desc: "Colors, sounds, and life of the Kurdish people.",
+        title: "Kurdish Culture", desc: "Life and colors.",
         sections: [
-          { title: "Newroz", text: "Newroz (March 21) is the national new year of Kurds. It symbolizes new beginnings and resistance." },
-          { title: "Clothing", text: "Kurdish clothes are known for their vibrant colors. Shal u shapik (men) and kiras u fistan (women) are staples." },
-          { title: "Hospitality", text: "Guests are sacred in Kurdish culture. Doors are always open, and the best food is served to guests." }
+          { title: "Newroz", text: "March 21 is the national day." },
+          { title: "Clothing", text: "Traditional colorful clothes." },
+          { title: "Hospitality", text: "Guests are sacred." }
         ]
       },
       muzik: {
-        title: "Kurdish Music",
-        desc: "Voice of the mountains and love.",
+        title: "Kurdish Music", desc: "Voice of mountains.",
         sections: [
-          { title: "Dengbej", text: "Dengbej is the pillar of Kurdish music. Bards tell history and pain through voice alone. Shakiro is a great example." },
-          { title: "Instruments", text: "Tembur, erbane (def), zurna, and flute are main instruments. Tembur holds a sacred place." },
-          { title: "Modern Music", text: "Artists like Sivan Perwer, Ciwan Haco, and Aynur Dogan bring Kurdish music to the world with modern styles." }
+          { title: "Dengbej", text: "Traditional bards." },
+          { title: "Instruments", text: "Tembur is sacred." },
+          { title: "Modern", text: "Artists bring music to the world." }
         ]
       },
       huner: {
-        title: "Art & Cinema",
-        desc: "Seeing the world through Kurdish eyes.",
+        title: "Art", desc: "Kurdish perspective.",
         sections: [
-          { title: "Kurdish Cinema", text: "Yilmaz Guney is considered the father of Kurdish cinema. Movies like 'Yol' have made a global impact." },
-          { title: "Painting", text: "Kurdish painters reflect their people's pain and hope on canvas." },
-          { title: "Folk Dance (Govend)", text: "Kurdish dances are a vital part of social life. Each region (Serhat, Botan, Amed) has its own style." }
+          { title: "Cinema", text: "Yilmaz Guney is the father of Kurdish cinema." },
+          { title: "Painting", text: "Reflecting hope." },
+          { title: "Dance", text: "Govend is vital part of life." }
         ]
       }
     }
