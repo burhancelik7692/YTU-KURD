@@ -1,12 +1,14 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics"; 
-import { getFirestore } from "firebase/firestore";  // Firestore Veritabanı
-import { getStorage } from "firebase/storage";    // Storage Depolama
-import { getAuth } from "firebase/auth";      // Authentication Servisi
+import { getFirestore } from "firebase/firestore";  // Firestore
+import { getStorage } from "firebase/storage";    // Storage
+import { getAuth } from "firebase/auth";      // Authentication
 
-// --- KRİTİK: BURAYI KENDİ FIREBASE AYARLARINIZLA DOLDURUN ---
+// --- FIREBASE KONFİGÜRASYONU ---
+// Lütfen bu bilgilerin KONSOLDAN DOĞRU kopyalandığından emin olun.
 const firebaseConfig = {
-  apiKey: "SENIN_YENI_VE_DOGRULANMIS_API_KEYIN_BURAYA", // Hatanın kaynağı burasıydı
+  // Sizin güncel anahtarınız buraya gelecek
+  apiKey: "SENIN_YENI_VE_DOGRULANMIS_API_KEYIN_BURAYA", 
   authDomain: "ytu-kurdi.firebaseapp.com",
   projectId: "ytu-kurdi",
   storageBucket: "ytu-kurdi.firebasestorage.app",
@@ -16,14 +18,19 @@ const firebaseConfig = {
 };
 
 
+// 1. Firebase Uygulamasını Başlat
 const app = initializeApp(firebaseConfig);
 
-// Servisleri başlat
+// 2. Kullanılacak Servisleri Başlat
+// NOT: Burada 'export' etmiyoruz, sadece 'const' ile başlatıyoruz.
 const analytics = getAnalytics(app); 
-export const auth = getAuth(app); 
-export const db = getFirestore(app); 
-export const storage = getStorage(app); 
+const auth = getAuth(app); 
+const db = getFirestore(app); 
+const storage = getStorage(app); 
 
+
+// 3. Servisleri Dışarı Aktar (TEK VE KESİN NOKTA)
+// Tüm servisleri burada toplu halde dışa aktarıyoruz.
 export { 
   app, 
   analytics, 
