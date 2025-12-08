@@ -1,13 +1,13 @@
+// src/firebase.js
+
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics"; 
-import { getFirestore } from "firebase/firestore";  // Firestore
-import { getStorage } from "firebase/storage";    // Storage
-import { getAuth } from "firebase/auth";      // Authentication
+import { getAnalytics, isSupported } from "firebase/analytics"; 
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+import { getAuth } from "firebase/auth";
 
 // --- FIREBASE KONFİGÜRASYONU ---
-// Lütfen bu bilgilerin KONSOLDAN DOĞRU kopyalandığından emin olun.
 const firebaseConfig = {
-  // Sizin güncel anahtarınız buraya gelecek
   apiKey: "AIzaSyDadado7dT6SYDywKRCpAc9L7kqkubdadE",
   authDomain: "ytu-kurdi.firebaseapp.com",
   databaseURL: "https://ytu-kurdi-default-rtdb.firebaseio.com",
@@ -18,24 +18,23 @@ const firebaseConfig = {
   measurementId: "G-KNWPL77C9F"
 };
 
-
-// 1. Firebase Uygulamasını Başlat
+// 1. Uygulamayı Başlat
 const app = initializeApp(firebaseConfig);
 
-// 2. Kullanılacak Servisleri Başlat
-// NOT: Burada 'export' etmiyoruz, sadece 'const' ile başlatıyoruz.
-const analytics = getAnalytics(app); 
-const auth = getAuth(app); 
-const db = getFirestore(app); 
-const storage = getStorage(app); 
+// 2. Servisleri Başlat
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
 
+// Analytics için güvenlik kontrolü (Build sırasında patlamaması için)
+let analytics;
+isSupported().then((yes) => {
+  if (yes) {
+    analytics = getAnalytics(app);
+  }
+}).catch((err) => {
+  console.log("Analytics bu ortamda desteklenmiyor:", err);
+});
 
-// 3. Servisleri Dışarı Aktar (TEK VE KESİN NOKTA)
-// Tüm servisleri burada toplu halde dışa aktarıyoruz.
-export { 
-  app, 
-  analytics, 
-  db, 
-  storage,
-  auth
-};
+// 3. Dışa Aktar
+export { app, analytics, db, storage, auth };
