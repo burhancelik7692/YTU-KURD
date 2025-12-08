@@ -1,20 +1,37 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
+import { getAnalytics } from "firebase/analytics"; 
+import { getFirestore } from "firebase/firestore"; // Firestore (Veritabanı)
+import { getStorage } from "firebase/storage";   // Storage (Depolama)
 
-// --- BURAYI FIREBASE KONSOLUNDAN ALDIĞIN KODLARLA DEĞİŞTİR ---
+
+// Web uygulamanızın Firebase yapılandırması
+// DİKKAT: Bu bilgileri .env dosyasına taşımak, genel güvenlik için önerilir.
 const firebaseConfig = {
-  apiKey: "AIzaSyDadado7dT6SYDywKRCpAc9L7kqkubdadE",
+  apiKey: "AIzaSyDadado7dT6SYDywKRCpAcL7kqkubdadE",
   authDomain: "ytu-kurdi.firebaseapp.com",
   projectId: "ytu-kurdi",
   storageBucket: "ytu-kurdi.firebasestorage.app",
   messagingSenderId: "384217788430",
-  appId: "G-GC3SS4X5YB"
+  appId: "1:384217788430:web:ca8903eb0d18f322778c5f",
+  measurementId: "G-KNWPL77C9F"
 };
 
+
+// 1. Firebase Uygulamasını Başlat
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const storage = getStorage(app);
+
+// 2. Kullanılacak Servisleri Başlat
+// Başlatılan 'app' değişkenini her bir servis fonksiyonuna parametre olarak verin.
+const analytics = getAnalytics(app); 
+const db = getFirestore(app);     
+const storage = getStorage(app); 
+
+
+// 3. Servisleri Dışarı Aktar (Export)
+// Böylece projenizin diğer bileşenlerinde bu servisleri kolayca kullanabilirsiniz.
+export { 
+  app, 
+  analytics, 
+  db, 
+  storage 
+};
