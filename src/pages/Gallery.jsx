@@ -2,47 +2,57 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, X, ZoomIn, Loader2, Image as ImageIcon } from 'lucide-react';
+import { ArrowLeft, X, ZoomIn, Loader2, AlertCircle } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { siteContent } from '../data/locales';
 
-// Firebase Bağlantısı
+// Firebase bağlantısı
 import { db } from '../firebase';
-import { collection, getDocs, query, orderBy } from 'firebase/firestore';
-
-// Yedek Statik Veriler (Veritabanı boşsa veya hata verirse bunlar görünür)
-import { GALLERY_IMAGES as STATIC_IMAGES } from '../data/gallery';
+import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
 
 const Gallery = () => {
   const { lang } = useLanguage();
   const t = siteContent[lang]?.gallery || { title: 'Wênegeh', desc: '...', cats: {} };
   
-  const [images, setImages] = useState(STATIC_IMAGES); // Başlangıçta statik veriyi göster
+  const [images, setImages] = useState([]); 
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [filter, setFilter] = useState('all');
   const [selectedImage, setSelectedImage] = useState(null);
 
-  // --- FIREBASE'DEN VERİ ÇEKME ---
+  // Kategorilerin eşleşmesi (Admin panelindeki küçük harf ID'leri ile)
+  const categoryMap = {
+    'newroz': 'newroz', 'calaki': 'calaki', 'taste': 'taste', 'ger': 'ger'
+  };
+
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        // 'gallery' koleksiyonunu oluşturulma tarihine göre tersten (en yeni en üstte) çek
-        const q = query(collection(db, "gallery"), orderBy("createdAt", "desc"));
+        // dynamicContent koleksiyonundan sadece 'gallery' tipindeki verileri çek
+        const contentRef = collection(db, "dynamicContent");
+        const q = query(contentRef, where("type", "==", "gallery"), orderBy("createdAt", "desc"));
         const querySnapshot = await getDocs(q);
         
         const firebaseImages = [];
         querySnapshot.forEach((doc) => {
-          firebaseImages.push({ id: doc.id, ...doc.data() });
+          const data = doc.data();
+          // NOT: URL -> data.url (Harici Link), Title -> data.title
+          firebaseImages.push({ 
+              id: doc.id, 
+              src: data.url, 
+              title: data.title, 
+              category: data.category?.toLowerCase() || 'calaki' 
+          });
         });
 
-        // Eğer veritabanında resim varsa, statik verinin üzerine yaz (veya birleştir)
-        if (firebaseImages.length > 0) {
-          // İstersen hem statik hem dinamik veriyi birleştirebilirsin: [...firebaseImages, ...STATIC_IMAGES]
-          setImages(firebaseImages); 
+        if (firebaseImages.length === 0) {
+            setError("Henüz galeriye bir şey eklenmemiş.");
         }
-      } catch (error) {
-        console.error("Galeri verisi çekilemedi:", error);
-        // Hata olursa zaten statik veriler (STATIC_IMAGES) gösteriliyor, site bozulmaz.
+        setImages(firebaseImages); 
+
+      } catch (err) {
+        console.error("Galeri verisi çekilemedi:", err);
+        setError("Veritabanı bağlantı hatası.");
       } finally {
         setLoading(false);
       }
@@ -66,27 +76,31 @@ const Gallery = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{t.title} - YTU Kurdî</title>
-      </Helmet>
+      <Helmet><title>{t.title} - YTU Kurdî</title></Helmet>
 
       <div className="min-h-screen bg-slate-50 dark:bg-slate-900 pt-24 pb-12 px-4 transition-colors duration-300">
         <div className="max-w-7xl mx-auto">
           
-          {/* Başlık */}
           <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
             <Link to="/" className="inline-flex items-center text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-white transition">
-              <ArrowLeft size={20} className="mr-2" /> {lang === 'KU' ? 'Vegere' : (lang === 'TR' ? 'Geri' : 'Back')}
+              <ArrowLeft size={20} className="mr-2" /> {lang === 'KU' ? 'Vegere' : 'Geri'}
             </Link>
             <div className="text-center">
               <h1 className="text-4xl font-black text-slate-900 dark:text-white mb-2">{t.title}</h1>
               <p className="text-slate-500 dark:text-slate-400">{t.desc}</p>
             </div>
-            {/* Admin Paneline Hızlı Geçiş Butonu (Sadece bilgi amaçlı, herkes görebilir ama giremez) */}
-            <Link to="/admin" className="hidden md:flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-blue-600 transition">
-               Admin <ImageIcon size={14} />
+            {/* Admin linki herkes için görünür, giriş kapısı /admin */}
+            <Link to="/admin" className="flex items-center gap-2 text-xs font-bold text-slate-300 hover:text-blue-600 dark:hover:text-cyan-400 transition">
+               Admin Girişi
             </Link>
           </div>
+
+          {/* Hata Mesajı */}
+          {error && (
+             <div className="text-center bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 p-4 rounded-xl flex items-center justify-center gap-2 my-8">
+               <AlertCircle size={20} /> {error}
+             </div>
+          )}
 
           {/* Filtre Butonları */}
           <div className="flex flex-wrap justify-center gap-2 mb-12">
@@ -113,14 +127,14 @@ const Gallery = () => {
           )}
 
           {/* Fotoğraf Izgarası */}
-          {!loading && (
+          {!loading && !error && (
             <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               <AnimatePresence>
                 {filteredImages.length > 0 ? (
                   filteredImages.map((img) => (
                     <motion.div
                       layout
-                      key={img.id} // Firebase ID'si veya Statik ID
+                      key={img.id}
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.5 }}
@@ -129,7 +143,7 @@ const Gallery = () => {
                       onClick={() => setSelectedImage(img)}
                     >
                       <img 
-                        src={img.src} 
+                        src={img.src} // HARİCİ URL BURADAN GELİYOR
                         alt={img.title} 
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         loading="lazy"
@@ -144,7 +158,7 @@ const Gallery = () => {
                   ))
                 ) : (
                   <div className="col-span-full text-center py-12 text-slate-400">
-                    <p>Di vê kategoriyê de wêne tune.</p>
+                    <p>Bu kategoride henüz fotoğraf yok.</p>
                   </div>
                 )}
               </AnimatePresence>
@@ -188,3 +202,21 @@ const Gallery = () => {
 };
 
 export default Gallery;
+```
+
+### 2. Adım: Firebase Kurallarını Kontrol Et (Çok Önemli)
+
+Eğer Firebase'de veritabanı okuma hatası alırsanız, bu kural yüzündendir.
+
+1.  **[Firebase Konsolu](https://console.firebase.google.com/)** > **Firestore Database**'e gidin.
+2.  **Rules (Kurallar)** sekmesinde şu kuralın yazdığından emin olun (bu, herkese okuma ve yazma izni verir):
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}
