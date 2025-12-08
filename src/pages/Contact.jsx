@@ -9,7 +9,6 @@ import { siteContent } from '../data/locales';
 const Contact = () => {
   const { lang } = useLanguage();
   
-  // Veritabanından veriyi çek (Hata korumalı)
   const content = siteContent[lang]?.pages?.tekili || { 
     title: "Têkilî", 
     desc: "Loading...", 
@@ -17,19 +16,16 @@ const Contact = () => {
     info: {} 
   };
 
-  // Form State'leri
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('idle'); // idle, sending, success
+  const [status, setStatus] = useState('idle');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setStatus('sending');
     
-    // Gerçek bir backend olmadığı için simülasyon yapıyoruz
     setTimeout(() => {
       setStatus('success');
       setFormData({ name: '', email: '', message: '' });
-      // 3 saniye sonra mesajı sıfırla
       setTimeout(() => setStatus('idle'), 3000);
     }, 1500);
   };
@@ -48,13 +44,11 @@ const Contact = () => {
       <div className="min-h-screen bg-slate-50 pt-24 pb-12 px-4">
         <div className="max-w-6xl mx-auto">
           
-          {/* Geri Dön Butonu */}
           <Link to="/" className="inline-flex items-center text-slate-500 hover:text-blue-900 mb-6 transition group">
             <ArrowLeft size={20} className="mr-1 group-hover:-translate-x-1 transition-transform" /> 
             {lang === 'KU' ? 'Vegere' : (lang === 'TR' ? 'Geri' : 'Back')}
           </Link>
 
-          {/* Başlık Alanı */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }} 
@@ -69,14 +63,12 @@ const Contact = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
-            {/* SOL TARAF: İletişim Bilgileri ve Harita */}
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
               className="space-y-6"
             >
-              {/* Bilgi Kartı */}
               <div className="bg-white rounded-3xl shadow-xl p-8 border border-slate-100">
                 <h3 className="text-2xl font-bold text-slate-800 mb-6">{content.info.addressTitle}</h3>
                 
@@ -101,7 +93,6 @@ const Contact = () => {
                   </div>
                 </div>
 
-                {/* Sosyal Medya */}
                 <div>
                   <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4">{content.info.follow}</p>
                   <div className="flex gap-4">
@@ -118,7 +109,6 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Google Maps (YTÜ Davutpaşa) */}
               <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 h-64 lg:h-80">
                 <iframe 
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.650490016626!2d28.88724831540456!3d41.02237897929944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cabb7e23b9f9c7%3A0x6c63a56247c16c5b!2zWcSxbZLFsXogVGVrbmlrIMOcbml2ZXJzaXRlc2kgRGF2dXRwYcWfYSBLYW1ww7xzw7w!5e0!3m2!1str!2str!4v1646754023451!5m2!1str!2str" 
@@ -132,7 +122,6 @@ const Contact = () => {
               </div>
             </motion.div>
 
-            {/* SAĞ TARAF: İletişim Formu */}
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -216,19 +205,3 @@ const Contact = () => {
 };
 
 export default Contact;
-```
-
----
-
-### 3. Adım: Menüye Linki Ekle (`src/data/locales.js` ve `Navigation.jsx`)
-
-1.  **`src/data/locales.js`**: `nav` bölümüne `tekili: 'Têkilî'` (TR: İletişim, EN: Contact) ekle.
-2.  **`src/components/Navigation.jsx`**: Linkler listesine şunu ekle:
-    ```javascript
-    { path: '/tekili', label: t.tekili || 'Têkilî' },
-    ```
-3.  **`src/App.jsx`**: Rotayı ekle:
-    ```javascript
-    import Contact from "./pages/Contact";
-    // ...
-    <Route path="/tekili" element={<Contact />} />
