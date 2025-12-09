@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "r
 import { Helmet } from "react-helmet";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
+// Sayfalar
 import Home from "./pages/Home";
 import Culture from "./pages/Culture"; 
 import Music from "./pages/Music";
@@ -14,7 +15,7 @@ import Dictionary from "./pages/Dictionary";
 import NotFound from "./pages/NotFound"; 
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
-import Blog from "./pages/Blog"; 
+import Blog from "./pages/Blog";
 
 // Admin Sayfaları
 import Login from "./pages/admin/Login";
@@ -24,9 +25,11 @@ import ScrollToTop from "./components/ScrollToTop";
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext'; 
 import { AuthProvider, useAuth } from './context/AuthContext';
-import { UserProvider } from './context/UserContext';
+import { UserProvider } from './context/UserContext'; 
 import "./index.css";
+import { Loader2 } from 'lucide-react'; // Loader eklendi
 
+// Korumalı Rota Bileşeni (Admin Girişi)
 const PrivateRoute = ({ children }) => {
   const { currentUser } = useAuth();
   return currentUser ? children : <Navigate to="/admin" />;
@@ -52,7 +55,19 @@ const Layout = ({ children }) => {
 };
 
 function App() {
+  const { loading } = useAuth(); // AuthContext'ten yükleme durumunu çekiyoruz
+
+  // Eğer Firebase yükleniyorsa, bekleme ekranı göster
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-slate-900">
+        <Loader2 className="animate-spin text-yellow-500" size={50} />
+      </div>
+    );
+  }
+  
   return (
+    // Tüm Context'ler uygulamayı sarmalar
     <AuthProvider>
       <UserProvider>
         <LanguageProvider>

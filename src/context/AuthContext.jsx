@@ -11,6 +11,7 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true); // Yükleme durumu
 
   useEffect(() => {
+    // onAuthStateChanged dinleyicisi, kullanıcının oturum durumunu belirler
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);
       setLoading(false); // Kullanıcı durumu belirlendiğinde yükleme biter
@@ -26,11 +27,10 @@ export const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
-  const value = { currentUser, login, logout, loading }; // Loading'i de dışa aktardık
+  const value = { currentUser, login, logout, loading };
 
   return (
     <AuthContext.Provider value={value}>
-      {/* Loading true ise, beklemeye devam et */}
       {children}
     </AuthContext.Provider>
   );

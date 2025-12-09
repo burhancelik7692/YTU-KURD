@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../../firebase';
-import { addDynamicContent } from '../../services/adminService';
+import { db } from '../../../firebase';
+import { addDynamicContent } from '../../../services/adminService';
 import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, MessageSquare, Book, Trash2, Link as LinkIcon, Edit, AlertCircle, Music, Film, Settings } from 'lucide-react';
-import { useLanguage } from '../../context/LanguageContext';
-import { siteContent } from '../../data/locales';
+import { useLanguage } from '../../../context/LanguageContext';
+import { siteContent } from '../../../data/locales';
 import { collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc } from 'firebase/firestore'; 
 
 const Dashboard = () => {
@@ -25,7 +25,7 @@ const Dashboard = () => {
     title: '', url: '', category: '', desc: '', type: 'gallery', text: '', ku: '', tr: ''
   });
 
-  // --- İÇERİK LİSTESİNİ ÇEKME ---
+  // --- 1. İÇERİK LİSTESİNİ ÇEKME ---
   useEffect(() => {
     fetchContentList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -39,6 +39,7 @@ const Dashboard = () => {
         const list = snapshot.docs.map(doc => ({ 
             id: doc.id, 
             ...doc.data(),
+            // Firestore zaman damgasını okunabilir tarihe çeviriyoruz.
             createdAt: doc.data().createdAt?.toDate ? doc.data().createdAt.toDate().toLocaleDateString(lang) : 'Bilinmiyor'
         }));
         setContentList(list);
@@ -50,7 +51,7 @@ const Dashboard = () => {
     }
   };
 
-  // --- SİLME İŞLEVİ ---
+  // --- 2. SİLME İŞLEVİ ---
   const handleDelete = async (id, title) => {
     if (!window.confirm(`'${title}' başlıklı içeriği silmek istediğinizden emin misiniz?`)) {
         return;
@@ -65,9 +66,10 @@ const Dashboard = () => {
     }
   };
   
-  // --- DÜZENLEME BAŞLATMA İŞLEVİ ---
+  // --- 3. DÜZENLEME BAŞLATMA İŞLEVİ ---
   const handleEdit = (item) => {
       setEditingId(item.id);
+      // Formu doğru sekmeye çek
       setActiveTab(item.type === 'dictionary' ? 'dictionary' : item.type === 'gallery' ? 'gallery' : 'content');
       setFormData({ 
           title: item.title || '', 
@@ -81,7 +83,7 @@ const Dashboard = () => {
       });
   };
 
-  // --- GÜNCELLEME VEYA EKLEME İŞLEVİ ---
+  // --- 4. GÜNCELLEME VEYA EKLEME İŞLEVİ ---
   const handleContentUpload = async (e) => {
       e.preventDefault();
       setError(null);
@@ -135,6 +137,7 @@ const Dashboard = () => {
       setFormData(prev => ({ ...prev, type: type, category: '', title: '', url: '', desc: '', text: '', ku: '', tr: '' }));
   };
   
+  // Dilden bağımsız sabitler
   const T = siteContent[lang]?.nav || {};
   const contentHeader = {
     gallery: { icon: Image, label: editingId ? 'Galeri Öğesini Güncelle' : 'Resim Ekle (Galeri)', color: 'blue' },
