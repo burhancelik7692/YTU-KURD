@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../../../firebase';
-import { addDynamicContent } from '../../../services/adminService';
+import { db } from '../../firebase'; // YOL DÜZELTİLDİ (src/firebase)
+import { addDynamicContent } from '../../services/adminService'; // YOL DÜZELTİLDİ
 import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, MessageSquare, Book, Trash2, Link as LinkIcon, Edit, AlertCircle, Music, Film, Settings } from 'lucide-react';
-import { useLanguage } from '../../../context/LanguageContext';
-import { siteContent } from '../../../data/locales';
+import { useLanguage } from '../../context/LanguageContext'; 
+import { siteContent } from '../../data/locales'; // YOL DÜZELTİLDİ
 import { collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc } from 'firebase/firestore'; 
 
+// --- SABİT KATEGORİLER (Sadece Galeri için kullanılıyor) ---
+const GALLERY_CATEGORIES = [
+  { value: "newroz", label: "Newroz" },
+  { value: "calaki", label: "Çalakî (Etkinlik)" },
+  { value: "taste", label: "Taştê (Kahvaltı)" },
+  { value: "ger", label: "Ger (Gezi)" },
+];
+
+// Admin Dashboard Bileşeni
 const Dashboard = () => {
   const { logout, currentUser } = useAuth();
   const navigate = useNavigate();
@@ -39,7 +48,6 @@ const Dashboard = () => {
         const list = snapshot.docs.map(doc => ({ 
             id: doc.id, 
             ...doc.data(),
-            // Firestore zaman damgasını okunabilir tarihe çeviriyoruz.
             createdAt: doc.data().createdAt?.toDate ? doc.data().createdAt.toDate().toLocaleDateString(lang) : 'Bilinmiyor'
         }));
         setContentList(list);
@@ -69,7 +77,6 @@ const Dashboard = () => {
   // --- 3. DÜZENLEME BAŞLATMA İŞLEVİ ---
   const handleEdit = (item) => {
       setEditingId(item.id);
-      // Formu doğru sekmeye çek
       setActiveTab(item.type === 'dictionary' ? 'dictionary' : item.type === 'gallery' ? 'gallery' : 'content');
       setFormData({ 
           title: item.title || '', 
@@ -83,7 +90,7 @@ const Dashboard = () => {
       });
   };
 
-  // --- 4. GÜNCELLEME VEYA EKLEME İŞLEVİ ---
+  // --- 4. GÜNCELLEME VEYRA EKLEME İŞLEVİ ---
   const handleContentUpload = async (e) => {
       e.preventDefault();
       setError(null);
@@ -101,12 +108,10 @@ const Dashboard = () => {
       setLoading(true);
       try {
           if (editingId) {
-              // GÜNCELLEME İŞLEMİ
               const docRef = doc(db, "dynamicContent", editingId);
               await updateDoc(docRef, dataToSave);
               setEditingId(null);
           } else {
-              // EKLEME İŞLEMİ
               await addDynamicContent(dataToSave);
           }
           
@@ -175,7 +180,7 @@ const Dashboard = () => {
           <button onClick={() => setContentTab('content')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${activeTab === 'content' ? 'bg-blue-600' : 'hover:bg-slate-800 text-slate-400'}`}><MessageSquare size={18} /> {T.admin_content || 'İçerik/Blog'}</button>
           <button onClick={() => setContentTab('dictionary')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${activeTab === 'dictionary' ? 'bg-blue-600' : 'hover:bg-slate-800 text-slate-400'}`}><Book size={18} /> {T.admin_dict || 'Sözlük'}</button>
           <div className="border-t border-slate-700 my-4"></div>
-          <button onClick={() => setActiveTab('settings')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${activeTab === 'settings' ? 'bg-yellow-600' : 'hover:bg-slate-800 text-slate-400'}`}><Settings size={18} /> Site Ayarları</button>
+          <button onClick={() => setContentTab('settings')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${activeTab === 'settings' ? 'bg-yellow-600' : 'hover:bg-slate-800 text-slate-400'}`}><Settings size={18} /> Site Ayarları</button>
         </nav>
         <button onClick={handleLogout} className="mt-12 flex items-center gap-2 text-red-400 hover:text-red-300 font-bold text-sm"><LogOut size={18} /> Çıkış Yap</button>
       </aside>
