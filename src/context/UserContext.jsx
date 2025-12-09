@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-
-// Firestore/Firebase bağlantılarını kontrol edin
-import { db } from '../firebase';
+// Firebase bağlantılarını kontrol edin
+import { db } from '../firebase'; 
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 const UserContext = createContext();
@@ -18,7 +17,7 @@ export const UserProvider = ({ children }) => {
     let id = localStorage.getItem('ytu_user_id');
 
     if (!id) {
-      // 2. ID yoksa, yeni benzersiz ID oluştur (Basit bir zaman damgası)
+      // 2. ID yoksa, yeni benzersiz ID oluştur
       id = `guest_${Date.now()}_${Math.floor(Math.random() * 9999)}`;
       localStorage.setItem('ytu_user_id', id);
     }
@@ -29,37 +28,50 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   const fetchUserData = async (id) => {
-    if (!id) return;
+    if (!id) {
+        setLoading(false);
+        return;
+    }
     try {
+      // KRİTİK KONTROL: db bağlantısı var mı? (GCP hatası olursa bu korur)
+      if (!db) {
+          console.error("Firestore bağlantısı henüz hazır değil veya API anahtarı geçersiz.");
+          setLoading(false);
+          return;
+      }
+      
       const userRef = doc(db, "users", id);
       const docSnap = await getDoc(userRef);
 
       if (docSnap.exists()) {
-        // Veri varsa yükle
         setUserData(docSnap.data());
       } else {
-        // Yeni kullanıcıysa, başlangıç verilerini kaydet
         const initialData = { 
           favoriteWords: [],
           lastLogin: new Date().toISOString()
         };
-        await setDoc(userRef, initialData);
+        // Yeni kullanıcıysa, başlangıç verilerini kaydet
+        await setDoc(userRef, initialData); 
         setUserData(initialData);
       }
     } catch (err) {
-      console.error("Kullanıcı verisi çekilemedi:", err);
+      // Hata olsa bile uygulamayı kitleme, sadece logla ve yüklemeyi tamamla
+      console.error("Kullanıcı verisi çekilemedi/kaydedilemedi, misafir modu aktif:", err);
+      setUserData({ favoriteWords: [], lastLogin: new Date().toISOString() }); // Varsayılan boş veri yükle
     } finally {
       setLoading(false);
     }
   };
   
-  // Veri Güncelleme Fonksiyonu
   const updateUserData = async (data) => {
-    if (!userId) return;
+    if (!userId || !db) {
+        console.error("Kullanıcı ID'si veya Firestore bağlantısı yok. Güncelleme yapılamadı.");
+        return;
+    }
     try {
       const userRef = doc(db, "users", userId);
       await setDoc(userRef, { ...userData, ...data }, { merge: true });
-      setUserData(prev => ({ ...prev, ...data })); // Yerel state'i güncelle
+      setUserData(prev => ({ ...prev, ...data }));
     } catch (err) {
       console.error("Veri güncelleme hatası:", err);
     }
@@ -69,7 +81,7 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </UserContext.Provider>
   );
 };
