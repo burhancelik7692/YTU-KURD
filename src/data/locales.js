@@ -4,7 +4,7 @@ export const siteContent = {
   // =================================================================
   KU: {
     nav: {
-      sereke: 'Sereke', ziman: 'Ziman', cand: 'Çand', dirok: 'Dîrok', muzik: 'Muzîk', huner: 'Huner', ferheng: 'Ferheng', gallery: 'Wênegeh', tekili: 'Têkilî', listik: 'Lîstik', follow: 'Me Bişopînin', join: 'Tevlî Me Bibe', admin_content: 'Naverok (Blog/Duyuru)', admin_dict: 'Ferheng'
+      sereke: 'Sereke', ziman: 'Ziman', cand: 'Çand', dirok: 'Dîrok', muzik: 'Muzîk', huner: 'Huner', ferheng: 'Ferheng', gallery: 'Wênegeh', tekili: 'Têkilî', listik: 'Lîstik', follow: 'Me Bişopînin', join: 'Tevlî Me Bibe', admin_content: 'Naverok (Blog/Duyuru)', admin_dict: 'Ferheng', blog: 'Duyurular'
     },
     notFound: {
       title: "Rêya Xwe Winda Kir?", desc: "Bibore, rûpela ku tu lê digerî me nedît.", backButton: "Vegere Sereke"
@@ -43,7 +43,7 @@ export const siteContent = {
         title: "Zimanê Kurdî", desc: "Zimanê me nasnameya me ye. Kurdî zimanekî Hînd-Ewropî ye.",
         alphabetTitle: "Alfabeya Kurdî (Kurmancî)", phrasesTitle: "Hevokên Girîng",
         topics: [
-          { id: 'reziman', title: 'Rêzimana Kurdî', desc: 'Rêziman û qawaidên ziman', text: 'Zimanê kurdî zimanek Hind-Ewropî ye. Alfabeya latînî (Kurmancî) û erebî (Soranî) heye.' },
+          { id: 'reziman', title: 'Rêzimana Kurdî', desc: 'Rêziman û qawaidên ziman', text: 'Kurdî zimanekî Hînd-Ewropî ye. Alfabeya latînî (Kurmancî) û erebî (Soranî) heye.' },
           { id: 'axaftin', title: 'Axaftina Rojane', desc: 'Hevokên rojane', text: 'Silav, Çawa yî, Baş im, Spas, Bi xêr hatî...' }
         ],
         phrases: [{ org: 'Roj baş', mean: 'Günaydın' }, { org: 'Spas', mean: 'Teşekkürler' }]
@@ -77,7 +77,7 @@ export const siteContent = {
   // =================================================================
   TR: {
     nav: {
-      sereke: 'Anasayfa', ziman: 'Dil', cand: 'Kültür', dirok: 'Tarih', muzik: 'Müzik', huner: 'Sanat', ferheng: 'Sözlük', gallery: 'Galeri', tekili: 'İletişim', listik: 'Oyun', follow: 'Bizi Takip Edin', join: 'Bize Katılın', admin_content: 'İçerik (Blog/Duyuru)', admin_dict: 'Sözlük'
+      sereke: 'Anasayfa', ziman: 'Dil', cand: 'Kültür', dirok: 'Tarih', muzik: 'Müzik', huner: 'Sanat', ferheng: 'Sözlük', gallery: 'Galeri', tekili: 'İletişim', listik: 'Oyun', follow: 'Bizi Takip Edin', join: 'Bize Katılın', admin_content: 'İçerik (Blog/Duyuru)', admin_dict: 'Sözlük', blog: 'Duyurular'
     },
     notFound: {
       title: "Yolunu Mu Kaybettin?", desc: "Üzgünüz, aradığınız sayfayı bulamadık.", backButton: "Ana Sayfaya Dön"

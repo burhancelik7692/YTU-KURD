@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "r
 import { Helmet } from "react-helmet";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
-// Sayfalar
 import Home from "./pages/Home";
 import Culture from "./pages/Culture"; 
 import Music from "./pages/Music";
@@ -15,7 +14,7 @@ import Dictionary from "./pages/Dictionary";
 import NotFound from "./pages/NotFound"; 
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
-import Blog from "./pages/Blog";
+import Blog from "./pages/Blog"; 
 
 // Admin Sayfaları
 import Login from "./pages/admin/Login";
@@ -25,49 +24,12 @@ import ScrollToTop from "./components/ScrollToTop";
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext'; 
 import { AuthProvider, useAuth } from './context/AuthContext';
-import { UserProvider } from './context/UserContext'; 
+import { UserProvider } from './context/UserContext';
 import "./index.css";
 
-// Korumalı Rota Bileşeni (Admin Girişi)
 const PrivateRoute = ({ children }) => {
   const { currentUser } = useAuth();
-  // Yükleme anında ekranda kalmayı veya Navigate'in çalışmasını bekler
   return currentUser ? children : <Navigate to="/admin" />;
-};
-
-// Uygulama yapısını tanımlayan bileşen
-const AppContent = () => {
-    const location = useLocation();
-    const isFullScreen = location.pathname === '/listik' || location.pathname.startsWith('/admin');
-
-    return (
-        <Layout>
-            <Routes>
-                {/* Normal Sayfalar */}
-                <Route path="/" element={<Home />} />
-                <Route path="/cand" element={<Culture />} />
-                <Route path="/muzik" element={<Music />} />
-                <Route path="/huner" element={<Art />} />
-                <Route path="/dirok" element={<History />} />
-                <Route path="/ziman" element={<Language />} />
-                <Route path="/ferheng" element={<Dictionary />} />
-                <Route path="/galeri" element={<Gallery />} />
-                <Route path="/tekili" element={<Contact />} />
-                <Route path="/listik" element={<Listik />} />
-                <Route path="/haberler" element={<Blog />} />
-                
-                {/* Admin Sayfaları */}
-                <Route path="/admin" element={<Login />} />
-                <Route path="/admin/dashboard" element={
-                    <PrivateRoute>
-                        <Dashboard />
-                    </PrivateRoute>
-                } />
-
-                <Route path="*" element={<NotFound />} />
-            </Routes>
-        </Layout>
-    );
 };
 
 const Layout = ({ children }) => {
@@ -89,17 +51,40 @@ const Layout = ({ children }) => {
   );
 };
 
-
 function App() {
   return (
-    // Context'ler dışarıda, bileşenler içeride tanımlanıyor
     <AuthProvider>
       <UserProvider>
         <LanguageProvider>
           <ThemeProvider>
             <Router>
               <ScrollToTop />
-              <AppContent /> {/* Yönlendirme ve içeriği buraya aldık */}
+              <Layout>
+                <Routes>
+                  {/* Normal Sayfalar */}
+                  <Route path="/" element={<Home />} />
+                  <Route path="/cand" element={<Culture />} />
+                  <Route path="/muzik" element={<Music />} />
+                  <Route path="/huner" element={<Art />} />
+                  <Route path="/dirok" element={<History />} />
+                  <Route path="/ziman" element={<Language />} />
+                  <Route path="/ferheng" element={<Dictionary />} />
+                  <Route path="/galeri" element={<Gallery />} />
+                  <Route path="/tekili" element={<Contact />} />
+                  <Route path="/listik" element={<Listik />} />
+                  <Route path="/haberler" element={<Blog />} />
+                  
+                  {/* Admin Sayfaları */}
+                  <Route path="/admin" element={<Login />} />
+                  <Route path="/admin/dashboard" element={
+                    <PrivateRoute>
+                      <Dashboard />
+                    </PrivateRoute>
+                  } />
+
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Layout>
             </Router>
           </ThemeProvider>
         </LanguageProvider>
