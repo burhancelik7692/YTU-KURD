@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../../firebase'; // YOL DÜZELTİLDİ (src/firebase)
-import { addDynamicContent } from '../../services/adminService'; // YOL DÜZELTİLDİ
+import { db } from '../../firebase';
+import { addDynamicContent } from '../../services/adminService';
 import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, MessageSquare, Book, Trash2, Link as LinkIcon, Edit, AlertCircle, Music, Film, Settings } from 'lucide-react';
-import { useLanguage } from '../../context/LanguageContext'; 
-import { siteContent } from '../../data/locales'; // YOL DÜZELTİLDİ
-import { collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc } from 'firebase/firestore'; 
+import { useLanguage } from '../../context/LanguageContext';
+import { siteContent } from '../../data/locales'; // YOL DÜZELTİLDİ: Artık sadece '../../data/locales' olmalı
+import { collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc, getDoc, setDoc } from 'firebase/firestore'; 
 
-// --- SABİT KATEGORİLER (Sadece Galeri için kullanılıyor) ---
+// --- SABİT KATEGORİLER ---
 const GALLERY_CATEGORIES = [
   { value: "newroz", label: "Newroz" },
   { value: "calaki", label: "Çalakî (Etkinlik)" },
@@ -16,7 +16,6 @@ const GALLERY_CATEGORIES = [
   { value: "ger", label: "Ger (Gezi)" },
 ];
 
-// Admin Dashboard Bileşeni
 const Dashboard = () => {
   const { logout, currentUser } = useAuth();
   const navigate = useNavigate();
@@ -29,12 +28,48 @@ const Dashboard = () => {
   const [contentList, setContentList] = useState([]);
   const [editingId, setEditingId] = useState(null); 
   
+  // Ayarlar State'i (Hakkımızda Metinleri için)
+  const [settings, setSettings] = useState({ aboutText1: '', aboutText2: '' });
+  
   // Form State'leri
   const [formData, setFormData] = useState({ 
     title: '', url: '', category: '', desc: '', type: 'gallery', text: '', ku: '', tr: ''
   });
 
-  // --- 1. İÇERİK LİSTESİNİ ÇEKME ---
+  // --- HAKKIMIZDA METİNLERİNİ ÇEKME ---
+  useEffect(() => {
+      fetchSettings();
+  }, [success]); // Başarılı bir işlem sonrası ayarları yenile
+
+  const fetchSettings = async () => {
+      try {
+          const settingsRef = doc(db, "settings", "home");
+          const docSnap = await getDoc(settingsRef);
+          if (docSnap.exists()) {
+              setSettings(docSnap.data());
+          }
+      } catch (err) {
+          console.error("Ayarlar çekilemedi:", err);
+      }
+  };
+
+  // --- HAKKIMIZDA METİNLERİNİ GÜNCELLEME ---
+  const handleSettingsUpdate = async (e) => {
+      e.preventDefault();
+      setLoading(true);
+      try {
+          const settingsRef = doc(db, "settings", "home");
+          // Sadece değişen alanları güncelliyoruz
+          await setDoc(settingsRef, settings, { merge: true }); 
+          setSuccess(true);
+          setTimeout(() => setSuccess(false), 3000);
+      } catch (err) {
+          setError("Ayarlar güncellenirken hata oluştu: " + err.message);
+      }
+      setLoading(false);
+  };
+
+  // --- İÇERİK LİSTESİNİ ÇEKME ---
   useEffect(() => {
     fetchContentList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -59,7 +94,7 @@ const Dashboard = () => {
     }
   };
 
-  // --- 2. SİLME İŞLEVİ ---
+  // --- SİLME İŞLEVİ ---
   const handleDelete = async (id, title) => {
     if (!window.confirm(`'${title}' başlıklı içeriği silmek istediğinizden emin misiniz?`)) {
         return;
@@ -74,7 +109,7 @@ const Dashboard = () => {
     }
   };
   
-  // --- 3. DÜZENLEME BAŞLATMA İŞLEVİ ---
+  // --- DÜZENLEME BAŞLATMA İŞLEVİ ---
   const handleEdit = (item) => {
       setEditingId(item.id);
       setActiveTab(item.type === 'dictionary' ? 'dictionary' : item.type === 'gallery' ? 'gallery' : 'content');
@@ -90,7 +125,7 @@ const Dashboard = () => {
       });
   };
 
-  // --- 4. GÜNCELLEME VEYRA EKLEME İŞLEVİ ---
+  // --- GÜNCELLEME VEYRA EKLEME İŞLEVİ ---
   const handleContentUpload = async (e) => {
       e.preventDefault();
       setError(null);
@@ -142,7 +177,6 @@ const Dashboard = () => {
       setFormData(prev => ({ ...prev, type: type, category: '', title: '', url: '', desc: '', text: '', ku: '', tr: '' }));
   };
   
-  // Dilden bağımsız sabitler
   const T = siteContent[lang]?.nav || {};
   const contentHeader = {
     gallery: { icon: Image, label: editingId ? 'Galeri Öğesini Güncelle' : 'Resim Ekle (Galeri)', color: 'blue' },
