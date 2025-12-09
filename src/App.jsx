@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "r
 import { Helmet } from "react-helmet";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
+
 // Sayfalar
 import Home from "./pages/Home";
 import Culture from "./pages/Culture"; 
@@ -25,7 +26,9 @@ import ScrollToTop from "./components/ScrollToTop";
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext'; 
 import { AuthProvider, useAuth } from './context/AuthContext';
-import { UserProvider } from './context/UserContext'; 
+// useUser'ı da import ediyoruz
+import { UserProvider, useUser } from './context/UserContext'; 
+
 import "./index.css";
 import { Loader2 } from 'lucide-react';
 
@@ -37,6 +40,7 @@ const PrivateRoute = ({ children }) => {
 
 const Layout = ({ children }) => {
   const location = useLocation();
+  // Admin ve Listik sayfalarında Header/Footer gizlensin
   const isFullScreen = location.pathname === '/listik' || location.pathname.startsWith('/admin');
 
   return (
@@ -49,25 +53,43 @@ const Layout = ({ children }) => {
         {children}
       </main>
 
-      {!(isFullScreen || location.pathname.startsWith('/admin')) && <Footer />}
+      {!isFullScreen && <Footer />}
     </div>
   );
 };
 
-// Uygulamanın İçeriklerini ve Rotasını Tutacak Bileşen
-const AppContent = () => {
+// --- DÜZELTME: Yüklenme Mantığı ve Rotalar ---
+// Bu bileşen artık Provider'ların İÇİNDE çağrıldığı için useAuth ve useUser'ı güvenle kullanabilir.
+const AppRoutes = () => {
+    // Auth ve User durumlarını çekiyoruz
+    const { loading: authLoading } = useAuth();
+    
+    // UserContext'ten loading durumunu alıyoruz (eğer varsa)
+    // Hata almamak için opsiyonel zincirleme (?.) ve varsayılan değer kullanıyoruz
+    const userContext = useUser(); 
+    const userLoading = userContext?.loading || false; 
+
+    // Yükleniyor Ekranı
+    if (authLoading || userLoading) {
+        return (
+          <div className="flex items-center justify-center min-h-screen bg-slate-900">
+            <Loader2 className="animate-spin text-yellow-500" size={50} />
+          </div>
+        );
+    }
+
     return (
         <Router>
             <ScrollToTop />
             <Layout>
                 <Routes>
-                    {/* KRİTİK DÜZELTME: Tüm URL'ler Kürtçe isimlerine göre ayarlandı */}
+                    {/* Anasayfa ve Diğer Sayfalar */}
                     <Route path="/" element={<Home />} />
-                    <Route path="/cand" element={<Culture />} />      {/* Kültür */}
-                    <Route path="/muzik" element={<Music />} />      {/* Müzik */}
-                    <Route path="/huner" element={<Art />} />        {/* Sanat */}
-                    <Route path="/dirok" element={<History />} />    {/* Tarih */}
-                    <Route path="/ziman" element={<Language />} />   {/* Dil */}
+                    <Route path="/cand" element={<Culture />} />
+                    <Route path="/muzik" element={<Music />} />
+                    <Route path="/huner" element={<Art />} />
+                    <Route path="/dirok" element={<History />} />
+                    <Route path="/ziman" element={<Language />} />
                     
                     <Route path="/ferheng" element={<Dictionary />} /> 
                     <Route path="/galeri" element={<Gallery />} />
@@ -90,25 +112,17 @@ const AppContent = () => {
     );
 };
 
-
+// --- DÜZELTME: Ana App Bileşeni ---
+// Burası sadece Context Provider'ları (Sarmalayıcıları) sağlar.
+// Hiçbir mantık (hook kullanımı) içermez, bu sayede hata vermez.
 function App() {
-  const { loading: authLoading } = useAuth();
-  const { loading: userLoading } = useUser();
-
-  if (authLoading || userLoading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen bg-slate-900">
-        <Loader2 className="animate-spin text-yellow-500" size={50} />
-      </div>
-    );
-  }
-  
   return (
     <AuthProvider>
       <UserProvider>
         <LanguageProvider>
           <ThemeProvider>
-            <AppContent />
+            {/* Asıl uygulama içeriği buradadır */}
+            <AppRoutes />
           </ThemeProvider>
         </LanguageProvider>
       </UserProvider>
