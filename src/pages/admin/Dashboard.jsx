@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../context/AuthContext';
+// YOL DÜZELTİLDİ: Tüm yollar ../../ ile src'den başlatılıyor
+import { useAuth } from '../../context/AuthContext'; 
 import { useNavigate } from 'react-router-dom';
-import { db } from '../../firebase';
-import { addDynamicContent } from '../../services/adminService';
+import { db } from '../../firebase'; 
+import { addDynamicContent } from '../../services/adminService'; 
 import { LogOut, Image, Plus, CheckCircle, Loader2, BookOpen, MessageSquare, Book, Trash2, Link as LinkIcon, Edit, AlertCircle, Music, Film, Settings } from 'lucide-react';
 import { useLanguage } from '../../context/LanguageContext';
-import { siteContent } from '../../data/locales'; // YOL DÜZELTİLDİ: Artık sadece '../../data/locales' olmalı
+import { siteContent } from '../../data/locales';
 import { collection, getDocs, deleteDoc, doc, query, orderBy, updateDoc, getDoc, setDoc } from 'firebase/firestore'; 
-
-// --- SABİT KATEGORİLER ---
-const GALLERY_CATEGORIES = [
-  { value: "newroz", label: "Newroz" },
-  { value: "calaki", label: "Çalakî (Etkinlik)" },
-  { value: "taste", label: "Taştê (Kahvaltı)" },
-  { value: "ger", label: "Ger (Gezi)" },
-];
 
 const Dashboard = () => {
   const { logout, currentUser } = useAuth();
@@ -37,10 +30,6 @@ const Dashboard = () => {
   });
 
   // --- HAKKIMIZDA METİNLERİNİ ÇEKME ---
-  useEffect(() => {
-      fetchSettings();
-  }, [success]); // Başarılı bir işlem sonrası ayarları yenile
-
   const fetchSettings = async () => {
       try {
           const settingsRef = doc(db, "settings", "home");
@@ -53,25 +42,24 @@ const Dashboard = () => {
       }
   };
 
-  // --- HAKKIMIZDA METİNLERİNİ GÜNCELLEME ---
   const handleSettingsUpdate = async (e) => {
       e.preventDefault();
       setLoading(true);
       try {
           const settingsRef = doc(db, "settings", "home");
-          // Sadece değişen alanları güncelliyoruz
           await setDoc(settingsRef, settings, { merge: true }); 
           setSuccess(true);
           setTimeout(() => setSuccess(false), 3000);
       } catch (err) {
-          setError("Ayarlar güncellenirken hata oluştu: " + err.message);
+          setError("Ayarlar güncellenirken hata oluştu.");
       }
       setLoading(false);
   };
-
+  
   // --- İÇERİK LİSTESİNİ ÇEKME ---
   useEffect(() => {
     fetchContentList();
+    fetchSettings();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [success]); 
 
@@ -87,49 +75,35 @@ const Dashboard = () => {
         }));
         setContentList(list);
     } catch (err) {
-        console.error("İçerik listesi çekilemedi:", err);
         setError("İçerik listesi yüklenirken bir hata oluştu.");
     } finally {
         setLoading(false);
     }
   };
 
-  // --- SİLME İŞLEVİ ---
+  // --- SİLME, DÜZENLEME, EKLEME/GÜNCELLEME İŞLEVLERİ ---
   const handleDelete = async (id, title) => {
-    if (!window.confirm(`'${title}' başlıklı içeriği silmek istediğinizden emin misiniz?`)) {
-        return;
-    }
+    if (!window.confirm(`'${title}' başlıklı içeriği silmek istediğinizden emin misiniz?`)) { return; }
     setEditingId(null);
     try {
         await deleteDoc(doc(db, "dynamicContent", id));
         setSuccess(true);
         fetchContentList();
-    } catch (err) {
-        setError("Silme işlemi başarısız oldu.");
-    }
+    } catch (err) { setError("Silme işlemi başarısız oldu."); }
   };
   
-  // --- DÜZENLEME BAŞLATMA İŞLEVİ ---
   const handleEdit = (item) => {
       setEditingId(item.id);
       setActiveTab(item.type === 'dictionary' ? 'dictionary' : item.type === 'gallery' ? 'gallery' : 'content');
       setFormData({ 
-          title: item.title || '', 
-          url: item.url || '', 
-          category: item.category || '', 
-          desc: item.desc || '',
-          type: item.type,
-          text: item.text || '', 
-          ku: item.ku || '', 
-          tr: item.tr || ''
+          title: item.title || '', url: item.url || '', category: item.category || '', desc: item.desc || '',
+          type: item.type, text: item.text || '', ku: item.ku || '', tr: item.tr || ''
       });
   };
 
-  // --- GÜNCELLEME VEYRA EKLEME İŞLEVİ ---
   const handleContentUpload = async (e) => {
       e.preventDefault();
       setError(null);
-      
       let dataToSave = { ...formData };
       
       if (!dataToSave.title && dataToSave.type !== 'dictionary') {
@@ -155,28 +129,15 @@ const Dashboard = () => {
           fetchContentList(); 
           
           setTimeout(() => setSuccess(false), 3000);
-      } catch (err) {
-          setError("İşlem başarısız oldu: " + err.message);
-      }
+      } catch (err) { setError("İşlem başarısız oldu: " + err.message); }
       setLoading(false);
   };
   
-  const handleLogout = async () => {
-    await logout();
-    navigate('/admin');
-  };
+  const handleLogout = async () => { await logout(); navigate('/admin'); };
+  const handleChange = (e) => { const { name, value } = e.target; setFormData(prev => ({ ...prev, [name]: value })); };
+  const setContentTab = (type) => { setEditingId(null); setActiveTab(type); setFormData(prev => ({ ...prev, type: type, category: '', title: '', url: '', desc: '', text: '', ku: '', tr: '' })); };
   
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const setContentTab = (type) => {
-      setEditingId(null); 
-      setActiveTab(type);
-      setFormData(prev => ({ ...prev, type: type, category: '', title: '', url: '', desc: '', text: '', ku: '', tr: '' }));
-  };
-  
+  // Admin UI için sabitler
   const T = siteContent[lang]?.nav || {};
   const contentHeader = {
     gallery: { icon: Image, label: editingId ? 'Galeri Öğesini Güncelle' : 'Resim Ekle (Galeri)', color: 'blue' },
@@ -214,7 +175,7 @@ const Dashboard = () => {
           <button onClick={() => setContentTab('content')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${activeTab === 'content' ? 'bg-blue-600' : 'hover:bg-slate-800 text-slate-400'}`}><MessageSquare size={18} /> {T.admin_content || 'İçerik/Blog'}</button>
           <button onClick={() => setContentTab('dictionary')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${activeTab === 'dictionary' ? 'bg-blue-600' : 'hover:bg-slate-800 text-slate-400'}`}><Book size={18} /> {T.admin_dict || 'Sözlük'}</button>
           <div className="border-t border-slate-700 my-4"></div>
-          <button onClick={() => setContentTab('settings')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${activeTab === 'settings' ? 'bg-yellow-600' : 'hover:bg-slate-800 text-slate-400'}`}><Settings size={18} /> Site Ayarları</button>
+          <button onClick={() => setActiveTab('settings')} className={`w-full text-left p-3 rounded-xl font-bold transition flex items-center gap-2 ${activeTab === 'settings' ? 'bg-yellow-600' : 'hover:bg-slate-800 text-slate-400'}`}><Settings size={18} /> Site Ayarları</button>
         </nav>
         <button onClick={handleLogout} className="mt-12 flex items-center gap-2 text-red-400 hover:text-red-300 font-bold text-sm"><LogOut size={18} /> Çıkış Yap</button>
       </aside>

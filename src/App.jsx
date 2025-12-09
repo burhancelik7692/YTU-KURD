@@ -27,7 +27,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { UserProvider } from './context/UserContext'; 
 import "./index.css";
-import { Loader2 } from 'lucide-react'; // Loader için
+import { Loader2 } from 'lucide-react';
 
 // Korumalı Rota Bileşeni (Admin Girişi)
 const PrivateRoute = ({ children }) => {
@@ -61,14 +61,15 @@ const AppContent = () => {
             <ScrollToTop />
             <Layout>
                 <Routes>
-                    {/* Normal Sayfalar */}
+                    {/* KRİTİK DÜZELTME: Tüm URL'ler Kürtçe isimlerine göre ayarlandı */}
                     <Route path="/" element={<Home />} />
-                    <Route path="/cand" element={<Culture />} />
-                    <Route path="/muzik" element={<Music />} />
-                    <Route path="/huner" element={<Art />} />
-                    <Route path="/dirok" element={<History />} />
-                    <Route path="/ziman" element={<Language />} />
-                    <Route path="/ferheng" element={<Dictionary />} />
+                    <Route path="/cand" element={<Culture />} />      {/* Kültür */}
+                    <Route path="/muzik" element={<Music />} />      {/* Müzik */}
+                    <Route path="/huner" element={<Art />} />        {/* Sanat */}
+                    <Route path="/dirok" element={<History />} />    {/* Tarih */}
+                    <Route path="/ziman" element={<Language />} />   {/* Dil */}
+                    
+                    <Route path="/ferheng" element={<Dictionary />} /> 
                     <Route path="/galeri" element={<Gallery />} />
                     <Route path="/tekili" element={<Contact />} />
                     <Route path="/listik" element={<Listik />} />
@@ -91,35 +92,28 @@ const AppContent = () => {
 
 
 function App() {
-  // En dış katmanda sadece AuthProvider ve UserProvider'ı çağıralım
+  const { loading: authLoading } = useAuth();
+  const { loading: userLoading } = useUser();
+
+  if (authLoading || userLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-slate-900">
+        <Loader2 className="animate-spin text-yellow-500" size={50} />
+      </div>
+    );
+  }
+  
   return (
     <AuthProvider>
       <UserProvider>
         <LanguageProvider>
           <ThemeProvider>
-            <AppLoader /> {/* Yeni Yükleyici Bileşeni */}
+            <AppContent />
           </ThemeProvider>
         </LanguageProvider>
       </UserProvider>
     </AuthProvider>
   );
-}
-
-// YÜKLEME KONTROL BİLEŞENİ
-const AppLoader = () => {
-    // AuthContext'ten yükleme durumunu çek
-    const { loading } = useAuth(); 
-
-    // Eğer Firebase yükleniyorsa, bekleme ekranı göster
-    if (loading) {
-        return (
-            <div className="flex items-center justify-center min-h-screen bg-slate-900">
-                <Loader2 className="animate-spin text-yellow-500" size={50} />
-            </div>
-        );
-    }
-    
-    return <AppContent />;
 }
 
 export default App;

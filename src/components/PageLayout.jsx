@@ -1,14 +1,19 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-// Link, ArrowLeft importları kaldırıldı
+import { ArrowLeft } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const PageLayout = ({ icon: Icon, title, description, color, children }) => {
   const { lang } = useLanguage();
   
-  // Arka plan ve kenarlık renklerini ayarla
+  const goBackText = lang === 'KU' ? 'Vegere' : (lang === 'TR' ? 'Geri' : 'Back');
   const bgColor = `bg-${color}-600`;
+
+  // KRİTİK DÜZELTME: Tarayıcı geçmişinde bir adım geri git
+  const handleBack = () => {
+    window.history.back(); 
+  };
 
   return (
     <>
@@ -20,10 +25,11 @@ const PageLayout = ({ icon: Icon, title, description, color, children }) => {
       <div className="min-h-screen bg-slate-50 dark:bg-slate-900 pt-24 pb-12 px-4 transition-colors duration-300">
         <div className="max-w-4xl mx-auto">
           
-          {/* GERİ TUŞU BURADAN KALDIRILDI */}
-          {/* Kullanıcı sadece Ana Menüdeki linkler üzerinden navigasyon yapacaktır. */}
+          <button onClick={handleBack} className="inline-flex items-center text-slate-500 dark:text-slate-400 hover:text-blue-900 dark:hover:text-white mb-6 transition group">
+            <ArrowLeft size={20} className="mr-1 group-hover:-translate-x-1 transition-transform" /> 
+            {goBackText} 
+          </button>
 
-          {/* Başlık Alanı */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }} 
