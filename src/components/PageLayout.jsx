@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-// Link ve ArrowLeft importları kaldırıldı
+// Link, ArrowLeft importları kaldırıldı
 import { useLanguage } from '../context/LanguageContext';
 
 const PageLayout = ({ icon: Icon, title, description, color, children }) => {
@@ -9,8 +9,6 @@ const PageLayout = ({ icon: Icon, title, description, color, children }) => {
   
   // Arka plan ve kenarlık renklerini ayarla
   const bgColor = `bg-${color}-600`;
-
-  // Geri tuşu mantığı tamamen kaldırıldı
 
   return (
     <>
@@ -23,7 +21,7 @@ const PageLayout = ({ icon: Icon, title, description, color, children }) => {
         <div className="max-w-4xl mx-auto">
           
           {/* GERİ TUŞU BURADAN KALDIRILDI */}
-          {/* Sadece navigasyon menüsü üzerinden geri dönülecek */}
+          {/* Kullanıcı sadece Ana Menüdeki linkler üzerinden navigasyon yapacaktır. */}
 
           {/* Başlık Alanı */}
           <motion.div 
