@@ -26,13 +26,51 @@ import ScrollToTop from "./components/ScrollToTop";
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext'; 
 import { AuthProvider, useAuth } from './context/AuthContext';
-// useUser'ı da import ediyoruz
 import { UserProvider, useUser } from './context/UserContext'; 
 
 import "./index.css";
-import { Loader2 } from 'lucide-react';
+import { Loader2, AlertTriangle } from 'lucide-react';
 
-// Korumalı Rota Bileşeni (Admin Girişi)
+// --- HATA YAKALAYICI (BEYAZ EKRAN SORUNU İÇİN) ---
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null, errorInfo: null };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error("Uygulama Hatası:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center text-white p-6 text-center">
+          <AlertTriangle size={64} className="text-red-500 mb-4" />
+          <h1 className="text-2xl font-bold mb-2">Bir şeyler ters gitti!</h1>
+          <p className="text-slate-400 mb-6">Siteniz yüklenirken kritik bir hata oluştu.</p>
+          <div className="bg-slate-800 p-4 rounded-lg text-left overflow-auto max-w-full w-full border border-red-500/30">
+            <p className="text-red-400 font-mono text-sm">{this.state.error?.message}</p>
+          </div>
+          <button 
+            onClick={() => window.location.reload()} 
+            className="mt-6 px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition font-bold"
+          >
+            Sayfayı Yenile
+          </button>
+        </div>
+      );
+    }
+
+    return this.props.children; 
+  }
+}
+
+// Korumalı Rota
 const PrivateRoute = ({ children }) => {
   const { currentUser } = useAuth();
   return currentUser ? children : <Navigate to="/admin" />;
@@ -40,40 +78,35 @@ const PrivateRoute = ({ children }) => {
 
 const Layout = ({ children }) => {
   const location = useLocation();
-  // Admin ve Listik sayfalarında Header/Footer gizlensin
   const isFullScreen = location.pathname === '/listik' || location.pathname.startsWith('/admin');
 
   return (
     <div className="app-container flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Helmet><title>YTU Kurdî</title></Helmet>
-      
       {!isFullScreen && <Navigation />}
-      
-      <main className="flex-grow">
-        {children}
-      </main>
-
+      <main className="flex-grow">{children}</main>
       {!isFullScreen && <Footer />}
     </div>
   );
 };
 
-// --- DÜZELTME: Yüklenme Mantığı ve Rotalar ---
-// Bu bileşen artık Provider'ların İÇİNDE çağrıldığı için useAuth ve useUser'ı güvenle kullanabilir.
 const AppRoutes = () => {
-    // Auth ve User durumlarını çekiyoruz
-    const { loading: authLoading } = useAuth();
+    // Context'lerden veri çekerken hata olursa patlamaması için güvenli erişim
+    const authContext = useAuth();
+    const userContext = useUser();
     
-    // UserContext'ten loading durumunu alıyoruz (eğer varsa)
-    // Hata almamak için opsiyonel zincirleme (?.) ve varsayılan değer kullanıyoruz
-    const userContext = useUser(); 
-    const userLoading = userContext?.loading || false; 
+    // Yüklenme durumlarını kontrol et
+    const authLoading = authContext?.loading || false;
+    const userLoading = userContext?.loading || false;
 
     // Yükleniyor Ekranı
     if (authLoading || userLoading) {
         return (
           <div className="flex items-center justify-center min-h-screen bg-slate-900">
-            <Loader2 className="animate-spin text-yellow-500" size={50} />
+            <div className="text-center">
+                <Loader2 className="animate-spin text-yellow-500 mx-auto mb-4" size={50} />
+                <p className="text-slate-400 animate-pulse">Yükleniyor...</p>
+            </div>
           </div>
         );
     }
@@ -83,28 +116,24 @@ const AppRoutes = () => {
             <ScrollToTop />
             <Layout>
                 <Routes>
-                    {/* Anasayfa ve Diğer Sayfalar */}
                     <Route path="/" element={<Home />} />
                     <Route path="/cand" element={<Culture />} />
                     <Route path="/muzik" element={<Music />} />
                     <Route path="/huner" element={<Art />} />
                     <Route path="/dirok" element={<History />} />
                     <Route path="/ziman" element={<Language />} />
-                    
                     <Route path="/ferheng" element={<Dictionary />} /> 
                     <Route path="/galeri" element={<Gallery />} />
                     <Route path="/tekili" element={<Contact />} />
                     <Route path="/listik" element={<Listik />} />
                     <Route path="/haberler" element={<Blog />} />
                     
-                    {/* Admin Sayfaları */}
                     <Route path="/admin" element={<Login />} />
                     <Route path="/admin/dashboard" element={
                         <PrivateRoute>
                             <Dashboard />
                         </PrivateRoute>
                     } />
-
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Layout>
@@ -112,21 +141,19 @@ const AppRoutes = () => {
     );
 };
 
-// --- DÜZELTME: Ana App Bileşeni ---
-// Burası sadece Context Provider'ları (Sarmalayıcıları) sağlar.
-// Hiçbir mantık (hook kullanımı) içermez, bu sayede hata vermez.
 function App() {
   return (
-    <AuthProvider>
-      <UserProvider>
-        <LanguageProvider>
-          <ThemeProvider>
-            {/* Asıl uygulama içeriği buradadır */}
-            <AppRoutes />
-          </ThemeProvider>
-        </LanguageProvider>
-      </UserProvider>
-    </AuthProvider>
+    <ErrorBoundary>
+        <AuthProvider>
+          <UserProvider>
+            <LanguageProvider>
+              <ThemeProvider>
+                <AppRoutes />
+              </ThemeProvider>
+            </LanguageProvider>
+          </UserProvider>
+        </AuthProvider>
+    </ErrorBoundary>
   );
 }
 
