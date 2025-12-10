@@ -106,6 +106,14 @@ export const translations = {
     tag_announcement: "Daxuyanî",
     tag_event: "Çalakî",
 
+    // --- ETKİNLİK (YENİ) ---
+    upcoming_event: "Çalakiya Pêşerojê",
+    event_date: "Dîroka Çalakiyê",
+    event_location: "Cihê Çalakiyê",
+    join_us: "Tevlî Me Bibe",
+    no_upcoming_event: "Niha çalakî tune ye.",
+    tag_event: "Etkinlik", // Admin paneli için sabit kalabilir veya "Çalakî"
+
     // --- SAYFA YÖNETİMİ ---
     page_management: "Rêveberiya Rûpelan",
     select_page_to_edit: "Rûpela ku tu dixwazî biguherînî hilbijêre",
@@ -155,7 +163,7 @@ export const translations = {
   },
   
   TR: {
-    // --- NAVİGASYON ---
+    // ... (Mevcut)
     home: "Anasayfa",
     culture: "Kültür",
     music: "Müzik",
@@ -173,7 +181,6 @@ export const translations = {
     logout: "Çıkış Yap",
     dashboard: "Panel",
 
-    // --- GENEL ---
     search: "Ara",
     save: "Kaydet",
     cancel: "İptal",
@@ -188,7 +195,6 @@ export const translations = {
     date: "Tarih",
     actions: "İşlemler",
 
-    // --- AUTH ---
     login_title: "Üye Girişi",
     admin_title: "Yönetici Girişi",
     register_title: "Hesap Oluştur",
@@ -207,7 +213,6 @@ export const translations = {
     auth_desc_standard: "Favorilerini, okuma listeni ve oyun ilerlemeni kaydetmek için giriş yap.",
     auth_desc_admin: "Bu alan sadece yetkili personel içindir.",
 
-    // --- KULLANICI PANELİ ---
     welcome: "Hoş geldiniz",
     last_login: "Son Giriş",
     favorite_words: "Favori Kelimeler",
@@ -223,7 +228,6 @@ export const translations = {
     edit_profile: "Profili Düzenle",
     full_name: "Ad Soyad",
 
-    // --- ADMIN DASHBOARD ---
     admin_dashboard_title: "Yönetici Paneli",
     overview: "Genel Bakış",
     site_settings: "Site Ayarları",
@@ -261,6 +265,14 @@ export const translations = {
     tag_announcement: "Duyuru",
     tag_event: "Etkinlik",
 
+    // --- ETKİNLİK ---
+    upcoming_event: "Sıradaki Etkinlik",
+    event_date: "Etkinlik Tarihi",
+    event_location: "Etkinlik Yeri",
+    join_us: "Bize Katılın",
+    no_upcoming_event: "Şu an planlanan etkinlik yok.",
+    tag_event: "Etkinlik",
+
     // --- SAYFA YÖNETİMİ ---
     page_management: "Sayfa Yönetimi",
     select_page_to_edit: "Düzenlemek istediğiniz sayfayı seçin",
@@ -277,22 +289,12 @@ export const translations = {
       contact: "İletişim Sayfası"
     },
 
-    // --- SÖZLÜK ---
     word_of_day: "Günün Kelimesi",
-    random_words: "Rastgele Kelimeler",
-    discover: "Keşfet",
-    quick_categories: "Hızlı Kategoriler",
-    cat_colors: "Renkler",
-    cat_numbers: "Sayılar",
-    cat_days: "Günler",
-    cat_family: "Aile",
-    click_to_search: "Aramak için tıkla",
     search_placeholder: "Kelime ara...",
     kurdish: "Kürtçe",
     turkish: "Türkçe",
     meaning: "Anlam",
 
-    // --- HATALAR ---
     error: "Hata",
     success: "Başarılı",
     error_generic: "Bir hata oluştu.",
@@ -310,7 +312,7 @@ export const translations = {
   },
 
   EN: {
-    // --- NAVIGATION ---
+    // ... (Mevcut kodlar)
     home: "Home",
     culture: "Culture",
     music: "Music",
@@ -328,7 +330,6 @@ export const translations = {
     logout: "Logout",
     dashboard: "Dashboard",
 
-    // --- GENERAL ---
     search: "Search",
     save: "Save",
     cancel: "Cancel",
@@ -343,7 +344,6 @@ export const translations = {
     date: "Date",
     actions: "Actions",
 
-    // --- AUTH ---
     login_title: "Member Login",
     admin_title: "Admin Login",
     register_title: "Create Account",
@@ -362,7 +362,6 @@ export const translations = {
     auth_desc_standard: "Login to save favorites.",
     auth_desc_admin: "Authorized personnel only.",
 
-    // --- USER DASHBOARD ---
     welcome: "Welcome",
     last_login: "Last Login",
     favorite_words: "Favorite Words",
@@ -378,7 +377,6 @@ export const translations = {
     edit_profile: "Edit Profile",
     full_name: "Full Name",
 
-    // --- ADMIN DASHBOARD ---
     admin_dashboard_title: "Admin Dashboard",
     overview: "Overview",
     site_settings: "Site Settings",
@@ -416,6 +414,14 @@ export const translations = {
     tag_announcement: "Announcement",
     tag_event: "Event",
 
+    // --- EVENT ---
+    upcoming_event: "Upcoming Event",
+    event_date: "Event Date",
+    event_location: "Event Location",
+    join_us: "Join Us",
+    no_upcoming_event: "No upcoming events.",
+    tag_event: "Event",
+
     // --- PAGE MANAGEMENT ---
     page_management: "Page Management",
     select_page_to_edit: "Select a page to edit",
@@ -432,22 +438,12 @@ export const translations = {
       contact: "Contact Page"
     },
 
-    // --- DICTIONARY ---
     word_of_day: "Word of the Day",
-    random_words: "Random Words",
-    discover: "Discover",
-    quick_categories: "Quick Categories",
-    cat_colors: "Colors",
-    cat_numbers: "Numbers",
-    cat_days: "Days",
-    cat_family: "Family",
-    click_to_search: "Click to search",
     search_placeholder: "Search word...",
     kurdish: "Kurdish",
     turkish: "Turkish",
     meaning: "Meaning",
 
-    // --- ERRORS ---
     error: "Error",
     success: "Success",
     error_generic: "An error occurred.",

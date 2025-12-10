@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Book, X, Loader2, AlertCircle, Heart, Copy, Check, Filter, BookOpen, Keyboard, Sparkles, Lightbulb, Grid, Quote, ArrowRightLeft } from 'lucide-react';
+import { Search, Book, X, Loader2, AlertCircle, Heart, Copy, Check, Filter, BookOpen, Keyboard, Sparkles, Lightbulb, Grid, Quote, ArrowRightLeft, Brain, RefreshCw, Trophy } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useUser } from '../context/UserContext'; 
 
@@ -11,6 +11,9 @@ import { STATIC_DICTIONARY, INTERNAL_DICTIONARY, KURDISH_CHARS } from '../data/d
 // Firebase
 import { db } from '../firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
+
+// --- YEDEK VERİLER ---
+let EXTERNAL_DATA = [];
 
 const Dictionary = () => {
   const { t, lang } = useLanguage();
@@ -33,7 +36,14 @@ const Dictionary = () => {
         random_explore: "Tesadûfî Bibîne",
         daily_word: "Peyva Îro",
         example: "Mînak / Daxuyanî",
-        source_admin: "Fermî"
+        source_admin: "Fermî",
+        quiz_title: "Testa Peyvan",
+        quiz_desc: "Zanîna xwe biceribîne!",
+        quiz_start: "Dest Pê Bike",
+        quiz_question: "Wateya vê peyvê çi ye?",
+        correct: "Rast e! 👏",
+        wrong: "Şaş e 😔",
+        score: "Pûan"
     },
     TR: { 
         desc: "Kelime hazinesi, örnekler ve anlamlar.",
@@ -47,7 +57,14 @@ const Dictionary = () => {
         random_explore: "Rastgele Keşfet",
         daily_word: "Günün Kelimesi",
         example: "Örnek / Açıklama",
-        source_admin: "Resmi"
+        source_admin: "Resmi",
+        quiz_title: "Kelime Testi",
+        quiz_desc: "Bilgini sına!",
+        quiz_start: "Teste Başla",
+        quiz_question: "Bu kelimenin anlamı nedir?",
+        correct: "Doğru! 👏",
+        wrong: "Yanlış 😔",
+        score: "Puan"
     },
     EN: { 
         desc: "Vocabulary, examples and meanings.",
@@ -61,17 +78,33 @@ const Dictionary = () => {
         random_explore: "Random Explore",
         daily_word: "Word of Today",
         example: "Example / Description",
-        source_admin: "Official"
+        source_admin: "Official",
+        quiz_title: "Word Quiz",
+        quiz_desc: "Test your knowledge!",
+        quiz_start: "Start Quiz",
+        quiz_question: "What is the meaning?",
+        correct: "Correct! 👏",
+        wrong: "Wrong 😔",
+        score: "Score"
     }
   }[lang] || {};
 
+  // State
   const [searchTerm, setSearchTerm] = useState("");
   const [allDictionaryData, setAllDictionaryData] = useState([]); 
-  const [displayedWords, setDisplayedWords] = useState([]);
   const [loading, setLoading] = useState(true);
   const [copiedId, setCopiedId] = useState(null);
+  
+  // Keşfet Modülü State'leri
   const [dailyWord, setDailyWord] = useState(null);
   const [randomSuggestions, setRandomSuggestions] = useState([]);
+
+  // --- QUIZ STATE ---
+  const [quizMode, setQuizMode] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [quizScore, setQuizScore] = useState(0);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [isAnswerCorrect, setIsAnswerCorrect] = useState(null); // true, false, null
 
   // --- HARF EKLEME ---
   const insertChar = (char) => {
@@ -81,9 +114,12 @@ const Dictionary = () => {
           const end = input.selectionEnd;
           const newValue = searchTerm.substring(0, start) + char + searchTerm.substring(end);
           setSearchTerm(newValue);
+          
           setTimeout(() => {
-              input.selectionStart = input.selectionEnd = start + 1;
-              input.focus();
+              if (input) {
+                  input.selectionStart = input.selectionEnd = start + 1;
+                  input.focus();
+              }
           }, 0);
       }
   };
@@ -114,7 +150,6 @@ const Dictionary = () => {
     const fetchDictionary = async () => {
       setLoading(true);
       try {
-        // 1. Firebase'den Veri Çek
         const q = query(collection(db, "dynamicContent"), where("type", "==", "dictionary"));
         const querySnapshot = await getDocs(q);
         const firebaseWords = [];
@@ -132,25 +167,15 @@ const Dictionary = () => {
           }
         });
 
-        // 2. VERİ BİRLEŞTİRME
         const dictionaryMap = new Map();
-
-        // A. Kod İçi Yedekler
         INTERNAL_DICTIONARY.forEach(word => dictionaryMap.set(word.ku.toLowerCase(), word));
-
-        // B. Statik Dosyadan Gelenler
-        STATIC_DICTIONARY.forEach((word, index) => {
-             // ID çakışmaması için statik verilere ID atıyoruz
-             dictionaryMap.set(word.ku.toLowerCase(), { ...word, id: `static_${index}` });
-        });
-
-        // C. Firebase (En Güncel) - Diğerlerini ezer
+        STATIC_DICTIONARY.forEach((word, index) => dictionaryMap.set(word.ku.toLowerCase(), { ...word, id: `static_${index}` }));
         firebaseWords.forEach(word => dictionaryMap.set(word.ku.toLowerCase(), word));
 
         const uniqueList = Array.from(dictionaryMap.values());
+        uniqueList.sort((a, b) => a.ku.localeCompare(b.ku));
         setAllDictionaryData(uniqueList);
 
-        // Günün Kelimesi
         if (uniqueList.length > 0) {
             const today = new Date();
             const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
@@ -162,7 +187,7 @@ const Dictionary = () => {
         }
 
       } catch (err) {
-        console.error("Hata:", err);
+        console.error("Sözlük yükleme hatası:", err);
         setAllDictionaryData([...INTERNAL_DICTIONARY, ...STATIC_DICTIONARY]);
       } finally {
         setLoading(false);
@@ -172,30 +197,72 @@ const Dictionary = () => {
     fetchDictionary();
   }, []); 
 
-  // --- ARAMA MOTORU ---
-  useEffect(() => {
-      if (searchTerm.trim().length === 0) {
-          setDisplayedWords([]);
-          return;
-      }
-      const term = searchTerm.toLowerCase();
+  // --- QUIZ FONKSİYONLARI ---
+  const startQuiz = () => {
+      setQuizMode(true);
+      setQuizScore(0);
+      generateQuestion();
+  };
+
+  const generateQuestion = () => {
+      if (allDictionaryData.length < 4) return;
       
+      // Rastgele bir kelime seç
+      const randomIdx = Math.floor(Math.random() * allDictionaryData.length);
+      const questionWord = allDictionaryData[randomIdx];
+      
+      // 3 tane yanlış cevap seç
+      const distractors = [];
+      while(distractors.length < 3) {
+          const idx = Math.floor(Math.random() * allDictionaryData.length);
+          const option = allDictionaryData[idx];
+          if (idx !== randomIdx && !distractors.includes(option)) {
+              distractors.push(option);
+          }
+      }
+
+      // Seçenekleri karıştır
+      const options = [...distractors, questionWord].sort(() => 0.5 - Math.random());
+      
+      setCurrentQuestion({ word: questionWord, options });
+      setSelectedOption(null);
+      setIsAnswerCorrect(null);
+  };
+
+  const handleAnswer = (option) => {
+      if (selectedOption) return; // Zaten cevaplandıysa işlem yapma
+      
+      setSelectedOption(option);
+      const correct = option.id === currentQuestion.word.id;
+      setIsAnswerCorrect(correct);
+      
+      if (correct) {
+          setQuizScore(prev => prev + 10);
+      }
+
+      // 1.5 saniye sonra yeni soruya geç
+      setTimeout(() => {
+          generateQuestion();
+      }, 1500);
+  };
+
+  // --- OPTİMİZE EDİLMİŞ ARAMA ---
+  const displayedWords = useMemo(() => {
+      if (searchTerm.trim().length === 0) return [];
+      
+      const term = searchTerm.toLowerCase();
       const results = allDictionaryData.filter(item => 
           item.ku.toLowerCase().includes(term) || item.tr.toLowerCase().includes(term)
       );
 
-      // Akıllı Sıralama
       results.sort((a, b) => {
           const aKu = a.ku.toLowerCase() === term;
           const aTr = a.tr.toLowerCase() === term;
-          const bKu = b.ku.toLowerCase() === term;
-          const bTr = b.tr.toLowerCase() === term;
-          if ((aKu || aTr) && !(bKu || bTr)) return -1;
-          if (!(aKu || aTr) && (bKu || bTr)) return 1;
-          return 0;
+          if ((aKu || aTr)) return -1;
+          return (a.ku.length + a.tr.length) - (b.ku.length + b.tr.length);
       });
 
-      setDisplayedWords(results.slice(0, 50));
+      return results.slice(0, 50);
   }, [searchTerm, allDictionaryData]);
 
   const handleQuickSearch = (term) => {
@@ -216,7 +283,6 @@ const Dictionary = () => {
           mainLang = "TR";
           subLang = "KU";
       }
-
       return { mainText, subText, mainLang, subLang };
   };
 
@@ -227,7 +293,7 @@ const Dictionary = () => {
       <div className="min-h-screen bg-slate-50 dark:bg-slate-900 pt-28 pb-12 px-4 transition-colors duration-300">
         <div className="max-w-4xl mx-auto">
 
-          {/* BAŞLIK */}
+          {/* 1. BAŞLIK VE ARAMA ALANI */}
           <div className="text-center mb-10">
               <h1 className="text-4xl font-black text-slate-800 dark:text-white mb-2">{t('dictionary')}</h1>
               <p className="text-slate-500 dark:text-slate-400 mb-8">{localT.desc}</p>
@@ -245,7 +311,7 @@ const Dictionary = () => {
                       />
                       <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" size={24} />
                       {searchTerm && (
-                          <button onClick={() => {setSearchTerm(""); setDisplayedWords([]);}} className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-red-500 transition">
+                          <button onClick={() => {setSearchTerm("");}} className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-red-500 transition">
                               <X size={20} />
                           </button>
                       )}
@@ -267,45 +333,97 @@ const Dictionary = () => {
               </div>
           </div>
 
-          {/* KEŞFET MODÜLLERİ (BOŞKEN) */}
+          {/* 2. KEŞFET MODÜLLERİ (BOŞKEN GÖRÜNÜR) */}
           {!searchTerm && !loading && (
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
-                  {dailyWord && (
-                      <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl group">
-                          <div className="absolute top-0 right-0 p-4 opacity-20"><Sparkles size={64} /></div>
-                          <div className="relative z-10 text-center">
-                              <div className="inline-flex items-center gap-2 bg-white/20 px-3 py-1 rounded-full text-xs font-bold uppercase mb-4 backdrop-blur-sm">
-                                  <Sparkles size={12} /> {localT.daily_word}
-                              </div>
-                              <h2 className="text-4xl md:text-5xl font-black mb-2">{dailyWord.ku}</h2>
-                              <p className="text-xl md:text-2xl text-indigo-100 font-light">{dailyWord.tr}</p>
-                              {dailyWord.desc && (
-                                  <div className="mt-4 bg-white/10 p-3 rounded-xl backdrop-blur-sm text-sm italic text-indigo-50 border border-white/10">"{dailyWord.desc}"</div>
-                              )}
-                              <div className="mt-6 flex justify-center gap-4">
-                                  <button onClick={() => toggleFavorite(dailyWord)} className="p-3 bg-white/10 hover:bg-white/20 rounded-full transition backdrop-blur-md">
-                                      <Heart size={20} className={isFavorite(dailyWord.ku) ? "fill-white text-white" : "text-white"} />
-                                  </button>
-                                  <button onClick={() => handleCopy(`${dailyWord.ku} - ${dailyWord.tr}`, 'daily')} className="p-3 bg-white/10 hover:bg-white/20 rounded-full transition backdrop-blur-md">
-                                      {copiedId === 'daily' ? <Check size={20} /> : <Copy size={20} />}
-                                  </button>
-                              </div>
-                          </div>
-                      </div>
-                  )}
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                          <h3 className="flex items-center gap-2 font-bold text-slate-800 dark:text-white mb-4"><Lightbulb className="text-yellow-500" size={20} /> {localT.random_explore}</h3>
-                          <div className="space-y-3">
-                              {randomSuggestions.map((item, i) => (
-                                  <div key={i} className="flex justify-between items-center p-3 bg-slate-50 dark:bg-slate-900 rounded-xl hover:bg-blue-50 dark:hover:bg-slate-700 transition cursor-pointer" onClick={() => handleQuickSearch(item.ku)}>
-                                      <span className="font-bold text-slate-700 dark:text-slate-200">{item.ku}</span>
-                                      <span className="text-sm text-slate-500">{item.tr}</span>
+                  
+                  {/* --- YENİ EKLENEN KELİME TESTİ (QUIZ) MODÜLÜ --- */}
+                  <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-6 text-white shadow-xl relative overflow-hidden">
+                      <div className="absolute top-0 right-0 p-4 opacity-10"><Brain size={120} /></div>
+                      
+                      {!quizMode ? (
+                          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                              <div>
+                                  <div className="inline-flex items-center gap-2 bg-white/20 px-3 py-1 rounded-full text-xs font-bold uppercase mb-2 backdrop-blur-sm">
+                                      <Brain size={12} /> {localT.quiz_title}
                                   </div>
-                              ))}
+                                  <h2 className="text-3xl font-black mb-1">{localT.quiz_title}</h2>
+                                  <p className="text-blue-100">{localT.quiz_desc}</p>
+                              </div>
+                              <button onClick={startQuiz} className="px-8 py-3 bg-white text-blue-600 rounded-xl font-bold hover:bg-blue-50 transition shadow-lg flex items-center gap-2">
+                                  <PlayIcon /> {localT.quiz_start}
+                              </button>
                           </div>
-                      </div>
+                      ) : (
+                          <div className="relative z-10 w-full max-w-2xl mx-auto">
+                              <div className="flex justify-between items-center mb-6">
+                                  <h3 className="text-xl font-bold flex items-center gap-2"><Brain /> {localT.quiz_title}</h3>
+                                  <div className="bg-white/20 px-4 py-1 rounded-full font-mono font-bold flex items-center gap-2">
+                                      <Trophy size={16} className="text-yellow-300" /> {quizScore}
+                                  </div>
+                              </div>
+                              
+                              {currentQuestion && (
+                                  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
+                                      <p className="text-center text-blue-200 text-sm font-bold uppercase mb-2">{localT.quiz_question}</p>
+                                      <h2 className="text-center text-4xl font-black mb-8">{currentQuestion.word.ku}</h2>
+                                      
+                                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                          {currentQuestion.options.map((opt, i) => {
+                                              let btnClass = "bg-white text-slate-800 hover:bg-blue-50";
+                                              if (selectedOption) {
+                                                  if (opt.id === currentQuestion.word.id) btnClass = "bg-green-500 text-white border-green-400";
+                                                  else if (opt.id === selectedOption.id) btnClass = "bg-red-500 text-white border-red-400";
+                                                  else btnClass = "bg-white/50 text-slate-400 cursor-not-allowed";
+                                              }
+
+                                              return (
+                                                  <button 
+                                                      key={i}
+                                                      onClick={() => handleAnswer(opt)}
+                                                      disabled={selectedOption !== null}
+                                                      className={`p-4 rounded-xl font-bold transition-all text-lg border-b-4 border-transparent ${btnClass}`}
+                                                  >
+                                                      {opt.tr}
+                                                  </button>
+                                              );
+                                          })}
+                                      </div>
+                                      
+                                      {selectedOption && (
+                                          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center mt-4 font-bold text-xl">
+                                              {isAnswerCorrect ? <span className="text-green-300">{localT.correct}</span> : <span className="text-red-300">{localT.wrong}</span>}
+                                          </motion.div>
+                                      )}
+                                  </div>
+                              )}
+                              
+                              <button onClick={() => setQuizMode(false)} className="mt-4 text-xs text-blue-200 hover:text-white underline w-full text-center">Testê Biqedîne (Çıkış)</button>
+                          </div>
+                      )}
+                  </div>
+
+                  {/* Günün Kelimesi & Kategoriler */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      {/* Günün Kelimesi */}
+                      {dailyWord && (
+                          <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm relative group overflow-hidden">
+                              <div className="absolute top-0 right-0 p-4 opacity-5"><Sparkles size={80} className="text-indigo-500" /></div>
+                              <h3 className="flex items-center gap-2 font-bold text-indigo-600 dark:text-indigo-400 mb-4"><Sparkles size={20} /> {localT.daily_word}</h3>
+                              
+                              <div className="text-center py-4">
+                                  <h2 className="text-4xl font-black text-slate-800 dark:text-white mb-2">{dailyWord.ku}</h2>
+                                  <p className="text-xl text-slate-500 dark:text-slate-400">{dailyWord.tr}</p>
+                              </div>
+                              
+                              <div className="flex justify-center gap-3 mt-4">
+                                  <button onClick={() => toggleFavorite(dailyWord)} className="p-2 bg-slate-100 dark:bg-slate-700 rounded-full hover:bg-pink-100 dark:hover:bg-pink-900/30 hover:text-pink-500 transition"><Heart size={20} className={isFavorite(dailyWord.ku) ? "fill-current text-pink-500" : ""} /></button>
+                                  <button onClick={() => handleCopy(`${dailyWord.ku} - ${dailyWord.tr}`, 'daily')} className="p-2 bg-slate-100 dark:bg-slate-700 rounded-full hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-500 transition"><Copy size={20} /></button>
+                              </div>
+                          </div>
+                      )}
+
+                      {/* Hızlı Kategoriler */}
                       <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm">
                           <h3 className="flex items-center gap-2 font-bold text-slate-800 dark:text-white mb-4"><Grid className="text-blue-500" size={20} /> {t('quick_categories')}</h3>
                           <div className="grid grid-cols-2 gap-3">
@@ -315,6 +433,7 @@ const Dictionary = () => {
                           </div>
                       </div>
                   </div>
+                  
                   <div className="text-center"><p className="text-xs text-slate-400 font-bold uppercase tracking-widest">{localT.total_db}: {allDictionaryData.length} {localT.words}</p></div>
               </motion.div>
           )}
@@ -375,5 +494,12 @@ const Dictionary = () => {
     </>
   );
 };
+
+// Yardımcı İkon Bileşeni (Play)
+const PlayIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 5V19L19 12L8 5Z" />
+    </svg>
+);
 
 export default Dictionary;
