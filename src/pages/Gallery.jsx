@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, X, ZoomIn, Loader2, AlertCircle, Image as ImageIcon } from 'lucide-react';
+import { ArrowLeft, AlertCircle, Loader2, ZoomIn, X } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { siteContent } from '../data/locales';
 

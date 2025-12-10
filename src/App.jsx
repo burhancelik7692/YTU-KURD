@@ -31,58 +31,49 @@ import { UserProvider, useUser } from './context/UserContext';
 import "./index.css";
 import { Loader2, AlertTriangle } from 'lucide-react';
 
-// --- HATA YAKALAYICI (BEYAZ EKRAN SORUNU İÇİN) ---
+// --- HATA YAKALAYICI (BEYAZ EKRAN ÇÖZÜMÜ) ---
+// Siteniz çökerse beyaz ekran yerine hatayı gösterir.
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null, errorInfo: null };
+    this.state = { hasError: false, error: null };
   }
-
-  static getDerivedStateFromError(error) {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error, errorInfo) {
-    console.error("Uygulama Hatası:", error, errorInfo);
-  }
-
+  static getDerivedStateFromError(error) { return { hasError: true, error }; }
+  componentDidCatch(error, errorInfo) { console.error("Kritik Hata:", error, errorInfo); }
   render() {
     if (this.state.hasError) {
       return (
         <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center text-white p-6 text-center">
           <AlertTriangle size={64} className="text-red-500 mb-4" />
-          <h1 className="text-2xl font-bold mb-2">Bir şeyler ters gitti!</h1>
-          <p className="text-slate-400 mb-6">Siteniz yüklenirken kritik bir hata oluştu.</p>
-          <div className="bg-slate-800 p-4 rounded-lg text-left overflow-auto max-w-full w-full border border-red-500/30">
-            <p className="text-red-400 font-mono text-sm">{this.state.error?.message}</p>
-          </div>
-          <button 
-            onClick={() => window.location.reload()} 
-            className="mt-6 px-6 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition font-bold"
-          >
-            Sayfayı Yenile
-          </button>
+          <h1 className="text-2xl font-bold">Bir şeyler ters gitti!</h1>
+          <p className="text-red-300 mt-2 p-4 bg-slate-800 rounded border border-red-500/30 font-mono text-sm">{this.state.error?.message}</p>
+          <button onClick={() => window.location.reload()} className="mt-6 px-6 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 font-bold transition">Sayfayı Yenile</button>
         </div>
       );
     }
-
     return this.props.children; 
   }
 }
 
-// Korumalı Rota
+// Korumalı Rota (Admin Girişi Kontrolü)
 const PrivateRoute = ({ children }) => {
   const { currentUser } = useAuth();
   return currentUser ? children : <Navigate to="/admin" />;
 };
 
+// Sayfa Düzeni (Header ve Footer Yönetimi)
 const Layout = ({ children }) => {
   const location = useLocation();
+  // Oyun sayfasında veya Admin panelinde Header/Footer gizle
   const isFullScreen = location.pathname === '/listik' || location.pathname.startsWith('/admin');
 
   return (
     <div className="app-container flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
-      <Helmet><title>YTU Kurdî</title></Helmet>
+      <Helmet>
+        {/* React 18+ uyumluluğu için string wrap edildi */}
+        <title>{"YTU Kurdî"}</title>
+      </Helmet>
+      
       {!isFullScreen && <Navigation />}
       <main className="flex-grow">{children}</main>
       {!isFullScreen && <Footer />}
@@ -90,16 +81,18 @@ const Layout = ({ children }) => {
   );
 };
 
-const AppRoutes = () => {
-    // Context'lerden veri çekerken hata olursa patlamaması için güvenli erişim
-    const authContext = useAuth();
-    const userContext = useUser();
+// --- İÇERİK BİLEŞENİ (Context Hook'ları Burada Kullanılır) ---
+// ÖNEMLİ: useAuth ve useUser hooklarını burada kullanıyoruz çünkü bu bileşen
+// Provider'ların İÇİNDE render ediliyor.
+const AppContent = () => {
+    const auth = useAuth();
+    const user = useUser();
     
-    // Yüklenme durumlarını kontrol et
-    const authLoading = authContext?.loading || false;
-    const userLoading = userContext?.loading || false;
+    // Hata almamak için güvenli kontrol (?.)
+    const authLoading = auth?.loading || false;
+    const userLoading = user?.loading || false;
 
-    // Yükleniyor Ekranı
+    // Yükleniyor Ekranı (Auth kontrolü bitene kadar bekle)
     if (authLoading || userLoading) {
         return (
           <div className="flex items-center justify-center min-h-screen bg-slate-900">
@@ -116,6 +109,7 @@ const AppRoutes = () => {
             <ScrollToTop />
             <Layout>
                 <Routes>
+                    {/* Halka Açık Sayfalar */}
                     <Route path="/" element={<Home />} />
                     <Route path="/cand" element={<Culture />} />
                     <Route path="/muzik" element={<Music />} />
@@ -126,14 +120,19 @@ const AppRoutes = () => {
                     <Route path="/galeri" element={<Gallery />} />
                     <Route path="/tekili" element={<Contact />} />
                     <Route path="/listik" element={<Listik />} />
-                    <Route path="/haberler" element={<Blog />} />
                     
+                    {/* GÜNCELLEME: Haberler -> Agahdarî (Duyurular) */}
+                    <Route path="/agahdari" element={<Blog />} />
+                    
+                    {/* Admin Sayfaları */}
                     <Route path="/admin" element={<Login />} />
                     <Route path="/admin/dashboard" element={
                         <PrivateRoute>
                             <Dashboard />
                         </PrivateRoute>
                     } />
+                    
+                    {/* 404 Sayfası */}
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Layout>
@@ -141,6 +140,7 @@ const AppRoutes = () => {
     );
 };
 
+// --- ANA APP BİLEŞENİ (Sadece Provider'ları Sağlar) ---
 function App() {
   return (
     <ErrorBoundary>
@@ -148,7 +148,8 @@ function App() {
           <UserProvider>
             <LanguageProvider>
               <ThemeProvider>
-                <AppRoutes />
+                {/* Asıl uygulama mantığı AppContent içindedir */}
+                <AppContent />
               </ThemeProvider>
             </LanguageProvider>
           </UserProvider>

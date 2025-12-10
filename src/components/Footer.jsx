@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, ArrowUp, Mail, Globe } from 'lucide-react';
+import { Instagram, ArrowUp, Mail, Globe, Youtube } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { siteContent } from '../data/locales'; // Site content'i menü için çekiyoruz

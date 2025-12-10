@@ -18,7 +18,7 @@ const Navigation = () => {
   const links = [
     { path: '/', label: t.sereke || 'Home' },
     { path: '/ferheng', label: t.ferheng || 'Sözlük', icon: <Book size={16} /> },
-    { path: '/haberler', label: t.blog || 'Duyurular', icon: <MessageSquare size={16} /> }, // Yeni Blog/Duyurular Linki
+    { path: '/haberler', label: t.blog || 'Duyurular', icon: <MessageSquare size={16} /> },
     { path: '/ziman', label: t.ziman || 'Dil' },
     { path: '/cand', label: t.cand || 'Kültür' },
     { path: '/dirok', label: t.dirok || 'Tarih' },
