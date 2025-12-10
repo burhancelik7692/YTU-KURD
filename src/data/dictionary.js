@@ -1,4503 +1,3277 @@
 // --- 1. STATİK SÖZLÜK (Genişletilebilir Liste) ---
-// Buraya binlerce kelime ekleyebilirsin. Kod şişmez.
 export const STATIC_DICTIONARY = [
-  {
-    "ku": "Merheba",
-    "tr": "Merhaba"
-  },
-  {
-    "ku": "Rojbaş",
-    "tr": "Günaydın / Tünaydın"
-  },
-  {
-    "ku": "Şevbaş",
-    "tr": "İyi Geceler"
-  },
-  {
-    "ku": "Spas",
-    "tr": "Teşekkürler"
-  },
-  {
-    "ku": "Fermû",
-    "tr": "Buyrun / Rica ederim"
-  },
-  {
-    "ku": "Çawa yî?",
-    "tr": "Nasılsın?"
-  },
-  {
-    "ku": "Baş im",
-    "tr": "İyiyim"
-  },
-  {
-    "ku": "Tu ji ku yî?",
-    "tr": "Nerelisin?"
-  },
-  {
-    "ku": "Navê te çi ye?",
-    "tr": "Adın ne?"
-  },
-  {
-    "ku": "Xatirê te",
-    "tr": "Hoşça kal"
-  },
-  {
-    "ku": "Aşîtî",
-    "tr": "Barış"
-  },
-  {
-    "ku": "Azadî",
-    "tr": "Özgürlük"
-  },
-  {
-    "ku": "Evîn",
-    "tr": "Aşk"
-  },
-  {
-    "ku": "Jiyan",
-    "tr": "Yaşam"
-  },
-  {
-    "ku": "Jin",
-    "tr": "Kadın"
-  },
-  {
-    "ku": "Mêr",
-    "tr": "Erkek"
-  },
-  {
-    "ku": "Zarok",
-    "tr": "Çocuk"
-  },
-  {
-    "ku": "Xwendekar",
-    "tr": "Öğrenci"
-  },
-  {
-    "ku": "Mamoste",
-    "tr": "Öğretmen"
-  },
-  {
-    "ku": "Pirtûk",
-    "tr": "Kitap"
-  },
-  {
-    "ku": "Pênûs",
-    "tr": "Kalem"
-  },
-  {
-    "ku": "Dibistan",
-    "tr": "Okul"
-  },
-  {
-    "ku": "Zanîngeh",
-    "tr": "Üniversite"
-  },
-  {
-    "ku": "Bajêr",
-    "tr": "Şehir"
-  },
-  {
-    "ku": "Gund",
-    "tr": "Köy"
-  },
-  {
-    "ku": "Çiya",
-    "tr": "Dağ"
-  },
-  {
-    "ku": "Av",
-    "tr": "Su"
-  },
-  {
-    "ku": "Nan",
-    "tr": "Ekmek"
-  },
-  {
-    "ku": "Heval",
-    "tr": "Arkadaş"
-  },
-  {
-    "ku": "Malbat",
-    "tr": "Aile"
-  },
-  {
-    "ku": "Dayik",
-    "tr": "Anne"
-  },
-  {
-    "ku": "Bav",
-    "tr": "Baba"
-  },
-  {
-    "ku": "Birayê min",
-    "tr": "Kardeşim (Erkek)"
-  },
-  {
-    "ku": "Xwişka min",
-    "tr": "Kardeşim (Kız)"
-  },
-  {
-    "ku": "Dil",
-    "tr": "Kalp / Gönül / Dil"
-  },
-  {
-    "ku": "Çav",
-    "tr": "Göz"
-  },
-  {
-    "ku": "Dest",
-    "tr": "El"
-  },
-  {
-    "ku": "Ser",
-    "tr": "Baş / Kafa"
-  },
-  {
-    "ku": "Ling",
-    "tr": "Ayak"
-  },
-  {
-    "ku": "Xweş",
-    "tr": "Güzel / Hoş"
-  },
 
-  // PDF Dosyasından A harfi ile başlayan girişler
-  {
-    "ku": "a (1)",
-    "tr": "Hayret sözcüğü. a ji te ra ha: Hoppala! Buyur bakalım!"
-  },
-  {
-    "ku": "a (2)",
-    "tr": "-im, -in malikiyet sıfatı. a bi xêr hebû: Sevindirici bir durum, güzel bir rastlantı olarak; \"iyi ki.\""
-  },
-  {
-    "ku": "abûqat",
-    "tr": "Avukat."
-  },
-  {
-    "ku": "aciz",
-    "tr": "Bezgin, bezen, bıkkın."
-  },
-  {
-    "ku": "aciz bûn",
-    "tr": "Bıkmak, sıkılmak."
-  },
-  {
-    "ku": "aciz kirin",
-    "tr": "Bıktırmak, bezdirmek."
-  },
-  {
-    "ku": "acizî",
-    "tr": "Bıkkınlık. (d.)"
-  },
-  {
-    "ku": "ad",
-    "tr": "Ahit, yemin. bi ad û wehd be: \"Yemin olsun, ahdolsun\" anlamında yemin biçimi. li min bi ad be gi ez îdî qahwê vexum: Bana ahdolsun ki artık kahve içmeyeceğim. (d.)"
-  },
-  {
-    "ku": "adar",
-    "tr": "Mart. (d.)"
-  },
-  {
-    "ku": "ad kirin",
-    "tr": "Ahdetmek, yemin etmek."
-  },
-  {
-    "ku": "afatî",
-    "tr": "Musibet, felaket, bela. (d.)"
-  },
-  {
-    "ku": "afir",
-    "tr": "Hayvan yemliği, yem teknesi, yemlik. (e.)"
-  },
-  {
-    "ku": "afsûn",
-    "tr": "Pileme."
-  },
-  {
-    "ku": "afsûn kirin",
-    "tr": "Bilemek."
-  },
-  {
-    "ku": "ajnê",
-    "tr": "Yüzme, suda yüzme."
-  },
-  {
-    "ku": "ajnêber",
-    "tr": "Yüzücü."
-  },
-  {
-    "ku": "ajnêberî",
-    "tr": "Yüzücülük. (d.)"
-  },
-  {
-    "ku": "ajnê kirin",
-    "tr": "Yüzmek, suda yüzmek."
-  },
-  {
-    "ku": "ajo",
-    "tr": "Sürücü."
-  },
-  {
-    "ku": "ajotin",
-    "tr": "Sürmek. (dajo, bajo)"
-  },
-  {
-    "ku": "ajotî",
-    "tr": "Sürülmüş olan tarla vb."
-  },
-  {
-    "ku": "akincî",
-    "tr": "Yerleşik, göçebe olmayan."
-  },
-  {
-    "ku": "alastin",
-    "tr": "Yalamak. (dalêse, balêse)"
-  },
-  {
-    "ku": "alemûn",
-    "tr": "bkz. \"bafûn\""
-  },
-  {
-    "ku": "alemyon",
-    "tr": "bkz. \"bafûn\""
-  },
-  {
-    "ku": "alif",
-    "tr": "Yem, hayvan yemi. (e.)"
-  },
-  {
-    "ku": "alif kirin",
-    "tr": "Hayvanları yemlemek."
-  },
-  {
-    "ku": "aliqîn",
-    "tr": "Birine veya bir yere takılmak. ez çûm qehwê, aliqîm wir: Kahveye gittim, oraya takıldım."
-  },
-  {
-    "ku": "alî",
-    "tr": "Taraf, yön. (e.)"
-  },
-  {
-    "ku": "ali",
-    "tr": "Yardım, yardım etme. ali hev kirin: Yardımlaşmak. alîk: Bir taraf."
-  },
-  {
-    "ku": "alî kirin",
-    "tr": "Yardım etmek."
-  },
-  {
-    "ku": "alme",
-    "tr": "Laçka, laçka olma."
-  },
-  {
-    "ku": "alme bûn",
-    "tr": "Laçka olmak. nigê sendelyê alme bûye: Sandalyenin ayağı laçkalaşmış."
-  },
-  {
-    "ku": "alûc",
-    "tr": "Erik. (d.)"
-  },
-  {
-    "ku": "alvêr",
-    "tr": "Alışveriş, alım-satım. (d.)"
-  },
-  {
-    "ku": "amojn",
-    "tr": "Amca karısı. (d.)"
-  },
-  {
-    "ku": "anê/anik",
-    "tr": "Anne. (çd.)"
-  },
-  {
-    "ku": "angorî",
-    "tr": "-a göre."
-  },
-  {
-    "ku": "anha",
-    "tr": "Şimdi."
-  },
-  {
-    "ku": "anîn",
-    "tr": "Getirmek. anîn cî: Yapmak, gerçekleştirmek; yerine getirmek (bir şeyi.) anîn dunyê: Dünyaya getirmek, doğurmak. anîn serê wî: Başına beklenmedik, şaşırtıcı bir olay vb. getirmek. bi anîn dan: Getirtmek."
-  },
-  {
-    "ku": "anka",
-    "tr": "Şimdi."
-  },
-  {
-    "ku": "ap",
-    "tr": "Amca. (e.)"
-  },
-  {
-    "ku": "apardûman",
-    "tr": "Apartman. (d.)"
-  },
-  {
-    "ku": "apo",
-    "tr": "Amcaya hitap şekli."
-  },
-  {
-    "ku": "apo (çd.)",
-    "tr": "Baba. (çd.)"
-  },
-  {
-    "ku": "aqil avêtin",
-    "tr": "Aklını yitirmek. Hemo aqil avêtiye: Hemo aklını yitirmiş."
-  },
-  {
-    "ku": "aqit",
-    "tr": "bkz. \"dims\""
-  },
-  {
-    "ku": "aqûbet",
-    "tr": "Akıbet. aqûbetî li serê te be: darısı başına. (d.)"
-  },
-  {
-    "ku": "ar",
-    "tr": "Ateş. ar ji laşê (bedena/canê) wî çûn: Çok ateşi çıkmak, vücut harareti normalden çok olmak. arê wî ketin: (Hasta için) Vücut ısısı azalmak, ateşi düşmek. arê Xwedê: \"Allah'ın ateşi\" anlamına gelen bu söz haşarı, yaramaz çocuklar için söylenir. (e.)"
-  },
-  {
-    "ku": "araqî",
-    "tr": "İçki. (d.)"
-  },
-  {
-    "ku": "araqxur",
-    "tr": "Ayyaş."
-  },
-  {
-    "ku": "arav",
-    "tr": "Çamaşır yıkandıktan sonra geriye kalan artık su, çamaşır suyu. (d.)"
-  },
-  {
-    "ku": "aravî",
-    "tr": "bkz. Arav. (d.)"
-  },
-  {
-    "ku": "ard",
-    "tr": "Un. (e.)"
-  },
-  {
-    "ku": "ardû",
-    "tr": "Yakacak. (e.)"
-  },
-  {
-    "ku": "arema",
-    "tr": "İskambilde, elliiki oyununda son el, son oyun."
-  },
-  {
-    "ku": "argûn",
-    "tr": "Ocak, ateş ocağı, şömine. (e.)"
-  },
-  {
-    "ku": "arî",
-    "tr": "Kül, ateş külü. (d.)"
-  },
-  {
-    "ku": "ar kirin",
-    "tr": "Arlanmak, uslanmak."
-  },
-  {
-    "ku": "arkolk",
-    "tr": "Ateş karıştırmada kullanılan sopa. (e.)"
-  },
-  {
-    "ku": "arode",
-    "tr": "Uyuşuk kimse."
-  },
-  {
-    "ku": "arsim",
-    "tr": "Nezle. bi arsimê ketin: Nezleye yakalanmak. (d.)"
-  },
-  {
-    "ku": "arsimî",
-    "tr": "Nezleli."
-  },
-  {
-    "ku": "arsimî bûn",
-    "tr": "Nezle olmak."
-  },
-  {
-    "ku": "arvan",
-    "tr": "Un, genel olarak un. (e.)"
-  },
-  {
-    "ku": "arwane",
-    "tr": "Dişi deve, maya. (d.)"
-  },
-  {
-    "ku": "aryan",
-    "tr": "(Özellikle baş) Şiddetle ağrımak. serî li min arya: Başım çatlıyor, başım çok ağrıyor. (diare, biare)"
-  },
-  {
-    "ku": "asas",
-    "tr": "Aslında, aslına bakılırsa."
-  },
-  {
-    "ku": "asê",
-    "tr": "Sarp, asi, yalçın."
-  },
-  {
-    "ku": "asilîn",
-    "tr": "Mahsur kalmak. Elo û Silo di çiyê da asilîn: Elo ve Sılo dağda mahsur kaldılar. (diasile, biasile)"
-  },
-  {
-    "ku": "asrax",
-    "tr": "Tavan. (e.)"
-  },
-  {
-    "ku": "aş",
-    "tr": "Değirmen. (e.)"
-  },
-  {
-    "ku": "aşêf",
-    "tr": "Toprağı çapalama işi."
-  },
-  {
-    "ku": "aşêf kirin",
-    "tr": "Toprağı çapalamak ve yabani bitkileri ayıklayıp temizlemek."
-  },
-  {
-    "ku": "aşiq",
-    "tr": "Çingene."
-  },
-  {
-    "ku": "aşiqtî",
-    "tr": "Çingenelik. (d.)"
-  },
-  {
-    "ku": "aşît",
-    "tr": "Çığ. (d.)"
-  },
-  {
-    "ku": "aşortmen",
-    "tr": "Eşofman. (e.)"
-  },
-  {
-    "ku": "aştî",
-    "tr": "Barış. (d.)"
-  },
-  {
-    "ku": "aşt kirin",
-    "tr": "Barışmak, barış yapmak. me aşt kir: Biz barıştık."
-  },
-  {
-    "ku": "aşûjin",
-    "tr": "İçi doldurulmuş çuvalların ağzını dikmekte kullanılan ve bu iş için yapılan ip. (d.)"
-  },
-  {
-    "ku": "aşxane",
-    "tr": "Lokanta. (d.)"
-  },
-  {
-    "ku": "atare",
-    "tr": "Yalan, aslı astarı olmayan şey. atare tuneye: Yalandır, asılsızdır; aslı astarı yok."
-  },
-  {
-    "ku": "atle nekirin",
-    "tr": "Ara vermemek, hiç duraksamamamak."
-  },
-  {
-    "ku": "av",
-    "tr": "Su. av ji devê wî çûn: Ağzının suyu akmak, ağzı sulanmak. ava ruyê wî rijyan: Utanma duygusunu yitirmek, hayasızlaşmak. av û av: Tümden, hiç geri gelmemecesine. (d.)"
-  },
-  {
-    "ku": "ava",
-    "tr": "Bayındır, şen."
-  },
-  {
-    "ku": "ava bûn",
-    "tr": "1) Bayındır olmak, şenelmek. 2) Güneş, ay ve yıldızların batması."
-  },
-  {
-    "ku": "ava firngiya",
-    "tr": "Domates salçası."
-  },
-  {
-    "ku": "ava îsota",
-    "tr": "Biber salçası."
-  },
-  {
-    "ku": "ava kirin",
-    "tr": "Bayındır hale getirmek, şeneltmek."
-  },
-  {
-    "ku": "ava lamo",
-    "tr": "bkz. \"qazaxî\""
-  },
-  {
-    "ku": "ava reş",
-    "tr": "Glokom, kara su."
-  },
-  {
-    "ku": "ava şamika",
-    "tr": "bkz. \"ava firngiya\""
-  },
-  {
-    "ku": "avdan",
-    "tr": "Sulamak, su vermek."
-  },
-  {
-    "ku": "avdest",
-    "tr": "Abdest. (d.)"
-  },
-  {
-    "ku": "avdestxane",
-    "tr": "Abdesthane, hela. (d.)"
-  },
-  {
-    "ku": "avdew",
-    "tr": "Ayran, su katılmış ayran. (d.)"
-  },
-  {
-    "ku": "avêtin",
-    "tr": "Atmak. (davêje, bavêje)"
-  },
-  {
-    "ku": "avis",
-    "tr": "Gebe."
-  },
-  {
-    "ku": "avis bûn",
-    "tr": "Gebe olmak."
-  },
-  {
-    "ku": "avisî",
-    "tr": "Gebelik. (d.)"
-  },
-  {
-    "ku": "avis kirin",
-    "tr": "Gebe bırakmak."
-  },
-  {
-    "ku": "avî",
-    "tr": "1) Sulak toprak 2) Çiy, şebnem. (d.)"
-  },
-  {
-    "ku": "avîtin",
-    "tr": "Atmak. (davîje, bavîje)"
-  },
-  {
-    "ku": "avlik",
-    "tr": "Sperm, meni. (d.)"
-  },
-  {
-    "ku": "avnisêl",
-    "tr": "Süzgeç. (d.)"
-  },
-  {
-    "ku": "avrênc",
-    "tr": "bkz. \"meşk\""
-  },
-  {
-    "ku": "avrî",
-    "tr": "Yiyecek içecek artığı. (d.)"
-  },
-  {
-    "ku": "avsinîk",
-    "tr": "Arsenik. (d.)"
-  },
-  {
-    "ku": "avsîrk",
-    "tr": "Sarımsaklı papara. (d.)"
-  },
-  {
-    "ku": "avşî",
-    "tr": "Ark vb. yerlerin kenarlarında yeşeren ot, çimen vb. şeyler. (d.)"
-  },
-  {
-    "ku": "avşo",
-    "tr": "İçecek artığı. (d.)"
-  },
-  {
-    "ku": "avşolik",
-    "tr": "Küflü."
-  },
-  {
-    "ku": "avzêm",
-    "tr": "Su kaynağı. (d.)"
-  },
-  {
-    "ku": "avzûm",
-    "tr": "Toka. (d.)"
-  },
-  {
-    "ku": "awiqandin",
-    "tr": "Geciktirmek, aksatmak. (diawiqîne, biawiqîne)"
-  },
-  {
-    "ku": "awiqîn",
-    "tr": "Gecikmek, aksamak. mîz lê awiqîye: idrar Zorluğu çekiyor. (diawiqe, biawiqe)"
-  },
-  {
-    "ku": "awir",
-    "tr": "Dik bakış. (d.)"
-  },
-  {
-    "ku": "ax (1)",
-    "tr": "Toprak. (d.)"
-  },
-  {
-    "ku": "ax (2)",
-    "tr": "Hayıflanma sözcüğü, ah!"
-  },
-  {
-    "ku": "axa",
-    "tr": "Ağa, yörenin başı, aşiret reisi."
-  },
-  {
-    "ku": "axatî",
-    "tr": "Ağalık. (d.)"
-  },
-  {
-    "ku": "axbandir",
-    "tr": "İlkbaharda tarlalarda biten yapraksız, çiçeksiz olup pişirilerek yemeği yapılan bir bitki. (d.)"
-  },
-  {
-    "ku": "axbanî",
-    "tr": "Bir çeşit kadın başörtüsü. (d.)"
-  },
-  {
-    "ku": "axifin",
-    "tr": "(Yara) İrin bağlamak. (diaxife, biaxife)"
-  },
-  {
-    "ku": "axirê",
-    "tr": "Nihayet, sonunda. axirê çû: Nihayet gitti. axirê em jê pa bûn: Nihayet ondan kurtulduk."
-  },
-  {
-    "ku": "axîn",
-    "tr": "Ah çekme, hayıflanma. (d.)"
-  },
-  {
-    "ku": "axîn kirin",
-    "tr": "Ah çekmek, hayıflanmak."
-  },
-  {
-    "ku": "axret",
-    "tr": "Ahiret. (d.)"
-  },
-  {
-    "ku": "axretî",
-    "tr": "Ahretlik."
-  },
-  {
-    "ku": "axur",
-    "tr": "Ahır. (e.)"
-  },
-  {
-    "ku": "ax û wax",
-    "tr": "Ah vah."
-  },
-  {
-    "ku": "ay",
-    "tr": "Ay, Ah, of."
-  },
-  {
-    "ku": "ayid",
-    "tr": "Ait."
-  },
-  {
-    "ku": "ayîn",
-    "tr": "Ah, beddua. (d.)"
-  },
-  {
-    "ku": "az",
-    "tr": "Başsağlığı ziyareti. (d.)"
-  },
-  {
-    "ku": "azeb",
-    "tr": "Bekâr."
-  },
-  {
-    "ku": "azebî",
-    "tr": "Bekârlık. (d.)"
-  },
-  {
-    "ku": "azirîn",
-    "tr": "(Yara) Azmak, yaranın azması. (diazire, biazire)"
-  },
-  // PDF Dosyasından B harfi ile başlayan girişler
-  {
-    "ku": "ba (1)",
-    "tr": "Rüzgar, yel. bayê bezê: Çabucak, acele olarak, hızlı bir şekilde. bayê bezê here bîne: Acele olarak, koşa koşa git getir. bayê kur: Şimal rüzgarı, lodos. bayê pîrê: Kocakarı fırtınası. ber bê ketin: Rüzgara kapılmak. li ber bê çûn: Rüzgara kapılmak. (e.)"
-  },
-  {
-    "ku": "babaegîd",
-    "tr": "Babayiğit."
-  },
-  {
-    "ku": "babed",
-    "tr": "Çeşit, tür. (d.)"
-  },
-  {
-    "ku": "babilûk",
-    "tr": "Siğil. (d.)"
-  },
-  {
-    "ku": "badan",
-    "tr": "Bükmek, burmak."
-  },
-  {
-    "ku": "badok",
-    "tr": "Büküm. (d.)"
-  },
-  {
-    "ku": "bafûn",
-    "tr": "Alüminyum. (e.)"
-  },
-  {
-    "ku": "bagirtî",
-    "tr": "Şişik, şişmiş olan."
-  },
-  {
-    "ku": "bahol",
-    "tr": "Bavul. (d.)"
-  },
-  {
-    "ku": "bahoz",
-    "tr": "Fırtına, bora. (d.)"
-  },
-  {
-    "ku": "bahr-bahr",
-    "tr": "Meleme. (d.)"
-  },
-  {
-    "ku": "bahryan",
-    "tr": "Melemek. (dibahre, bibahre)"
-  },
-  {
-    "ku": "bajar",
-    "tr": "Şehir. (e.)"
-  },
-  {
-    "ku": "bajarî",
-    "tr": "Şehirli."
-  },
-  {
-    "ku": "bajarîko",
-    "tr": "Şehirlivari, şehirli usulü."
-  },
-  {
-    "ku": "bajarvan",
-    "tr": "Kırdan şehre gidip gelenlere denir."
-  },
-  {
-    "ku": "bakevn",
-    "tr": "Koyun ve sığırlarda romatizma. (d.)"
-  },
-  {
-    "ku": "ba kirin",
-    "tr": "Yellendirmek, rüzgara savurmak, sallamak."
-  },
-  {
-    "ku": "bakur",
-    "tr": "Kuzey. (e.)"
-  },
-  {
-    "ku": "bakurî",
-    "tr": "Kuzeyli."
-  },
-  {
-    "ku": "bal",
-    "tr": "Dikkat, dikkat etme. bala xu dayin: dikkat etmek, gözlemlemek. (d.)"
-  },
-  {
-    "ku": "balcan",
-    "tr": "Patlıcan. (e.)"
-  },
-  {
-    "ku": "Balcîqa",
-    "tr": "Belçika ve Belçika malı bir çeşit tabanca. (d.)"
-  },
-  {
-    "ku": "balgî",
-    "tr": "Yastık. (e.)"
-  },
-  {
-    "ku": "balgîyê mara",
-    "tr": "Yılanyastığı otu."
-  },
-  {
-    "ku": "balîf",
-    "tr": "bkz. \"balgî\""
-  },
-  {
-    "ku": "balo",
-    "tr": "Hiç olmazsa, bari."
-  },
-  {
-    "ku": "banandin",
-    "tr": "Alıştırmak. (dibanîne, bibanîne)"
-  },
-  {
-    "ku": "bane",
-    "tr": "Koyunların ilkbahar otlağı. (d.)"
-  },
-  {
-    "ku": "ban kirin",
-    "tr": "Çağırmak."
-  },
-  {
-    "ku": "banyan",
-    "tr": "Alışmak. (dibane, bibane)"
-  },
-  {
-    "ku": "bapêş",
-    "tr": "Nezle. (d.)"
-  },
-  {
-    "ku": "bapîr",
-    "tr": "Dede. (e.)"
-  },
-  {
-    "ku": "baq",
-    "tr": "Demet. (d.)"
-  },
-  {
-    "ku": "baq-baq",
-    "tr": "Gıdaklama, tavuğun \"gıt gıt gıdak\" diye ses çıkarması. (d.)"
-  },
-  {
-    "ku": "baqil",
-    "tr": "Uslu, akıllı."
-  },
-  {
-    "ku": "baqil bûn",
-    "tr": "Uslanmak, akıllanmak."
-  },
-  {
-    "ku": "baqilî",
-    "tr": "Usluluk, akıllılık. (d.)"
-  },
-  {
-    "ku": "baqîn",
-    "tr": "Tepki. (d.)"
-  },
-  {
-    "ku": "bar",
-    "tr": "Yük. bi bara: Sürüyle, pek çok. (e.)"
-  },
-  {
-    "ku": "baran",
-    "tr": "Yağmur. baran sekinî ga cil kir: İş işten geçtikten sonra davrananlar için söylenir. ji ber baranê revya ber çironekê: Güç bir durumdan kurtulayım derken daha kötüsüyle karşılaşmayı anlatır. (d.)"
-  },
-  {
-    "ku": "barandin",
-    "tr": "Yağdırmak."
-  },
-  {
-    "ku": "barçêmk",
-    "tr": "Yarasa. (e.)"
-  },
-  {
-    "ku": "barîn",
-    "tr": "Yağmak."
-  },
-  {
-    "ku": "bar kirin",
-    "tr": "Yüklemek, taşınmak."
-  },
-  {
-    "ku": "bask",
-    "tr": "Kanat. (e.)"
-  },
-  {
-    "ku": "bastiq",
-    "tr": "Pestil. (e.)"
-  },
-  {
-    "ku": "baş",
-    "tr": "İyi."
-  },
-  {
-    "ku": "baş bûn",
-    "tr": "İyi olmak, iyileşmek."
-  },
-  {
-    "ku": "başî",
-    "tr": "İyilik. (d.)"
-  },
-  {
-    "ku": "baş kirin",
-    "tr": "İyi etmek, iyileştirmek."
-  },
-  {
-    "ku": "başqe",
-    "tr": "Başka."
-  },
-  {
-    "ku": "baştir",
-    "tr": "Daha iyi."
-  },
-  {
-    "ku": "başwala",
-    "tr": "Donsuz, kilotsuz."
-  },
-  {
-    "ku": "batî",
-    "tr": "Testis. (e.)"
-  },
-  {
-    "ku": "batofk",
-    "tr": "Diyarbakır Türkçesinde \"batof\" şeklinde telaffuz edilen, ilaç olarak da kullanılan bir bitki. Bitkinin toprak üstünde kalan kısmı kurutulup kurt düşürmede, yarayı iyileştirmede, sarılık hastalığını gidermede kullanılır. (Lat. Herba Hyperici) (d.)"
-  },
-  {
-    "ku": "bav",
-    "tr": "Baba. (e.)"
-  },
-  {
-    "ku": "bavmarî",
-    "tr": "Üvey baba. (e.)"
-  },
-  {
-    "ku": "bavo",
-    "tr": "Babaya hitap şekli."
-  },
-  {
-    "ku": "bavtî",
-    "tr": "Babalık, baba olma durumu. (d.)"
-  },
-  {
-    "ku": "bav û kal",
-    "tr": "Ecdat, ata, cet."
-  },
-  {
-    "ku": "bawer",
-    "tr": "İnanan, inanmış olan."
-  },
-  {
-    "ku": "bawer bûn",
-    "tr": "İnanmak, güvenmek."
-  },
-  {
-    "ku": "bawerî",
-    "tr": "İnanç, iman, güven. (d.)"
-  },
-  {
-    "ku": "bawer kirin",
-    "tr": "İnanmak."
-  },
-  {
-    "ku": "bawî",
-    "tr": "Romatizmalı."
-  },
-  {
-    "ku": "bawîşk",
-    "tr": "Esneme."
-  },
-  {
-    "ku": "baxçe",
-    "tr": "Bahçe. (e.)"
-  },
-  {
-    "ku": "baxdenos",
-    "tr": "Maydanoz. (d.)"
-  },
-  {
-    "ku": "baz",
-    "tr": "Şahin. (e.)"
-  },
-  {
-    "ku": "bazar",
-    "tr": "1) Pazar (günü). 2) Pazarlık. (d.)"
-  },
-  {
-    "ku": "bazar kirin",
-    "tr": "Pazarlık etmek."
-  },
-  {
-    "ku": "bazdan",
-    "tr": "1) Koşmak. 2) Halay çekmek."
-  },
-  {
-    "ku": "bazin",
-    "tr": "Bilezik. (e.)"
-  },
-  {
-    "ku": "bazinê hustu",
-    "tr": "Köprücük kemiği."
-  },
-  {
-    "ku": "bec",
-    "tr": "Yabani, susuz toprak parçası."
-  },
-  {
-    "ku": "beden",
-    "tr": "1) Sur. 2) Vücut. (d.)"
-  },
-  {
-    "ku": "bedew",
-    "tr": "Şuh, alımlı, çekici."
-  },
-  {
-    "ku": "befş",
-    "tr": "Kaval kemiği."
-  },
-  {
-    "ku": "beg",
-    "tr": "Bey."
-  },
-  {
-    "ku": "begtî",
-    "tr": "Beylik. (d.)"
-  },
-  {
-    "ku": "behc",
-    "tr": "Kızgınlık, öfke. (d.)"
-  },
-  {
-    "ku": "behecandin",
-    "tr": "Kızdırmak, öfkelendirmek."
-  },
-  {
-    "ku": "behecîn",
-    "tr": "Kızmak, öfkelenmek."
-  },
-  {
-    "ku": "behr",
-    "tr": "Deniz. (d.)"
-  },
-  {
-    "ku": "behs",
-    "tr": "Bahsetme. (d.)"
-  },
-  {
-    "ku": "behs kirin",
-    "tr": "Bahsetmek."
-  },
-  {
-    "ku": "behzî",
-    "tr": "Bembeyaz, apak kimse."
-  },
-  {
-    "ku": "bejn",
-    "tr": "Boy. bejn revandin: Boy atmak, boyu uzamak. bejn û bal: Endam, boy pos. (d.)"
-  },
-  {
-    "ku": "bel (1)",
-    "tr": "Kulakları dik olan hayvan."
-  },
-  {
-    "ku": "bela (1)",
-    "tr": "Bela. bela xu dîyin: Yaptığı kötülüklerin karşılığını bulmak; belasını bulmak. bela xu tê dan: (Biri) Başına bela olmak, (ona) belasını sürmek. li bela xu geryan: Belasını aramak. li belê geryan: Bela aramak. (d.)"
-  },
-  {
-    "ku": "bela (2)",
-    "tr": "Dağınık."
-  },
-  {
-    "ku": "bela bûn",
-    "tr": "Dağılmak."
-  },
-  {
-    "ku": "bela kirin",
-    "tr": "Dağıtmak."
-  },
-  {
-    "ku": "belakir",
-    "tr": "Belalı kimse."
-  },
-  {
-    "ku": "belaş",
-    "tr": "Bedava. mift î belaş: Çok ucuz, sudan ucuz."
-  },
-  {
-    "ku": "belaşî",
-    "tr": "Bir şeyin bedava olması durumu. (d.)"
-  },
-  {
-    "ku": "belatewş",
-    "tr": "Boşuna, beyhude."
-  },
-  {
-    "ku": "belek",
-    "tr": "Alaca."
-  },
-  {
-    "ku": "belek bûn",
-    "tr": "Alacalaşmak."
-  },
-  {
-    "ku": "belek kirin",
-    "tr": "Alacalaştırmak."
-  },
-  {
-    "ku": "belekî",
-    "tr": "Alacalık. (d.)"
-  },
-  {
-    "ku": "belengaz",
-    "tr": "Yoksul, perişan."
-  },
-  {
-    "ku": "belengazî",
-    "tr": "Yoksulluk, perişanlık. (d.)"
-  },
-  {
-    "ku": "belhazirî",
-    "tr": "Hali hazırda."
-  },
-  {
-    "ku": "beli-reş",
-    "tr": "Siyah renkli ve dik kulaklı hayvan."
-  },
-  {
-    "ku": "belk",
-    "tr": "Yaprak. (d.)"
-  },
-  {
-    "ku": "belka guh",
-    "tr": "Kulak tozu."
-  },
-  {
-    "ku": "bel kirin",
-    "tr": "Ayakta işemek."
-  },
-  {
-    "ku": "belovacî",
-    "tr": "Tersyüz."
-  },
-  {
-    "ku": "beloxwarî",
-    "tr": "Eğri büğrü."
-  },
-  {
-    "ku": "belqitandin",
-    "tr": "Gebertmek. (dibelqitîne, bibelqitîne)"
-  },
-  {
-    "ku": "belqitîn",
-    "tr": "Gebermek. belqityê: Geberesice! (kadın için). belqityo: Geberesice! (erkek için)."
-  },
-  {
-    "ku": "belût",
-    "tr": "Domalma."
-  },
-  {
-    "ku": "belût bûn",
-    "tr": "Domalmak."
-  },
-  {
-    "ku": "belût kirin",
-    "tr": "Domaltmak."
-  },
-  {
-    "ku": "belxem",
-    "tr": "Balgam. (d.)"
-  },
-  {
-    "ku": "ben",
-    "tr": "İp. benê sola: Ayakkabı bağı. (e.)"
-  },
-  {
-    "ku": "bencik",
-    "tr": "Yabani haşhaş. (d.)"
-  },
-  {
-    "ku": "bend",
-    "tr": "Sınır taşları. (d.)"
-  },
-  {
-    "ku": "bendazik",
-    "tr": "İri göbekli kimse."
-  },
-  {
-    "ku": "bende",
-    "tr": "Birini veya bir şeyi bekleme."
-  },
-  {
-    "ku": "bendik",
-    "tr": "Peynire katılan bir bitki. (d.)"
-  },
-  {
-    "ku": "bendike",
-    "tr": "Çuldan oluşturulan büyük torba, büyük çuval. (d.)"
-  },
-  {
-    "ku": "bend kirin",
-    "tr": "Taş dizmek, taşlardan set yapmak."
-  },
-  {
-    "ku": "bengulî",
-    "tr": "Saç bağı. (d.)"
-  },
-  {
-    "ku": "benîşt",
-    "tr": "Sakız. (e.)"
-  },
-  {
-    "ku": "benkulabe",
-    "tr": "Sabanın, öküzün boynuna takılan halka kısmı."
-  },
-  {
-    "ku": "beq",
-    "tr": "Kurbağa. (e.)"
-  },
-  {
-    "ku": "beqa nekirin",
-    "tr": "Anında, sesini bile çıkaramadan ölmek."
-  },
-  {
-    "ku": "beqê becî",
-    "tr": "Kara kurbağası."
-  },
-  {
-    "ku": "ber (1)",
-    "tr": "Kilim. 2) Aşiretin kolu. (d.)"
-  },
-  {
-    "ku": "ber (2)",
-    "tr": "Astar. (e.)"
-  },
-  {
-    "ku": "ber (3)",
-    "tr": "Ürün anlamında yalnızca \"sêberî\" (üç defa doğum yapmış, üç defa ürün vermiş koyun), \"çarberî\" (dört defa doğum yapmış, dört defa ürün vermiş koyun) gibi kelimelerde kullanılır."
-  },
-  {
-    "ku": "ber (4)",
-    "tr": "Ön, ön taraf. ber xu nedîyin: Rahat yüzü görmemek. berê xu bi wî da kirin: Ona yüzünü dönmek. berê xu guherandin: Yüzünü (birinden) çevirmek."
-  },
-  {
-    "ku": "beredayî",
-    "tr": "Serseri, başıboş kimse."
-  },
-  {
-    "ku": "beradayîtî",
-    "tr": "Serserilik, başıboşluk. (d.)"
-  },
-  {
-    "ku": "beran",
-    "tr": "Koç. (e.)"
-  },
-  {
-    "ku": "berate",
-    "tr": "Leş. (e.)"
-  },
-  {
-    "ku": "berayî",
-    "tr": "En. (d.)"
-  },
-  {
-    "ku": "beraz",
-    "tr": "Domuz. (e.)"
-  },
-  {
-    "ku": "berbangî",
-    "tr": "Sabah vakti koyun otlatması. (d.)"
-  },
-  {
-    "ku": "berbar",
-    "tr": "İş yapabilme gücü. ji berbarê xu da ketin: Elden ayaktan düşmek. diya min ji berbarê xu da ketîye: Annem elden ayaktan düşmüş."
-  },
-  {
-    "ku": "berbat",
-    "tr": "Berbat."
-  },
-  {
-    "ku": "berbat bûn",
-    "tr": "Berbat olmak."
-  },
-  {
-    "ku": "berbatî",
-    "tr": "Berbat olma durumu, berbatlık. (d.)"
-  },
-  {
-    "ku": "berbat kirin",
-    "tr": "Berbatlaştırmak."
-  },
-  {
-    "ku": "berbazin",
-    "tr": "Bileziğin önüne takılan süs boncuğu. (e.)"
-  },
-  {
-    "ku": "berbejn",
-    "tr": "Boy muskası. (d.)"
-  },
-  {
-    "ku": "berber",
-    "tr": "Takas etme, değiş tokuş."
-  },
-  {
-    "ku": "berberoşk",
-    "tr": "bkz. \"geneg\""
-  },
-  {
-    "ku": "berbijêr",
-    "tr": "Aşağıya doğru."
-  },
-  {
-    "ku": "berbijor",
-    "tr": "Yukarıya doğru."
-  },
-  {
-    "ku": "berbû",
-    "tr": "Gelin alayı. (e.)"
-  },
-  {
-    "ku": "berçem",
-    "tr": "Paytak, paytak bacaklı."
-  },
-  {
-    "ku": "berçok",
-    "tr": "Çoban kepeneğinde çobanın sopasını koyduğu bölüm. (d.)"
-  },
-  {
-    "ku": "berdan",
-    "tr": "Bırakmak, salıvermek. bera hev dan: Birbirine düşürmek, birbirine bırakmak. berde binê te erd e!: (Biri aşırı yalan söylediğinde) \"Ha söyle ha söyle kimsenin inandığı yok zaten.\" berdê berdê: Kim kime dum duma."
-  },
-  {
-    "ku": "berdayî",
-    "tr": "Bırakılmış, salıverilmiş olan."
-  },
-  {
-    "ku": "berdelav kirin",
-    "tr": "Koyunları su kıyısına götürüp su içmelerini sağlamak."
-  },
-  {
-    "ku": "berdest",
-    "tr": "Düşkün, aciz."
-  },
-  {
-    "ku": "berdevk",
-    "tr": "Kapı önü. (e.)"
-  },
-  {
-    "ku": "berdêl",
-    "tr": "Karşılıklı kız alıp verme, takas etme."
-  },
-  {
-    "ku": "berdêlî",
-    "tr": "Karşılılı kız alıp verme biçimindeki evliliklerde evlenen kızlardan her biri. (d.)"
-  },
-  {
-    "ku": "berdêlî kirin",
-    "tr": "Karşılıklı kız alıp vermek, takas etmek."
-  },
-  {
-    "ku": "berdilk",
-    "tr": "Göğüslük. (d.)"
-  },
-  {
-    "ku": "berdîr",
-    "tr": "bkz. \"berindîr\""
-  },
-  {
-    "ku": "beref kirin",
-    "tr": "Toplamak, bir araya getirmek, derlemek."
-  },
-  {
-    "ku": "berembîlo",
-    "tr": "Parabellum marka tabanca. (d.)"
-  },
-  {
-    "ku": "berindîr",
-    "tr": "3 Yaşındaki dişi koyun. (d.)"
-  },
-  {
-    "ku": "berî",
-    "tr": "-den önce. berî nîvro: Öğleden önce"
-  },
-  {
-    "ku": "berê",
-    "tr": "Önce, eskiden. ji berê da: Uzun zamandan beri, eskiden beri, öteden beri."
-  },
-  {
-    "ku": "berjêr",
-    "tr": "Aşağı doğru."
-  },
-  {
-    "ku": "berjor",
-    "tr": "Yukarı doğru."
-  },
-  {
-    "ku": "berêberê",
-    "tr": "İlk önce."
-  },
-  {
-    "ku": "berê kemberê",
-    "tr": "İlaç olarak da kullanılan bir ot."
-  },
-  {
-    "ku": "berketî",
-    "tr": "Meftun. ez ne berketiya te me: Sana meftun değilim."
-  },
-  {
-    "ku": "berketin",
-    "tr": "Üzülmek."
-  },
-  {
-    "ku": "berket",
-    "tr": "Bereket. (d.)"
-  },
-  {
-    "ku": "berêvarê",
-    "tr": "Akşamüstü."
-  },
-  {
-    "ku": "berf",
-    "tr": "Kar. (d.)"
-  },
-  {
-    "ku": "bermal",
-    "tr": "Kilim. (d.)"
-  },
-  {
-    "ku": "berferatî",
-    "tr": "Fırat nehri kıyısında oturanlara denir."
-  },
-  {
-    "ku": "bergend",
-    "tr": "Karşılık, değer. ez ê li solên te sê cot gore bidim te: Ayakkabılarına karşılık üç çift çorap vereceğim sana. Asê bergendî deh keçika ye: Asê on kıza bedeldir."
-  },
-  {
-    "ku": "berga",
-    "tr": "1 Yaşını geçmiş, döllenme çağına gelmiş olan dişi sığır."
-  },
-  {
-    "ku": "bergiro",
-    "tr": "bkz. \"geneg\""
-  },
-  {
-    "ku": "bergeryan",
-    "tr": "Yalvarmak. ez pir li ber bavê xu geryam, dîsa jî nenermijî: Babama çok yalvardım, yine de yumuşamadı."
-  },
-  {
-    "ku": "berger",
-    "tr": "Yalvarma, yalvarış. (d.)"
-  },
-  {
-    "ku": "bermalî",
-    "tr": "Ev hanımı. (d.)"
-  },
-  {
-    "ku": "bergirtin",
-    "tr": "Hayvanların gebe kalması."
-  },
-  {
-    "ku": "bermirad",
-    "tr": "Evlenme çağına gelmiş olan."
-  },
-  {
-    "ku": "bergîr",
-    "tr": "1) Beygir 2) İnatçı kadın. (d.)"
-  },
-  {
-    "ku": "bermîl",
-    "tr": "Yiyilebilen bir bitki."
-  },
-  {
-    "ku": "berguherk",
-    "tr": "Şafak öncesi koyun otlatması. (d.)"
-  },
-  {
-    "ku": "bernîr",
-    "tr": "Çift öküzlerinde boyunduruk ipi."
-  },
-  {
-    "ku": "beridîn",
-    "tr": "(İnsan, hayvan ve bitki için) Olgunlaşmak, gövermek. (diberide, biberide)"
-  },
-  {
-    "ku": "bero",
-    "tr": "Meşe palamudu. bero ji ceftê da ket, go dev î çere ye!: Soyunu hor görenler için söylenir. (e.)"
-  },
-  {
-    "ku": "ber vî",
-    "tr": "-e doğru. ber vî min bîne: Bana doğru getir."
-  },
-  {
-    "ku": "beroş",
-    "tr": "Kazan. (d.)"
-  },
-  {
-    "ku": "berrînî",
-    "tr": "Çöllük."
-  },
-  {
-    "ku": "berserî",
-    "tr": "Başucu."
-  },
-  {
-    "ku": "berrî",
-    "tr": "Çöl. (d.)"
-  },
-  {
-    "ku": "bersîf",
-    "tr": "Yanıt. (d.)"
-  },
-  {
-    "ku": "berpal",
-    "tr": "Yokuşlu."
-  },
-  {
-    "ku": "bersîf dan",
-    "tr": "Yanıtlamak."
-  },
-  {
-    "ku": "berşoşk",
-    "tr": "Mide ekşimesi."
-  },
-  {
-    "ku": "berşoşkî bûn",
-    "tr": "Midesi ekşimek."
-  },
-  {
-    "ku": "bertir",
-    "tr": "Daha önceki."
-  },
-  {
-    "ku": "bertîl",
-    "tr": "Rüşvet. (d.)"
-  },
-  {
-    "ku": "bervînek",
-    "tr": "Kadınların, yün eğirirken yanlarına takıp iği üzerinde kaydırdıkları kösele parçası. (d.)"
-  },
-  {
-    "ku": "berwar",
-    "tr": "Yamaç. (e.)"
-  },
-  {
-    "ku": "berx",
-    "tr": "Kuzu."
-  },
-  {
-    "ku": "berxudan",
-    "tr": "Direnmek."
-  },
-  {
-    "ku": "berxudar",
-    "tr": "Berhudar. berxudar be: \"Hoş geldin\" sözüne karşılık olarak söylenir; \"hoş bulduk\", \"safa bulduk.\""
-  },
-  {
-    "ku": "berxudarî",
-    "tr": "Selamet, esenlik. (d.)"
-  },
-  {
-    "ku": "berxur",
-    "tr": "Koyunların etek kısmında oluşan bir tür kaşıntı hastalığı. (d.)"
-  },
-  {
-    "ku": "berzendk",
-    "tr": "Kol yakası. (d.)"
-  },
-  {
-    "ku": "berzewac",
-    "tr": "Evlenme çağına gelmiş olan."
-  },
-  {
-    "ku": "berzik",
-    "tr": "Etek kılları. (d.)"
-  },
-  {
-    "ku": "bes",
-    "tr": "Yeter."
-  },
-  {
-    "ku": "bes bûn",
-    "tr": "Yeter olmak."
-  },
-  {
-    "ku": "best",
-    "tr": "Derin olmayan vadi. (d.)"
-  },
-  {
-    "ku": "beşt",
-    "tr": "Kalın direk, kiriş. (e.)"
-  },
-  {
-    "ku": "bet",
-    "tr": "Toy kuşu. (d.)"
-  },
-  {
-    "ku": "beta fiso",
-    "tr": "Bir tür toy kuşu."
-  },
-  {
-    "ku": "betal",
-    "tr": "İşsiz güçsüz, işi olmayan, boşta olan."
-  },
-  {
-    "ku": "betalî",
-    "tr": "İşsiz güçsüz olma, boşta olma durumu. (d.)"
-  },
-  {
-    "ku": "betal kirin",
-    "tr": "Paydos etmek."
-  },
-  {
-    "ku": "betan",
-    "tr": "Elbise astarı. (e.)"
-  },
-  {
-    "ku": "betanî",
-    "tr": "Battaniye. (d.)"
-  },
-  {
-    "ku": "betilandin",
-    "tr": "Yormak, yorgun düşürmek."
-  },
-  {
-    "ku": "betilîn",
-    "tr": "Yorulmak."
-  },
-  {
-    "ku": "betin",
-    "tr": "Ana rahmi. (e.)"
-  },
-  {
-    "ku": "betr",
-    "tr": "Şakak. (d.)"
-  },
-  {
-    "ku": "Bexda",
-    "tr": "Bağdat. (d.)"
-  },
-  {
-    "ku": "bexdadî",
-    "tr": "Bir kefiye çeşidi. (d.)"
-  },
-  {
-    "ku": "bexşîş",
-    "tr": "Bahşiş. (d.)"
-  },
-  {
-    "ku": "bext",
-    "tr": "1) Güvenirlik. 2) Baht, talih. (e.)"
-  },
-  {
-    "ku": "bextreş",
-    "tr": "Bahtı kara, kötü talihli."
-  },
-  {
-    "ku": "bextreşî",
-    "tr": "Bahtı kara olma durumu, kötü talihlilik. (d.)"
-  },
-  {
-    "ku": "beyar",
-    "tr": "Ekilmemiş arazi. (d.)"
-  },
-  {
-    "ku": "beyîk",
-    "tr": "Döven veya benzeri araçların, hayvana bağlanan iki uzun ağacı. (d.)"
-  },
-  {
-    "ku": "beytar",
-    "tr": "Veteriner."
-  },
-  {
-    "ku": "bez (1)",
-    "tr": "İçyağı. (e.)"
-  },
-  {
-    "ku": "bez (2)",
-    "tr": "Koşu. (d.)"
-  },
-  {
-    "ku": "beza",
-    "tr": "Koşucu."
-  },
-  {
-    "ku": "bezyan",
-    "tr": "Koşmak."
-  },
-  {
-    "ku": "bê",
-    "tr": "Gayrî, -den başka, -siz. bê lome be: \"Allah saklasın\" anlamındaki söz."
-  },
-  {
-    "ku": "bêar",
-    "tr": "Arsız."
-  },
-  {
-    "ku": "bêav",
-    "tr": "Susuz, suyu olmayan."
-  },
-  {
-    "ku": "bêbav",
-    "tr": "Babasız."
-  },
-  {
-    "ku": "bêber",
-    "tr": "Ensiz."
-  },
-  {
-    "ku": "bêbext",
-    "tr": "1) Bahtsız. 2) Kalleş, hain."
-  },
-  {
-    "ku": "bêbextî",
-    "tr": "Kalleşlik, hainlik. (d.)"
-  },
-  {
-    "ku": "bêcî",
-    "tr": "Yersiz, yeri olmayan."
-  },
-  {
-    "ku": "bêçar",
-    "tr": "Çaresiz, zavallı."
-  },
-  {
-    "ku": "bêçare",
-    "tr": "Çaresiz."
-  },
-  {
-    "ku": "bêçarî",
-    "tr": "Çaresizlik. (d.)"
-  },
-  {
-    "ku": "bêçik",
-    "tr": "Ellik, ekin biçenlerin kullandığı ellik aleti. (d.)"
-  },
-  {
-    "ku": "bêçî",
-    "tr": "Parmak. bêçiya şehdê: İşaret parmağı. bêçiya xu di her qulî (qulikê) ra kirin: Burnunu her işe sokmak. (d.)"
-  },
-  {
-    "ku": "bêdawî",
-    "tr": "Sonsuz, sonu olmayan.."
-  },
-  {
-    "ku": "bêdeng",
-    "tr": "Sessiz, sakin."
-  },
-  {
-    "ku": "bêdengî",
-    "tr": "Sessizlik. (d.)"
-  },
-  {
-    "ku": "bêderd",
-    "tr": "Dertsiz, tasasız."
-  },
-  {
-    "ku": "bêdest",
-    "tr": "Elsiz."
-  },
-  {
-    "ku": "bênav",
-    "tr": "Adsız."
-  },
-  {
-    "ku": "bêdê",
-    "tr": "Anasız."
-  },
-  {
-    "ku": "bêdil",
-    "tr": "Gönülsüz."
-  },
-  {
-    "ku": "bêdîn",
-    "tr": "Dinsiz."
-  },
-  {
-    "ku": "bêesl",
-    "tr": "Soysuz, asılsız."
-  },
-  {
-    "ku": "bêguman",
-    "tr": "Şüphesiz."
-  },
-  {
-    "ku": "bêgune",
-    "tr": "Suçsuz, günahsız."
-  },
-  {
-    "ku": "bêhal",
-    "tr": "Halsiz."
-  },
-  {
-    "ku": "bêhawe",
-    "tr": "Biçimsiz."
-  },
-  {
-    "ku": "bêhemd",
-    "tr": "Gayri ihtiyari, bilmeyerek, istemeden."
-  },
-  {
-    "ku": "bêhemdî",
-    "tr": "İstek dışı olan, bilmeyerek olan, doğal olmayan gelişme."
-  },
-  {
-    "ku": "bêheş",
-    "tr": "Sersem, akılsız."
-  },
-  {
-    "ku": "bêheş bûn",
-    "tr": "Herhangi bir neden yüzünden zihni karışmak veya zekâsı uyuşmak, ne yaptığının farkında olmamak, sersemleşmek."
-  },
-  {
-    "ku": "bêheşî",
-    "tr": "Sersemlik. (d.)"
-  },
-  {
-    "ku": "bêheş kirin",
-    "tr": "Sersem etmek."
-  },
-  {
-    "ku": "bêhêl",
-    "tr": "Yansız, tarafsız."
-  },
-  {
-    "ku": "bêjin",
-    "tr": "Karısız."
-  },
-  {
-    "ku": "bêjing",
-    "tr": "Kalbur, elek. (d.)"
-  },
-  {
-    "ku": "bêjing kirin",
-    "tr": "Elemek, kalburdan geçirmek."
-  },
-  {
-    "ku": "bêkar",
-    "tr": "İşsiz."
-  },
-  {
-    "ku": "bêkes",
-    "tr": "Kimsesiz."
-  },
-  {
-    "ku": "bêkesî",
-    "tr": "Kimsesizlik. (d.)"
-  },
-  {
-    "ku": "bêkêf",
-    "tr": "Keyifsiz, neşesiz, moralsiz."
-  },
-  {
-    "ku": "bêkêr",
-    "tr": "Yararsız, faydasız."
-  },
-  {
-    "ku": "bêlûg",
-    "tr": "Bölük, askeri bölük. (d.)"
-  },
-  {
-    "ku": "bêmehd",
-    "tr": "Keyifsiz, moralsiz."
-  },
-  {
-    "ku": "bênamûs",
-    "tr": "Namussuz."
-  },
-  {
-    "ku": "bênder",
-    "tr": "Harman. (d.)"
-  },
-  {
-    "ku": "bêpar",
-    "tr": "Paysız, mahrum."
-  },
-  {
-    "ku": "bêpî",
-    "tr": "Kolsuz."
-  },
-  {
-    "ku": "bêpîr",
-    "tr": "Soysuz."
-  },
-  {
-    "ku": "bêpîrtî",
-    "tr": "Soysuzluk. (d.)"
-  },
-  {
-    "ku": "bêr (1)",
-    "tr": "Kürek. (d.)"
-  },
-  {
-    "ku": "bêrç",
-    "tr": "Keileri sağıma sürme işi. (d.)"
-  },
-  {
-    "ku": "bêrç kirin",
-    "tr": "Keçileri sağıma sürmek."
-  },
-  {
-    "ku": "bêrê",
-    "tr": "Yolsuz, yolu olmayan."
-  },
-  {
-    "ku": "bêrik",
-    "tr": "1) Küçük kürek. 2) bkz. \"pil\" (d.)"
-  },
-  {
-    "ku": "bêrim",
-    "tr": "Küçücük göl. (d.)"
-  },
-  {
-    "ku": "bêrî (1)",
-    "tr": "Cep. bêriya kefen tune: \"Para, ölürken götürülmez\" anlamında cimriler için söylenir. (d.)"
-  },
-  {
-    "ku": "bêrî (2)",
-    "tr": "Koyun sağımı ve koyun sağımının yapıldığı yer. (d.)"
-  },
-  {
-    "ku": "bêrî kirin",
-    "tr": "Koyunları sağmak."
-  },
-  {
-    "ku": "bêrîvan",
-    "tr": "Koyun sağan kız."
-  },
-  {
-    "ku": "bêr kirin (2)",
-    "tr": "1) Küremek. 2) Koyunları sağıma sürmek."
-  },
-  {
-    "ku": "bêruh",
-    "tr": "Ruhsuz, cansız, beti benzi kalmamış olan. bêruh mayin: Yüzü sararıp solmak, cansız ve güçsüz kalmak."
-  },
-  {
-    "ku": "bêrû",
-    "tr": "Yüzsüz, yüzü olmayan."
-  },
-  {
-    "ku": "Bêrût",
-    "tr": "Beyrut. (d.)"
-  },
-  {
-    "ku": "bêsemt",
-    "tr": "Terbiyesiz, görgüsüz kimse."
-  },
-  {
-    "ku": "bêsilme",
-    "tr": "Beslemelik (kimse)."
-  },
-  {
-    "ku": "bêsiûd",
-    "tr": "Talihsiz."
-  },
-  {
-    "ku": "bêsî",
-    "tr": "Karların çukur yerleri doldurması. (d.)"
-  },
-  {
-    "ku": "bêş",
-    "tr": "Salma, salma parası. (d.)"
-  },
-  {
-    "ku": "bêşewq",
-    "tr": "Işıksız."
-  },
-  {
-    "ku": "bêşîr",
-    "tr": "Sütsüz."
-  },
-  {
-    "ku": "bêtam",
-    "tr": "Tatsız."
-  },
-  {
-    "ku": "bêtar",
-    "tr": "1) Aslı astarı olmayan yalan, büyük yalan. 2) Çok iri, azman."
-  },
-  {
-    "ku": "bêtilî",
-    "tr": "Parmaksız."
-  },
-  {
-    "ku": "bêtir",
-    "tr": "Daha çok."
-  },
-  {
-    "ku": "bêtirs",
-    "tr": "Korkusuz, korkusuzca."
-  },
-  {
-    "ku": "bêtîn",
-    "tr": "Isısız."
-  },
-  {
-    "ku": "bêwec",
-    "tr": "Yüzsüz, uğursuz."
-  },
-  {
-    "ku": "bêwext",
-    "tr": "Vakitsiz."
-  },
-  {
-    "ku": "bêxatir",
-    "tr": "Hatırsız, kıymetsiz."
-  },
-  {
-    "ku": "bêxew",
-    "tr": "Uykusuz."
-  },
-  {
-    "ku": "bêxwedê",
-    "tr": "Allahsız."
-  },
-  {
-    "ku": "bêxwedî",
-    "tr": "Sahipsiz."
-  },
-  {
-    "ku": "bêxwedîtî",
-    "tr": "Sahipsizlik. (d.)"
-  },
-  {
-    "ku": "bêxwê",
-    "tr": "Tuzsuz."
-  },
-  {
-    "ku": "bêxwîn",
-    "tr": "Kansız."
-  },
-  {
-    "ku": "bêyom",
-    "tr": "Uğursuz."
-  },
-  {
-    "ku": "bêzar",
-    "tr": "1) Dilsiz. 2) Bezgin, bıkkın."
-  },
-  {
-    "ku": "bêzar bûn",
-    "tr": "Bezmek."
-  },
-  {
-    "ku": "bêzar kirin",
-    "tr": "Bezdirmek."
-  },
-  {
-    "ku": "bêzaro",
-    "tr": "Çocuksuz."
-  },
-  {
-    "ku": "bi",
-    "tr": "İle, Göre, vasıtasıyla."
-  },
-  {
-    "ku": "bi ber xistin",
-    "tr": "(Olumsuz yönde birine) Yol göstermek."
-  },
-  {
-    "ku": "bi cî",
-    "tr": "Yerli, yeri olan."
-  },
-  {
-    "ku": "biçûk",
-    "tr": "Küçük."
-  },
-  {
-    "ku": "biçûk bûn",
-    "tr": "Küçülmek."
-  },
-  {
-    "ku": "biçûk kirin",
-    "tr": "Küçültmek."
-  },
-  {
-    "ku": "biçûktî",
-    "tr": "Küçüklük. (d.)"
-  },
-  {
-    "ku": "biheş",
-    "tr": "Akıllı, zeki."
-  },
-  {
-    "ku": "bi heve bûn",
-    "tr": "İki şeyin birbirine yapışması, birbirine tutturulması. (\"bi hev ve bûn\"dan)"
-  },
-  {
-    "ku": "bi heve kirin",
-    "tr": "İki şeyi birbirine yapıştırmak, birbirine tutturmak. (\"bi hev ve kirin\" den)"
-  },
-  {
-    "ku": "bi hev ketin",
-    "tr": "Aralarında anlaşmazlık çıkmak, birbirine düşmek."
-  },
-  {
-    "ku": "bi hev xistin",
-    "tr": "İliklemek, birbirine tutturmak. qunçikê xu bi hev xe: Düğmelerini ilikle."
-  },
-  {
-    "ku": "bihîstin",
-    "tr": "Duymak. bihîstina gi min bihîst...: Duyduğum odur ki..."
-  },
-  {
-    "ku": "bihîv",
-    "tr": "Badem. (d.)"
-  },
-  {
-    "ku": "bih kirin",
-    "tr": "\"Höt\" demek, yıldırmak."
-  },
-  {
-    "ku": "bihost",
-    "tr": "Karış. (d.)"
-  },
-  {
-    "ku": "bihost kirin",
-    "tr": "Karışlamak."
-  },
-  {
-    "ku": "bijang",
-    "tr": "Kirpik. (e.)"
-  },
-  {
-    "ku": "bijare",
-    "tr": "Seçkin."
-  },
-  {
-    "ku": "bijartin",
-    "tr": "Ayıklamak."
-  },
-  {
-    "ku": "bijê/bijo",
-    "tr": "Çiş. (ça.)"
-  },
-  {
-    "ku": "bijmar",
-    "tr": "Kırkayak. (e.)"
-  },
-  {
-    "ku": "bijok",
-    "tr": "İmrenen."
-  },
-  {
-    "ku": "bijyan",
-    "tr": "İmrenmek. (dibije, bibije)"
-  },
-  {
-    "ku": "bikir",
-    "tr": "Bakire."
-  },
-  {
-    "ku": "bilbil",
-    "tr": "Bülbül. (e.)"
-  },
-  {
-    "ku": "bilbizîq",
-    "tr": "Yabani lale. (d.)"
-  },
-  {
-    "ku": "bilik",
-    "tr": "Pipi. (ça.)"
-  },
-  {
-    "ku": "bilind",
-    "tr": "Yüksek."
-  },
-  {
-    "ku": "bilind bûn",
-    "tr": "Yükselmek, yüksek olmak."
-  },
-  {
-    "ku": "bilindî",
-    "tr": "Yükseklik. (d.)"
-  },
-  {
-    "ku": "bilind kirin",
-    "tr": "Yükseltmek, yüksek etmek."
-  },
-  {
-    "ku": "bilî bûn",
-    "tr": "Oyalanmak, meşgul olmak."
-  },
-  {
-    "ku": "bilo",
-    "tr": "Pipi. (ça.)"
-  },
-  {
-    "ku": "bilq-bilq",
-    "tr": "Fokurdama, fokurtu. (d.)"
-  },
-  {
-    "ku": "bilqik",
-    "tr": "Su kabarcığı. (d.)"
-  },
-  {
-    "ku": "bilqyan",
-    "tr": "Fokurdamak. (dibilqe, bibilqe)"
-  },
-  {
-    "ku": "bilûr",
-    "tr": "Kaval. (d.)"
-  },
-  {
-    "ku": "bilûrvan",
-    "tr": "Kavalcı."
-  },
-  {
-    "ku": "bilxur",
-    "tr": "Bulgur. (d.)"
-  },
-  {
-    "ku": "bilxurhêr",
-    "tr": "Bulgur öğütme makinesiyle bulgur öğüten kimse, bulgur öğütücüsü."
-  },
-  {
-    "ku": "bilyan",
-    "tr": "Oyalanmak, meşgul olmak. Hêlîn bi bûka paçîn dibile: Hêlin bez bebekle oyalanıyor."
-  },
-  {
-    "ku": "bimbarek",
-    "tr": "Mübarek."
-  },
-  {
-    "ku": "bi min",
-    "tr": "Bence, bana sorarsan, fikrime göre."
-  },
-  {
-    "ku": "bin (1)",
-    "tr": "Alt. binê xu şil kirin: Altını ıslatmak. ji bin: Alttan, dipten. ji bin da: (Mecazi) Kökten, temelden."
-  },
-  {
-    "ku": "binav",
-    "tr": "Dişbudak ağacı. (d.)"
-  },
-  {
-    "ku": "binçeng",
-    "tr": "Koltukaltı. dan binçenga: Yaltaklanmak, yağ çekmek; koltuğuna vermek. (d.)"
-  },
-  {
-    "ku": "bindarî",
-    "tr": "Kadınların toplu bir şekilde ağaç gölgesinde iğ eğirmeleri. (d.)"
-  },
-  {
-    "ku": "bindest",
-    "tr": "El altında olan."
-  },
-  {
-    "ku": "binerdik",
-    "tr": "Yer elması. (d.)"
-  },
-  {
-    "ku": "binevş",
-    "tr": "Menekşe. (d.)"
-  },
-  {
-    "ku": "binê xetê",
-    "tr": "Sınırın öte tarafı."
-  },
-  {
-    "ku": "binge",
-    "tr": "Temel, esas. (d.)"
-  },
-  {
-    "ku": "binî",
-    "tr": "Alt, Dip. binî girtin: (Yemek) Dibi tutmak."
-  },
-  {
-    "ku": "binketin",
-    "tr": "Mağlup olmak. ew bi ser ketin, em jî bin ketin: Onlar galip geldiler biz ise yenildik."
-  },
-  {
-    "ku": "binkoz",
-    "tr": "Yeni doğmuş kuzuların altına serilen kurumuş ot, sap vb. şeyler. (d.)"
-  },
-  {
-    "ku": "binrax",
-    "tr": "Yere serilen yaygı. (d.)"
-  },
-  {
-    "ku": "bir (1)",
-    "tr": "Kısım, grup, sürü. (d.)"
-  },
-  {
-    "ku": "bira (1)",
-    "tr": "Erkek kardeş. (e.)"
-  },
-  {
-    "ku": "bira (2)",
-    "tr": "-sun (emir sözcüğü)"
-  },
-  {
-    "ku": "bira bi",
-    "tr": "Olsun! Tamam!"
-  },
-  {
-    "ku": "birabir",
-    "tr": "Kardeş götüren, kardeşi kardeşten ayıran, kardeşi baba evinden götüren. (Kadınlar için söylenir.)"
-  },
-  {
-    "ku": "birak",
-    "tr": "Ahbap, dost. (e.)"
-  },
-  {
-    "ku": "birakose",
-    "tr": "Yüzde dost kalpte hain olan kimse."
-  },
-  {
-    "ku": "bira qe",
-    "tr": "Olsun!"
-  },
-  {
-    "ku": "birastî",
-    "tr": "Gerçekten."
-  },
-  {
-    "ku": "biraştin",
-    "tr": "Izgara yapmak, kızartmak. (dibirêje, bibirêje)"
-  },
-  {
-    "ku": "biratî",
-    "tr": "Kardeşlik. (d.)"
-  },
-  {
-    "ku": "birazê",
-    "tr": "Erkek kardeş çocuğu."
-  },
-  {
-    "ku": "bire",
-    "tr": "Burç. (d.)"
-  },
-  {
-    "ku": "birçî",
-    "tr": "Aç. bi zikê birçî: Boş mideyle, aç karnına."
-  },
-  {
-    "ku": "birçî bûn",
-    "tr": "Acıkmak."
-  },
-  {
-    "ku": "birçî kirin",
-    "tr": "Acıktırmak."
-  },
-  {
-    "ku": "birçîtî",
-    "tr": "Açlık. (d.)"
-  },
-  {
-    "ku": "birek",
-    "tr": "Testere. (d.)"
-  },
-  {
-    "ku": "birin",
-    "tr": "Götürmek."
-  },
-  {
-    "ku": "birine",
-    "tr": "Pirinç. (d.)"
-  },
-  {
-    "ku": "biriqandin",
-    "tr": "Parlatmak."
-  },
-  {
-    "ku": "biriqîn",
-    "tr": "Parlamak."
-  },
-  {
-    "ku": "birîn",
-    "tr": "Yara. (d.)"
-  },
-  {
-    "ku": "birîndar",
-    "tr": "Yaralı."
-  },
-  {
-    "ku": "birîndar bûn",
-    "tr": "Yaralanmak."
-  },
-  {
-    "ku": "birîndarî",
-    "tr": "Yaralılık. (d.)"
-  },
-  {
-    "ku": "birîndar kirin",
-    "tr": "Yaralamak."
-  },
-  {
-    "ku": "birk",
-    "tr": "Karasaban tutağı. (d.)"
-  },
-  {
-    "ku": "birnotî",
-    "tr": "Burunotu. (d.)"
-  },
-  {
-    "ku": "birq",
-    "tr": "Katran. (d.)"
-  },
-  {
-    "ku": "birqonek",
-    "tr": "Parlak."
-  },
-  {
-    "ku": "birrîn",
-    "tr": "Kesmek, biçmek."
-  },
-  {
-    "ku": "birû",
-    "tr": "Kaş. (e.)"
-  },
-  {
-    "ku": "birûsîn",
-    "tr": "Işıldamak. (dibirûse, bibirûse)"
-  },
-  {
-    "ku": "birûsk",
-    "tr": "1) Yıldırım. 2) Alnın ortası, iki kaş arası. li birûska eniya wî xistin: Alnının ortasına (çatına) vurmak. (d.)"
-  },
-  {
-    "ku": "bi ser ketin",
-    "tr": "Yenmek, mağlup etmek. ez bi ser wî ketim: Onu yendim."
-  },
-  {
-    "ku": "bi ser xistin",
-    "tr": "Yenmek, mağlup etmek, başarmak. min bi ser wî xist: Onu mağlup ettim. min bi ser xist: Başardım."
-  },
-  {
-    "ku": "bisilman",
-    "tr": "Müslüman."
-  },
-  {
-    "ku": "bisilmantî",
-    "tr": "Müslümanlık. (d.)"
-  },
-  {
-    "ku": "bisk",
-    "tr": "Zülüf. (e.)"
-  },
-  {
-    "ku": "bismîla",
-    "tr": "Bismillah."
-  },
-  {
-    "ku": "bist",
-    "tr": "Sağ, esen, zinde."
-  },
-  {
-    "ku": "bişkaftin",
-    "tr": "(Dikiş) Sökmek. (dibişkive, bibişkive, bişkaft)"
-  },
-  {
-    "ku": "bişkivandin",
-    "tr": "(Dikiş) Sökmek. (dibişkivîne, bibişkivîne)"
-  },
-  {
-    "ku": "bişkivîn",
-    "tr": "(Dikiş) Sökülmek."
-  },
-  {
-    "ku": "bişkofk",
-    "tr": "Düğme. (bkz. \"qunçik\") (d.)"
-  },
-  {
-    "ku": "bişkul",
-    "tr": "Keçi, koyun ve deve dışkısı. (d.)"
-  },
-  {
-    "ku": "bi te",
-    "tr": "Sence, sana göre, fikrince."
-  },
-  {
-    "ku": "bitir",
-    "tr": "1) Olgun (daha çok yetişmiş olan bitki, hayvan) 2) Saygısız, terbiyesiz kimse."
-  },
-  {
-    "ku": "bitir bûn",
-    "tr": "Olgunlaşmak, yetişmek."
-  },
-  {
-    "ku": "biv/bive/bivitê",
-    "tr": "Küçük çocukları ateş vb. tehlikeli şeylerden uzak tutmak için kullanılan sözcük."
-  },
-  {
-    "ku": "bivir",
-    "tr": "Balta. (d.)"
-  },
-  {
-    "ku": "bixaltî",
-    "tr": "Teyze oğlu. (e.)"
-  },
-  {
-    "ku": "bixawî",
-    "tr": "El ve ayak bileği. (d.)"
-  },
-  {
-    "ku": "bizaştîr",
-    "tr": "Meleş. (d.)"
-  },
-  {
-    "ku": "bizdandin",
-    "tr": "Ödünü koparmak."
-  },
-  {
-    "ku": "bizdyan",
-    "tr": "Ödü kopmak."
-  },
-  {
-    "ku": "bizin",
-    "tr": "Keçi. (d.)"
-  },
-  {
-    "ku": "bizir",
-    "tr": "Bezir."
-  },
-  {
-    "ku": "bizmar",
-    "tr": "Çivi. (e.)"
-  },
-  {
-    "ku": "bizmik",
-    "tr": "Koyun ve keçi yavrularının süt emmesini önlemek için ağızlarına takılan tahta çubuk, bir çeşit burunsalık. (e.)"
-  },
-  {
-    "ku": "bizmikê kon",
-    "tr": "Çadırın parçalarını birbirine tutturmakta kullanılan ve bir çeşit düğme görevi yapan tahta çubuklar."
-  },
-  {
-    "ku": "bizorê",
-    "tr": "Zorla, güçbela, zar zor, zoraki."
-  },
-  {
-    "ku": "bî",
-    "tr": "Söğüt ağacı. (d.)"
-  },
-  {
-    "ku": "bî (2)",
-    "tr": "Dul."
-  },
-  {
-    "ku": "bîh",
-    "tr": "Kaparo, peşinat. (d.)"
-  },
-  {
-    "ku": "bîlle",
-    "tr": "Billahi."
-  },
-  {
-    "ku": "bîlleheq",
-    "tr": "Haksız yere."
-  },
-  {
-    "ku": "bîllesebeb",
-    "tr": "Sebepsiz yere."
-  },
-  {
-    "ku": "bîn (1)",
-    "tr": "Koku. bîn ketin: İçine koku düşmek, kokuşmak. bîna fisa bi ser xistin: Yenmek, fena mağlup etmek; \"duman etmek\". bîn û buxar: (Hamam, banyo mutfak vb. yerlerde) Buharla karışık bunaltıcı kokular. 2) Soluk, nefes. bîna wî çikandin: Nefes alıp veremez duruma getirmek, nefesini kesmek. bîna wî çikyan: Nefes alıp veremez duruma gelmek, nefessiz kalmak, nefesi kesilmek. bîna wî fire bûn: Sıkıntısı, tasası dağılmak; içi rahat etmek, içi ferahlamak. bîna wî nehatin ber wî: Nefes alamamak. bîna xu fire girtin: Gönlünü ferah tutmak. bîna xu girtin: Dinlenmek. bîna xu teng kirin: Kızmak, öfkelenmek, sinirlenmek. (d.)"
-  },
-  {
-    "ku": "bînfire",
-    "tr": "Gönlü ferah, rahat, tahammüllü."
-  },
-  {
-    "ku": "bînfireyî",
-    "tr": "Gönül ferahlığı, tahammüllülük. (d.)"
-  },
-  {
-    "ku": "bîn kirin",
-    "tr": "Koklamak."
-  },
-  {
-    "ku": "bînteng",
-    "tr": "Asabi."
-  },
-  {
-    "ku": "bîntengî",
-    "tr": "Asabilik. (d.)"
-  },
-  {
-    "ku": "bînvedan",
-    "tr": "Hızlı hızlı soluk alıp vermek."
-  },
-  {
-    "ku": "bîr (1)",
-    "tr": "Kuyu. 2) Şuur, bilinç, us. bi bîra wî ketin/ketin bîra wî: Aklına düşmek, aklına gelmek. gava welat bi bîra min dikeve hêsir bi çavê min dikeve: Vatan aklıma geldiğinde gözlerim yaşarıyor. bi bîra wî xistin: (Ona) Anımsatmak. ji bîra wî çûn: Unutmak, hatırlamamak, aklından çıkmak. tê bîra min nayê bîra min ...: Bildim bileli, kendimi bildim bileli. (d.)"
-  },
-  {
-    "ku": "bîra bûn",
-    "tr": "Unutulmak. em ji bîra bûn: Unutulduk."
-  },
-  {
-    "ku": "bîra kirin",
-    "tr": "Unutmak."
-  },
-  {
-    "ku": "bîr anîn",
-    "tr": "Akla getirmek, anmak, hatırlamak."
-  },
-  {
-    "ku": "bîrawir",
-    "tr": "Reşit."
-  },
-  {
-    "ku": "bîr birin",
-    "tr": "Akıl etmek, hatırlamak. te sol anî? na, min qet bîra wira nebir: Ayakkabı getirdin mi? hayır, onu hiç akıl edemedim."
-  },
-  {
-    "ku": "bîr bûn",
-    "tr": "Aklı ermek, çevresinde olup bitenleri, doğruyu yanlışı anlamaya başlamak. ez îdî bîra her tiştî dibim: Benim herşeye aklım eriyor artık."
-  },
-  {
-    "ku": "bîrik",
-    "tr": "Küçük kuyu. (d.)"
-  },
-  {
-    "ku": "bîrî",
-    "tr": "Özleme, hasret. (d.)"
-  },
-  {
-    "ku": "bîrî kirin",
-    "tr": "Özlemek."
-  },
-  {
-    "ku": "bîrov",
-    "tr": "Sedef hastalığı. (d.)"
-  },
-  {
-    "ku": "bîst (1)",
-    "tr": "Süre, zaman, kısa zaman parçası. (d.)"
-  },
-  {
-    "ku": "bîst (2)",
-    "tr": "Yirmi. (e.)"
-  },
-  {
-    "ku": "bîstan",
-    "tr": "Bostan. (e.)"
-  },
-  {
-    "ku": "bîstik",
-    "tr": "Bir süre, kısa bir süre."
-  },
-  {
-    "ku": "bîvil",
-    "tr": "Burun. bîvila xu hilkirin: Beğenmemek, küçümsemek, \"burun kıvırmak.\" (d.)"
-  },
-  {
-    "ku": "bo",
-    "tr": "İçin."
-  },
-  {
-    "ku": "boçik",
-    "tr": "Kuyruk ve kuyruk sokumu. (d.)"
-  },
-  {
-    "ku": "boçikî",
-    "tr": "Bel kayması olan kimse."
-  },
-  {
-    "ku": "bolvir",
-    "tr": "Savurgan."
-  },
-  {
-    "ku": "bolvirî",
-    "tr": "Savurganlık. (d.)"
-  },
-  {
-    "ku": "bona",
-    "tr": "İçin."
-  },
-  {
-    "ku": "boncî",
-    "tr": "Süs köpeği, fino."
-  },
-  {
-    "ku": "boraq",
-    "tr": "Kurban bayramında kesilen kurban. (d.)"
-  },
-  {
-    "ku": "borê qer",
-    "tr": "Kürt mitolojik masallarında adı geçen bir at."
-  },
-  {
-    "ku": "borî",
-    "tr": "Boru (d.)"
-  },
-  {
-    "ku": "bor kirin",
-    "tr": "Dürmek. libûnkar kulava bor dike: Keçeci keçeleri dürüyor."
-  },
-  {
-    "ku": "boş",
-    "tr": "Bol."
-  },
-  {
-    "ku": "boş bûn",
-    "tr": "Bol olmak."
-  },
-  {
-    "ku": "Bota",
-    "tr": "Botan aşireti, Botanlılar."
-  },
-  {
-    "ku": "botı.",
-    "tr": "Ufak yapılı keçi."
-  },
-  {
-    "ku": "Botî",
-    "tr": "Botan aşiretine mensup olan kimse, Botanlı."
-  },
-  {
-    "ku": "boxe",
-    "tr": "Kısırlaştırılmamış öküz. (e.)"
-  },
-  {
-    "ku": "boyax",
-    "tr": "Boya. (d.)"
-  },
-  {
-    "ku": "boyax kirin",
-    "tr": "Boyamak."
-  },
-  {
-    "ku": "boz",
-    "tr": "Açık sarıya çalan renk."
-  },
-  {
-    "ku": "bozik",
-    "tr": "Sarışın erkek."
-  },
-  {
-    "ku": "bozo",
-    "tr": "Sarışın erkek."
-  },
-  {
-    "ku": "buha (1)",
-    "tr": "Fiat, eder. (e.)"
-  },
-  {
-    "ku": "buha (2)",
-    "tr": "Pahalı."
-  },
-  {
-    "ku": "buha bûn",
-    "tr": "Pahalılaşmak."
-  },
-  {
-    "ku": "buha kirin",
-    "tr": "Pahalılaştırmak."
-  },
-  {
-    "ku": "buhar",
-    "tr": "Bahar. (d.)"
-  },
-  {
-    "ku": "buhartin",
-    "tr": "bkz. \"buhurandin\""
-  },
-  {
-    "ku": "buhayî",
-    "tr": "Pahalılık. (d.)"
-  },
-  {
-    "ku": "buho",
-    "tr": "Böcek. (çd.)"
-  },
-  {
-    "ku": "buhuk",
-    "tr": "Böcek. (d.)"
-  },
-  {
-    "ku": "buhur",
-    "tr": "Akarsu geçidi. (d.)"
-  },
-  {
-    "ku": "buhurandin",
-    "tr": "Geçirmek. (dibuhurîne, bibuhurîne)"
-  },
-  {
-    "ku": "buhurîn",
-    "tr": "Geçmek."
-  },
-  {
-    "ku": "bujî",
-    "tr": "Yele. (d.)"
-  },
-  {
-    "ku": "burxî",
-    "tr": "Vida. (d.)"
-  },
-  {
-    "ku": "buxçe",
-    "tr": "Bohça. (d.)"
-  },
-  {
-    "ku": "buxt",
-    "tr": "İftira. (d.)"
-  },
-  {
-    "ku": "buxtan",
-    "tr": "İftira. (d.)"
-  },
-  {
-    "ku": "bûk",
-    "tr": "Gelin. bûka paçîn: Bezden yapılmış oyuncak bebek. (d.)"
-  },
-  {
-    "ku": "bûkik",
-    "tr": "Gözde oluşan arpacık. (d.)"
-  },
-  {
-    "ku": "bûktî",
-    "tr": "Gelinlik, gelin olma durumu. (d.)"
-  },
-  {
-    "ku": "bûm",
-    "tr": "Baykuşun bir çeşidi"
-  },
-  {
-    "ku": "bûn",
-    "tr": "Olmak. bû birq û birûsk: Kaybedilen (veya kaybolan) birşey bir türlü bulunamamak; \"sanki yer yarıldı da içine girdi.\" bûn kenê xelkê: El aleme alay konusu olmak. bûn merî: Bir kimse, kendini yetiştirip topluma yararlı duruma gelmek; adam olmak. bûn mina barûtê: Aşırı kızmak."
-  },
-  {
-    "ku": "bûr-bûr",
-    "tr": "Feryat. (d.)"
-  },
-  {
-    "ku": "bûrîn",
-    "tr": "Feryat, feryat etme. (d.)"
-  },
-  {
-    "ku": "bûryan",
-    "tr": "(İnek ve öküz) Böğürmek. (dibûre, bibûre)"
-  },
-  {
-    "ku": "bûtbût",
-    "tr": "bkz. \"dîksilêman\""
-  },
-  {
-    "ku": "bûyin",
-    "tr": "Olmak."
-  },
-  // PDF Dosyasından C harfi ile başlayan girişler
-  {
-    "ku": "cab",
-    "tr": "Yanıt, cevap. (d.)"
-  },
-  {
-    "ku": "cab dan",
-    "tr": "Yanıtlamak."
-  },
-  {
-    "ku": "cabhazir",
-    "tr": "Hazırcevap kimse."
-  },
-  {
-    "ku": "camêr",
-    "tr": "Centilmen, alicenap."
-  },
-  {
-    "ku": "camêrî",
-    "tr": "Centilmenlik. (d.)"
-  },
-  {
-    "ku": "can",
-    "tr": "1) Can, ruh. 2) Vücut. bira canê te sax be: Çeşitli kayıplar karşısında \"sen sağsın ya, önemli olan bu\" anlamında teselli sözü; \"canın sağ olsun!\" çik û can: Capcanlı, taze, zinde. ji canê xu aciz bûn: Canından bezmek. ölümü göze alacak kadar sıkıntı içinde olmak, canından bezmek, canından usanmak. min canê xu li erdê nedîye: Bu sıkıntıya katlanmaya, bu tehlikeye atılmaya hiç niyetim yok; canımı sokakta bulmadım. (e.)"
-  },
-  {
-    "ku": "can (2)",
-    "tr": "Genç, taze, zinde."
-  },
-  {
-    "ku": "canbaz",
-    "tr": "Hayvan tüccarı."
-  },
-  {
-    "ku": "canbazî",
-    "tr": "Hayvan tüccarlığı. (d.)"
-  },
-  {
-    "ku": "can dan",
-    "tr": "Can vermek."
-  },
-  {
-    "ku": "canfeda",
-    "tr": "Canını feda eden."
-  },
-  {
-    "ku": "cange",
-    "tr": "Dana. (e.)"
-  },
-  {
-    "ku": "cangiran",
-    "tr": "Ağır canlı, üşengen."
-  },
-  {
-    "ku": "cangiranî",
-    "tr": "Ağır canlılık, üşengenlik. (d.)"
-  },
-  {
-    "ku": "canik",
-    "tr": "Hanımefendi, terbiyeli ve münasip bayan."
-  },
-  {
-    "ku": "canî",
-    "tr": "Gençlik. (d.)"
-  },
-  {
-    "ku": "cankos",
-    "tr": "Zangoç, çan."
-  },
-  {
-    "ku": "canzerik",
-    "tr": "\"zerik\" denen böceğin insan ve özellikle koyunlara bulaştırdığı sarılık hastalığı. (d.)"
-  },
-  {
-    "ku": "canzerkî",
-    "tr": "Sarılık olmuş koyun."
-  },
-  {
-    "ku": "car",
-    "tr": "Defa, kez, sefer. carê/carkê: Bir sefer (\"carekê\"den). cara berê: Geçen sefer. cara di: Geçen sefer. pir cara: Çoğu kez. (d.)"
-  },
-  {
-    "ku": "cara",
-    "tr": "Hiçbir zaman, asla. min cara jê ra tiştik xirab nego: Asla ona kötü birşey demedim."
-  },
-  {
-    "ku": "car car",
-    "tr": "Bazı bazı."
-  },
-  {
-    "ku": "carcim",
-    "tr": "İşlemeli kilim. (d.)"
-  },
-  {
-    "ku": "cardi",
-    "tr": "Yine, bir daha."
-  },
-  {
-    "ku": "caris",
-    "tr": "Haşin, arsız."
-  },
-  {
-    "ku": "carna",
-    "tr": "Bazen."
-  },
-  {
-    "ku": "carût",
-    "tr": "Soba vb. için kullanılan küçük kürek. (d.)"
-  },
-  {
-    "ku": "caw",
-    "tr": "Bez. (e.)"
-  },
-  {
-    "ku": "cawîn",
-    "tr": "Bezden yapılmış olan."
-  },
-  {
-    "ku": "cax",
-    "tr": "Parmaklık, cağ. (d.)"
-  },
-  {
-    "ku": "cax kirin",
-    "tr": "Parmaklıklı hale getirmek."
-  },
-  {
-    "ku": "caxkirî",
-    "tr": "Parmaklıklı, cağlı."
-  },
-  {
-    "ku": "ce",
-    "tr": "Arpa. (e.)"
-  },
-  {
-    "ku": "cebar",
-    "tr": "Kırık çıkık hekimi."
-  },
-  {
-    "ku": "cebilxane",
-    "tr": "Cephane. (d.)"
-  },
-  {
-    "ku": "cebirandin",
-    "tr": "Kırık çıkık organları onarmak, kaynaştırmak."
-  },
-  {
-    "ku": "cebirîn",
-    "tr": "Kırık çıkık organların onarılması, kaynaşması."
-  },
-  {
-    "ku": "ceft",
-    "tr": "Deri boyamada kullanılan bir ağaç kökü. (d.)"
-  },
-  {
-    "ku": "cehcek",
-    "tr": "Çöreğe katılan bir bitki. (d.)"
-  },
-  {
-    "ku": "cehde",
-    "tr": "Cadde. (d.)"
-  },
-  {
-    "ku": "cehdû",
-    "tr": "Cadı. (d.)"
-  },
-  {
-    "ku": "cehemand/in",
-    "tr": "bkz. \"cehnimandin\""
-  },
-  {
-    "ku": "cehemîn",
-    "tr": "bkz. \"cehnimîn\""
-  },
-  {
-    "ku": "cehnimandin",
-    "tr": "Gebertmek."
-  },
-  {
-    "ku": "cehnime",
-    "tr": "Cehennem, cehnima wî kirin: \"Defolup gitmek, cehenneme gitmek, cehenneme kadar yolu olmak\" anlamında öfke sözü. cehnima wî kiriye: (Onun) Cehenneme kadar yolu var. (d.)"
-  },
-  {
-    "ku": "cehnimî",
-    "tr": "Cehennemlik."
-  },
-  {
-    "ku": "cehnimîn",
-    "tr": "1) Cehennem olmak, defolup gitmek. 2) Gebermek."
-  },
-  {
-    "ku": "cehnî",
-    "tr": "Tay."
-  },
-  {
-    "ku": "cehtirî",
-    "tr": "Kekik otu. (d.)"
-  },
-  {
-    "ku": "celb",
-    "tr": "Çamur. (d.)"
-  },
-  {
-    "ku": "celewî",
-    "tr": "Atlarda oluşan ölümcül ruam (sakağı) hastalığı. (d.)"
-  },
-  {
-    "ku": "cem (1)",
-    "tr": "Nezd, yan."
-  },
-  {
-    "ku": "cem (2)",
-    "tr": "Yükün bir tarafı, denk."
-  },
-  {
-    "ku": "cemed",
-    "tr": "Buz. (d.)"
-  },
-  {
-    "ku": "cemidandin",
-    "tr": "Dondurmak."
-  },
-  {
-    "ku": "cemidîn",
-    "tr": "Donmak."
-  },
-  {
-    "ku": "cem kirin",
-    "tr": "Yükü denk hale getirmek."
-  },
-  {
-    "ku": "ceml",
-    "tr": "Cemre. (d.)"
-  },
-  {
-    "ku": "cenan",
-    "tr": "Yarıcı, ortakçı."
-  },
-  {
-    "ku": "cenanî",
-    "tr": "Yarıcılık, ortakçılık. (d.)"
-  },
-  {
-    "ku": "cendirme",
-    "tr": "Jandarma."
-  },
-  {
-    "ku": "ceng",
-    "tr": "Savaş, cenk. (d.)"
-  },
-  {
-    "ku": "cengawer",
-    "tr": "Cengaver."
-  },
-  {
-    "ku": "ceng kirin",
-    "tr": "Savaşmak."
-  },
-  {
-    "ku": "ceribandin",
-    "tr": "Denemek, sınamak."
-  },
-  {
-    "ku": "cewahîr",
-    "tr": "Değerli taşlar."
-  },
-  {
-    "ku": "cewr",
-    "tr": "bkz. \"cewrik\""
-  },
-  {
-    "ku": "cewrik",
-    "tr": "Köpek ve tazı gibi hayvanların yavrusu."
-  },
-  {
-    "ku": "ceyran",
-    "tr": "Elektrik, cereyan. (d.)"
-  },
-  {
-    "ku": "cezer",
-    "tr": "Arpaların sararma zamanı."
-  },
-  {
-    "ku": "cêbkêsan",
-    "tr": "Yankesici."
-  },
-  {
-    "ku": "cênîg",
-    "tr": "Favori. (d.)"
-  },
-  {
-    "ku": "cêwî",
-    "tr": "İkiz."
-  },
-  {
-    "ku": "cibe",
-    "tr": "Cüppe. (d.)"
-  },
-  {
-    "ku": "cihdan",
-    "tr": "3 Yaşındaki erkek deve. (e.)"
-  },
-  {
-    "ku": "cihê",
-    "tr": "Ayrı."
-  },
-  {
-    "ku": "cihê bûn",
-    "tr": "Ayrılmak."
-  },
-  {
-    "ku": "cihê kirin",
-    "tr": "Ayırmak."
-  },
-  {
-    "ku": "cihîz",
-    "tr": "Çeyiz. (e.)"
-  },
-  {
-    "ku": "cihûd",
-    "tr": "Yahudi."
-  },
-  {
-    "ku": "cil (1)",
-    "tr": "Yaygı, çul vb. şeyler. (d.)"
-  },
-  {
-    "ku": "cil (2)",
-    "tr": "Giysi. (e.)"
-  },
-  {
-    "ku": "cilêt",
-    "tr": "Jilet. (d.)"
-  },
-  {
-    "ku": "cilik (1)",
-    "tr": "Yaygıcık, küçük çul vb. şeyler. (d.)"
-  },
-  {
-    "ku": "cilik (2)",
-    "tr": "Giysicik. (e.)"
-  },
-  {
-    "ku": "cilq",
-    "tr": "Cıvık (kimse)."
-  },
-  {
-    "ku": "cilqî",
-    "tr": "(İnsan için) Cıvıklık. (d.)"
-  },
-  {
-    "ku": "cilqîn",
-    "tr": "Tokat vururken çıkan ses."
-  },
-  {
-    "ku": "cil û caw",
-    "tr": "Manifatura. (e.)"
-  },
-  {
-    "ku": "cilûq",
-    "tr": "Erkek hindi. (e.)"
-  },
-  {
-    "ku": "cimbûş",
-    "tr": "Cümbüş. (d.)"
-  },
-  {
-    "ku": "cimêlî",
-    "tr": "bkz. \"devşewitî\""
-  },
-  {
-    "ku": "cin",
-    "tr": "Cin. bi cina ketin: Cin çarpmak. cin tavilê digê zara: Cinler çocukları çok çabuk çarpar. cin pê girtin: Cin çarpmak. (e.)"
-  },
-  {
-    "ku": "cinawir",
-    "tr": "Canavar. (e.)"
-  },
-  {
-    "ku": "cinaze",
-    "tr": "Cenaze. (e.)"
-  },
-  {
-    "ku": "cindar",
-    "tr": "Cinli, cin çarpmış olan."
-  },
-  {
-    "ku": "cinet",
-    "tr": "Cennet. (d.)"
-  },
-  {
-    "ku": "cinetî",
-    "tr": "Cennetlik."
-  },
-  {
-    "ku": "cinh",
-    "tr": "Ucu kalın (dövüş için kullanılan) sopa. (e.)"
-  },
-  {
-    "ku": "cino",
-    "tr": "Cinli, cin çarpmış olan erkek. (e.)"
-  },
-  {
-    "ku": "cir (1)",
-    "tr": "(Birinin) Öfkesini yatıştırma, öfkesini dindirme."
-  },
-  {
-    "ku": "cir (2)",
-    "tr": "Su testisi. (e.)"
-  },
-  {
-    "ku": "cirbûh",
-    "tr": "İri sıçan."
-  },
-  {
-    "ku": "cirdîxezal",
-    "tr": "Kuş yavruları ve küçük fareleri yiyerek beslenen iri bir tür sıçan."
-  },
-  {
-    "ku": "cirdon",
-    "tr": "Sıçan. (e.)"
-  },
-  {
-    "ku": "cirîng",
-    "tr": "Tokat sesi. cirîngî jê anîn: Tokat şaplatmak, (şamar) vurmak (sesli bir şekilde.)"
-  },
-  {
-    "ku": "cirm",
-    "tr": "Cereme, suç bedeli, ceza. (d.)"
-  },
-  {
-    "ku": "cisn",
-    "tr": "Cins, tür. (e.)"
-  },
-  {
-    "ku": "civandin",
-    "tr": "Yığmak, bir araya getirmek."
-  },
-  {
-    "ku": "civyan",
-    "tr": "Yığılmak, bir araya gelmek."
-  },
-  {
-    "ku": "cixare",
-    "tr": "Sigara. (d.)"
-  },
-  {
-    "ku": "cixcixe",
-    "tr": "Jelatin. (d.)"
-  },
-  {
-    "ku": "cixilandin",
-    "tr": "Öfkelendirmek, kızdırmak. (dicixilîne, bicixilîne)"
-  },
-  {
-    "ku": "cixilîn",
-    "tr": "Öfkelenmek, kızmak. (dicixile, bicixile)"
-  },
-  {
-    "ku": "cixîz",
-    "tr": "Çizgi. (d.)"
-  },
-  {
-    "ku": "cixîz kirin",
-    "tr": "Çizmek, çiziştirmek."
-  },
-  {
-    "ku": "Cizîr",
-    "tr": "Şırnak'ın Cizre ilçesi. (d.)"
-  },
-  {
-    "ku": "cizlawît",
-    "tr": "Eskiden giyilen bir tür lastik ayakkabı"
-  },
-  {
-    "ku": "cî",
-    "tr": "Yer. bi cî bûn: Yeri bulunmak, yeri tespit olmak. bi cî kirin: Yerini bulmak, yerini tespit etmek. ciyê ar lê tune be dû jê ranabe: \"Ateş olmayan yerden duman çıkmaz\". cî cî: Yer yer. cî dan: Yer vermek. cî girtin: Yer almak. cî bi cî: Yer yer. di cî da: Anında, yerinde. di cî xistin: Yerine koymak, yerine oturtmak. ez ê derî di cî xim: Kapıyı yerine oturtacağım. li ciyê rehetî: Boş yere, gereksiz yere, durduk yerde. (e.)"
-  },
-  {
-    "ku": "cîger",
-    "tr": "Ciğer. (d.)"
-  },
-  {
-    "ku": "cîmêr",
-    "tr": "Ergenlik çağına girmekte olan erkek çocuk."
-  },
-  {
-    "ku": "cînciq",
-    "tr": "İncik boncuk. (d.)"
-  },
-  {
-    "ku": "cîq (1)",
-    "tr": "Çocukla oynarken gözler bir süre kapatılıp aniden açılarak söylenen sözcük."
-  },
-  {
-    "ku": "cîq (2)",
-    "tr": "Karkuşu. (d.)"
-  },
-  {
-    "ku": "cîran",
-    "tr": "Komşu."
-  },
-  {
-    "ku": "cîranbehecî",
-    "tr": "Komşu çatlatan, komşu kıskandıran (giysi vb. şeyler için söylenir.)"
-  },
-  {
-    "ku": "cîrantî",
-    "tr": "Komşuluk. (d.)"
-  },
-  {
-    "ku": "co",
-    "tr": "Kanal, ark. (d.)"
-  },
-  {
-    "ku": "col",
-    "tr": "Koyun sürüsünden bir grup."
-  },
-  {
-    "ku": "comerd",
-    "tr": "Cömert."
-  },
-  {
-    "ku": "comerdî",
-    "tr": "Cömertlik. (d.)"
-  },
-  {
-    "ku": "cot",
-    "tr": "Çift, \"tek\"in karşıtı."
-  },
-  {
-    "ku": "cot (2)",
-    "tr": "Ekim işi, toprağı işleme. (e.)"
-  },
-  {
-    "ku": "cotarî",
-    "tr": "Çiftçi."
-  },
-  {
-    "ku": "cotik",
-    "tr": "İkiz."
-  },
-  {
-    "ku": "cot kirin",
-    "tr": "Çift sürmek."
-  },
-  {
-    "ku": "cuher",
-    "tr": "Atın yem torbası. (e.)"
-  },
-  {
-    "ku": "culhet",
-    "tr": "Cesaret. (d.)"
-  },
-  {
-    "ku": "curn",
-    "tr": "Kurna (soku.) (e.)"
-  },
-  {
-    "ku": "cuzbe",
-    "tr": "Zikir. bi cuzbê ketin: Tanrı'nın adını art arda tekrarlayıp kendinden geçmek, zikretmek. (d.)"
-  },
-  {
-    "ku": "cuzdan",
-    "tr": "Cüzdan. (e.)"
-  },
-  {
-    "ku": "cû",
-    "tr": "Tavuklara yem vermeye çağırırken söylenen sözcük; \"bili bili.\""
-  },
-  {
-    "ku": "cûcî/cûcû",
-    "tr": "Tavuk. (ça.)"
-  },
-  {
-    "ku": "cûm",
-    "tr": "Sakız kalıbı. (d.)"
-  },
-  {
-    "ku": "cûn",
-    "tr": "Haki renk."
-  },
-  {
-    "ku": "cûnik",
-    "tr": "bkz. \"cân\""
-  },
-  {
-    "ku": "cûre",
-    "tr": "Bodur, kısa."
-  },
-  {
-    "ku": "cûyin",
-    "tr": "(Ağızda) Çiğnemek."
-  },
-  {
-    "ku": "cünî",
-    "tr": "Dibek taşı. (e.)"
-  },
-  // PDF Dosyasından Ç harfi ile başlayan girişler
-  {
-    "ku": "ça",
-    "tr": "Ne kadar, ne kadar da, ne de ça rind e!: Ne kadar da güzeldir! (\"çuqa\"dan \"ça\"ya dönüşmüş.)"
-  },
-  {
-    "ku": "çahm",
-    "tr": "Bence, galiba, bana sorarsan."
-  },
-  {
-    "ku": "çakêt",
-    "tr": "Ceket. (e.)"
-  },
-  {
-    "ku": "çakil",
-    "tr": "Ucu eğri sopa."
-  },
-  {
-    "ku": "çakûç",
-    "tr": "Çekiç. (e.)"
-  },
-  {
-    "ku": "çakût",
-    "tr": "bkz. \"çakûç\""
-  },
-  {
-    "ku": "çal",
-    "tr": "Çukur. (d.)"
-  },
-  {
-    "ku": "çalik",
-    "tr": "Çukurcuk. (d.)"
-  },
-  {
-    "ku": "çarmêrkî",
-    "tr": "Bağdaş oturma şekli."
-  },
-  {
-    "ku": "çarnig",
-    "tr": "Dört ayaklı."
-  },
-  {
-    "ku": "çarox",
-    "tr": "Çarık. (d.)"
-  },
-  {
-    "ku": "çarparsû",
-    "tr": "Azıdişi."
-  },
-  {
-    "ku": "çarpî",
-    "tr": "Emekleme, dört ayak üzerinde yürüme. bi çarpiya dimeşe: Emekleyerek yürüyor, dört ayak üzerinde yürüyor."
-  },
-  {
-    "ku": "çarsibe",
-    "tr": "Öbür gün değil daha öbür gün."
-  },
-  {
-    "ku": "çarsid",
-    "tr": "Dört yüz. (e.)"
-  },
-  {
-    "ku": "çalim",
-    "tr": "Afi, caka. çalim firotin: Caka satmak. (d.)"
-  },
-  {
-    "ku": "çalmış",
-    "tr": "Sakar."
-  },
-  {
-    "ku": "çandin",
-    "tr": "Ekmek, ekin ekmek."
-  },
-  {
-    "ku": "çandir",
-    "tr": "Çadır. (d.)"
-  },
-  {
-    "ku": "çanqal",
-    "tr": "Çengel. (d.)"
-  },
-  {
-    "ku": "çanqal kirin",
-    "tr": "Çengellemek."
-  },
-  {
-    "ku": "çapik",
-    "tr": "Ağaçtan yapılmış kap"
-  },
-  {
-    "ku": "çaqmaq",
-    "tr": "Tüfek horozu."
-  },
-  {
-    "ku": "çaqo",
-    "tr": "bkz. \"kêr\""
-  },
-  {
-    "ku": "çar",
-    "tr": "Dört. bi çar çava giryan: \"İki gözü iki çeşme\" ağlamak. (e.)"
-  },
-  {
-    "ku": "çarşef",
-    "tr": "Çarşaf. (d.)"
-  },
-  {
-    "ku": "çaralî",
-    "tr": "Dört taraf."
-  },
-  {
-    "ku": "çardax",
-    "tr": "Çardak. (d.)"
-  },
-  {
-    "ku": "çarde",
-    "tr": "On dört. (e.)"
-  },
-  {
-    "ku": "çare",
-    "tr": "Çare, çözüm. (d.)"
-  },
-  {
-    "ku": "çargoşe",
-    "tr": "Dörtköşe, dörtgen."
-  },
-  {
-    "ku": "çarik",
-    "tr": "Kadın başörtüsü. (d.)"
-  },
-  {
-    "ku": "çarîk",
-    "tr": "Dörtte bir, çeyrek. (\"çaryek\"ten) (d.)"
-  },
-  {
-    "ku": "çarşemî",
-    "tr": "Çarşamba. (d.)"
-  },
-  {
-    "ku": "çarşî",
-    "tr": "Çarşı. Çarşya Şewitî: Diyarbakır'ın Balıkçılarbaşı semtinde bulunan ünlü bir çarşı. (d.)"
-  },
-  {
-    "ku": "çav",
-    "tr": "Göz. çav berdan: Göz koymak, göz dikmek. çav kirin: Gözle işaret etmek; göz etmek. min çav kir wî: Ona göz ettim. çav qurç kirin: Göz kırpmak. çav lê gerandin: (Bir şeye) Üstünkörü bakmak, şöyle bir bakmak; göz gezdirmek. çavê te ronî!: \"Seni sevindiren olay kutlu olsun; gözün aydın!\" anlamında. çavê wî bar nebûn: Gözü doymamak. çavê wî birrîn: Gözü kesmek. çavê wî lêketin: Bir şeyi rastgele görmek, \"gözüne ilişmek\". çavê wî li rê mayin: Sevilen bir kimseyi özlemle beklemek; gözü yolda kalmak. çavê wî rijyan: Gözü yaralanıp kör olmak; gözü akmak. çavê wî tirsandin: Yıldırmak, gözünü korkutmak. çavê xu jê nekutan: Gözlerini üzerinden ayırmamak, (ona) gözlerini dahi kırpmadan devamlı bakmak. di bin çava ra: Göz altından. ji çava da ketin: Gözden düşmek. min çavê te xwaro/ê: Okşamalık olarak kullanılır. (e.)"
-  },
-  {
-    "ku": "çavbeloq (1)",
-    "tr": "Dikenli bir bitki. (d.)"
-  },
-  {
-    "ku": "çavbeloq (2)",
-    "tr": "Patlak gözlü."
-  },
-  {
-    "ku": "çavbirçî",
-    "tr": "Açgözlü."
-  },
-  {
-    "ku": "çavbirçîtî",
-    "tr": "Açgözlülük. (d.)"
-  },
-  {
-    "ku": "çavçirtonek",
-    "tr": "Saklanbaç oyunu. (d.)"
-  },
-  {
-    "ku": "çavhişin",
-    "tr": "Mavi gözlü."
-  },
-  {
-    "ku": "çavik",
-    "tr": "Gözlük. (d.)"
-  },
-  {
-    "ku": "çavî",
-    "tr": "Gözenek. (d.)"
-  },
-  {
-    "ku": "çavînok",
-    "tr": "Nazar sahibi, nazar değdiren kimse."
-  },
-  {
-    "ku": "çavînokî (1)",
-    "tr": "Nazar değmiş olan."
-  },
-  {
-    "ku": "çavînokî kirin",
-    "tr": "Nazar değdirmek, nazara uğratmak."
-  },
-  {
-    "ku": "çavnezerî",
-    "tr": "Nazar sahibi."
-  },
-  {
-    "ku": "çavnûtik",
-    "tr": "Kenegöz."
-  },
-  {
-    "ku": "çavpeqle",
-    "tr": "Bakla gözlü kimse."
-  },
-  {
-    "ku": "çavqûnde",
-    "tr": "Fasik."
-  },
-  {
-    "ku": "çavreş",
-    "tr": "Kara gözlü."
-  },
-  {
-    "ku": "çavsor",
-    "tr": "Gözünü kan bürümüş olan, belalı kimse."
-  },
-  {
-    "ku": "çavtêr",
-    "tr": "Tokgözlü."
-  },
-  {
-    "ku": "çavtêrî",
-    "tr": "Tokgözlülük. (d.)"
-  },
-  {
-    "ku": "çavtirsyayî",
-    "tr": "Gözü korkmuş olan."
-  },
-  {
-    "ku": "çawa",
-    "tr": "Nasıl."
-  },
-  {
-    "ku": "çawîş",
-    "tr": "Çavuş."
-  },
-  {
-    "ku": "çax",
-    "tr": "Zaman, çağ. çaxa dîk birçî dibe erse bi bîrê dikeve: İnsanlar yoksunluğunu çektikleri şeyler için olmayacak kuruntulara kapılır. di çaxa (...) ra: -nin yaşlarında. Eyşik di çaxa Miho ra ye: Eyşık Miho'nun yaşlarındadır. (d.)"
-  },
-  {
-    "ku": "çax (2)",
-    "tr": "bkz. \"çaxka\""
-  },
-  {
-    "ku": "çaxka",
-    "tr": "-diği zaman. çaxka tu çû: Sen gittiğinde."
-  },
-  {
-    "ku": "çaydan",
-    "tr": "Demlik. (e.)"
-  },
-  {
-    "ku": "çayxane",
-    "tr": "Çayhane. (d.)"
-  },
-  {
-    "ku": "Çebaxçûr",
-    "tr": "Bingöl ili. (d.)"
-  },
-  {
-    "ku": "çeç",
-    "tr": "El. (çd.)"
-  },
-  {
-    "ku": "çefî",
-    "tr": "Kefiye. (d.)"
-  },
-  {
-    "ku": "çehço",
-    "tr": "Göz. (çd.)"
-  },
-  {
-    "ku": "çek",
-    "tr": "Giysi. (e.)"
-  },
-  {
-    "ku": "çekem",
-    "tr": "Bir cins çam. (d.)"
-  },
-  {
-    "ku": "çekur",
-    "tr": "Eskimiş ve işe yaramaz hale gelmiş olan tulum. (e.)"
-  },
-  {
-    "ku": "çek û çol",
-    "tr": "Giysi, pılı pırtı vb. şeyler."
-  },
-  {
-    "ku": "çel (1)",
-    "tr": "Bir bebek hastalığı. (d.)"
-  },
-  {
-    "ku": "çel (2)",
-    "tr": "Kırk. çelê wê/wî qedyan: (Lohusa, bebek, ölü için) Doğum ya da ölümünün üzerinden kırk gün geçmek. (e.)"
-  },
-  {
-    "ku": "çele",
-    "tr": "Ocak ayı. (d.)"
-  },
-  {
-    "ku": "çeleng",
-    "tr": "Hoş, zarif, çevik."
-  },
-  {
-    "ku": "çelepaş",
-    "tr": "Kasım ayı. (d.)"
-  },
-  {
-    "ku": "çelepêş",
-    "tr": "Ekim ayı. (d.)"
-  },
-  {
-    "ku": "çelîn",
-    "tr": "Lohusa."
-  },
-  {
-    "ku": "çelînî",
-    "tr": "Lohusalık. (d.)"
-  },
-  {
-    "ku": "çelpandin",
-    "tr": "(Köpek yemek yerken) Şapırdatmak."
-  },
-  {
-    "ku": "çelp-çelp",
-    "tr": "Şapırtı. (d.)"
-  },
-  {
-    "ku": "çelqandin",
-    "tr": "Çalkalamak."
-  },
-  {
-    "ku": "çelqyan",
-    "tr": "Çalkalanmak."
-  },
-  {
-    "ku": "çeltûg",
-    "tr": "Çeltik. (d.)"
-  },
-  {
-    "ku": "çelziman",
-    "tr": "Dilli, konuşkan."
-  },
-  {
-    "ku": "çem",
-    "tr": "Nehir. çem û çem: Tümden, hiç geri gelmemecesine. (e.)"
-  },
-  {
-    "ku": "çemçik",
-    "tr": "Derin kepçe. (d.)"
-  },
-  {
-    "ku": "çeml",
-    "tr": "Kap vb. şeylerin kulpu. (e.)"
-  },
-  {
-    "ku": "çend",
-    "tr": "Kaç, birkaç. çend ro di wê da: Birkaç gün sonra. Çendakî: Bir süre, bir süreliğine. Hêlîn bira çendakî li mala me bimîne: Hêlin bir süre bizim evde kalsın."
-  },
-  {
-    "ku": "çeng",
-    "tr": "Doldurulmaya hazır durumdaki avuç. (d.)"
-  },
-  {
-    "ku": "çenge",
-    "tr": "Çene. çenge avêtin: can çekişmek, azraille pençeleşmek. çenge davêje: Can çekişiyor, azraille pençeleşiyor. (d.)"
-  },
-  {
-    "ku": "çep",
-    "tr": "1) Sol. 2) Sapa, ters."
-  },
-  {
-    "ku": "çepel",
-    "tr": "Pis, murdar."
-  },
-  {
-    "ku": "çepik",
-    "tr": "Alkış. li çepika xistin: Alkış çalmak. (d.)"
-  },
-  {
-    "ku": "çepil",
-    "tr": "Kol. (e.)"
-  },
-  {
-    "ku": "çepo",
-    "tr": "Solak (erkek.)"
-  },
-  {
-    "ku": "çeporasto",
-    "tr": "Çapraz, çaprazlama."
-  },
-  {
-    "ku": "çeqel",
-    "tr": "Yengeç. (e.)"
-  },
-  {
-    "ku": "çeqilmast",
-    "tr": "Yoğurda su katarak oluşturulan ayran. (d.)"
-  },
-  {
-    "ku": "çer",
-    "tr": "Nasıl."
-  },
-  {
-    "ku": "çerçî",
-    "tr": "Gezgin satıcı, çerçi."
-  },
-  {
-    "ku": "çerçîfe",
-    "tr": "Çerçeve. (d.)"
-  },
-  {
-    "ku": "çerçîtî",
-    "tr": "Gezgin satıcılık. (d.)"
-  },
-  {
-    "ku": "çerez",
-    "tr": "Çerez. (d.)"
-  },
-  {
-    "ku": "çerez kirin",
-    "tr": "Çerez yemek."
-  },
-  {
-    "ku": "çergî",
-    "tr": "-i gibi, nasıl ki ... çergî ket, mir: Düştüğü gibi öldü."
-  },
-  {
-    "ku": "çerixandin",
-    "tr": "Döndürmek, çevirmek. (diçerixîne, biçerixîne)"
-  },
-  {
-    "ku": "çerm",
-    "tr": "Deri. (e.)"
-  },
-  {
-    "ku": "çermandin",
-    "tr": "Deriyi bıçak veya benzeri bir şeyle yüzmek. (diçermîne, biçermîne)"
-  },
-  {
-    "ku": "çerm kirin",
-    "tr": "Deriyi bıçak veya benzeri bir şeyle yüzmek. (bkz. \"çermandin\")"
-  },
-  {
-    "ku": "çerx",
-    "tr": "Çark, torna. (d.)"
-  },
-  {
-    "ku": "çerx kirin",
-    "tr": "Çarka vurmak."
-  },
-  {
-    "ku": "çetinî",
-    "tr": "Zorluk. (d.)"
-  },
-  {
-    "ku": "çetlastîk",
-    "tr": "Çatallastik. (d.)"
-  },
-  {
-    "ku": "çewal",
-    "tr": "Çuval. çewalê geltikî: Bir çeşit çuval. çewalê nîkê: Bir çeşit çuval. (e.)"
-  },
-  {
-    "ku": "çewlîg",
-    "tr": "Hafif çimenlik. (d.)"
-  },
-  {
-    "ku": "çewt",
-    "tr": "Eğri, ters, çarpık."
-  },
-  {
-    "ku": "çewt bûn",
-    "tr": "Eğri olmak, ters olmak, çarpıklaşmak."
-  },
-  {
-    "ku": "çewtî",
-    "tr": "Eğrilik, terslik, çarpıklık. (d.)"
-  },
-  {
-    "ku": "çewt kirin",
-    "tr": "Eğri etmek, çarpık hale getirmek."
-  },
-  {
-    "ku": "çewto mewto",
-    "tr": "Eğri büğrü, çarpık çurpuk, ters."
-  },
-  {
-    "ku": "çexşûr",
-    "tr": "Yiyilebilen bir bitki. (d.)"
-  },
-  {
-    "ku": "çê",
-    "tr": "İyi."
-  },
-  {
-    "ku": "çêbûn",
-    "tr": "Yapılmak, oluşmak, iyi olmak, düzgün olmak."
-  },
-  {
-    "ku": "çêkirin",
-    "tr": "Yapmak, oluşturmak. bi çêkirin dan/dan çêkirin: Yaptırmak."
-  },
-  {
-    "ku": "çêkirî",
-    "tr": "Yapılmış olan, mamul."
-  },
-  {
-    "ku": "çêle",
-    "tr": "Yavru."
-  },
-  {
-    "ku": "çêlik",
-    "tr": "Yavru."
-  },
-  {
-    "ku": "çêlkew",
-    "tr": "Keklik yavrusu."
-  },
-  {
-    "ku": "çêlrû",
-    "tr": "Terbiyesiz."
-  },
-  {
-    "ku": "çêrandin",
-    "tr": "Otlatmak."
-  },
-  {
-    "ku": "çêre",
-    "tr": "Otlak. (d.)"
-  },
-  {
-    "ku": "Çêrmûg",
-    "tr": "Diyarbakır'ın Çermik ilçesi. (d.)"
-  },
-  {
-    "ku": "çêryan",
-    "tr": "Otlamak."
-  },
-  {
-    "ku": "çêtir",
-    "tr": "Daha iyi."
-  },
-  {
-    "ku": "çêtir kirin",
-    "tr": "Daha iyi etmek."
-  },
-  {
-    "ku": "çêtî (1)",
-    "tr": "Et parçası. çêtî ji hev kirin: Birbirini kıyasıya dövmek, bir birini perişan etmek veya birbiriyle çok sert bir biçimde dalaşmak."
-  },
-  {
-    "ku": "çêtî kirin",
-    "tr": "Eti parçalamak."
-  },
-  {
-    "ku": "çêyî",
-    "tr": "İyilik. çêyiya Keja ye, li pişt Mila ye: İyiliği biz yaptık, karşılığını başkası aldı. (d)"
-  },
-  {
-    "ku": "çi",
-    "tr": "Ne. çi çax: ne zaman. çi feyde: Artık geçmişte kalan bir durum karşısında, öne sürülenin ya da istenenin geçersizliğini, işe yaramzlığını göstermek için söylenir; ne fayda! çi heye, çi tune ye?: Hangi haberler, ne gibi havadisler var? ne var, ne yok? çi heyf: Çaresi yok, elden ne gelir, ne çare."
-  },
-  {
-    "ku": "çiçik",
-    "tr": "Meme. (d.)"
-  },
-  {
-    "ku": "çiço",
-    "tr": "Meme. (çd.)"
-  },
-  {
-    "ku": "çiftexas",
-    "tr": "Patiska."
-  },
-  {
-    "ku": "çind",
-    "tr": "Zıplama, sıçrama. xu çind kirin: Zıplamak, sıçramak."
-  },
-  {
-    "ku": "çikandin",
-    "tr": "(Su kaynağı, çeşme vb. yerlerin suyunu) Kurutmak."
-  },
-  {
-    "ku": "çik kirin",
-    "tr": "(Direk, ağaç vb.) Dikmek."
-  },
-  {
-    "ku": "çikos",
-    "tr": "Cimri."
-  },
-  {
-    "ku": "çikosî",
-    "tr": "Cimrilik. (d.)"
-  },
-  {
-    "ku": "çikyan",
-    "tr": "(Su kaynağı, çeşme vb. yerlerin suyu) Kurumak."
-  },
-  {
-    "ku": "çilek",
-    "tr": "Pisboğaz."
-  },
-  {
-    "ku": "çilekî",
-    "tr": "Pisboğazlık. (d.)"
-  },
-  {
-    "ku": "çileqe",
-    "tr": "Geveze."
-  },
-  {
-    "ku": "çileqî",
-    "tr": "Gevezelik. (d.)"
-  },
-  {
-    "ku": "çilfis",
-    "tr": "Hırsız."
-  },
-  {
-    "ku": "çilfisandin",
-    "tr": "Çalmak, aşırmak. (diçilfisîne, biçilfisîne)"
-  },
-  {
-    "ku": "çilfisî",
-    "tr": "Hırsızlık. (d.)"
-  },
-  {
-    "ku": "çilik",
-    "tr": "Kadın cinsel organı. (d.)"
-  },
-  {
-    "ku": "çilk",
-    "tr": "Damla. (d.)"
-  },
-  {
-    "ku": "çilkandin",
-    "tr": "(Sıvı vb.) Sıçratmak."
-  },
-  {
-    "ku": "çilkyan",
-    "tr": "(Sıvı vb.) Sıçramak."
-  },
-  {
-    "ku": "çilm",
-    "tr": "bkz. \"liçik\""
-  },
-  {
-    "ku": "çilmisandin",
-    "tr": "Soldurmak, soluklaştırmak."
-  },
-  {
-    "ku": "çilmisîn",
-    "tr": "Solmak, soluklaşmak."
-  },
-  {
-    "ku": "çilmo",
-    "tr": "bkz. \"lîço\""
-  },
-  {
-    "ku": "çilo",
-    "tr": "Yaprakları dökülmemiş olan ağaç dalları. (e.)"
-  },
-  {
-    "ku": "çilope",
-    "tr": "bkz. \"çilo\""
-  },
-  {
-    "ku": "çim",
-    "tr": "Uç. (e.)"
-  },
-  {
-    "ku": "çima",
-    "tr": "Neden, niçin."
-  },
-  {
-    "ku": "çimaq",
-    "tr": "Ateş yakmada kullanılan bir cins taş. (e.)"
-  },
-  {
-    "ku": "çimik",
-    "tr": "Uç. (e.)"
-  },
-  {
-    "ku": "çingîn",
-    "tr": "Şıngırtı. çingînî ji tasê hat: Tas şıngırdadı."
-  },
-  {
-    "ku": "Çingûş",
-    "tr": "Diyarbakır'ın Çüngüş ilçesi. (d.)"
-  },
-  {
-    "ku": "çinîn",
-    "tr": "Biçmek, ekin biçmek. (diçine, biçine)"
-  },
-  {
-    "ku": "çip-çip",
-    "tr": "Suyun damlama sesi. (d.)"
-  },
-  {
-    "ku": "çipisk",
-    "tr": "Fiske. (d.)"
-  },
-  {
-    "ku": "çiq",
-    "tr": "\"Tık\" tesi."
-  },
-  {
-    "ku": "çir (1)",
-    "tr": "Bir yudumluk sıvı. (d.)"
-  },
-  {
-    "ku": "çir (2)",
-    "tr": "Diri, zinde."
-  },
-  {
-    "ku": "çira",
-    "tr": "Neden, niçin."
-  },
-  {
-    "ku": "çirandin",
-    "tr": "Yırtmak. (diçirîne, biçirîne)"
-  },
-  {
-    "ku": "çiravk",
-    "tr": "Su kaynağı. (d.)"
-  },
-  {
-    "ku": "çirçirî kirin",
-    "tr": "Yırtmak ve parça parça etmek."
-  },
-  {
-    "ku": "çirçirk",
-    "tr": "1) Cırcırböceği. 2) Hallachane. (d.)"
-  },
-  {
-    "ku": "çire",
-    "tr": "Çira. (d.)"
-  },
-  {
-    "ku": "çirge",
-    "tr": "bkz. \"çiravk\""
-  },
-  {
-    "ku": "çirik",
-    "tr": "Küçük su kaynağı. (d.)"
-  },
-  {
-    "ku": "çirî",
-    "tr": "Meme ağzı, meme deliği. (d.)"
-  },
-  {
-    "ku": "çirnî",
-    "tr": "Zayıf ve kara kuru kimse."
-  },
-  {
-    "ku": "çironek",
-    "tr": "Su oluğu, çörten. (d.)"
-  },
-  {
-    "ku": "çirtik (1)",
-    "tr": "Hafif kadın, hoppa kadın. 2) Parmak şaklatma."
-  },
-  {
-    "ku": "çirtim",
-    "tr": "Salkımdan bir parça, salkım parçası. (d.)"
-  },
-  {
-    "ku": "çirt û virt",
-    "tr": "bkz. \"tirt û virt\""
-  },
-  {
-    "ku": "çirûsîn",
-    "tr": "Parıldamak."
-  },
-  {
-    "ku": "çirûsk",
-    "tr": "Parıltı. (d.)"
-  },
-  {
-    "ku": "çiryan",
-    "tr": "Yırtılmak."
-  },
-  {
-    "ku": "çist",
-    "tr": "Canlı, hareketli, zinde."
-  },
-  {
-    "ku": "çişə",
-    "tr": "Çiş. (çd.)"
-  },
-  {
-    "ku": "çito",
-    "tr": "Nasıl."
-  },
-  {
-    "ku": "çitonî",
-    "tr": "Nasıl, ne şekilde."
-  },
-  {
-    "ku": "çiv",
-    "tr": "1) Zikzak. 2) Hile, oyun, düzen. (d.)"
-  },
-  {
-    "ku": "çivandin",
-    "tr": "Büzmek. (diçivîne, biçivîne)"
-  },
-  {
-    "ku": "çiv û dolab",
-    "tr": "Hile, düzen, dalavere, üçkâğıt."
-  },
-  {
-    "ku": "çixe",
-    "tr": "İneği sağıma sürerken söylenen sözcük."
-  },
-  {
-    "ku": "çixir",
-    "tr": "Karda açılan yol. (d.)"
-  },
-  {
-    "ku": "çixlik",
-    "tr": "İçi kof çıkan kurumuş nohut. (d.)"
-  },
-  {
-    "ku": "çiya",
-    "tr": "Dağ. (e.)"
-  },
-  {
-    "ku": "çiyayî",
-    "tr": "Dağlı."
-  },
-  {
-    "ku": "çizirik",
-    "tr": "Kuyruk yağı veya içyağının eritilmesinden sonra geriye kalan posası. (d.)"
-  },
-  {
-    "ku": "çizirîn",
-    "tr": "Sızmak, su sızmak. (diçizire, biçizire)"
-  },
-  {
-    "ku": "çiz kirin",
-    "tr": "1) İşemek. 2) Yakmak. (ça.)"
-  },
-  {
-    "ku": "çîçik",
-    "tr": "Az."
-  },
-  {
-    "ku": "çîk (1)",
-    "tr": "Uzun namlulu bir çeşit silah. (d.)"
-  },
-  {
-    "ku": "çîk (2)",
-    "tr": "Şey."
-  },
-  {
-    "ku": "çîksayî",
-    "tr": "Apaçık (hava.)"
-  },
-  {
-    "ku": "çîkufte",
-    "tr": "Çiğköfte. (d.)"
-  },
-  {
-    "ku": "çîmen",
-    "tr": "Çimen."
-  },
-  {
-    "ku": "çîp",
-    "tr": "Baldır. (d.)"
-  },
-  {
-    "ku": "çîprût",
-    "tr": "Çıplak bacaklı."
-  },
-  {
-    "ku": "çîr",
-    "tr": "Kayısı kurusu."
-  },
-  {
-    "ku": "çît",
-    "tr": "1) Çadırların etrafına dikilen çubuklar. 2) Bezden kadın başörtüsü. (d.)"
-  },
-  {
-    "ku": "çîvandin",
-    "tr": "(Kurşun) Vınlamak."
-  },
-  {
-    "ku": "çîv-çîv",
-    "tr": "Vınlama. (d.)"
-  },
-  {
-    "ku": "çîxsor",
-    "tr": "Yiyilebilen bir bitki. (d.)"
-  },
-  {
-    "ku": "ço (1)",
-    "tr": "Sopa. (e.)"
-  },
-  {
-    "ku": "ço (2)",
-    "tr": "Eşek, katır gibi hayvanlara hızlı yürümeleri için söylenen sözcük."
-  },
-  {
-    "ku": "çoçik",
-    "tr": "Derin kepçe. (d.)"
-  },
-  {
-    "ku": "çoço",
-    "tr": "Eşek. (ça.)"
-  },
-  {
-    "ku": "çog",
-    "tr": "Diz. (d.)"
-  },
-  {
-    "ku": "çoganî",
-    "tr": "Çökerek, dizüstü."
-  },
-  {
-    "ku": "çogerî",
-    "tr": "Dizleri tutmaz olan."
-  },
-  {
-    "ku": "çogerî bûn",
-    "tr": "Dizleri tutmaz olmak."
-  },
-  {
-    "ku": "çol",
-    "tr": "Çöl, kır, kırsal alan. çol û pol: Çöl, kır. çol û çepel: bkz. \"çol û pol\" (d.)"
-  },
-  {
-    "ku": "çolbir",
-    "tr": "Kestirme yol. (d.)"
-  },
-  {
-    "ku": "çolik",
-    "tr": "Bir sürü, pek çok. çolik peya: Bir sürü erkek. çolik zarê hûr: Bir sürü ufak çocuk."
-  },
-  {
-    "ku": "çoqal",
-    "tr": "Eli sakat kimse."
-  },
-  {
-    "ku": "çoqal bûn",
-    "tr": "Eli sakat olmak."
-  },
-  {
-    "ku": "çoqalî",
-    "tr": "Eli sakat olma durumu. (d.)"
-  },
-  {
-    "ku": "çoqal kirin",
-    "tr": "Elini sakat etmek."
-  },
-  {
-    "ku": "çort",
-    "tr": "Kaba, kırıcı (söz.)"
-  },
-  {
-    "ku": "çortan",
-    "tr": "Çökelek kurusu. (e.)"
-  },
-  {
-    "ku": "çortanî",
-    "tr": "Çökelek kurusundan yapılan bir tür kışlık ayran çorbası. (d.)"
-  },
-  {
-    "ku": "çuqa",
-    "tr": "Ne kadar."
-  },
-  {
-    "ku": "çuqas",
-    "tr": "bkz. \"çuqa\""
-  },
-  {
-    "ku": "çurmîş bûn",
-    "tr": "bkz. \"rizyan\""
-  },
-  {
-    "ku": "çurûg",
-    "tr": "Çürük."
-  },
-  {
-    "ku": "çuxur",
-    "tr": "Tezek kalıbı. (d.)"
-  },
-  {
-    "ku": "çûç!",
-    "tr": "Otur! (çd.)"
-  },
-  {
-    "ku": "çûçik (1)",
-    "tr": "Küçük."
-  },
-  {
-    "ku": "çûçik (2)",
-    "tr": "Serçe, serçegiller. (d.)"
-  },
-  {
-    "ku": "çûçî kirin",
-    "tr": "Oturmak. (ça.)"
-  },
-  {
-    "ku": "çûk (1)",
-    "tr": "Kuş. (d.)"
-  },
-  {
-    "ku": "çûk (2)",
-    "tr": "Küçük."
-  },
-  {
-    "ku": "çûktî",
-    "tr": "Küçüklük. (d.)"
-  },
-  {
-    "ku": "çûn",
-    "tr": "Gitmek. çûn destê (...): (...) elini öpmek. çûn heyfa bavê qûna dê dan ser: Daha iyi şeyler elde etmeye çalışırken elindekini de kaybetmek; \"Dimyat'a pirince giderken evdeki bulgurdan olmak\" çûn rehmetê: Rahmetli olmak, vefat etmek. çûn sala xu: (Çocuk) Bir yaşını doldurmak. çûn ser qismetê xu: (Gelin olacak çağa gelmiş kız) Kocaya varmak, kısmeti çıkıp evlenmek. çûn zora wî: Ağırına gitmek, gücüne gitmek."
-  },
-  {
-    "ku": "çûr",
-    "tr": "Bir koyun çeşidi."
-  },
-  {
-    "ku": "çûyin",
-    "tr": "Gitmek."
-  },
-  {
-    "ku": "çûz-çûz",
-    "tr": "Sıçan, fare gibi hayvanların çıkardığı ses. (d.)"
-  }
+  // PDF Dosyasından Çıkarılan Kelimeler
+  { ku: 'a (1)', tr: 'Hayret sözcüğü. a ji te ra ha: Hoppala! Buyur bakalım!', desc: 'Hayret sözcüğü. Örnek: a ji te ra ha: Hoppala! Buyur bakalım!' },
+  { ku: 'a (2)', tr: '-im, -in malikiyet sıfatı. a bi xêr hebû: Sevindirici bir durum, güzel bir rastlantı olarak; "iyi ki."', desc: '-im, -in malikiyet sıfatı. Örnek: a bi xêr hebû: Sevindirici bir durum, güzel bir rastlantı olarak; "iyi ki."' },
+  { ku: 'abûqat', tr: 'Avukat.', desc: 'Avukat.' },
+  { ku: 'aciz', tr: 'Bezgin, bezen, bıkkın.', desc: 'Bezgin, bezen, bıkkın.' },
+  { ku: 'aciz bûn', tr: 'Bıkmak, sıkılmak.', desc: 'Bıkmak, sıkılmak.' },
+  { ku: 'aciz kirin', tr: 'Bıktırmak, bezdirmek.', desc: 'Bıktırmak, bezdirmek.' },
+  { ku: 'acizî', tr: 'Bıkkınlık. (d.)', desc: 'Bıkkınlık.' },
+  { ku: 'ad', tr: 'Ahit, yemin. bi ad û wehd be: "Yemin olsun, ahdolsun" anlamında yemin biçimi. li min bi ad be gi ez îdî qahwê vexum: Bana ahdolsun ki artık kahve içmeyeceğim. (d.)', desc: 'Ahit, yemin. Örnek: li min bi ad be gi ez îdî qahwê vexum: Bana ahdolsun ki artık kahve içmeyeceğim.' },
+  { ku: 'adar', tr: 'Mart. (d.)', desc: 'Mart.' },
+  { ku: 'ad kirin', tr: 'Ahdetmek, yemin etmek.', desc: 'Ahdetmek, yemin etmek.' },
+  { ku: 'afatî', tr: 'Musibet, felaket, bela. (d.)', desc: 'Musibet, felaket, bela.' },
+  { ku: 'afir', tr: 'Hayvan yemliği, yem teknesi, yemlik. (e.)', desc: 'Hayvan yemliği, yem teknesi, yemlik.' },
+  { ku: 'afsûn', tr: 'Pileme.', desc: 'Pileme.' },
+  { ku: 'afsûn kirin', tr: 'Bilemek.', desc: 'Bilemek.' },
+  { ku: 'ajnê', tr: 'Yüzme, suda yüzme.', desc: 'Yüzme, suda yüzme.' },
+  { ku: 'ajnêber', tr: 'Yüzücü.', desc: 'Yüzücü.' },
+  { ku: 'ajnêberî', tr: 'Yüzücülük. (d.)', desc: 'Yüzücülük.' },
+  { ku: 'ajnê kirin', tr: 'Yüzmek, suda yüzmek.', desc: 'Yüzmek, suda yüzmek.' },
+  { ku: 'ajo', tr: 'Sürücü.', desc: 'Sürücü.' },
+  { ku: 'ajotin', tr: 'Sürmek. (dajo, bajo)', desc: 'Sürmek. (Geniş zaman: dajo, emir: bajo)' },
+  { ku: 'ajotî', tr: 'Sürülmüş olan tarla vb.', desc: 'Sürülmüş olan tarla vb.' },
+  { ku: 'akincî', tr: 'Yerleşik, göçebe olmayan.', desc: 'Yerleşik, göçebe olmayan.' },
+  { ku: 'alastin', tr: 'Yalamak. (dalêse, balêse)', desc: 'Yalamak. (Geniş zaman: dalêse, emir: balêse)' },
+  { ku: 'alemûn', tr: 'bkz. "bafûn"', desc: 'bkz. "bafûn".' },
+  { ku: 'alemyon', tr: 'bkz. "bafûn"', desc: 'bkz. "bafûn".' },
+  { ku: 'alif', tr: 'Yem, hayvan yemi. (e.)', desc: 'Yem, hayvan yemi.' },
+  { ku: 'alif kirin', tr: 'Hayvanları yemlemek.', desc: 'Hayvanları yemlemek.' },
+  { ku: 'aliqîn', tr: 'Birine veya bir yere takılmak. ez çûm qehwê, aliqîm wir: Kahveye gittim, oraya takıldım.', desc: 'Birine veya bir yere takılmak. Örnek: ez çûm qehwê, aliqîm wir: Kahveye gittim, oraya takıldım.' },
+  { ku: 'alî', tr: 'Taraf, yön. (e.)', desc: 'Taraf, yön.' },
+  { ku: 'ali', tr: 'Yardım, yardım etme. ali hev kirin: Yardımlaşmak. alîk: Bir taraf.', desc: 'Yardım, yardım etme. Örnek: ali hev kirin: Yardımlaşmak. alîk: Bir taraf.' },
+  { ku: 'alî kirin', tr: 'Yardım etmek.', desc: 'Yardım etmek.' },
+  { ku: 'alme', tr: 'Laçka, laçka olma.', desc: 'Laçka, laçka olma.' },
+  { ku: 'alme bûn', tr: 'Laçka olmak. nigê sendelyê alme bûye: Sandalyenin ayağı laçkalaşmış.', desc: 'Laçka olmak. Örnek: nigê sendelyê alme bûye: Sandalyenin ayağı laçkalaşmış.' },
+  { ku: 'alûc', tr: 'Erik. (d.)', desc: 'Erik.' },
+  { ku: 'alvêr', tr: 'Alışveriş, alım-satım. (d.)', desc: 'Alışveriş, alım-satım.' },
+  { ku: 'amojn', tr: 'Amca karısı. (d.)', desc: 'Amca karısı.' },
+  { ku: 'anê/anik', tr: 'Anne. (çd.)', desc: 'Anne. (Çocuk dilinde)' },
+  { ku: 'angorî', tr: '-a göre.', desc: '-a göre.' },
+  { ku: 'anha', tr: 'Şimdi.', desc: 'Şimdi.' },
+  { ku: 'anîn', tr: 'Getirmek. anîn cî: Yapmak, gerçekleştirmek; yerine getirmek (bir şeyi.) anîn dunyê: Dünyaya getirmek, doğurmak. anîn serê wî: Başına beklenmedik, şaşırtıcı bir olay vb. getirmek. bi anîn dan: Getirtmek.', desc: 'Getirmek. Deyimler: anîn cî (yapmak), anîn dunyê (doğurmak), anîn serê wî (başına iş açmak), bi anîn dan (getirtmek).' },
+  { ku: 'anka', tr: 'Şimdi.', desc: 'Şimdi.' },
+  { ku: 'ap', tr: 'Amca. (e.)', desc: 'Amca.' },
+  { ku: 'apardûman', tr: 'Apartman. (d.)', desc: 'Apartman.' },
+  { ku: 'apo', tr: 'Amcaya hitap şekli.', desc: 'Amcaya hitap şekli.' },
+  { ku: 'apo (çd.)', tr: 'Baba. (çd.)', desc: 'Baba. (Çocuk dilinde)' },
+  { ku: 'aqil avêtin', tr: 'Aklını yitirmek. Hemo aqil avêtiye: Hemo aklını yitirmiş.', desc: 'Aklını yitirmek. Örnek: Hemo aqil avêtiye: Hemo aklını yitirmiş.' },
+  { ku: 'aqit', tr: 'bkz. "dims"', desc: 'bkz. "dims".' },
+  { ku: 'aqûbet', tr: 'Akıbet. aqûbetî li serê te be: darısı başına. (d.)', desc: 'Akıbet. Örnek: aqûbetî li serê te be: darısı başına.' },
+  { ku: 'ar', tr: 'Ateş. ar ji laşê (bedena/canê) wî çûn: Çok ateşi çıkmak, vücut harareti normalden çok olmak. arê wî ketin: (Hasta için) Vücut ısısı azalmak, ateşi düşmek. arê Xwedê: "Allah\'ın ateşi" anlamına gelen bu söz haşarı, yaramaz çocuklar için söylenir. (e.)', desc: 'Ateş. Deyimler: ar ji laşê wî çûn (çok ateşlenmek), arê wî ketin (ateşi düşmek), arê Xwedê (yaramaz çocuk).' },
+  { ku: 'araqî', tr: 'İçki. (d.)', desc: 'İçki.' },
+  { ku: 'araqxur', tr: 'Ayyaş.', desc: 'Ayyaş.' },
+  { ku: 'arav', tr: 'Çamaşır yıkandıktan sonra geriye kalan artık su, çamaşır suyu. (d.)', desc: 'Çamaşır yıkandıktan sonra kalan artık su, çamaşır suyu.' },
+  { ku: 'aravî', tr: 'bkz. Arav. (d.)', desc: 'bkz. Arav.' },
+  { ku: 'ard', tr: 'Un. (e.)', desc: 'Un.' },
+  { ku: 'ardû', tr: 'Yakacak. (e.)', desc: 'Yakacak.' },
+  { ku: 'arema', tr: 'İskambilde, elliiki oyununda son el, son oyun.', desc: 'İskambilde, elliiki oyununda son el, son oyun.' },
+  { ku: 'argûn', tr: 'Ocak, ateş ocağı, şömine. (e.)', desc: 'Ocak, ateş ocağı, şömine.' },
+  { ku: 'arî', tr: 'Kül, ateş külü. (d.)', desc: 'Kül, ateş külü.' },
+  { ku: 'ar kirin', tr: 'Arlanmak, uslanmak.', desc: 'Arlanmak, uslanmak.' },
+  { ku: 'arkolk', tr: 'Ateş karıştırmada kullanılan sopa. (e.)', desc: 'Ateş karıştırmada kullanılan sopa.' },
+  { ku: 'arode', tr: 'Uyuşuk kimse.', desc: 'Uyuşuk kimse.' },
+  { ku: 'arsim', tr: 'Nezle. bi arsimê ketin: Nezleye yakalanmak. (d.)', desc: 'Nezle. Örnek: bi arsimê ketin: Nezleye yakalanmak.' },
+  { ku: 'arsimî', tr: 'Nezleli.', desc: 'Nezleli.' },
+  { ku: 'arsimî bûn', tr: 'Nezle olmak.', desc: 'Nezle olmak.' },
+  { ku: 'arvan', tr: 'Un, genel olarak un. (e.)', desc: 'Un, genel olarak un.' },
+  { ku: 'arwane', tr: 'Dişi deve, maya. (d.)', desc: 'Dişi deve, maya.' },
+  { ku: 'aryan', tr: '(Özellikle baş) Şiddetle ağrımak. serî li min arya: Başım çatlıyor, başım çok ağrıyor. (diare, biare)', desc: '(Özellikle baş) Şiddetle ağrımak. Örnek: serî li min arya: Başım çatlıyor, başım çok ağrıyor. (Geniş zaman: diare, emir: biare)' },
+  { ku: 'asas', tr: 'Aslında, aslına bakılırsa.', desc: 'Aslında, aslına bakılırsa.' },
+  { ku: 'asê', tr: 'Sarp, asi, yalçın.', desc: 'Sarp, asi, yalçın.' },
+  { ku: 'asilîn', tr: 'Mahsur kalmak. Elo û Silo di çiyê da asilîn: Elo ve Sılo dağda mahsur kaldılar. (diasile, biasile)', desc: 'Mahsur kalmak. Örnek: Elo û Silo di çiyê da asilîn: Elo ve Sılo dağda mahsur kaldılar. (Geniş zaman: diasile, emir: biasile)' },
+  { ku: 'asrax', tr: 'Tavan. (e.)', desc: 'Tavan.' },
+  { ku: 'aş', tr: 'Değirmen. (e.)', desc: 'Değirmen.' },
+  { ku: 'aşêf', tr: 'Toprağı çapalama işi.', desc: 'Toprağı çapalama işi.' },
+  { ku: 'aşêf kirin', tr: 'Toprağı çapalamak ve yabani bitkileri ayıklayıp temizlemek.', desc: 'Toprağı çapalamak ve yabani bitkileri ayıklayıp temizlemek.' },
+  { ku: 'aşiq', tr: 'Çingene.', desc: 'Çingene.' },
+  { ku: 'aşiqtî', tr: 'Çingenelik. (d.)', desc: 'Çingenelik.' },
+  { ku: 'aşît', tr: 'Çığ. (d.)', desc: 'Çığ.' },
+  { ku: 'aşortmen', tr: 'Eşofman. (e.)', desc: 'Eşofman.' },
+  { ku: 'aştî', tr: 'Barış. (d.)', desc: 'Barış.' },
+  { ku: 'aşt kirin', tr: 'Barışmak, barış yapmak. me aşt kir: Biz barıştık.', desc: 'Barışmak, barış yapmak. Örnek: me aşt kir: Biz barıştık.' },
+  { ku: 'aşûjin', tr: 'İçi doldurulmuş çuvalların ağzını dikmekte kullanılan ve bu iş için yapılan ip. (d.)', desc: 'İçi doldurulmuş çuvalların ağzını dikmekte kullanılan ve bu iş için yapılan ip.' },
+  { ku: 'aşxane', tr: 'Lokanta. (d.)', desc: 'Lokanta.' },
+  { ku: 'atare', tr: 'Yalan, aslı astarı olmayan şey. atare tuneye: Yalandır, asılsızdır; aslı astarı yok.', desc: 'Yalan, aslı astarı olmayan şey. Örnek: atare tuneye: Yalandır, asılsızdır; aslı astarı yok.' },
+  { ku: 'atle nekirin', tr: 'Ara vermemek, hiç duraksamamamak.', desc: 'Ara vermemek, hiç duraksamamamak.' },
+  { ku: 'av', tr: 'Su. av ji devê wî çûn: Ağzının suyu akmak, ağzı sulanmak. ava ruyê wî rijyan: Utanma duygusunu yitirmek, hayasızlaşmak. av û av: Tümden, hiç geri gelmemecesine. (d.)', desc: 'Su. Deyimler: av ji devê wî çûn (ağzının suyu akmak), ava ruyê wî rijyan (utanma duygusunu yitirmek), av û av (tümden, geri gelmemecesine).' },
+  { ku: 'ava', tr: 'Bayındır, şen.', desc: 'Bayındır, şen.' },
+  { ku: 'ava bûn', tr: '1) Bayındır olmak, şenelmek. 2) Güneş, ay ve yıldızların batması.', desc: 'Bayındır olmak, şenelmek veya Güneş, ay ve yıldızların batması.' },
+  { ku: 'ava firngiya', tr: 'Domates salçası.', desc: 'Domates salçası.' },
+  { ku: 'ava îsota', tr: 'Biber salçası.', desc: 'Biber salçası.' },
+  { ku: 'ava kirin', tr: 'Bayındır hale getirmek, şeneltmek.', desc: 'Bayındır hale getirmek, şeneltmek.' },
+  { ku: 'ava lamo', tr: 'bkz. "qazaxî"', desc: 'bkz. "qazaxî".' },
+  { ku: 'ava reş', tr: 'Glokom, kara su.', desc: 'Glokom, kara su.' },
+  { ku: 'ava şamika', tr: 'bkz. "ava firngiya"', desc: 'bkz. "ava firngiya".' },
+  { ku: 'avdan', tr: 'Sulamak, su vermek.', desc: 'Sulamak, su vermek.' },
+  { ku: 'avdest', tr: 'Abdest. (d.)', desc: 'Abdest.' },
+  { ku: 'avdestxane', tr: 'Abdesthane, hela. (d.)', desc: 'Abdesthane, hela.' },
+  { ku: 'avdew', tr: 'Ayran, su katılmış ayran. (d.)', desc: 'Ayran, su katılmış ayran.' },
+  { ku: 'avêtin', tr: 'Atmak. (davêje, bavêje)', desc: 'Atmak. (Geniş zaman: davêje, emir: bavêje)' },
+  { ku: 'avis', tr: 'Gebe.', desc: 'Gebe.' },
+  { ku: 'avis bûn', tr: 'Gebe olmak.', desc: 'Gebe olmak.' },
+  { ku: 'avisî', tr: 'Gebelik. (d.)', desc: 'Gebelik.' },
+  { ku: 'avis kirin', tr: 'Gebe bırakmak.', desc: 'Gebe bırakmak.' },
+  { ku: 'avî', tr: '1) Sulak toprak 2) Çiy, şebnem. (d.)', desc: 'Sulak toprak veya Çiy, şebnem.' },
+  { ku: 'avîtin', tr: 'Atmak. (davîje, bavîje)', desc: 'Atmak. (Geniş zaman: davîje, emir: bavîje)' },
+  { ku: 'avlik', tr: 'Sperm, meni. (d.)', desc: 'Sperm, meni.' },
+  { ku: 'avnisêl', tr: 'Süzgeç. (d.)', desc: 'Süzgeç.' },
+  { ku: 'avrênc', tr: 'bkz. "meşk"', desc: 'bkz. "meşk".' },
+  { ku: 'avrî', tr: 'Yiyecek içecek artığı. (d.)', desc: 'Yiyecek içecek artığı.' },
+  { ku: 'avsinîk', tr: 'Arsenik. (d.)', desc: 'Arsenik.' },
+  { ku: 'avsîrk', tr: 'Sarımsaklı papara. (d.)', desc: 'Sarımsaklı papara.' },
+  { ku: 'avşî', tr: 'Ark vb. yerlerin kenarlarında yeşeren ot, çimen vb. şeyler. (d.)', desc: 'Ark vb. yerlerin kenarlarında yeşeren ot, çimen vb. şeyler.' },
+  { ku: 'avşo', tr: 'İçecek artığı. (d.)', desc: 'İçecek artığı.' },
+  { ku: 'avşolik', tr: 'Küflü.', desc: 'Küflü.' },
+  { ku: 'avzêm', tr: 'Su kaynağı. (d.)', desc: 'Su kaynağı.' },
+  { ku: 'avzûm', tr: 'Toka. (d.)', desc: 'Toka.' },
+  { ku: 'awiqandin', tr: 'Geciktirmek, aksatmak. (diawiqîne, biawiqîne)', desc: 'Geciktirmek, aksatmak. (Geniş zaman: diawiqîne, emir: biawiqîne)' },
+  { ku: 'awiqîn', tr: 'Gecikmek, aksamak. mîz lê awiqîye: idrar Zorluğu çekiyor. (diawiqe, biawiqe)', desc: 'Gecikmek, aksamak. Örnek: mîz lê awiqîye: idrar Zorluğu çekiyor. (Geniş zaman: diawiqe, emir: biawiqe)' },
+  { ku: 'awir', tr: 'Dik bakış. (d.)', desc: 'Dik bakış.' },
+  { ku: 'ax (1)', tr: 'Toprak. (d.)', desc: 'Toprak.' },
+  { ku: 'ax (2)', tr: 'Hayıflanma sözcüğü, ah!', desc: 'Hayıflanma sözcüğü, ah!' },
+  { ku: 'axa', tr: 'Ağa, yörenin başı, aşiret reisi.', desc: 'Ağa, yörenin başı, aşiret reisi.' },
+  { ku: 'axatî', tr: 'Ağalık. (d.)', desc: 'Ağalık.' },
+  { ku: 'axbandir', tr: 'İlkbaharda tarlalarda biten yapraksız, çiçeksiz olup pişirilerek yemeği yapılan bir bitki. (d.)', desc: 'İlkbaharda tarlalarda biten yapraksız, çiçeksiz olup pişirilerek yemeği yapılan bir bitki.' },
+  { ku: 'axbanî', tr: 'Bir çeşit kadın başörtüsü. (d.)', desc: 'Bir çeşit kadın başörtüsü.' },
+  { ku: 'axifin', tr: '(Yara) İrin bağlamak. (diaxife, biaxife)', desc: '(Yara) İrin bağlamak. (Geniş zaman: diaxife, emir: biaxife)' },
+  { ku: 'axirê', tr: 'Nihayet, sonunda. axirê çû: Nihayet gitti. axirê em jê pa bûn: Nihayet ondan kurtulduk.', desc: 'Nihayet, sonunda. Örnek: axirê çû: Nihayet gitti.' },
+  { ku: 'axîn', tr: 'Ah çekme, hayıflanma. (d.)', desc: 'Ah çekme, hayıflanma.' },
+  { ku: 'axîn kirin', tr: 'Ah çekmek, hayıflanmak.', desc: 'Ah çekmek, hayıflanmak.' },
+  { ku: 'axret', tr: 'Ahiret. (d.)', desc: 'Ahiret.' },
+  { ku: 'axretî', tr: 'Ahretlik.', desc: 'Ahretlik.' },
+  { ku: 'axur', tr: 'Ahır. (e.)', desc: 'Ahır.' },
+  { ku: 'ax û wax', tr: 'Ah vah.', desc: 'Ah vah.' },
+  { ku: 'ay', tr: 'Ay, Ah, of.', desc: 'Ay, Ah, of.' },
+  { ku: 'ayid', tr: 'Ait.', desc: 'Ait.' },
+  { ku: 'ayîn', tr: 'Ah, beddua. (d.)', desc: 'Ah, beddua.' },
+  { ku: 'az', tr: 'Başsağlığı ziyareti. (d.)', desc: 'Başsağlığı ziyareti.' },
+  { ku: 'azeb', tr: 'Bekâr.', desc: 'Bekâr.' },
+  { ku: 'azebî', tr: 'Bekârlık. (d.)', desc: 'Bekârlık.' },
+  { ku: 'azirîn', tr: '(Yara) Azmak, yaranın azması. (diazire, biazire)', desc: '(Yara) Azmak, yaranın azması. (Geniş zaman: diazire, emir: biazire)' },
+  { ku: 'ba (1)', tr: 'Rüzgar, yel. bayê bezê: Çabucak, acele olarak, hızlı bir şekilde. bayê bezê here bîne: Acele olarak, koşa koşa git getir. bayê kur: Şimal rüzgarı, lodos. bayê pîrê: Kocakarı fırtınası. ber bê ketin: Rüzgara kapılmak. li ber bê çûn: Rüzgara kapılmak. (e.)', desc: 'Rüzgar, yel. Deyimler: bayê bezê (çabucak), bayê kur (lodos), bayê pîrê (kocakarı fırtınası), ber bê ketin/çûn (rüzgara kapılmak).' },
+  { ku: 'babaegîd', tr: 'Babayiğit.', desc: 'Babayiğit.' },
+  { ku: 'babed', tr: 'Çeşit, tür. (d.)', desc: 'Çeşit, tür.' },
+  { ku: 'babilûk', tr: 'Siğil. (d.)', desc: 'Siğil.' },
+  { ku: 'badan', tr: 'Bükmek, burmak.', desc: 'Bükmek, burmak.' },
+  { ku: 'badok', tr: 'Büküm. (d.)', desc: 'Büküm.' },
+  { ku: 'bafûn', tr: 'Alüminyum. (e.)', desc: 'Alüminyum.' },
+  { ku: 'bagirtî', tr: 'Şişik, şişmiş olan.', desc: 'Şişik, şişmiş olan.' },
+  { ku: 'bahol', tr: 'Bavul. (d.)', desc: 'Bavul.' },
+  { ku: 'bahoz', tr: 'Fırtına, bora. (d.)', desc: 'Fırtına, bora.' },
+  { ku: 'bahr-bahr', tr: 'Meleme. (d.)', desc: 'Meleme.' },
+  { ku: 'bahryan', tr: 'Melemek. (dibahre, bibahre)', desc: 'Melemek. (Geniş zaman: dibahre, emir: bibahre)' },
+  { ku: 'bajar', tr: 'Şehir. (e.)', desc: 'Şehir.' },
+  { ku: 'bajarî', tr: 'Şehirli.', desc: 'Şehirli.' },
+  { ku: 'bajarîko', tr: 'Şehirlivari, şehirli usulü.', desc: 'Şehirlivari, şehirli usulü.' },
+  { ku: 'bajarvan', tr: 'Kırdan şehre gidip gelenlere denir.', desc: 'Kırdan şehre gidip gelenlere denir.' },
+  { ku: 'bakevn', tr: 'Koyun ve sığırlarda romatizma. (d.)', desc: 'Koyun ve sığırlarda romatizma.' },
+  { ku: 'ba kirin', tr: 'Yellendirmek, rüzgara savurmak, sallamak.', desc: 'Yellendirmek, rüzgara savurmak, sallamak.' },
+  { ku: 'bakur', tr: 'Kuzey. (e.)', desc: 'Kuzey.' },
+  { ku: 'bakurî', tr: 'Kuzeyli.', desc: 'Kuzeyli.' },
+  { ku: 'bal', tr: 'Dikkat, dikkat etme. bala xu dayin: dikkat etmek, gözlemlemek. (d.)', desc: 'Dikkat, dikkat etme. Örnek: bala xu dayin: dikkat etmek, gözlemlemek.' },
+  { ku: 'balcan', tr: 'Patlıcan. (e.)', desc: 'Patlıcan.' },
+  { ku: 'Balcîqa', tr: 'Belçika ve Belçika malı bir çeşit tabanca. (d.)', desc: 'Belçika ve Belçika malı bir çeşit tabanca.' },
+  { ku: 'balgî', tr: 'Yastık. (e.)', desc: 'Yastık.' },
+  { ku: 'balgîyê mara', tr: 'Yılanyastığı otu.', desc: 'Yılanyastığı otu.' },
+  { ku: 'balîf', tr: 'bkz. "balgî"', desc: 'bkz. "balgî".' },
+  { ku: 'balo', tr: 'Hiç olmazsa, bari.', desc: 'Hiç olmazsa, bari.' },
+  { ku: 'banandin', tr: 'Alıştırmak. (dibanîne, bibanîne)', desc: 'Alıştırmak. (Geniş zaman: dibanîne, emir: bibanîne)' },
+  { ku: 'bane', tr: 'Koyunların ilkbahar otlağı. (d.)', desc: 'Koyunların ilkbahar otlağı.' },
+  { ku: 'ban kirin', tr: 'Çağırmak.', desc: 'Çağırmak.' },
+  { ku: 'banyan', tr: 'Alışmak. (dibane, bibane)', desc: 'Alışmak. (Geniş zaman: dibane, emir: bibane)' },
+  { ku: 'bapêş', tr: 'Nezle. (d.)', desc: 'Nezle.' },
+  { ku: 'bapîr', tr: 'Dede. (e.)', desc: 'Dede.' },
+  { ku: 'baq', tr: 'Demet. (d.)', desc: 'Demet.' },
+  { ku: 'baq-baq', tr: 'Gıdaklama, tavuğun "gıt gıt gıdak" diye ses çıkarması. (d.)', desc: 'Gıdaklama, tavuğun "gıt gıt gıdak" diye ses çıkarması.' },
+  { ku: 'baqil', tr: 'Uslu, akıllı.', desc: 'Uslu, akıllı.' },
+  { ku: 'baqil bûn', tr: 'Uslanmak, akıllanmak.', desc: 'Uslanmak, akıllanmak.' },
+  { ku: 'baqilî', tr: 'Usluluk, akıllılık. (d.)', desc: 'Usluluk, akıllılık.' },
+  { ku: 'baqîn', tr: 'Tepki. (d.)', desc: 'Tepki.' },
+  { ku: 'bar', tr: 'Yük. bi bara: Sürüyle, pek çok. (e.)', desc: 'Yük. Deyim: bi bara (sürüyle, pek çok).' },
+  { ku: 'baran', tr: 'Yağmur. baran sekinî ga cil kir: İş işten geçtikten sonra davrananlar için söylenir. ji ber baranê revya ber çironekê: Güç bir durumdan kurtulayım derken daha kötüsüyle karşılaşmayı anlatır. (d.)', desc: 'Yağmur. Deyimler: baran sekinî ga cil kir (iş işten geçtikten sonra davranmak), ji ber baranê revya ber çironekê (kötüsünden kaçıp daha kötüsüne yakalanmak).' },
+  { ku: 'barandin', tr: 'Yağdırmak.', desc: 'Yağdırmak.' },
+  { ku: 'barçêmk', tr: 'Yarasa. (e.)', desc: 'Yarasa.' },
+  { ku: 'barîn', tr: 'Yağmak.', desc: 'Yağmak.' },
+  { ku: 'bar kirin', tr: 'Yüklemek, taşınmak.', desc: 'Yüklemek, taşınmak.' },
+  { ku: 'bask', tr: 'Kanat. (e.)', desc: 'Kanat.' },
+  { ku: 'bastiq', tr: 'Pestil. (e.)', desc: 'Pestil.' },
+  { ku: 'baş', tr: 'İyi.', desc: 'İyi.' },
+  { ku: 'baş bûn', tr: 'İyi olmak, iyileşmek.', desc: 'İyi olmak, iyileşmek.' },
+  { ku: 'başî', tr: 'İyilik. (d.)', desc: 'İyilik.' },
+  { ku: 'baş kirin', tr: 'İyi etmek, iyileştirmek.', desc: 'İyi etmek, iyileştirmek.' },
+  { ku: 'başqe', tr: 'Başka.', desc: 'Başka.' },
+  { ku: 'baştir', tr: 'Daha iyi.', desc: 'Daha iyi.' },
+  { ku: 'başwala', tr: 'Donsuz, kilotsuz.', desc: 'Donsuz, kilotsuz.' },
+  { ku: 'batî', tr: 'Testis. (e.)', desc: 'Testis.' },
+  { ku: 'batofk', tr: 'Diyarbakır Türkçesinde "batof" şeklinde telaffuz edilen, ilaç olarak da kullanılan bir bitki. Bitkinin toprak üstünde kalan kısmı kurutulup kurt düşürmede, yarayı iyileştirmede, sarılık hastalığını gidermede kullanılır. (Lat. Herba Hyperici) (d.)', desc: 'Diyarbakır Türkçesinde "batof" şeklinde telaffuz edilen, ilaç olarak da kullanılan bir bitki (Lat. Herba Hyperici).' },
+  { ku: 'bav', tr: 'Baba. (e.)', desc: 'Baba.' },
+  { ku: 'bavmarî', tr: 'Üvey baba. (e.)', desc: 'Üvey baba.' },
+  { ku: 'bavo', tr: 'Babaya hitap şekli.', desc: 'Babaya hitap şekli.' },
+  { ku: 'bavtî', tr: 'Babalık, baba olma durumu. (d.)', desc: 'Babalık, baba olma durumu.' },
+  { ku: 'bav û kal', tr: 'Ecdat, ata, cet.', desc: 'Ecdat, ata, cet.' },
+  { ku: 'bawer', tr: 'İnanan, inanmış olan.', desc: 'İnanan, inanmış olan.' },
+  { ku: 'bawer bûn', tr: 'İnanmak, güvenmek.', desc: 'İnanmak, güvenmek.' },
+  { ku: 'bawerî', tr: 'İnanç, iman, güven. (d.)', desc: 'İnanç, iman, güven.' },
+  { ku: 'bawer kirin', tr: 'İnanmak.', desc: 'İnanmak.' },
+  { ku: 'bawî', tr: 'Romatizmalı.', desc: 'Romatizmalı.' },
+  { ku: 'bawîşk', tr: 'Esneme.', desc: 'Esneme.' },
+  { ku: 'baxçe', tr: 'Bahçe. (e.)', desc: 'Bahçe.' },
+  { ku: 'baxdenos', tr: 'Maydanoz. (d.)', desc: 'Maydanoz.' },
+  { ku: 'baz', tr: 'Şahin. (e.)', desc: 'Şahin.' },
+  { ku: 'bazar', tr: '1) Pazar (günü). 2) Pazarlık. (d.)', desc: 'Pazar (günü) veya Pazarlık.' },
+  { ku: 'bazar kirin', tr: 'Pazarlık etmek.', desc: 'Pazarlık etmek.' },
+  { ku: 'bazdan', tr: '1) Koşmak. 2) Halay çekmek.', desc: 'Koşmak veya Halay çekmek.' },
+  { ku: 'bazin', tr: 'Bilezik. (e.)', desc: 'Bilezik.' },
+  { ku: 'bazinê hustu', tr: 'Köprücük kemiği.', desc: 'Köprücük kemiği.' },
+  { ku: 'bec', tr: 'Yabani, susuz toprak parçası.', desc: 'Yabani, susuz toprak parçası.' },
+  { ku: 'beden', tr: '1) Sur. 2) Vücut. (d.)', desc: 'Sur veya Vücut.' },
+  { ku: 'bedew', tr: 'Şuh, alımlı, çekici.', desc: 'Şuh, alımlı, çekici.' },
+  { ku: 'befş', tr: 'Kaval kemiği.', desc: 'Kaval kemiği.' },
+  { ku: 'beg', tr: 'Bey.', desc: 'Bey.' },
+  { ku: 'begtî', tr: 'Beylik. (d.)', desc: 'Beylik.' },
+  { ku: 'behc', tr: 'Kızgınlık, öfke. (d.)', desc: 'Kızgınlık, öfke.' },
+  { ku: 'behecandin', tr: 'Kızdırmak, öfkelendirmek.', desc: 'Kızdırmak, öfkelendirmek.' },
+  { ku: 'behecîn', tr: 'Kızmak, öfkelenmek.', desc: 'Kızmak, öfkelenmek.' },
+  { ku: 'behr', tr: 'Deniz. (d.)', desc: 'Deniz.' },
+  { ku: 'behs', tr: 'Bahsetme. (d.)', desc: 'Bahsetme.' },
+  { ku: 'behs kirin', tr: 'Bahsetmek.', desc: 'Bahsetmek.' },
+  { ku: 'behzî', tr: 'Bembeyaz, apak kimse.', desc: 'Bembeyaz, apak kimse.' },
+  { ku: 'bejn', tr: 'Boy. bejn revandin: Boy atmak, boyu uzamak. bejn û bal: Endam, boy pos. (d.)', desc: 'Boy. Deyimler: bejn revandin (boy atmak), bejn û bal (endam, boy pos).' },
+  { ku: 'bel (1)', tr: 'Kulakları dik olan hayvan.', desc: 'Kulakları dik olan hayvan.' },
+  { ku: 'bela (1)', tr: 'Bela. bela xu dîyin: Yaptığı kötülüklerin karşılığını bulmak; belasını bulmak. bela xu tê dan: (Biri) Başına bela olmak, (ona) belasını sürmek. li bela xu geryan: Belasını aramak. li belê geryan: Bela aramak. (d.)', desc: 'Bela. Deyimler: bela xu dîyin (belasını bulmak), li belê geryan (bela aramak).' },
+  { ku: 'bela (2)', tr: 'Dağınık.', desc: 'Dağınık.' },
+  { ku: 'bela bûn', tr: 'Dağılmak.', desc: 'Dağılmak.' },
+  { ku: 'bela kirin', tr: 'Dağıtmak.', desc: 'Dağıtmak.' },
+  { ku: 'belakir', tr: 'Belalı kimse.', desc: 'Belalı kimse.' },
+  { ku: 'belaş', tr: 'Bedava. mift î belaş: Çok ucuz, sudan ucuz.', desc: 'Bedava. Örnek: mift î belaş: Çok ucuz, sudan ucuz.' },
+  { ku: 'belaşî', tr: 'Bir şeyin bedava olması durumu. (d.)', desc: 'Bir şeyin bedava olması durumu.' },
+  { ku: 'belatewş', tr: 'Boşuna, beyhude.', desc: 'Boşuna, beyhude.' },
+  { ku: 'belek', tr: 'Alaca.', desc: 'Alaca.' },
+  { ku: 'belek bûn', tr: 'Alacalaşmak.', desc: 'Alacalaşmak.' },
+  { ku: 'belek kirin', tr: 'Alacalaştırmak.', desc: 'Alacalaştırmak.' },
+  { ku: 'belekî', tr: 'Alacalık. (d.)', desc: 'Alacalık.' },
+  { ku: 'belengaz', tr: 'Yoksul, perişan.', desc: 'Yoksul, perişan.' },
+  { ku: 'belengazî', tr: 'Yoksulluk, perişanlık. (d.)', desc: 'Yoksulluk, perişanlık.' },
+  { ku: 'belhazirî', tr: 'Hali hazırda.', desc: 'Hali hazırda.' },
+  { ku: 'beli-reş', tr: 'Siyah renkli ve dik kulaklı hayvan.', desc: 'Siyah renkli ve dik kulaklı hayvan.' },
+  { ku: 'belk', tr: 'Yaprak. (d.)', desc: 'Yaprak.' },
+  { ku: 'belka guh', tr: 'Kulak tozu.', desc: 'Kulak tozu.' },
+  { ku: 'bel kirin', tr: 'Ayakta işemek.', desc: 'Ayakta işemek.' },
+  { ku: 'belovacî', tr: 'Tersyüz.', desc: 'Tersyüz.' },
+  { ku: 'beloxwarî', tr: 'Eğri büğrü.', desc: 'Eğri büğrü.' },
+  { ku: 'belqitandin', tr: 'Gebertmek. (dibelqitîne, bibelqitîne)', desc: 'Gebertmek. (Geniş zaman: dibelqitîne, emir: bibelqitîne)' },
+  { ku: 'belqitîn', tr: 'Gebermek. belqityê: Geberesice! (kadın için). belqityo: Geberesice! (erkek için).', desc: 'Gebermek. Deyimler: belqityê (geberesice! kadın için), belqityo (geberesice! erkek için).' },
+  { ku: 'belût', tr: 'Domalma.', desc: 'Domalma.' },
+  { ku: 'belût bûn', tr: 'Domalmak.', desc: 'Domalmak.' },
+  { ku: 'belût kirin', tr: 'Domaltmak.', desc: 'Domaltmak.' },
+  { ku: 'belxem', tr: 'Balgam. (d.)', desc: 'Balgam.' },
+  { ku: 'ben', tr: 'İp. benê sola: Ayakkabı bağı. (e.)', desc: 'İp. Örnek: benê sola: Ayakkabı bağı.' },
+  { ku: 'bencik', tr: 'Yabani haşhaş. (d.)', desc: 'Yabani haşhaş.' },
+  { ku: 'bend', tr: 'Sınır taşları. (d.)', desc: 'Sınır taşları.' },
+  { ku: 'bendazik', tr: 'İri göbekli kimse.', desc: 'İri göbekli kimse.' },
+  { ku: 'bende', tr: 'Birini veya bir şeyi bekleme.', desc: 'Birini veya bir şeyi bekleme.' },
+  { ku: 'bendik', tr: 'Peynire katılan bir bitki. (d.)', desc: 'Peynire katılan bir bitki.' },
+  { ku: 'bendike', tr: 'Çuldan oluşturulan büyük torba, büyük çuval. (d.)', desc: 'Çuldan oluşturulan büyük torba, büyük çuval.' },
+  { ku: 'bend kirin', tr: 'Taş dizmek, taşlardan set yapmak.', desc: 'Taş dizmek, taşlardan set yapmak.' },
+  { ku: 'bengulî', tr: 'Saç bağı. (d.)', desc: 'Saç bağı.' },
+  { ku: 'benîşt', tr: 'Sakız. (e.)', desc: 'Sakız.' },
+  { ku: 'benkulabe', tr: 'Sabanın, öküzün boynuna takılan halka kısmı.', desc: 'Sabanın, öküzün boynuna takılan halka kısmı.' },
+  { ku: 'beq', tr: 'Kurbağa. (e.)', desc: 'Kurbağa.' },
+  { ku: 'beqa nekirin', tr: 'Anında, sesini bile çıkaramadan ölmek.', desc: 'Anında, sesini bile çıkaramadan ölmek.' },
+  { ku: 'beqê becî', tr: 'Kara kurbağası.', desc: 'Kara kurbağası.' },
+  { ku: 'ber (1)', tr: 'Kilim. 2) Aşiretin kolu. (d.)', desc: 'Kilim veya Aşiretin kolu.' },
+  { ku: 'ber (2)', tr: 'Astar. (e.)', desc: 'Astar.' },
+  { ku: 'ber (3)', tr: 'Ürün anlamında yalnızca "sêberî" (üç defa doğum yapmış, üç defa ürün vermiş koyun), "çarberî" (dört defa doğum yapmış, dört defa ürün vermiş koyun) gibi kelimelerde kullanılır.', desc: 'Ürün anlamında (örn: sêberî, çarberî).' },
+  { ku: 'ber (4)', tr: 'Ön, ön taraf. ber xu nedîyin: Rahat yüzü görmemek. berê xu bi wî da kirin: Ona yüzünü dönmek. berê xu guherandin: Yüzünü (birinden) çevirmek.', desc: 'Ön, ön taraf. Deyimler: ber xu nedîyin (rahat yüzü görmemek), berê xu bi wî da kirin (yüzünü dönmek), berê xu guherandin (yüzünü çevirmek).' },
+  { ku: 'beredayî', tr: 'Serseri, başıboş kimse.', desc: 'Serseri, başıboş kimse.' },
+  { ku: 'beradayîtî', tr: 'Serserilik, başıboşluk. (d.)', desc: 'Serserilik, başıboşluk.' },
+  { ku: 'beran', tr: 'Koç. (e.)', desc: 'Koç.' },
+  { ku: 'berate', tr: 'Leş. (e.)', desc: 'Leş.' },
+  { ku: 'berayî', tr: 'En. (d.)', desc: 'En.' },
+  { ku: 'beraz', tr: 'Domuz. (e.)', desc: 'Domuz.' },
+  { ku: 'berbangî', tr: 'Sabah vakti koyun otlatması. (d.)', desc: 'Sabah vakti koyun otlatması.' },
+  { ku: 'berbar', tr: 'İş yapabilme gücü. ji berbarê xu da ketin: Elden ayaktan düşmek. diya min ji berbarê xu da ketîye: Annem elden ayaktan düşmüş.', desc: 'İş yapabilme gücü. Deyim: ji berbarê xu da ketin (elden ayaktan düşmek).' },
+  { ku: 'berbat', tr: 'Berbat.', desc: 'Berbat.' },
+  { ku: 'berbat bûn', tr: 'Berbat olmak.', desc: 'Berbat olmak.' },
+  { ku: 'berbatî', tr: 'Berbat olma durumu, berbatlık. (d.)', desc: 'Berbat olma durumu, berbatlık.' },
+  { ku: 'berbat kirin', tr: 'Berbatlaştırmak.', desc: 'Berbatlaştırmak.' },
+  { ku: 'berbazin', tr: 'Bileziğin önüne takılan süs boncuğu. (e.)', desc: 'Bileziğin önüne takılan süs boncuğu.' },
+  { ku: 'berbejn', tr: 'Boy muskası. (d.)', desc: 'Boy muskası.' },
+  { ku: 'berber', tr: 'Takas etme, değiş tokuş.', desc: 'Takas etme, değiş tokuş.' },
+  { ku: 'berberoşk', tr: 'bkz. "geneg"', desc: 'bkz. "geneg".' },
+  { ku: 'berbijêr', tr: 'Aşağıya doğru.', desc: 'Aşağıya doğru.' },
+  { ku: 'berbijor', tr: 'Yukarıya doğru.', desc: 'Yukarıya doğru.' },
+  { ku: 'berbû', tr: 'Gelin alayı. (e.)', desc: 'Gelin alayı.' },
+  { ku: 'berçem', tr: 'Paytak, paytak bacaklı.', desc: 'Paytak, paytak bacaklı.' },
+  { ku: 'berçok', tr: 'Çoban kepeneğinde çobanın sopasını koyduğu bölüm. (d.)', desc: 'Çoban kepeneğinde çobanın sopasını koyduğu bölüm.' },
+  { ku: 'berdan', tr: 'Bırakmak, salıvermek. bera hev dan: Birbirine düşürmek, birbirine bırakmak. berde binê te erd e!: (Biri aşırı yalan söylediğinde) "Ha söyle ha söyle kimsenin inandığı yok zaten." berdê berdê: Kim kime dum duma.', desc: 'Bırakmak, salıvermek. Deyimler: bera hev dan (birbirine düşürmek), berde binê te erd e! (yalan söylediğinde kullanılan söz), berdê berdê (kim kime dum duma).' },
+  { ku: 'berdayî', tr: 'Bırakılmış, salıverilmiş olan.', desc: 'Bırakılmış, salıverilmiş olan.' },
+  { ku: 'berdelav kirin', tr: 'Koyunları su kıyısına götürüp su içmelerini sağlamak.', desc: 'Koyunları su kıyısına götürüp su içmelerini sağlamak.' },
+  { ku: 'berdest', tr: 'Düşkün, aciz.', desc: 'Düşkün, aciz.' },
+  { ku: 'berdevk', tr: 'Kapı önü. (e.)', desc: 'Kapı önü.' },
+  { ku: 'berdêl', tr: 'Karşılıklı kız alıp verme, takas etme.', desc: 'Karşılıklı kız alıp verme, takas etme.' },
+  { ku: 'berdêlî', tr: 'Karşılılı kız alıp verme biçimindeki evliliklerde evlenen kızlardan her biri. (d.)', desc: 'Karşılılı kız alıp verme biçimindeki evliliklerde evlenen kızlardan her biri.' },
+  { ku: 'berdêlî kirin', tr: 'Karşılıklı kız alıp vermek, takas etmek.', desc: 'Karşılıklı kız alıp vermek, takas etmek.' },
+  { ku: 'berdilk', tr: 'Göğüslük. (d.)', desc: 'Göğüslük.' },
+  { ku: 'berdîr', tr: 'bkz. "berindîr"', desc: 'bkz. "berindîr".' },
+  { ku: 'beref kirin', tr: 'Toplamak, bir araya getirmek, derlemek.', desc: 'Toplamak, bir araya getirmek, derlemek.' },
+  { ku: 'berembîlo', tr: 'Parabellum marka tabanca. (d.)', desc: 'Parabellum marka tabanca.' },
+  { ku: 'berindîr', tr: '3 Yaşındaki dişi koyun. (d.)', desc: '3 Yaşındaki dişi koyun.' },
+  { ku: 'berî', tr: '-den önce. berî nîvro: Öğleden önce', desc: '-den önce. Örnek: berî nîvro: Öğleden önce.' },
+  { ku: 'berê', tr: 'Önce, eskiden. ji berê da: Uzun zamandan beri, eskiden beri, öteden beri.', desc: 'Önce, eskiden. Örnek: ji berê da: Uzun zamandan beri, eskiden beri, öteden beri.' },
+  { ku: 'berjêr', tr: 'Aşağı doğru.', desc: 'Aşağı doğru.' },
+  { ku: 'berjor', tr: 'Yukarı doğru.', desc: 'Yukarı doğru.' },
+  { ku: 'berêberê', tr: 'İlk önce.', desc: 'İlk önce.' },
+  { ku: 'berê kemberê', tr: 'İlaç olarak da kullanılan bir ot.', desc: 'İlaç olarak da kullanılan bir ot.' },
+  { ku: 'berketî', tr: 'Meftun. ez ne berketiya te me: Sana meftun değilim.', desc: 'Meftun. Örnek: ez ne berketiya te me: Sana meftun değilim.' },
+  { ku: 'berketin', tr: 'Üzülmek.', desc: 'Üzülmek.' },
+  { ku: 'berket', tr: 'Bereket. (d.)', desc: 'Bereket.' },
+  { ku: 'berêvarê', tr: 'Akşamüstü.', desc: 'Akşamüstü.' },
+  { ku: 'berf', tr: 'Kar. (d.)', desc: 'Kar.' },
+  { ku: 'bermal', tr: 'Kilim. (d.)', desc: 'Kilim.' },
+  { ku: 'berferatî', tr: 'Fırat nehri kıyısında oturanlara denir.', desc: 'Fırat nehri kıyısında oturanlara denir.' },
+  { ku: 'bergend', tr: 'Karşılık, değer. ez ê li solên te sê cot gore bidim te: Ayakkabılarına karşılık üç çift çorap vereceğim sana. Asê bergendî deh keçika ye: Asê on kıza bedeldir.', desc: 'Karşılık, değer. Örnek: Asê bergendî deh keçika ye: Asê on kıza bedeldir.' },
+  { ku: 'berga', tr: '1 Yaşını geçmiş, döllenme çağına gelmiş olan dişi sığır.', desc: '1 Yaşını geçmiş, döllenme çağına gelmiş olan dişi sığır.' },
+  { ku: 'bergiro', tr: 'bkz. "geneg"', desc: 'bkz. "geneg".' },
+  { ku: 'bergeryan', tr: 'Yalvarmak. ez pir li ber bavê xu geryam, dîsa jî nenermijî: Babama çok yalvardım, yine de yumuşamadı.', desc: 'Yalvarmak. Örnek: ez pir li ber bavê xu geryam, dîsa jî nenermijî: Babama çok yalvardım, yine de yumuşamadı.' },
+  { ku: 'berger', tr: 'Yalvarma, yalvarış. (d.)', desc: 'Yalvarma, yalvarış.' },
+  { ku: 'bermalî', tr: 'Ev hanımı. (d.)', desc: 'Ev hanımı.' },
+  { ku: 'bergirtin', tr: 'Hayvanların gebe kalması.', desc: 'Hayvanların gebe kalması.' },
+  { ku: 'bermirad', tr: 'Evlenme çağına gelmiş olan.', desc: 'Evlenme çağına gelmiş olan.' },
+  { ku: 'bergîr', tr: '1) Beygir 2) İnatçı kadın. (d.)', desc: 'Beygir veya İnatçı kadın.' },
+  { ku: 'bermîl', tr: 'Yiyilebilen bir bitki.', desc: 'Yiyilebilen bir bitki.' },
+  { ku: 'berguherk', tr: 'Şafak öncesi koyun otlatması. (d.)', desc: 'Şafak öncesi koyun otlatması.' },
+  { ku: 'bernîr', tr: 'Çift öküzlerinde boyunduruk ipi.', desc: 'Çift öküzlerinde boyunduruk ipi.' },
+  { ku: 'beridîn', tr: '(İnsan, hayvan ve bitki için) Olgunlaşmak, gövermek. (diberide, biberide)', desc: '(İnsan, hayvan ve bitki için) Olgunlaşmak, gövermek. (Geniş zaman: diberide, emir: biberide)' },
+  { ku: 'bero', tr: 'Meşe palamudu. bero ji ceftê da ket, go dev î çere ye!: Soyunu hor görenler için söylenir. (e.)', desc: 'Meşe palamudu. Deyim: bero ji ceftê da ket, go dev î çere ye! (Soyunu hor görenler için söylenir.)' },
+  { ku: 'ber vî', tr: '-e doğru. ber vî min bîne: Bana doğru getir.', desc: '-e doğru. Örnek: ber vî min bîne: Bana doğru getir.' },
+  { ku: 'beroş', tr: 'Kazan. (d.)', desc: 'Kazan.' },
+  { ku: 'berrînî', tr: 'Çöllük.', desc: 'Çöllük.' },
+  { ku: 'berserî', tr: 'Başucu.', desc: 'Başucu.' },
+  { ku: 'berrî', tr: 'Çöl. (d.)', desc: 'Çöl.' },
+  { ku: 'bersîf', tr: 'Yanıt. (d.)', desc: 'Yanıt.' },
+  { ku: 'berpal', tr: 'Yokuşlu.', desc: 'Yokuşlu.' },
+  { ku: 'bersîf dan', tr: 'Yanıtlamak.', desc: 'Yanıtlamak.' },
+  { ku: 'berşoşk', tr: 'Mide ekşimesi.', desc: 'Mide ekşimesi.' },
+  { ku: 'berşoşkî bûn', tr: 'Midesi ekşimek.', desc: 'Midesi ekşimek.' },
+  { ku: 'bertir', tr: 'Daha önceki.', desc: 'Daha önceki.' },
+  { ku: 'bertîl', tr: 'Rüşvet. (d.)', desc: 'Rüşvet.' },
+  { ku: 'bervînek', tr: 'Kadınların, yün eğirirken yanlarına takıp iği üzerinde kaydırdıkları kösele parçası. (d.)', desc: 'Kadınların, yün eğirirken yanlarına takıp iği üzerinde kaydırdıkları kösele parçası.' },
+  { ku: 'berwar', tr: 'Yamaç. (e.)', desc: 'Yamaç.' },
+  { ku: 'berx', tr: 'Kuzu.', desc: 'Kuzu.' },
+  { ku: 'berxudan', tr: 'Direnmek.', desc: 'Direnmek.' },
+  { ku: 'berxudar', tr: 'Berhudar. berxudar be: "Hoş geldin" sözüne karşılık olarak söylenir; "hoş bulduk", "safa bulduk."', desc: 'Berhudar. Örnek: berxudar be: "Hoş geldin" sözüne karşılık olarak söylenir.' },
+  { ku: 'berxudarî', tr: 'Selamet, esenlik. (d.)', desc: 'Selamet, esenlik.' },
+  { ku: 'berxur', tr: 'Koyunların etek kısmında oluşan bir tür kaşıntı hastalığı. (d.)', desc: 'Koyunların etek kısmında oluşan bir tür kaşıntı hastalığı.' },
+  { ku: 'berzendk', tr: 'Kol yakası. (d.)', desc: 'Kol yakası.' },
+  { ku: 'berzewac', tr: 'Evlenme çağına gelmiş olan.', desc: 'Evlenme çağına gelmiş olan.' },
+  { ku: 'berzik', tr: 'Etek kılları. (d.)', desc: 'Etek kılları.' },
+  { ku: 'bes', tr: 'Yeter.', desc: 'Yeter.' },
+  { ku: 'bes bûn', tr: 'Yeter olmak.', desc: 'Yeter olmak.' },
+  { ku: 'best', tr: 'Derin olmayan vadi. (d.)', desc: 'Derin olmayan vadi.' },
+  { ku: 'beşt', tr: 'Kalın direk, kiriş. (e.)', desc: 'Kalın direk, kiriş.' },
+  { ku: 'bet', tr: 'Toy kuşu. (d.)', desc: 'Toy kuşu.' },
+  { ku: 'beta fiso', tr: 'Bir tür toy kuşu.', desc: 'Bir tür toy kuşu.' },
+  { ku: 'betal', tr: 'İşsiz güçsüz, işi olmayan, boşta olan.', desc: 'İşsiz güçsüz, işi olmayan, boşta olan.' },
+  { ku: 'betalî', tr: 'İşsiz güçsüz olma, boşta olma durumu. (d.)', desc: 'İşsiz güçsüz olma, boşta olma durumu.' },
+  { ku: 'betal kirin', tr: 'Paydos etmek.', desc: 'Paydos etmek.' },
+  { ku: 'betan', tr: 'Elbise astarı. (e.)', desc: 'Elbise astarı.' },
+  { ku: 'betanî', tr: 'Battaniye. (d.)', desc: 'Battaniye.' },
+  { ku: 'betilandin', tr: 'Yormak, yorgun düşürmek.', desc: 'Yormak, yorgun düşürmek.' },
+  { ku: 'betilîn', tr: 'Yorulmak.', desc: 'Yorulmak.' },
+  { ku: 'betin', tr: 'Ana rahmi. (e.)', desc: 'Ana rahmi.' },
+  { ku: 'betr', tr: 'Şakak. (d.)', desc: 'Şakak.' },
+  { ku: 'Bexda', tr: 'Bağdat. (d.)', desc: 'Bağdat.' },
+  { ku: 'bexdadî', tr: 'Bir kefiye çeşidi. (d.)', desc: 'Bir kefiye çeşidi.' },
+  { ku: 'bexşîş', tr: 'Bahşiş. (d.)', desc: 'Bahşiş.' },
+  { ku: 'bext', tr: '1) Güvenirlik. 2) Baht, talih. (e.)', desc: 'Güvenirlik veya Baht, talih.' },
+  { ku: 'bextreş', tr: 'Bahtı kara, kötü talihli.', desc: 'Bahtı kara, kötü talihli.' },
+  { ku: 'bextreşî', tr: 'Bahtı kara olma durumu, kötü talihlilik. (d.)', desc: 'Bahtı kara olma durumu, kötü talihlilik.' },
+  { ku: 'beyar', tr: 'Ekilmemiş arazi. (d.)', desc: 'Ekilmemiş arazi.' },
+  { ku: 'beyîk', tr: 'Döven veya benzeri araçların, hayvana bağlanan iki uzun ağacı. (d.)', desc: 'Döven veya benzeri araçların, hayvana bağlanan iki uzun ağacı.' },
+  { ku: 'beytar', tr: 'Veteriner.', desc: 'Veteriner.' },
+  { ku: 'bez (1)', tr: 'İçyağı. (e.)', desc: 'İçyağı.' },
+  { ku: 'bez (2)', tr: 'Koşu. (d.)', desc: 'Koşu.' },
+  { ku: 'beza', tr: 'Koşucu.', desc: 'Koşucu.' },
+  { ku: 'bezyan', tr: 'Koşmak.', desc: 'Koşmak.' },
+  { ku: 'bê', tr: 'Gayrî, -den başka, -siz. bê lome be: "Allah saklasın" anlamındaki söz.', desc: 'Gayrî, -den başka, -siz. Örnek: bê lome be: "Allah saklasın."' },
+  { ku: 'bêar', tr: 'Arsız.', desc: 'Arsız.' },
+  { ku: 'bêav', tr: 'Susuz, suyu olmayan.', desc: 'Susuz, suyu olmayan.' },
+  { ku: 'bêbav', tr: 'Babasız.', desc: 'Babasız.' },
+  { ku: 'bêber', tr: 'Ensiz.', desc: 'Ensiz.' },
+  { ku: 'bêbext', tr: '1) Bahtsız. 2) Kalleş, hain.', desc: 'Bahtsız veya Kalleş, hain.' },
+  { ku: 'bêbextî', tr: 'Kalleşlik, hainlik. (d.)', desc: 'Kalleşlik, hainlik.' },
+  { ku: 'bêcî', tr: 'Yersiz, yeri olmayan.', desc: 'Yersiz, yeri olmayan.' },
+  { ku: 'bêçar', tr: 'Çaresiz, zavallı.', desc: 'Çaresiz, zavallı.' },
+  { ku: 'bêçare', tr: 'Çaresiz.', desc: 'Çaresiz.' },
+  { ku: 'bêçarî', tr: 'Çaresizlik. (d.)', desc: 'Çaresizlik.' },
+  { ku: 'bêçik', tr: 'Ellik, ekin biçenlerin kullandığı ellik aleti. (d.)', desc: 'Ellik, ekin biçenlerin kullandığı ellik aleti.' },
+  { ku: 'bêçî', tr: 'Parmak. bêçiya şehdê: İşaret parmağı. bêçiya xu di her qulî (qulikê) ra kirin: Burnunu her işe sokmak. (d.)', desc: 'Parmak. Deyimler: bêçiya şehdê (İşaret parmağı), bêçiya xu di her qulî (qulikê) ra kirin (burnunu her işe sokmak).' },
+  { ku: 'bêdawî', tr: 'Sonsuz, sonu olmayan..', desc: 'Sonsuz, sonu olmayan.' },
+  { ku: 'bêdeng', tr: 'Sessiz, sakin.', desc: 'Sessiz, sakin.' },
+  { ku: 'bêdengî', tr: 'Sessizlik. (d.)', desc: 'Sessizlik.' },
+  { ku: 'bêderd', tr: 'Dertsiz, tasasız.', desc: 'Dertsiz, tasasız.' },
+  { ku: 'bêdest', tr: 'Elsiz.', desc: 'Elsiz.' },
+  { ku: 'bênav', tr: 'Adsız.', desc: 'Adsız.' },
+  { ku: 'bêdê', tr: 'Anasız.', desc: 'Anasız.' },
+  { ku: 'bêdil', tr: 'Gönülsüz.', desc: 'Gönülsüz.' },
+  { ku: 'bêdîn', tr: 'Dinsiz.', desc: 'Dinsiz.' },
+  { ku: 'bêesl', tr: 'Soysuz, asılsız.', desc: 'Soysuz, asılsız.' },
+  { ku: 'bêguman', tr: 'Şüphesiz.', desc: 'Şüphesiz.' },
+  { ku: 'bêgune', tr: 'Suçsuz, günahsız.', desc: 'Suçsuz, günahsız.' },
+  { ku: 'bêhal', tr: 'Halsiz.', desc: 'Halsiz.' },
+  { ku: 'bêhawe', tr: 'Biçimsiz.', desc: 'Biçimsiz.' },
+  { ku: 'bêhemd', tr: 'Gayri ihtiyari, bilmeyerek, istemeden.', desc: 'Gayri ihtiyari, bilmeyerek, istemeden.' },
+  { ku: 'bêhemdî', tr: 'İstek dışı olan, bilmeyerek olan, doğal olmayan gelişme.', desc: 'İstek dışı olan, bilmeyerek olan, doğal olmayan gelişme.' },
+  { ku: 'bêheş', tr: 'Sersem, akılsız.', desc: 'Sersem, akılsız.' },
+  { ku: 'bêheş bûn', tr: 'Herhangi bir neden yüzünden zihni karışmak veya zekâsı uyuşmak, ne yaptığının farkında olmamak, sersemleşmek.', desc: 'Herhangi bir neden yüzünden zihni karışmak veya zekâsı uyuşmak, ne yaptığının farkında olmamak, sersemleşmek.' },
+  { ku: 'bêheşî', tr: 'Sersemlik. (d.)', desc: 'Sersemlik.' },
+  { ku: 'bêheş kirin', tr: 'Sersem etmek.', desc: 'Sersem etmek.' },
+  { ku: 'bêhêl', tr: 'Yansız, tarafsız.', desc: 'Yansız, tarafsız.' },
+  { ku: 'bêjin', tr: 'Karısız.', desc: 'Karısız.' },
+  { ku: 'bêjing', tr: 'Kalbur, elek. (d.)', desc: 'Kalbur, elek.' },
+  { ku: 'bêjing kirin', tr: 'Elemek, kalburdan geçirmek.', desc: 'Elemek, kalburdan geçirmek.' },
+  { ku: 'bêkar', tr: 'İşsiz.', desc: 'İşsiz.' },
+  { ku: 'bêkes', tr: 'Kimsesiz.', desc: 'Kimsesiz.' },
+  { ku: 'bêkesî', tr: 'Kimsesizlik. (d.)', desc: 'Kimsesizlik.' },
+  { ku: 'bêkêf', tr: 'Keyifsiz, neşesiz, moralsiz.', desc: 'Keyifsiz, neşesiz, moralsiz.' },
+  { ku: 'bêkêr', tr: 'Yararsız, faydasız.', desc: 'Yararsız, faydasız.' },
+  { ku: 'bêlûg', tr: 'Bölük, askeri bölük. (d.)', desc: 'Bölük, askeri bölük.' },
+  { ku: 'bêmehd', tr: 'Keyifsiz, moralsiz.', desc: 'Keyifsiz, moralsiz.' },
+  { ku: 'bênamûs', tr: 'Namussuz.', desc: 'Namussuz.' },
+  { ku: 'bênder', tr: 'Harman. (d.)', desc: 'Harman.' },
+  { ku: 'bêpar', tr: 'Paysız, mahrum.', desc: 'Paysız, mahrum.' },
+  { ku: 'bêpî', tr: 'Kolsuz.', desc: 'Kolsuz.' },
+  { ku: 'bêpîr', tr: 'Soysuz.', desc: 'Soysuz.' },
+  { ku: 'bêpîrtî', tr: 'Soysuzluk. (d.)', desc: 'Soysuzluk.' },
+  { ku: 'bêr (1)', tr: 'Kürek. (d.)', desc: 'Kürek.' },
+  { ku: 'bêrç', tr: 'Keileri sağıma sürme işi. (d.)', desc: 'Keileri sağıma sürme işi.' },
+  { ku: 'bêrç kirin', tr: 'Keçileri sağıma sürmek.', desc: 'Keçileri sağıma sürmek.' },
+  { ku: 'bêrê', tr: 'Yolsuz, yolu olmayan.', desc: 'Yolsuz, yolu olmayan.' },
+  { ku: 'bêrik', tr: '1) Küçük kürek. 2) bkz. "pil" (d.)', desc: 'Küçük kürek veya bkz. "pil".' },
+  { ku: 'bêrim', tr: 'Küçücük göl. (d.)', desc: 'Küçücük göl.' },
+  { ku: 'bêrî (1)', tr: 'Cep. bêriya kefen tune: "Para, ölürken götürülmez" anlamında cimriler için söylenir. (d.)', desc: 'Cep. Deyim: bêriya kefen tune ("Para, ölürken götürülmez" anlamında cimriler için söylenir).' },
+  { ku: 'bêrî (2)', tr: 'Koyun sağımı ve koyun sağımının yapıldığı yer. (d.)', desc: 'Koyun sağımı ve koyun sağımının yapıldığı yer.' },
+  { ku: 'bêrî kirin', tr: 'Koyunları sağmak.', desc: 'Koyunları sağmak.' },
+  { ku: 'bêrîvan', tr: 'Koyun sağan kız.', desc: 'Koyun sağan kız.' },
+  { ku: 'bêr kirin (2)', tr: '1) Küremek. 2) Koyunları sağıma sürmek.', desc: 'Küremek veya Koyunları sağıma sürmek.' },
+  { ku: 'bêruh', tr: 'Ruhsuz, cansız, beti benzi kalmamış olan. bêruh mayin: Yüzü sararıp solmak, cansız ve güçsüz kalmak.', desc: 'Ruhsuz, cansız, beti benzi kalmamış olan. Örnek: bêruh mayin: Yüzü sararıp solmak, cansız ve güçsüz kalmak.' },
+  { ku: 'bêrû', tr: 'Yüzsüz, yüzü olmayan.', desc: 'Yüzsüz, yüzü olmayan.' },
+  { ku: 'Bêrût', tr: 'Beyrut. (d.)', desc: 'Beyrut.' },
+  { ku: 'bêsemt', tr: 'Terbiyesiz, görgüsüz kimse.', desc: 'Terbiyesiz, görgüsüz kimse.' },
+  { ku: 'bêsilme', tr: 'Beslemelik (kimse).', desc: 'Beslemelik (kimse).' },
+  { ku: 'bêsiûd', tr: 'Talihsiz.', desc: 'Talihsiz.' },
+  { ku: 'bêsî', tr: 'Karların çukur yerleri doldurması. (d.)', desc: 'Karların çukur yerleri doldurması.' },
+  { ku: 'bêş', tr: 'Salma, salma parası. (d.)', desc: 'Salma, salma parası.' },
+  { ku: 'bêşewq', tr: 'Işıksız.', desc: 'Işıksız.' },
+  { ku: 'bêşîr', tr: 'Sütsüz.', desc: 'Sütsüz.' },
+  { ku: 'bêtam', tr: 'Tatsız.', desc: 'Tatsız.' },
+  { ku: 'bêtar', tr: '1) Aslı astarı olmayan yalan, büyük yalan. 2) Çok iri, azman.', desc: 'Aslı astarı olmayan yalan, büyük yalan veya Çok iri, azman.' },
+  { ku: 'bêtilî', tr: 'Parmaksız.', desc: 'Parmaksız.' },
+  { ku: 'bêtir', tr: 'Daha çok.', desc: 'Daha çok.' },
+  { ku: 'bêtirs', tr: 'Korkusuz, korkusuzca.', desc: 'Korkusuz, korkusuzca.' },
+  { ku: 'bêtîn', tr: 'Isısız.', desc: 'Isısız.' },
+  { ku: 'bêwec', tr: 'Yüzsüz, uğursuz.', desc: 'Yüzsüz, uğursuz.' },
+  { ku: 'bêwext', tr: 'Vakitsiz.', desc: 'Vakitsiz.' },
+  { ku: 'bêxatir', tr: 'Hatırsız, kıymetsiz.', desc: 'Hatırsız, kıymetsiz.' },
+  { ku: 'bêxew', tr: 'Uykusuz.', desc: 'Uykusuz.' },
+  { ku: 'bêxwedê', tr: 'Allahsız.', desc: 'Allahsız.' },
+  { ku: 'bêxwedî', tr: 'Sahipsiz.', desc: 'Sahipsiz.' },
+  { ku: 'bêxwedîtî', tr: 'Sahipsizlik. (d.)', desc: 'Sahipsizlik.' },
+  { ku: 'bêxwê', tr: 'Tuzsuz.', desc: 'Tuzsuz.' },
+  { ku: 'bêxwîn', tr: 'Kansız.', desc: 'Kansız.' },
+  { ku: 'bêyom', tr: 'Uğursuz.', desc: 'Uğursuz.' },
+  { ku: 'bêzar', tr: '1) Dilsiz. 2) Bezgin, bıkkın.', desc: 'Dilsiz veya Bezgin, bıkkın.' },
+  { ku: 'bêzar bûn', tr: 'Bezmek.', desc: 'Bezmek.' },
+  { ku: 'bêzar kirin', tr: 'Bezdirmek.', desc: 'Bezdirmek.' },
+  { ku: 'bêzaro', tr: 'Çocuksuz.', desc: 'Çocuksuz.' },
+  { ku: 'bi', tr: 'İle, Göre, vasıtasıyla.', desc: 'İle, Göre, vasıtasıyla.' },
+  { ku: 'bi ber xistin', tr: '(Olumsuz yönde birine) Yol göstermek.', desc: '(Olumsuz yönde birine) Yol göstermek.' },
+  { ku: 'bi cî', tr: 'Yerli, yeri olan.', desc: 'Yerli, yeri olan.' },
+  { ku: 'biçûk', tr: 'Küçük.', desc: 'Küçük.' },
+  { ku: 'biçûk bûn', tr: 'Küçülmek.', desc: 'Küçülmek.' },
+  { ku: 'biçûk kirin', tr: 'Küçültmek.', desc: 'Küçültmek.' },
+  { ku: 'biçûktî', tr: 'Küçüklük. (d.)', desc: 'Küçüklük.' },
+  { ku: 'biheş', tr: 'Akıllı, zeki.', desc: 'Akıllı, zeki.' },
+  { ku: 'bi heve bûn', tr: 'İki şeyin birbirine yapışması, birbirine tutturulması. ("bi hev ve bûn"dan)', desc: 'İki şeyin birbirine yapışması, birbirine tutturulması.' },
+  { ku: 'bi heve kirin', tr: 'İki şeyi birbirine yapıştırmak, birbirine tutturmak. ("bi hev ve kirin" den)', desc: 'İki şeyi birbirine yapıştırmak, birbirine tutturmak.' },
+  { ku: 'bi hev ketin', tr: 'Aralarında anlaşmazlık çıkmak, birbirine düşmek.', desc: 'Aralarında anlaşmazlık çıkmak, birbirine düşmek.' },
+  { ku: 'bi hev xistin', tr: 'İliklemek, birbirine tutturmak. qunçikê xu bi hev xe: Düğmelerini ilikle.', desc: 'İliklemek, birbirine tutturmak. Örnek: qunçikê xu bi hev xe: Düğmelerini ilikle.' },
+  { ku: 'bihîstin', tr: 'Duymak. bihîstina gi min bihîst...: Duyduğum odur ki...', desc: 'Duymak. Örnek: bihîstina gi min bihîst...: Duyduğum odur ki...' },
+  { ku: 'bihîv', tr: 'Badem. (d.)', desc: 'Badem.' },
+  { ku: 'bih kirin', tr: '"Höt" demek, yıldırmak.', desc: '"Höt" demek, yıldırmak.' },
+  { ku: 'bihost', tr: 'Karış. (d.)', desc: 'Karış.' },
+  { ku: 'bihost kirin', tr: 'Karışlamak.', desc: 'Karışlamak.' },
+  { ku: 'bijang', tr: 'Kirpik. (e.)', desc: 'Kirpik.' },
+  { ku: 'bijare', tr: 'Seçkin.', desc: 'Seçkin.' },
+  { ku: 'bijartin', tr: 'Ayıklamak.', desc: 'Ayıklamak.' },
+  { ku: 'bijê/bijo', tr: 'Çiş. (ça.)', desc: 'Çiş. (Çocuk ağzı)' },
+  { ku: 'bijmar', tr: 'Kırkayak. (e.)', desc: 'Kırkayak.' },
+  { ku: 'bijok', tr: 'İmrenen.', desc: 'İmrenen.' },
+  { ku: 'bijyan', tr: 'İmrenmek. (dibije, bibije)', desc: 'İmrenmek. (Geniş zaman: dibije, emir: bibije)' },
+  { ku: 'bikir', tr: 'Bakire.', desc: 'Bakire.' },
+  { ku: 'bilbil', tr: 'Bülbül. (e.)', desc: 'Bülbül.' },
+  { ku: 'bilbizîq', tr: 'Yabani lale. (d.)', desc: 'Yabani lale.' },
+  { ku: 'bilik', tr: 'Pipi. (ça.)', desc: 'Pipi. (Çocuk ağzı)' },
+  { ku: 'bilind', tr: 'Yüksek.', desc: 'Yüksek.' },
+  { ku: 'bilind bûn', tr: 'Yükselmek, yüksek olmak.', desc: 'Yükselmek, yüksek olmak.' },
+  { ku: 'bilindî', tr: 'Yükseklik. (d.)', desc: 'Yükseklik.' },
+  { ku: 'bilind kirin', tr: 'Yükseltmek, yüksek etmek.', desc: 'Yükseltmek, yüksek etmek.' },
+  { ku: 'bilî bûn', tr: 'Oyalanmak, meşgul olmak.', desc: 'Oyalanmak, meşgul olmak.' },
+  { ku: 'bilo', tr: 'Pipi. (ça.)', desc: 'Pipi. (Çocuk ağzı)' },
+  { ku: 'bilq-bilq', tr: 'Fokurdama, fokurtu. (d.)', desc: 'Fokurdama, fokurtu.' },
+  { ku: 'bilqik', tr: 'Su kabarcığı. (d.)', desc: 'Su kabarcığı.' },
+  { ku: 'bilqyan', tr: 'Fokurdamak. (dibilqe, bibilqe)', desc: 'Fokurdamak. (Geniş zaman: dibilqe, emir: bibilqe)' },
+  { ku: 'bilûr', tr: 'Kaval. (d.)', desc: 'Kaval.' },
+  { ku: 'bilûrvan', tr: 'Kavalcı.', desc: 'Kavalcı.' },
+  { ku: 'bilxur', tr: 'Bulgur. (d.)', desc: 'Bulgur.' },
+  { ku: 'bilxurhêr', tr: 'Bulgur öğütme makinesiyle bulgur öğüten kimse, bulgur öğütücüsü.', desc: 'Bulgur öğütme makinesiyle bulgur öğüten kimse, bulgur öğütücüsü.' },
+  { ku: 'bilyan', tr: 'Oyalanmak, meşgul olmak. Hêlîn bi bûka paçîn dibile: Hêlin bez bebekle oyalanıyor.', desc: 'Oyalanmak, meşgul olmak. Örnek: Hêlîn bi bûka paçîn dibile: Hêlin bez bebekle oyalanıyor.' },
+  { ku: 'bimbarek', tr: 'Mübarek.', desc: 'Mübarek.' },
+  { ku: 'bi min', tr: 'Bence, bana sorarsan, fikrime göre.', desc: 'Bence, bana sorarsan, fikrime göre.' },
+  { ku: 'bin (1)', tr: 'Alt. binê xu şil kirin: Altını ıslatmak. ji bin: Alttan, dipten. ji bin da: (Mecazi) Kökten, temelden.', desc: 'Alt. Deyimler: binê xu şil kirin (altını ıslatmak), ji bin da (kökten, temelden).' },
+  { ku: 'binav', tr: 'Dişbudak ağacı. (d.)', desc: 'Dişbudak ağacı.' },
+  { ku: 'binçeng', tr: 'Koltukaltı. dan binçenga: Yaltaklanmak, yağ çekmek; koltuğuna vermek. (d.)', desc: 'Koltukaltı. Deyim: dan binçenga (yaltaklanmak, yağ çekmek).' },
+  { ku: 'bindarî', tr: 'Kadınların toplu bir şekilde ağaç gölgesinde iğ eğirmeleri. (d.)', desc: 'Kadınların toplu bir şekilde ağaç gölgesinde iğ eğirmeleri.' },
+  { ku: 'bindest', tr: 'El altında olan.', desc: 'El altında olan.' },
+  { ku: 'binerdik', tr: 'Yer elması. (d.)', desc: 'Yer elması.' },
+  { ku: 'binevş', tr: 'Menekşe. (d.)', desc: 'Menekşe.' },
+  { ku: 'binê xetê', tr: 'Sınırın öte tarafı.', desc: 'Sınırın öte tarafı.' },
+  { ku: 'binge', tr: 'Temel, esas. (d.)', desc: 'Temel, esas.' },
+  { ku: 'binî', tr: 'Alt, Dip. binî girtin: (Yemek) Dibi tutmak.', desc: 'Alt, Dip. Deyim: binî girtin (dibi tutmak -yemek için-).' },
+  { ku: 'binketin', tr: 'Mağlup olmak. ew bi ser ketin, em jî bin ketin: Onlar galip geldiler biz ise yenildik.', desc: 'Mağlup olmak. Örnek: ew bi ser ketin, em jî bin ketin: Onlar galip geldiler biz ise yenildik.' },
+  { ku: 'binkoz', tr: 'Yeni doğmuş kuzuların altına serilen kurumuş ot, sap vb. şeyler. (d.)', desc: 'Yeni doğmuş kuzuların altına serilen kurumuş ot, sap vb. şeyler.' },
+  { ku: 'binrax', tr: 'Yere serilen yaygı. (d.)', desc: 'Yere serilen yaygı.' },
+  { ku: 'bir (1)', tr: 'Kısım, grup, sürü. (d.)', desc: 'Kısım, grup, sürü.' },
+  { ku: 'bira (1)', tr: 'Erkek kardeş. (e.)', desc: 'Erkek kardeş.' },
+  { ku: 'bira (2)', tr: '-sun (emir sözcüğü)', desc: '-sun (emir sözcüğü)' },
+  { ku: 'bira bi', tr: 'Olsun! Tamam!', desc: 'Olsun! Tamam!' },
+  { ku: 'birabir', tr: 'Kardeş götüren, kardeşi kardeşten ayıran, kardeşi baba evinden götüren. (Kadınlar için söylenir.)', desc: 'Kardeş götüren, kardeşi kardeşten ayıran, kardeşi baba evinden götüren.' },
+  { ku: 'birak', tr: 'Ahbap, dost. (e.)', desc: 'Ahbap, dost.' },
+  { ku: 'birakose', tr: 'Yüzde dost kalpte hain olan kimse.', desc: 'Yüzde dost kalpte hain olan kimse.' },
+  { ku: 'bira qe', tr: 'Olsun!', desc: 'Olsun!' },
+  { ku: 'birastî', tr: 'Gerçekten.', desc: 'Gerçekten.' },
+  { ku: 'biraştin', tr: 'Izgara yapmak, kızartmak. (dibirêje, bibirêje)', desc: 'Izgara yapmak, kızartmak. (Geniş zaman: dibirêje, emir: bibirêje)' },
+  { ku: 'biratî', tr: 'Kardeşlik. (d.)', desc: 'Kardeşlik.' },
+  { ku: 'birazê', tr: 'Erkek kardeş çocuğu.', desc: 'Erkek kardeş çocuğu.' },
+  { ku: 'bire', tr: 'Burç. (d.)', desc: 'Burç.' },
+  { ku: 'birçî', tr: 'Aç. bi zikê birçî: Boş mideyle, aç karnına.', desc: 'Aç. Örnek: bi zikê birçî: Boş mideyle, aç karnına.' },
+  { ku: 'birçî bûn', tr: 'Acıkmak.', desc: 'Acıkmak.' },
+  { ku: 'birçî kirin', tr: 'Acıktırmak.', desc: 'Acıktırmak.' },
+  { ku: 'birçîtî', tr: 'Açlık. (d.)', desc: 'Açlık.' },
+  { ku: 'birek', tr: 'Testere. (d.)', desc: 'Testere.' },
+  { ku: 'birin', tr: 'Götürmek.', desc: 'Götürmek.' },
+  { ku: 'birine', tr: 'Pirinç. (d.)', desc: 'Pirinç.' },
+  { ku: 'biriqandin', tr: 'Parlatmak.', desc: 'Parlatmak.' },
+  { ku: 'biriqîn', tr: 'Parlamak.', desc: 'Parlamak.' },
+  { ku: 'birîn', tr: 'Yara. (d.)', desc: 'Yara.' },
+  { ku: 'birîndar', tr: 'Yaralı.', desc: 'Yaralı.' },
+  { ku: 'birîndar bûn', tr: 'Yaralanmak.', desc: 'Yaralanmak.' },
+  { ku: 'birîndarî', tr: 'Yaralılık. (d.)', desc: 'Yaralılık.' },
+  { ku: 'birîndar kirin', tr: 'Yaralamak.', desc: 'Yaralamak.' },
+  { ku: 'birk', tr: 'Karasaban tutağı. (d.)', desc: 'Karasaban tutağı.' },
+  { ku: 'birnotî', tr: 'Burunotu. (d.)', desc: 'Burunotu.' },
+  { ku: 'birq', tr: 'Katran. (d.)', desc: 'Katran.' },
+  { ku: 'birqonek', tr: 'Parlak.', desc: 'Parlak.' },
+  { ku: 'birrîn', tr: 'Kesmek, biçmek.', desc: 'Kesmek, biçmek.' },
+  { ku: 'birû', tr: 'Kaş. (e.)', desc: 'Kaş.' },
+  { ku: 'birûsîn', tr: 'Işıldamak. (dibirûse, bibirûse)', desc: 'Işıldamak. (Geniş zaman: dibirûse, emir: bibirûse)' },
+  { ku: 'birûsk', tr: '1) Yıldırım. 2) Alnın ortası, iki kaş arası. li birûska eniya wî xistin: Alnının ortasına (çatına) vurmak. (d.)', desc: 'Yıldırım veya Alnın ortası, iki kaş arası. Deyim: li birûska eniya wî xistin (alnının ortasına vurmak).' },
+  { ku: 'bi ser ketin', tr: 'Yenmek, mağlup etmek. ez bi ser wî ketim: Onu yendim.', desc: 'Yenmek, mağlup etmek. Örnek: ez bi ser wî ketim: Onu yendim.' },
+  { ku: 'bi ser xistin', tr: 'Yenmek, mağlup etmek, başarmak. min bi ser wî xist: Onu mağlup ettim. min bi ser xist: Başardım.', desc: 'Yenmek, mağlup etmek, başarmak. Örnek: min bi ser wî xist: Onu mağlup ettim.' },
+  { ku: 'bisilman', tr: 'Müslüman.', desc: 'Müslüman.' },
+  { ku: 'bisilmantî', tr: 'Müslümanlık. (d.)', desc: 'Müslümanlık.' },
+  { ku: 'bisk', tr: 'Zülüf. (e.)', desc: 'Zülüf.' },
+  { ku: 'bismîla', tr: 'Bismillah.', desc: 'Bismillah.' },
+  { ku: 'bist', tr: 'Sağ, esen, zinde.', desc: 'Sağ, esen, zinde.' },
+  { ku: 'bişkaftin', tr: '(Dikiş) Sökmek. (dibişkive, bibişkive, bişkaft)', desc: '(Dikiş) Sökmek. (Geniş zaman: dibişkive, emir: bibişkive)' },
+  { ku: 'bişkivandin', tr: '(Dikiş) Sökmek. (dibişkivîne, bibişkivîne)', desc: '(Dikiş) Sökmek. (Geniş zaman: dibişkivîne, emir: bibişkivîne)' },
+  { ku: 'bişkivîn', tr: '(Dikiş) Sökülmek.', desc: '(Dikiş) Sökülmek.' },
+  { ku: 'bişkofk', tr: 'Düğme. (bkz. "qunçik") (d.)', desc: 'Düğme.' },
+  { ku: 'bişkul', tr: 'Keçi, koyun ve deve dışkısı. (d.)', desc: 'Keçi, koyun ve deve dışkısı.' },
+  { ku: 'bi te', tr: 'Sence, sana göre, fikrince.', desc: 'Sence, sana göre, fikrince.' },
+  { ku: 'bitir', tr: '1) Olgun (daha çok yetişmiş olan bitki, hayvan) 2) Saygısız, terbiyesiz kimse.', desc: 'Olgun (bitki, hayvan) veya Saygısız, terbiyesiz kimse.' },
+  { ku: 'bitir bûn', tr: 'Olgunlaşmak, yetişmek.', desc: 'Olgunlaşmak, yetişmek.' },
+  { ku: 'biv/bive/bivitê', tr: 'Küçük çocukları ateş vb. tehlikeli şeylerden uzak tutmak için kullanılan sözcük.', desc: 'Küçük çocukları ateş vb. tehlikeli şeylerden uzak tutmak için kullanılan sözcük.' },
+  { ku: 'bivir', tr: 'Balta. (d.)', desc: 'Balta.' },
+  { ku: 'bixaltî', tr: 'Teyze oğlu. (e.)', desc: 'Teyze oğlu.' },
+  { ku: 'bixawî', tr: 'El ve ayak bileği. (d.)', desc: 'El ve ayak bileği.' },
+  { ku: 'bizaştîr', tr: 'Meleş. (d.)', desc: 'Meleş.' },
+  { ku: 'bizdandin', tr: 'Ödünü koparmak.', desc: 'Ödünü koparmak.' },
+  { ku: 'bizdyan', tr: 'Ödü kopmak.', desc: 'Ödü kopmak.' },
+  { ku: 'bizin', tr: 'Keçi. (d.)', desc: 'Keçi.' },
+  { ku: 'bizir', tr: 'Bezir.', desc: 'Bezir.' },
+  { ku: 'bizmar', tr: 'Çivi. (e.)', desc: 'Çivi.' },
+  { ku: 'bizmik', tr: 'Koyun ve keçi yavrularının süt emmesini önlemek için ağızlarına takılan tahta çubuk, bir çeşit burunsalık. (e.)', desc: 'Koyun ve keçi yavrularının süt emmesini önlemek için ağızlarına takılan tahta çubuk, bir çeşit burunsalık.' },
+  { ku: 'bizmikê kon', tr: 'Çadırın parçalarını birbirine tutturmakta kullanılan ve bir çeşit düğme görevi yapan tahta çubuklar.', desc: 'Çadırın parçalarını birbirine tutturmakta kullanılan ve bir çeşit düğme görevi yapan tahta çubuklar.' },
+  { ku: 'bizorê', tr: 'Zorla, güçbela, zar zor, zoraki.', desc: 'Zorla, güçbela, zar zor, zoraki.' },
+  { ku: 'bî', tr: 'Söğüt ağacı. (d.)', desc: 'Söğüt ağacı.' },
+  { ku: 'bî (2)', tr: 'Dul.', desc: 'Dul.' },
+  { ku: 'bîh', tr: 'Kaparo, peşinat. (d.)', desc: 'Kaparo, peşinat.' },
+  { ku: 'bîlle', tr: 'Billahi.', desc: 'Billahi.' },
+  { ku: 'bîlleheq', tr: 'Haksız yere.', desc: 'Haksız yere.' },
+  { ku: 'bîllesebeb', tr: 'Sebepsiz yere.', desc: 'Sebepsiz yere.' },
+  { ku: 'bîn (1)', tr: 'Koku. bîn ketin: İçine koku düşmek, kokuşmak. bîna fisa bi ser xistin: Yenmek, fena mağlup etmek; "duman etmek". bîn û buxar: (Hamam, banyo mutfak vb. yerlerde) Buharla karışık bunaltıcı kokular. 2) Soluk, nefes. bîna wî çikandin: Nefes alıp veremez duruma getirmek, nefesini kesmek. bîna wî çikyan: Nefes alıp veremez duruma gelmek, nefessiz kalmak, nefesi kesilmek. bîna wî fire bûn: Sıkıntısı, tasası dağılmak; içi rahat etmek, içi ferahlamak. bîna wî nehatin ber wî: Nefes alamamak. bîna xu fire girtin: Gönlünü ferah tutmak. bîna xu girtin: Dinlenmek. bîna xu teng kirin: Kızmak, öfkelenmek, sinirlenmek. (d.)', desc: 'Koku veya Soluk, nefes. Deyimler: bîn ketin (kokuşmak), bîna wî çikandin/çikyan (nefesi kesilmek), bîna wî fire bûn (içi rahat etmek), bîna xu teng kirin (kızmak, sinirlenmek).' },
+  { ku: 'bînfire', tr: 'Gönlü ferah, rahat, tahammüllü.', desc: 'Gönlü ferah, rahat, tahammüllü.' },
+  { ku: 'bînfireyî', tr: 'Gönül ferahlığı, tahammüllülük. (d.)', desc: 'Gönül ferahlığı, tahammüllülük.' },
+  { ku: 'bîn kirin', tr: 'Koklamak.', desc: 'Koklamak.' },
+  { ku: 'bînteng', tr: 'Asabi.', desc: 'Asabi.' },
+  { ku: 'bîntengî', tr: 'Asabilik. (d.)', desc: 'Asabilik.' },
+  { ku: 'bînvedan', tr: 'Hızlı hızlı soluk alıp vermek.', desc: 'Hızlı hızlı soluk alıp vermek.' },
+  { ku: 'bîr (1)', tr: 'Kuyu. 2) Şuur, bilinç, us. bi bîra wî ketin/ketin bîra wî: Aklına düşmek, aklına gelmek. gava welat bi bîra min dikeve hêsir bi çavê min dikeve: Vatan aklıma geldiğinde gözlerim yaşarıyor. bi bîra wî xistin: (Ona) Anımsatmak. ji bîra wî çûn: Unutmak, hatırlamamak, aklından çıkmak. tê bîra min nayê bîra min ...: Bildim bileli, kendimi bildim bileli. (d.)', desc: 'Kuyu veya Şuur, bilinç, us. Deyimler: bi bîra wî ketin (aklına gelmek), ji bîra wî çûn (unutmak), tê bîra min nayê bîra min (bildim bileli).' },
+  { ku: 'bîra bûn', tr: 'Unutulmak. em ji bîra bûn: Unutulduk.', desc: 'Unutulmak. Örnek: em ji bîra bûn: Unutulduk.' },
+  { ku: 'bîra kirin', tr: 'Unutmak.', desc: 'Unutmak.' },
+  { ku: 'bîr anîn', tr: 'Akla getirmek, anmak, hatırlamak.', desc: 'Akla getirmek, anmak, hatırlamak.' },
+  { ku: 'bîrawir', tr: 'Reşit.', desc: 'Reşit.' },
+  { ku: 'bîr birin', tr: 'Akıl etmek, hatırlamak. te sol anî? na, min qet bîra wira nebir: Ayakkabı getirdin mi? hayır, onu hiç akıl edemedim.', desc: 'Akıl etmek, hatırlamak. Örnek: te sol anî? na, min qet bîra wira nebir: Ayakkabı getirdin mi? hayır, onu hiç akıl edemedim.' },
+  { ku: 'bîr bûn', tr: 'Aklı ermek, çevresinde olup bitenleri, doğruyu yanlışı anlamaya başlamak. ez îdî bîra her tiştî dibim: Benim herşeye aklım eriyor artık.', desc: 'Aklı ermek, çevresinde olup bitenleri, doğruyu yanlışı anlamaya başlamak. Örnek: ez îdî bîra her tiştî dibim: Benim herşeye aklım eriyor artık.' },
+  { ku: 'bîrik', tr: 'Küçük kuyu. (d.)', desc: 'Küçük kuyu.' },
+  { ku: 'bîrî', tr: 'Özleme, hasret. (d.)', desc: 'Özleme, hasret.' },
+  { ku: 'bîrî kirin', tr: 'Özlemek.', desc: 'Özlemek.' },
+  { ku: 'bîrov', tr: 'Sedef hastalığı. (d.)', desc: 'Sedef hastalığı.' },
+  { ku: 'bîst (1)', tr: 'Süre, zaman, kısa zaman parçası. (d.)', desc: 'Süre, zaman, kısa zaman parçası.' },
+  { ku: 'bîst (2)', tr: 'Yirmi. (e.)', desc: 'Yirmi.' },
+  { ku: 'bîstan', tr: 'Bostan. (e.)', desc: 'Bostan.' },
+  { ku: 'bîstik', tr: 'Bir süre, kısa bir süre.', desc: 'Bir süre, kısa bir süre.' },
+  { ku: 'bîvil', tr: 'Burun. bîvila xu hilkirin: Beğenmemek, küçümsemek, "burun kıvırmak." (d.)', desc: 'Burun. Deyim: bîvila xu hilkirin (beğenmemek, "burun kıvırmak").' },
+  { ku: 'bo', tr: 'İçin.', desc: 'İçin.' },
+  { ku: 'boçik', tr: 'Kuyruk ve kuyruk sokumu. (d.)', desc: 'Kuyruk ve kuyruk sokumu.' },
+  { ku: 'boçikî', tr: 'Bel kayması olan kimse.', desc: 'Bel kayması olan kimse.' },
+  { ku: 'bolvir', tr: 'Savurgan.', desc: 'Savurgan.' },
+  { ku: 'bolvirî', tr: 'Savurganlık. (d.)', desc: 'Savurganlık.' },
+  { ku: 'bona', tr: 'İçin.', desc: 'İçin.' },
+  { ku: 'boncî', tr: 'Süs köpeği, fino.', desc: 'Süs köpeği, fino.' },
+  { ku: 'boraq', tr: 'Kurban bayramında kesilen kurban. (d.)', desc: 'Kurban bayramında kesilen kurban.' },
+  { ku: 'borê qer', tr: 'Kürt mitolojik masallarında adı geçen bir at.', desc: 'Kürt mitolojik masallarında adı geçen bir at.' },
+  { ku: 'borî', tr: 'Boru (d.)', desc: 'Boru.' },
+  { ku: 'bor kirin', tr: 'Dürmek. libûnkar kulava bor dike: Keçeci keçeleri dürüyor.', desc: 'Dürmek. Örnek: libûnkar kulava bor dike: Keçeci keçeleri dürüyor.' },
+  { ku: 'boş', tr: 'Bol.', desc: 'Bol.' },
+  { ku: 'boş bûn', tr: 'Bol olmak.', desc: 'Bol olmak.' },
+  { ku: 'Bota', tr: 'Botan aşireti, Botanlılar.', desc: 'Botan aşireti, Botanlılar.' },
+  { ku: 'botı.', tr: 'Ufak yapılı keçi.', desc: 'Ufak yapılı keçi.' },
+  { ku: 'Botî', tr: 'Botan aşiretine mensup olan kimse, Botanlı.', desc: 'Botan aşiretine mensup olan kimse, Botanlı.' },
+  { ku: 'boxe', tr: 'Kısırlaştırılmamış öküz. (e.)', desc: 'Kısırlaştırılmamış öküz.' },
+  { ku: 'boyax', tr: 'Boya. (d.)', desc: 'Boya.' },
+  { ku: 'boyax kirin', tr: 'Boyamak.', desc: 'Boyamak.' },
+  { ku: 'boz', tr: 'Açık sarıya çalan renk.', desc: 'Açık sarıya çalan renk.' },
+  { ku: 'bozik', tr: 'Sarışın erkek.', desc: 'Sarışın erkek.' },
+  { ku: 'bozo', tr: 'Sarışın erkek.', desc: 'Sarışın erkek.' },
+  { ku: 'buha (1)', tr: 'Fiat, eder. (e.)', desc: 'Fiat, eder.' },
+  { ku: 'buha (2)', tr: 'Pahalı.', desc: 'Pahalı.' },
+  { ku: 'buha bûn', tr: 'Pahalılaşmak.', desc: 'Pahalılaşmak.' },
+  { ku: 'buha kirin', tr: 'Pahalılaştırmak.', desc: 'Pahalılaştırmak.' },
+  { ku: 'buhar', tr: 'Bahar. (d.)', desc: 'Bahar.' },
+  { ku: 'buhartin', tr: 'bkz. "buhurandin"', desc: 'bkz. "buhurandin".' },
+  { ku: 'buhayî', tr: 'Pahalılık. (d.)', desc: 'Pahalılık.' },
+  { ku: 'buho', tr: 'Böcek. (çd.)', desc: 'Böcek. (Çocuk dilinde)' },
+  { ku: 'buhuk', tr: 'Böcek. (d.)', desc: 'Böcek.' },
+  { ku: 'buhur', tr: 'Akarsu geçidi. (d.)', desc: 'Akarsu geçidi.' },
+  { ku: 'buhurandin', tr: 'Geçirmek. (dibuhurîne, bibuhurîne)', desc: 'Geçirmek. (Geniş zaman: dibuhurîne, emir: bibuhurîne)' },
+  { ku: 'buhurîn', tr: 'Geçmek.', desc: 'Geçmek.' },
+  { ku: 'bujî', tr: 'Yele. (d.)', desc: 'Yele.' },
+  { ku: 'burxî', tr: 'Vida. (d.)', desc: 'Vida.' },
+  { ku: 'buxçe', tr: 'Bohça. (d.)', desc: 'Bohça.' },
+  { ku: 'buxt', tr: 'İftira. (d.)', desc: 'İftira.' },
+  { ku: 'buxtan', tr: 'İftira. (d.)', desc: 'İftira.' },
+  { ku: 'bûk', tr: 'Gelin. bûka paçîn: Bezden yapılmış oyuncak bebek. (d.)', desc: 'Gelin. Örnek: bûka paçîn: Bezden yapılmış oyuncak bebek.' },
+  { ku: 'bûkik', tr: 'Gözde oluşan arpacık. (d.)', desc: 'Gözde oluşan arpacık.' },
+  { ku: 'bûktî', tr: 'Gelinlik, gelin olma durumu. (d.)', desc: 'Gelinlik, gelin olma durumu.' },
+  { ku: 'bûm', tr: 'Baykuşun bir çeşidi', desc: 'Baykuşun bir çeşidi.' },
+  { ku: 'bûn', tr: 'Olmak. bû birq û birûsk: Kaybedilen (veya kaybolan) birşey bir türlü bulunamamak; "sanki yer yarıldı da içine girdi." bûn kenê xelkê: El aleme alay konusu olmak. bûn merî: Bir kimse, kendini yetiştirip topluma yararlı duruma gelmek; adam olmak. bûn mina barûtê: Aşırı kızmak.', desc: 'Olmak. Deyimler: bû birq û birûsk (kaybolmak), bûn kenê xelkê (alay konusu olmak), bûn merî (adam olmak), bûn mina barûtê (aşırı kızmak).' },
+  { ku: 'bûr-bûr', tr: 'Feryat. (d.)', desc: 'Feryat.' },
+  { ku: 'bûrîn', tr: 'Feryat, feryat etme. (d.)', desc: 'Feryat, feryat etme.' },
+  { ku: 'bûryan', tr: '(İnek ve öküz) Böğürmek. (dibûre, bibûre)', desc: '(İnek ve öküz) Böğürmek. (Geniş zaman: dibûre, emir: bibûre)' },
+  { ku: 'bûtbût', tr: 'bkz. "dîksilêman"', desc: 'bkz. "dîksilêman".' },
+  { ku: 'bûyin', tr: 'Olmak.', desc: 'Olmak.' },
+  { ku: 'cab', tr: 'Yanıt, cevap. (d.)', desc: 'Yanıt, cevap.' },
+  { ku: 'cab dan', tr: 'Yanıtlamak.', desc: 'Yanıtlamak.' },
+  { ku: 'cabhazir', tr: 'Hazırcevap kimse.', desc: 'Hazırcevap kimse.' },
+  { ku: 'camêr', tr: 'Centilmen, alicenap.', desc: 'Centilmen, alicenap.' },
+  { ku: 'camêrî', tr: 'Centilmenlik. (d.)', desc: 'Centilmenlik.' },
+  { ku: 'can', tr: '1) Can, ruh. 2) Vücut. bira canê te sax be: Çeşitli kayıplar karşısında "sen sağsın ya, önemli olan bu" anlamında teselli sözü; "canın sağ olsun!" çik û can: Capcanlı, taze, zinde. ji canê xu aciz bûn: Canından bezmek. ölümü göze alacak kadar sıkıntı içinde olmak, canından bezmek, canından usanmak. min canê xu li erdê nedîye: Bu sıkıntıya katlanmaya, bu tehlikeye atılmaya hiç niyetim yok; canımı sokakta bulmadım. (e.)', desc: 'Can, ruh veya Vücut. Deyimler: bira canê te sax be (canın sağ olsun), ji canê xu aciz bûn (canından bezmek), min canê xu li erdê nedîye (canımı sokakta bulmadım).' },
+  { ku: 'can (2)', tr: 'Genç, taze, zinde.', desc: 'Genç, taze, zinde.' },
+  { ku: 'canbaz', tr: 'Hayvan tüccarı.', desc: 'Hayvan tüccarı.' },
+  { ku: 'canbazî', tr: 'Hayvan tüccarlığı. (d.)', desc: 'Hayvan tüccarlığı.' },
+  { ku: 'can dan', tr: 'Can vermek.', desc: 'Can vermek.' },
+  { ku: 'canfeda', tr: 'Canını feda eden.', desc: 'Canını feda eden.' },
+  { ku: 'cange', tr: 'Dana. (e.)', desc: 'Dana.' },
+  { ku: 'cangiran', tr: 'Ağır canlı, üşengen.', desc: 'Ağır canlı, üşengen.' },
+  { ku: 'cangiranî', tr: 'Ağır canlılık, üşengenlik. (d.)', desc: 'Ağır canlılık, üşengenlik.' },
+  { ku: 'canik', tr: 'Hanımefendi, terbiyeli ve münasip bayan.', desc: 'Hanımefendi, terbiyeli ve münasip bayan.' },
+  { ku: 'canî', tr: 'Gençlik. (d.)', desc: 'Gençlik.' },
+  { ku: 'cankos', tr: 'Zangoç, çan.', desc: 'Zangoç, çan.' },
+  { ku: 'canzerik', tr: '"zerik" denen böceğin insan ve özellikle koyunlara bulaştırdığı sarılık hastalığı. (d.)', desc: '"zerik" denen böceğin insan ve özellikle koyunlara bulaştırdığı sarılık hastalığı.' },
+  { ku: 'canzerkî', tr: 'Sarılık olmuş koyun.', desc: 'Sarılık olmuş koyun.' },
+  { ku: 'car', tr: 'Defa, kez, sefer. carê/carkê: Bir sefer ("carekê"den). cara berê: Geçen sefer. cara di: Geçen sefer. pir cara: Çoğu kez. (d.)', desc: 'Defa, kez, sefer. Örnek: pir cara (çoğu kez).' },
+  { ku: 'cara', tr: 'Hiçbir zaman, asla. min cara jê ra tiştik xirab nego: Asla ona kötü birşey demedim.', desc: 'Hiçbir zaman, asla. Örnek: min cara jê ra tiştik xirab nego: Asla ona kötü birşey demedim.' },
+  { ku: 'car car', tr: 'Bazı bazı.', desc: 'Bazı bazı.' },
+  { ku: 'carcim', tr: 'İşlemeli kilim. (d.)', desc: 'İşlemeli kilim.' },
+  { ku: 'cardi', tr: 'Yine, bir daha.', desc: 'Yine, bir daha.' },
+  { ku: 'caris', tr: 'Haşin, arsız.', desc: 'Haşin, arsız.' },
+  { ku: 'carna', tr: 'Bazen.', desc: 'Bazen.' },
+  { ku: 'carût', tr: 'Soba vb. için kullanılan küçük kürek. (d.)', desc: 'Soba vb. için kullanılan küçük kürek.' },
+  { ku: 'caw', tr: 'Bez. (e.)', desc: 'Bez.' },
+  { ku: 'cawîn', tr: 'Bezden yapılmış olan.', desc: 'Bezden yapılmış olan.' },
+  { ku: 'cax', tr: 'Parmaklık, cağ. (d.)', desc: 'Parmaklık, cağ.' },
+  { ku: 'cax kirin', tr: 'Parmaklıklı hale getirmek.', desc: 'Parmaklıklı hale getirmek.' },
+  { ku: 'caxkirî', tr: 'Parmaklıklı, cağlı.', desc: 'Parmaklıklı, cağlı.' },
+  { ku: 'ce', tr: 'Arpa. (e.)', desc: 'Arpa.' },
+  { ku: 'cebar', tr: 'Kırık çıkık hekimi.', desc: 'Kırık çıkık hekimi.' },
+  { ku: 'cebilxane', tr: 'Cephane. (d.)', desc: 'Cephane.' },
+  { ku: 'cebirandin', tr: 'Kırık çıkık organları onarmak, kaynaştırmak.', desc: 'Kırık çıkık organları onarmak, kaynaştırmak.' },
+  { ku: 'cebirîn', tr: 'Kırık çıkık organların onarılması, kaynaşması.', desc: 'Kırık çıkık organların onarılması, kaynaşması.' },
+  { ku: 'ceft', tr: 'Deri boyamada kullanılan bir ağaç kökü. (d.)', desc: 'Deri boyamada kullanılan bir ağaç kökü.' },
+  { ku: 'cehcek', tr: 'Çöreğe katılan bir bitki. (d.)', desc: 'Çöreğe katılan bir bitki.' },
+  { ku: 'cehde', tr: 'Cadde. (d.)', desc: 'Cadde.' },
+  { ku: 'cehdû', tr: 'Cadı. (d.)', desc: 'Cadı.' },
+  { ku: 'cehemand/in', tr: 'bkz. "cehnimandin"', desc: 'bkz. "cehnimandin".' },
+  { ku: 'cehemîn', tr: 'bkz. "cehnimîn"', desc: 'bkz. "cehnimîn".' },
+  { ku: 'cehnimandin', tr: 'Gebertmek.', desc: 'Gebertmek.' },
+  { ku: 'cehnime', tr: 'Cehennem, cehnima wî kirin: "Defolup gitmek, cehenneme gitmek, cehenneme kadar yolu olmak" anlamında öfke sözü. cehnima wî kiriye: (Onun) Cehenneme kadar yolu var. (d.)', desc: 'Cehennem. Örnek: cehnima wî kirin: "Defolup gitmek", cehnima wî kiriye: (Onun) Cehenneme kadar yolu var.' },
+  { ku: 'cehnimî', tr: 'Cehennemlik.', desc: 'Cehennemlik.' },
+  { ku: 'cehnimîn', tr: '1) Cehennem olmak, defolup gitmek. 2) Gebermek.', desc: 'Cehennem olmak, defolup gitmek veya Gebermek.' },
+  { ku: 'cehnî', tr: 'Tay.', desc: 'Tay.' },
+  { ku: 'cehtirî', tr: 'Kekik otu. (d.)', desc: 'Kekik otu.' },
+  { ku: 'celb', tr: 'Çamur. (d.)', desc: 'Çamur.' },
+  { ku: 'celewî', tr: 'Atlarda oluşan ölümcül ruam (sakağı) hastalığı. (d.)', desc: 'Atlarda oluşan ölümcül ruam (sakağı) hastalığı.' },
+  { ku: 'cem (1)', tr: 'Nezd, yan.', desc: 'Nezd, yan.' },
+  { ku: 'cem (2)', tr: 'Yükün bir tarafı, denk.', desc: 'Yükün bir tarafı, denk.' },
+  { ku: 'cemed', tr: 'Buz. (d.)', desc: 'Buz.' },
+  { ku: 'cemidandin', tr: 'Dondurmak.', desc: 'Dondurmak.' },
+  { ku: 'cemidîn', tr: 'Donmak.', desc: 'Donmak.' },
+  { ku: 'cem kirin', tr: 'Yükü denk hale getirmek.', desc: 'Yükü denk hale getirmek.' },
+  { ku: 'ceml', tr: 'Cemre. (d.)', desc: 'Cemre.' },
+  { ku: 'cenan', tr: 'Yarıcı, ortakçı.', desc: 'Yarıcı, ortakçı.' },
+  { ku: 'cenanî', tr: 'Yarıcılık, ortakçılık. (d.)', desc: 'Yarıcılık, ortakçılık.' },
+  { ku: 'cendirme', tr: 'Jandarma.', desc: 'Jandarma.' },
+  { ku: 'ceng', tr: 'Savaş, cenk. (d.)', desc: 'Savaş, cenk.' },
+  { ku: 'cengawer', tr: 'Cengaver.', desc: 'Cengaver.' },
+  { ku: 'ceng kirin', tr: 'Savaşmak.', desc: 'Savaşmak.' },
+  { ku: 'ceribandin', tr: 'Denemek, sınamak.', desc: 'Denemek, sınamak.' },
+  { ku: 'cewahîr', tr: 'Değerli taşlar.', desc: 'Değerli taşlar.' },
+  { ku: 'cewr', tr: 'bkz. "cewrik"', desc: 'bkz. "cewrik".' },
+  { ku: 'cewrik', tr: 'Köpek ve tazı gibi hayvanların yavrusu.', desc: 'Köpek ve tazı gibi hayvanların yavrusu.' },
+  { ku: 'ceyran', tr: 'Elektrik, cereyan. (d.)', desc: 'Elektrik, cereyan.' },
+  { ku: 'cezer', tr: 'Arpaların sararma zamanı.', desc: 'Arpaların sararma zamanı.' },
+  { ku: 'cêbkêsan', tr: 'Yankesici.', desc: 'Yankesici.' },
+  { ku: 'cênîg', tr: 'Favori. (d.)', desc: 'Favori.' },
+  { ku: 'cêwî', tr: 'İkiz.', desc: 'İkiz.' },
+  { ku: 'cibe', tr: 'Cüppe. (d.)', desc: 'Cüppe.' },
+  { ku: 'cihdan', tr: '3 Yaşındaki erkek deve. (e.)', desc: '3 Yaşındaki erkek deve.' },
+  { ku: 'cihê', tr: 'Ayrı.', desc: 'Ayrı.' },
+  { ku: 'cihê bûn', tr: 'Ayrılmak.', desc: 'Ayrılmak.' },
+  { ku: 'cihê kirin', tr: 'Ayırmak.', desc: 'Ayırmak.' },
+  { ku: 'cihîz', tr: 'Çeyiz. (e.)', desc: 'Çeyiz.' },
+  { ku: 'cihûd', tr: 'Yahudi.', desc: 'Yahudi.' },
+  { ku: 'cil (1)', tr: 'Yaygı, çul vb. şeyler. (d.)', desc: 'Yaygı, çul vb. şeyler.' },
+  { ku: 'cil (2)', tr: 'Giysi. (e.)', desc: 'Giysi.' },
+  { ku: 'cilêt', tr: 'Jilet. (d.)', desc: 'Jilet.' },
+  { ku: 'cilik (1)', tr: 'Yaygıcık, küçük çul vb. şeyler. (d.)', desc: 'Yaygıcık, küçük çul vb. şeyler.' },
+  { ku: 'cilik (2)', tr: 'Giysicik. (e.)', desc: 'Giysicik.' },
+  { ku: 'cilq', tr: 'Cıvık (kimse).', desc: 'Cıvık (kimse).' },
+  { ku: 'cilqî', tr: '(İnsan için) Cıvıklık. (d.)', desc: 'Cıvıklık (insan için).' },
+  { ku: 'cilqîn', tr: 'Tokat vururken çıkan ses.', desc: 'Tokat vururken çıkan ses.' },
+  { ku: 'cil û caw', tr: 'Manifatura. (e.)', desc: 'Manifatura.' },
+  { ku: 'cilûq', tr: 'Erkek hindi. (e.)', desc: 'Erkek hindi.' },
+  { ku: 'cimbûş', tr: 'Cümbüş. (d.)', desc: 'Cümbüş.' },
+  { ku: 'cimêlî', tr: 'bkz. "devşewitî"', desc: 'bkz. "devşewitî".' },
+  { ku: 'cin', tr: 'Cin. bi cina ketin: Cin çarpmak. cin tavilê digê zara: Cinler çocukları çok çabuk çarpar. cin pê girtin: Cin çarpmak. (e.)', desc: 'Cin. Deyimler: bi cina ketin/cin pê girtin (Cin çarpmak).' },
+  { ku: 'cinawir', tr: 'Canavar. (e.)', desc: 'Canavar.' },
+  { ku: 'cinaze', tr: 'Cenaze. (e.)', desc: 'Cenaze.' },
+  { ku: 'cindar', tr: 'Cinli, cin çarpmış olan.', desc: 'Cinli, cin çarpmış olan.' },
+  { ku: 'cinet', tr: 'Cennet. (d.)', desc: 'Cennet.' },
+  { ku: 'cinetî', tr: 'Cennetlik.', desc: 'Cennetlik.' },
+  { ku: 'cinh', tr: 'Ucu kalın (dövüş için kullanılan) sopa. (e.)', desc: 'Ucu kalın (dövüş için kullanılan) sopa.' },
+  { ku: 'cino', tr: 'Cinli, cin çarpmış olan erkek. (e.)', desc: 'Cinli, cin çarpmış olan erkek.' },
+  { ku: 'cir (1)', tr: '(Birinin) Öfkesini yatıştırma, öfkesini dindirme.', desc: '(Birinin) Öfkesini yatıştırma, öfkesini dindirme.' },
+  { ku: 'cir (2)', tr: 'Su testisi. (e.)', desc: 'Su testisi.' },
+  { ku: 'cirbûh', tr: 'İri sıçan.', desc: 'İri sıçan.' },
+  { ku: 'cirdîxezal', tr: 'Kuş yavruları ve küçük fareleri yiyerek beslenen iri bir tür sıçan.', desc: 'Kuş yavruları ve küçük fareleri yiyerek beslenen iri bir tür sıçan.' },
+  { ku: 'cirdon', tr: 'Sıçan. (e.)', desc: 'Sıçan.' },
+  { ku: 'cirîng', tr: 'Tokat sesi. cirîngî jê anîn: Tokat şaplatmak, (şamar) vurmak (sesli bir şekilde.)', desc: 'Tokat sesi. Deyim: cirîngî jê anîn (Tokat şaplatmak).' },
+  { ku: 'cirm', tr: 'Cereme, suç bedeli, ceza. (d.)', desc: 'Cereme, suç bedeli, ceza.' },
+  { ku: 'cisn', tr: 'Cins, tür. (e.)', desc: 'Cins, tür.' },
+  { ku: 'civandin', tr: 'Yığmak, bir araya getirmek.', desc: 'Yığmak, bir araya getirmek.' },
+  { ku: 'civyan', tr: 'Yığılmak, bir araya gelmek.', desc: 'Yığılmak, bir araya gelmek.' },
+  { ku: 'cixare', tr: 'Sigara. (d.)', desc: 'Sigara.' },
+  { ku: 'cixcixe', tr: 'Jelatin. (d.)', desc: 'Jelatin.' },
+  { ku: 'cixilandin', tr: 'Öfkelendirmek, kızdırmak. (dicixilîne, bicixilîne)', desc: 'Öfkelendirmek, kızdırmak. (Geniş zaman: dicixilîne, emir: bicixilîne)' },
+  { ku: 'cixilîn', tr: 'Öfkelenmek, kızmak. (dicixile, bicixile)', desc: 'Öfkelenmek, kızmak. (Geniş zaman: dicixile, emir: bicixile)' },
+  { ku: 'cixîz', tr: 'Çizgi. (d.)', desc: 'Çizgi.' },
+  { ku: 'cixîz kirin', tr: 'Çizmek, çiziştirmek.', desc: 'Çizmek, çiziştirmek.' },
+  { ku: 'Cizîr', tr: 'Şırnak\'ın Cizre ilçesi. (d.)', desc: 'Şırnak\'ın Cizre ilçesi.' },
+  { ku: 'cizlawît', tr: 'Eskiden giyilen bir tür lastik ayakkabı', desc: 'Eskiden giyilen bir tür lastik ayakkabı.' },
+  { ku: 'cî', tr: 'Yer. bi cî bûn: Yeri bulunmak, yeri tespit olmak. bi cî kirin: Yerini bulmak, yerini tespit etmek. ciyê ar lê tune be dû jê ranabe: "Ateş olmayan yerden duman çıkmaz". cî cî: Yer yer. cî dan: Yer vermek. cî girtin: Yer almak. cî bi cî: Yer yer. di cî da: Anında, yerinde. di cî xistin: Yerine koymak, yerine oturtmak. ez ê derî di cî xim: Kapıyı yerine oturtacağım. li ciyê rehetî: Boş yere, gereksiz yere, durduk yerde. (e.)', desc: 'Yer. Deyimler: bi cî bûn (yeri bulunmak), ciyê ar lê tune be dû jê ranabe (ateş olmayan yerden duman çıkmaz), di cî da (anında), di cî xistin (yerine koymak).' },
+  { ku: 'cîger', tr: 'Ciğer. (d.)', desc: 'Ciğer.' },
+  { ku: 'cîmêr', tr: 'Ergenlik çağına girmekte olan erkek çocuk.', desc: 'Ergenlik çağına girmekte olan erkek çocuk.' },
+  { ku: 'cînciq', tr: 'İncik boncuk. (d.)', desc: 'İncik boncuk.' },
+  { ku: 'cîq (1)', tr: 'Çocukla oynarken gözler bir süre kapatılıp aniden açılarak söylenen sözcük.', desc: 'Çocukla oynarken gözler bir süre kapatılıp aniden açılarak söylenen sözcük.' },
+  { ku: 'cîq (2)', tr: 'Karkuşu. (d.)', desc: 'Karkuşu.' },
+  { ku: 'cîran', tr: 'Komşu.', desc: 'Komşu.' },
+  { ku: 'cîranbehecî', tr: 'Komşu çatlatan, komşu kıskandıran (giysi vb. şeyler için söylenir.)', desc: 'Komşu çatlatan, komşu kıskandıran.' },
+  { ku: 'cîrantî', tr: 'Komşuluk. (d.)', desc: 'Komşuluk.' },
+  { ku: 'co', tr: 'Kanal, ark. (d.)', desc: 'Kanal, ark.' },
+  { ku: 'col', tr: 'Koyun sürüsünden bir grup.', desc: 'Koyun sürüsünden bir grup.' },
+  { ku: 'comerd', tr: 'Cömert.', desc: 'Cömert.' },
+  { ku: 'comerdî', tr: 'Cömertlik. (d.)', desc: 'Cömertlik.' },
+  { ku: 'cot', tr: 'Çift, "tek"in karşıtı.', desc: 'Çift, "tek"in karşıtı.' },
+  { ku: 'cot (2)', tr: 'Ekim işi, toprağı işleme. (e.)', desc: 'Ekim işi, toprağı işleme.' },
+  { ku: 'cotarî', tr: 'Çiftçi.', desc: 'Çiftçi.' },
+  { ku: 'cotik', tr: 'İkiz.', desc: 'İkiz.' },
+  { ku: 'cot kirin', tr: 'Çift sürmek.', desc: 'Çift sürmek.' },
+  { ku: 'cuher', tr: 'Atın yem torbası. (e.)', desc: 'Atın yem torbası.' },
+  { ku: 'culhet', tr: 'Cesaret. (d.)', desc: 'Cesaret.' },
+  { ku: 'curn', tr: 'Kurna (soku.) (e.)', desc: 'Kurna (soku.)' },
+  { ku: 'cuzbe', tr: 'Zikir. bi cuzbê ketin: Tanrı\'nın adını art arda tekrarlayıp kendinden geçmek, zikretmek. (d.)', desc: 'Zikir. Deyim: bi cuzbê ketin (Tanrı\'nın adını tekrarlayıp kendinden geçmek).' },
+  { ku: 'cuzdan', tr: 'Cüzdan. (e.)', desc: 'Cüzdan.' },
+  { ku: 'cû', tr: 'Tavuklara yem vermeye çağırırken söylenen sözcük; "bili bili."', desc: 'Tavuklara yem vermeye çağırırken söylenen sözcük; "bili bili."' },
+  { ku: 'cûcî/cûcû', tr: 'Tavuk. (ça.)', desc: 'Tavuk. (Çocuk ağzı)' },
+  { ku: 'cûm', tr: 'Sakız kalıbı. (d.)', desc: 'Sakız kalıbı.' },
+  { ku: 'cûn', tr: 'Haki renk.', desc: 'Haki renk.' },
+  { ku: 'cûnik', tr: 'bkz. "cân"', desc: 'bkz. "cân".' },
+  { ku: 'cûre', tr: 'Bodur, kısa.', desc: 'Bodur, kısa.' },
+  { ku: 'cûyin', tr: '(Ağızda) Çiğnemek.', desc: '(Ağızda) Çiğnemek.' },
+  { ku: 'cünî', tr: 'Dibek taşı. (e.)', desc: 'Dibek taşı.' },
+  { ku: 'ça', tr: 'Ne kadar, ne kadar da, ne de ça rind e!: Ne kadar da güzeldir! ("çuqa"dan "ça"ya dönüşmüş.)', desc: 'Ne kadar, ne kadar da, ne de. Örnek: ça rind e!: Ne kadar da güzeldir!' },
+  { ku: 'çahm', tr: 'Bence, galiba, bana sorarsan.', desc: 'Bence, galiba, bana sorarsan.' },
+  { ku: 'çakêt', tr: 'Ceket. (e.)', desc: 'Ceket.' },
+  { ku: 'çakil', tr: 'Ucu eğri sopa.', desc: 'Ucu eğri sopa.' },
+  { ku: 'çakûç', tr: 'Çekiç. (e.)', desc: 'Çekiç.' },
+  { ku: 'çakût', tr: 'bkz. "çakûç"', desc: 'bkz. "çakûç".' },
+  { ku: 'çal', tr: 'Çukur. (d.)', desc: 'Çukur.' },
+  { ku: 'çalik', tr: 'Çukurcuk. (d.)', desc: 'Çukurcuk.' },
+  { ku: 'çarmêrkî', tr: 'Bağdaş oturma şekli.', desc: 'Bağdaş oturma şekli.' },
+  { ku: 'çarnig', tr: 'Dört ayaklı.', desc: 'Dört ayaklı.' },
+  { ku: 'çarox', tr: 'Çarık. (d.)', desc: 'Çarık.' },
+  { ku: 'çarparsû', tr: 'Azıdişi.', desc: 'Azıdişi.' },
+  { ku: 'çarpî', tr: 'Emekleme, dört ayak üzerinde yürüme. bi çarpiya dimeşe: Emekleyerek yürüyor, dört ayak üzerinde yürüyor.', desc: 'Emekleme, dört ayak üzerinde yürüme. Örnek: bi çarpiya dimeşe: Emekleyerek yürüyor.' },
+  { ku: 'çarsibe', tr: 'Öbür gün değil daha öbür gün.', desc: 'Öbür gün değil daha öbür gün.' },
+  { ku: 'çarsid', tr: 'Dört yüz. (e.)', desc: 'Dört yüz.' },
+  { ku: 'çalim', tr: 'Afi, caka. çalim firotin: Caka satmak. (d.)', desc: 'Afi, caka. Deyim: çalim firotin (Caka satmak).' },
+  { ku: 'çalmış', tr: 'Sakar.', desc: 'Sakar.' },
+  { ku: 'çandin', tr: 'Ekmek, ekin ekmek.', desc: 'Ekmek, ekin ekmek.' },
+  { ku: 'çandir', tr: 'Çadır. (d.)', desc: 'Çadır.' },
+  { ku: 'çanqal', tr: 'Çengel. (d.)', desc: 'Çengel.' },
+  { ku: 'çanqal kirin', tr: 'Çengellemek.', desc: 'Çengellemek.' },
+  { ku: 'çapik', tr: 'Ağaçtan yapılmış kap', desc: 'Ağaçtan yapılmış kap.' },
+  { ku: 'çaqmaq', tr: 'Tüfek horozu.', desc: 'Tüfek horozu.' },
+  { ku: 'çaqo', tr: 'bkz. "kêr"', desc: 'bkz. "kêr".' },
+  { ku: 'çar', tr: 'Dört. bi çar çava giryan: "İki gözü iki çeşme" ağlamak. (e.)', desc: 'Dört. Deyim: bi çar çava giryan ("İki gözü iki çeşme" ağlamak).' },
+  { ku: 'çarşef', tr: 'Çarşaf. (d.)', desc: 'Çarşaf.' },
+  { ku: 'çaralî', tr: 'Dört taraf.', desc: 'Dört taraf.' },
+  { ku: 'çardax', tr: 'Çardak. (d.)', desc: 'Çardak.' },
+  { ku: 'çarde', tr: 'On dört. (e.)', desc: 'On dört.' },
+  { ku: 'çare', tr: 'Çare, çözüm. (d.)', desc: 'Çare, çözüm.' },
+  { ku: 'çargoşe', tr: 'Dörtköşe, dörtgen.', desc: 'Dörtköşe, dörtgen.' },
+  { ku: 'çarik', tr: 'Kadın başörtüsü. (d.)', desc: 'Kadın başörtüsü.' },
+  { ku: 'çarîk', tr: 'Dörtte bir, çeyrek. ("çaryek"ten) (d.)', desc: 'Dörtte bir, çeyrek.' },
+  { ku: 'çarşemî', tr: 'Çarşamba. (d.)', desc: 'Çarşamba.' },
+  { ku: 'çarşî', tr: 'Çarşı. Çarşya Şewitî: Diyarbakır\'ın Balıkçılarbaşı semtinde bulunan ünlü bir çarşı. (d.)', desc: 'Çarşı. Örnek: Çarşya Şewitî: Diyarbakır\'ın Balıkçılarbaşı semtinde bulunan ünlü bir çarşı.' },
+  { ku: 'çav', tr: 'Göz. çav berdan: Göz koymak, göz dikmek. çav kirin: Gözle işaret etmek; göz etmek. min çav kir wî: Ona göz ettim. çav qurç kirin: Göz kırpmak. çav lê gerandin: (Bir şeye) Üstünkörü bakmak, şöyle bir bakmak; göz gezdirmek. çavê te ronî!: "Seni sevindiren olay kutlu olsun; gözün aydın!" anlamında. çavê wî bar nebûn: Gözü doymamak. çavê wî birrîn: Gözü kesmek. çavê wî lêketin: Bir şeyi rastgele görmek, "gözüne ilişmek". çavê wî li rê mayin: Sevilen bir kimseyi özlemle beklemek; gözü yolda kalmak. çavê wî rijyan: Gözü yaralanıp kör olmak; gözü akmak. çavê wî tirsandin: Yıldırmak, gözünü korkutmak. çavê xu jê nekutan: Gözlerini üzerinden ayırmamak, (ona) gözlerini dahi kırpmadan devamlı bakmak. di bin çava ra: Göz altından. ji çava da ketin: Gözden düşmek. min çavê te xwaro/ê: Okşamalık olarak kullanılır. (e.)', desc: 'Göz. Deyimler: çav berdan (göz koymak), çav kirin (göz etmek), çavê te ronî! (gözün aydın!), çavê wî bar nebûn (gözü doymamak), çavê wî li rê mayin (gözü yolda kalmak), çavê wî tirsandin (yıldırmak).' },
+  { ku: 'çavbeloq (1)', tr: 'Dikenli bir bitki. (d.)', desc: 'Dikenli bir bitki.' },
+  { ku: 'çavbeloq (2)', tr: 'Patlak gözlü.', desc: 'Patlak gözlü.' },
+  { ku: 'çavbirçî', tr: 'Açgözlü.', desc: 'Açgözlü.' },
+  { ku: 'çavbirçîtî', tr: 'Açgözlülük. (d.)', desc: 'Açgözlülük.' },
+  { ku: 'çavçirtonek', tr: 'Saklanbaç oyunu. (d.)', desc: 'Saklanbaç oyunu.' },
+  { ku: 'çavhişin', tr: 'Mavi gözlü.', desc: 'Mavi gözlü.' },
+  { ku: 'çavik', tr: 'Gözlük. (d.)', desc: 'Gözlük.' },
+  { ku: 'çavî', tr: 'Gözenek. (d.)', desc: 'Gözenek.' },
+  { ku: 'çavînok', tr: 'Nazar sahibi, nazar değdiren kimse.', desc: 'Nazar sahibi, nazar değdiren kimse.' },
+  { ku: 'çavînokî (1)', tr: 'Nazar değmiş olan.', desc: 'Nazar değmiş olan.' },
+  { ku: 'çavînokî kirin', tr: 'Nazar değdirmek, nazara uğratmak.', desc: 'Nazar değdirmek, nazara uğratmak.' },
+  { ku: 'çavnezerî', tr: 'Nazar sahibi.', desc: 'Nazar sahibi.' },
+  { ku: 'çavnûtik', tr: 'Kenegöz.', desc: 'Kenegöz.' },
+  { ku: 'çavpeqle', tr: 'Bakla gözlü kimse.', desc: 'Bakla gözlü kimse.' },
+  { ku: 'çavqûnde', tr: 'Fasik.', desc: 'Fasik.' },
+  { ku: 'çavreş', tr: 'Kara gözlü.', desc: 'Kara gözlü.' },
+  { ku: 'çavsor', tr: 'Gözünü kan bürümüş olan, belalı kimse.', desc: 'Gözünü kan bürümüş olan, belalı kimse.' },
+  { ku: 'çavtêr', tr: 'Tokgözlü.', desc: 'Tokgözlü.' },
+  { ku: 'çavtêrî', tr: 'Tokgözlülük. (d.)', desc: 'Tokgözlülük.' },
+  { ku: 'çavtirsyayî', tr: 'Gözü korkmuş olan.', desc: 'Gözü korkmuş olan.' },
+  { ku: 'çawa', tr: 'Nasıl.', desc: 'Nasıl.' },
+  { ku: 'çawîş', tr: 'Çavuş.', desc: 'Çavuş.' },
+  { ku: 'çax', tr: 'Zaman, çağ. çaxa dîk birçî dibe erse bi bîrê dikeve: İnsanlar yoksunluğunu çektikleri şeyler için olmayacak kuruntulara kapılır. di çaxa (...) ra: -nin yaşlarında. Eyşik di çaxa Miho ra ye: Eyşık Miho\'nun yaşlarındadır. (d.)', desc: 'Zaman, çağ. Deyimler: çaxa dîk birçî dibe erse bi bîrê dikeve (yoksunluktan olmayacak kuruntulara kapılmak).' },
+  { ku: 'çax (2)', tr: 'bkz. "çaxka"', desc: 'bkz. "çaxka".' },
+  { ku: 'çaxka', tr: '-diği zaman. çaxka tu çû: Sen gittiğinde.', desc: '-diği zaman. Örnek: çaxka tu çû: Sen gittiğinde.' },
+  { ku: 'çaydan', tr: 'Demlik. (e.)', desc: 'Demlik.' },
+  { ku: 'çayxane', tr: 'Çayhane. (d.)', desc: 'Çayhane.' },
+  { ku: 'Çebaxçûr', tr: 'Bingöl ili. (d.)', desc: 'Bingöl ili.' },
+  { ku: 'çeç', tr: 'El. (çd.)', desc: 'El. (Çocuk dilinde)' },
+  { ku: 'çefî', tr: 'Kefiye. (d.)', desc: 'Kefiye.' },
+  { ku: 'çehço', tr: 'Göz. (çd.)', desc: 'Göz. (Çocuk dilinde)' },
+  { ku: 'çek', tr: 'Giysi. (e.)', desc: 'Giysi.' },
+  { ku: 'çekem', tr: 'Bir cins çam. (d.)', desc: 'Bir cins çam.' },
+  { ku: 'çekur', tr: 'Eskimiş ve işe yaramaz hale gelmiş olan tulum. (e.)', desc: 'Eskimiş ve işe yaramaz hale gelmiş olan tulum.' },
+  { ku: 'çek û çol', tr: 'Giysi, pılı pırtı vb. şeyler.', desc: 'Giysi, pılı pırtı vb. şeyler.' },
+  { ku: 'çel (1)', tr: 'Bir bebek hastalığı. (d.)', desc: 'Bir bebek hastalığı.' },
+  { ku: 'çel (2)', tr: 'Kırk. çelê wê/wî qedyan: (Lohusa, bebek, ölü için) Doğum ya da ölümünün üzerinden kırk gün geçmek. (e.)', desc: 'Kırk. Deyim: çelê wê/wî qedyan (doğum ya da ölümün üzerinden kırk gün geçmek).' },
+  { ku: 'çele', tr: 'Ocak ayı. (d.)', desc: 'Ocak ayı.' },
+  { ku: 'çeleng', tr: 'Hoş, zarif, çevik.', desc: 'Hoş, zarif, çevik.' },
+  { ku: 'çelepaş', tr: 'Kasım ayı. (d.)', desc: 'Kasım ayı.' },
+  { ku: 'çelepêş', tr: 'Ekim ayı. (d.)', desc: 'Ekim ayı.' },
+  { ku: 'çelîn', tr: 'Lohusa.', desc: 'Lohusa.' },
+  { ku: 'çelînî', tr: 'Lohusalık. (d.)', desc: 'Lohusalık.' },
+  { ku: 'çelpandin', tr: '(Köpek yemek yerken) Şapırdatmak.', desc: '(Köpek yemek yerken) Şapırdatmak.' },
+  { ku: 'çelp-çelp', tr: 'Şapırtı. (d.)', desc: 'Şapırtı.' },
+  { ku: 'çelqandin', tr: 'Çalkalamak.', desc: 'Çalkalamak.' },
+  { ku: 'çelqyan', tr: 'Çalkalanmak.', desc: 'Çalkalanmak.' },
+  { ku: 'çeltûg', tr: 'Çeltik. (d.)', desc: 'Çeltik.' },
+  { ku: 'çelziman', tr: 'Dilli, konuşkan.', desc: 'Dilli, konuşkan.' },
+  { ku: 'çem', tr: 'Nehir. çem û çem: Tümden, hiç geri gelmemecesine. (e.)', desc: 'Nehir. Deyim: çem û çem (Tümden, hiç geri gelmemecesine).' },
+  { ku: 'çemçik', tr: 'Derin kepçe. (d.)', desc: 'Derin kepçe.' },
+  { ku: 'çeml', tr: 'Kap vb. şeylerin kulpu. (e.)', desc: 'Kap vb. şeylerin kulpu.' },
+  { ku: 'çend', tr: 'Kaç, birkaç. çend ro di wê da: Birkaç gün sonra. Çendakî: Bir süre, bir süreliğine. Hêlîn bira çendakî li mala me bimîne: Hêlin bir süre bizim evde kalsın.', desc: 'Kaç, birkaç. Örnek: Çendakî: Bir süre.' },
+  { ku: 'çeng', tr: 'Doldurulmaya hazır durumdaki avuç. (d.)', desc: 'Doldurulmaya hazır durumdaki avuç.' },
+  { ku: 'çenge', tr: 'Çene. çenge avêtin: can çekişmek, azraille pençeleşmek. çenge davêje: Can çekişiyor, azraille pençeleşiyor. (d.)', desc: 'Çene. Deyim: çenge avêtin (can çekişmek).' },
+  { ku: 'çep', tr: '1) Sol. 2) Sapa, ters.', desc: 'Sol veya Sapa, ters.' },
+  { ku: 'çepel', tr: 'Pis, murdar.', desc: 'Pis, murdar.' },
+  { ku: 'çepik', tr: 'Alkış. li çepika xistin: Alkış çalmak. (d.)', desc: 'Alkış. Deyim: li çepika xistin (Alkış çalmak).' },
+  { ku: 'çepil', tr: 'Kol. (e.)', desc: 'Kol.' },
+  { ku: 'çepo', tr: 'Solak (erkek.)', desc: 'Solak (erkek).' },
+  { ku: 'çeporasto', tr: 'Çapraz, çaprazlama.', desc: 'Çapraz, çaprazlama.' },
+  { ku: 'çeqel', tr: 'Yengeç. (e.)', desc: 'Yengeç.' },
+  { ku: 'çeqilmast', tr: 'Yoğurda su katarak oluşturulan ayran. (d.)', desc: 'Yoğurda su katarak oluşturulan ayran.' },
+  { ku: 'çer', tr: 'Nasıl.', desc: 'Nasıl.' },
+  { ku: 'çerçî', tr: 'Gezgin satıcı, çerçi.', desc: 'Gezgin satıcı, çerçi.' },
+  { ku: 'çerçîfe', tr: 'Çerçeve. (d.)', desc: 'Çerçeve.' },
+  { ku: 'çerçîtî', tr: 'Gezgin satıcılık. (d.)', desc: 'Gezgin satıcılık.' },
+  { ku: 'çerez', tr: 'Çerez. (d.)', desc: 'Çerez.' },
+  { ku: 'çerez kirin', tr: 'Çerez yemek.', desc: 'Çerez yemek.' },
+  { ku: 'çergî', tr: '-i gibi, nasıl ki ... çergî ket, mir: Düştüğü gibi öldü.', desc: '-i gibi, nasıl ki. Örnek: çergî ket, mir: Düştüğü gibi öldü.' },
+  { ku: 'çerixandin', tr: 'Döndürmek, çevirmek. (diçerixîne, biçerixîne)', desc: 'Döndürmek, çevirmek. (Geniş zaman: diçerixîne, emir: biçerixîne)' },
+  { ku: 'çerm', tr: 'Deri. (e.)', desc: 'Deri.' },
+  { ku: 'çermandin', tr: 'Deriyi bıçak veya benzeri bir şeyle yüzmek. (diçermîne, biçermîne)', desc: 'Deriyi bıçak veya benzeri bir şeyle yüzmek. (Geniş zaman: diçermîne, emir: biçermîne)' },
+  { ku: 'çerm kirin', tr: 'Deriyi bıçak veya benzeri bir şeyle yüzmek. (bkz. "çermandin")', desc: 'Deriyi bıçak veya benzeri bir şeyle yüzmek.' },
+  { ku: 'çerx', tr: 'Çark, torna. (d.)', desc: 'Çark, torna.' },
+  { ku: 'çerx kirin', tr: 'Çarka vurmak.', desc: 'Çarka vurmak.' },
+  { ku: 'çetinî', tr: 'Zorluk. (d.)', desc: 'Zorluk.' },
+  { ku: 'çetlastîk', tr: 'Çatallastik. (d.)', desc: 'Çatallastik.' },
+  { ku: 'çewal', tr: 'Çuval. çewalê geltikî: Bir çeşit çuval. çewalê nîkê: Bir çeşit çuval. (e.)', desc: 'Çuval. (çeşitleri: çewalê geltikî, çewalê nîkê)' },
+  { ku: 'çewlîg', tr: 'Hafif çimenlik. (d.)', desc: 'Hafif çimenlik.' },
+  { ku: 'çewt', tr: 'Eğri, ters, çarpık.', desc: 'Eğri, ters, çarpık.' },
+  { ku: 'çewt bûn', tr: 'Eğri olmak, ters olmak, çarpıklaşmak.', desc: 'Eğri olmak, ters olmak, çarpıklaşmak.' },
+  { ku: 'çewtî', tr: 'Eğrilik, terslik, çarpıklık. (d.)', desc: 'Eğrilik, terslik, çarpıklık.' },
+  { ku: 'çewt kirin', tr: 'Eğri etmek, çarpık hale getirmek.', desc: 'Eğri etmek, çarpık hale getirmek.' },
+  { ku: 'çewto mewto', tr: 'Eğri büğrü, çarpık çurpuk, ters.', desc: 'Eğri büğrü, çarpık çurpuk, ters.' },
+  { ku: 'çexşûr', tr: 'Yiyilebilen bir bitki. (d.)', desc: 'Yiyilebilen bir bitki.' },
+  { ku: 'çê', tr: 'İyi.', desc: 'İyi.' },
+  { ku: 'çêbûn', tr: 'Yapılmak, oluşmak, iyi olmak, düzgün olmak.', desc: 'Yapılmak, oluşmak, iyi olmak, düzgün olmak.' },
+  { ku: 'çêkirin', tr: 'Yapmak, oluşturmak. bi çêkirin dan/dan çêkirin: Yaptırmak.', desc: 'Yapmak, oluşturmak. Deyim: bi çêkirin dan/dan çêkirin (Yaptırmak).' },
+  { ku: 'çêkirî', tr: 'Yapılmış olan, mamul.', desc: 'Yapılmış olan, mamul.' },
+  { ku: 'çêle', tr: 'Yavru.', desc: 'Yavru.' },
+  { ku: 'çêlik', tr: 'Yavru.', desc: 'Yavru.' },
+  { ku: 'çêlkew', tr: 'Keklik yavrusu.', desc: 'Keklik yavrusu.' },
+  { ku: 'çêlrû', tr: 'Terbiyesiz.', desc: 'Terbiyesiz.' },
+  { ku: 'çêrandin', tr: 'Otlatmak.', desc: 'Otlatmak.' },
+  { ku: 'çêre', tr: 'Otlak. (d.)', desc: 'Otlak.' },
+  { ku: 'Çêrmûg', tr: 'Diyarbakır\'ın Çermik ilçesi. (d.)', desc: 'Diyarbakır\'ın Çermik ilçesi.' },
+  { ku: 'çêryan', tr: 'Otlamak.', desc: 'Otlamak.' },
+  { ku: 'çêtir', tr: 'Daha iyi.', desc: 'Daha iyi.' },
+  { ku: 'çêtir kirin', tr: 'Daha iyi etmek.', desc: 'Daha iyi etmek.' },
+  { ku: 'çêtî (1)', tr: 'Et parçası. çêtî ji hev kirin: Birbirini kıyasıya dövmek, bir birini perişan etmek veya birbiriyle çok sert bir biçimde dalaşmak.', desc: 'Et parçası. Deyim: çêtî ji hev kirin (Birbirini kıyasıya dövmek).' },
+  { ku: 'çêtî kirin', tr: 'Eti parçalamak.', desc: 'Eti parçalamak.' },
+  { ku: 'çêyî', tr: 'İyilik. çêyiya Keja ye, li pişt Mila ye: İyiliği biz yaptık, karşılığını başkası aldı. (d)', desc: 'İyilik. Deyim: çêyiya Keja ye, li pişt Mila ye (İyiliği biz yaptık, karşılığını başkası aldı).' },
+  { ku: 'çi', tr: 'Ne. çi çax: ne zaman. çi feyde: Artık geçmişte kalan bir durum karşısında, öne sürülenin ya da istenenin geçersizliğini, işe yaramzlığını göstermek için söylenir; ne fayda! çi heye, çi tune ye?: Hangi haberler, ne gibi havadisler var? ne var, ne yok? çi heyf: Çaresi yok, elden ne gelir, ne çare.', desc: 'Ne. Örnek: çi çax (ne zaman), çi heye, çi tune ye? (ne var, ne yok?), çi heyf (ne çare).' },
+  { ku: 'çiçik', tr: 'Meme. (d.)', desc: 'Meme.' },
+  { ku: 'çiço', tr: 'Meme. (çd.)', desc: 'Meme. (Çocuk dilinde)' },
+  { ku: 'çiftexas', tr: 'Patiska.', desc: 'Patiska.' },
+  { ku: 'çind', tr: 'Zıplama, sıçrama. xu çind kirin: Zıplamak, sıçramak.', desc: 'Zıplama, sıçrama. Deyim: xu çind kirin (Zıplamak, sıçramak).' },
+  { ku: 'çikandin', tr: '(Su kaynağı, çeşme vb. yerlerin suyunu) Kurutmak.', desc: '(Su kaynağı, çeşme vb. yerlerin suyunu) Kurutmak.' },
+  { ku: 'çik kirin', tr: '(Direk, ağaç vb.) Dikmek.', desc: '(Direk, ağaç vb.) Dikmek.' },
+  { ku: 'çikos', tr: 'Cimri.', desc: 'Cimri.' },
+  { ku: 'çikosî', tr: 'Cimrilik. (d.)', desc: 'Cimrilik.' },
+  { ku: 'çikyan', tr: '(Su kaynağı, çeşme vb. yerlerin suyu) Kurumak.', desc: '(Su kaynağı, çeşme vb. yerlerin suyu) Kurumak.' },
+  { ku: 'çilek', tr: 'Pisboğaz.', desc: 'Pisboğaz.' },
+  { ku: 'çilekî', tr: 'Pisboğazlık. (d.)', desc: 'Pisboğazlık.' },
+  { ku: 'çileqe', tr: 'Geveze.', desc: 'Geveze.' },
+  { ku: 'çileqî', tr: 'Gevezelik. (d.)', desc: 'Gevezelik.' },
+  { ku: 'çilfis', tr: 'Hırsız.', desc: 'Hırsız.' },
+  { ku: 'çilfisandin', tr: 'Çalmak, aşırmak. (diçilfisîne, biçilfisîne)', desc: 'Çalmak, aşırmak. (Geniş zaman: diçilfisîne, emir: biçilfisîne)' },
+  { ku: 'çilfisî', tr: 'Hırsızlık. (d.)', desc: 'Hırsızlık.' },
+  { ku: 'çilik', tr: 'Kadın cinsel organı. (d.)', desc: 'Kadın cinsel organı.' },
+  { ku: 'çilk', tr: 'Damla. (d.)', desc: 'Damla.' },
+  { ku: 'çilkandin', tr: '(Sıvı vb.) Sıçratmak.', desc: '(Sıvı vb.) Sıçratmak.' },
+  { ku: 'çilkyan', tr: '(Sıvı vb.) Sıçramak.', desc: '(Sıvı vb.) Sıçramak.' },
+  { ku: 'çilm', tr: 'bkz. "liçik"', desc: 'bkz. "liçik".' },
+  { ku: 'çilmisandin', tr: 'Soldurmak, soluklaştırmak.', desc: 'Soldurmak, soluklaştırmak.' },
+  { ku: 'çilmisîn', tr: 'Solmak, soluklaşmak.', desc: 'Solmak, soluklaşmak.' },
+  { ku: 'çilmo', tr: 'bkz. "lîço"', desc: 'bkz. "lîço".' },
+  { ku: 'çilo', tr: 'Yaprakları dökülmemiş olan ağaç dalları. (e.)', desc: 'Yaprakları dökülmemiş olan ağaç dalları.' },
+  { ku: 'çilope', tr: 'bkz. "çilo"', desc: 'bkz. "çilo".' },
+  { ku: 'çim', tr: 'Uç. (e.)', desc: 'Uç.' },
+  { ku: 'çima', tr: 'Neden, niçin.', desc: 'Neden, niçin.' },
+  { ku: 'çimaq', tr: 'Ateş yakmada kullanılan bir cins taş. (e.)', desc: 'Ateş yakmada kullanılan bir cins taş.' },
+  { ku: 'çimik', tr: 'Uç. (e.)', desc: 'Uç.' },
+  { ku: 'çingîn', tr: 'Şıngırtı. çingînî ji tasê hat: Tas şıngırdadı.', desc: 'Şıngırtı. Örnek: çingînî ji tasê hat: Tas şıngırdadı.' },
+  { ku: 'Çingûş', tr: 'Diyarbakır\'ın Çüngüş ilçesi. (d.)', desc: 'Diyarbakır\'ın Çüngüş ilçesi.' },
+  { ku: 'çinîn', tr: 'Biçmek, ekin biçmek. (diçine, biçine)', desc: 'Biçmek, ekin biçmek. (Geniş zaman: diçine, emir: biçine)' },
+  { ku: 'çip-çip', tr: 'Suyun damlama sesi. (d.)', desc: 'Suyun damlama sesi.' },
+  { ku: 'çipisk', tr: 'Fiske. (d.)', desc: 'Fiske.' },
+  { ku: 'çiq', tr: '"Tık" tesi.', desc: '"Tık" tesi.' },
+  { ku: 'çir (1)', tr: 'Bir yudumluk sıvı. (d.)', desc: 'Bir yudumluk sıvı.' },
+  { ku: 'çir (2)', tr: 'Diri, zinde.', desc: 'Diri, zinde.' },
+  { ku: 'çira', tr: 'Neden, niçin.', desc: 'Neden, niçin.' },
+  { ku: 'çirandin', tr: 'Yırtmak. (diçirîne, biçirîne)', desc: 'Yırtmak. (Geniş zaman: diçirîne, emir: biçirîne)' },
+  { ku: 'çiravk', tr: 'Su kaynağı. (d.)', desc: 'Su kaynağı.' },
+  { ku: 'çirçirî kirin', tr: 'Yırtmak ve parça parça etmek.', desc: 'Yırtmak ve parça parça etmek.' },
+  { ku: 'çirçirk', tr: '1) Cırcırböceği. 2) Hallachane. (d.)', desc: 'Cırcırböceği veya Hallachane.' },
+  { ku: 'çire', tr: 'Çira. (d.)', desc: 'Çira.' },
+  { ku: 'çirge', tr: 'bkz. "çiravk"', desc: 'bkz. "çiravk".' },
+  { ku: 'çirik', tr: 'Küçük su kaynağı. (d.)', desc: 'Küçük su kaynağı.' },
+  { ku: 'çirî', tr: 'Meme ağzı, meme deliği. (d.)', desc: 'Meme ağzı, meme deliği.' },
+  { ku: 'çirnî', tr: 'Zayıf ve kara kuru kimse.', desc: 'Zayıf ve kara kuru kimse.' },
+  { ku: 'çironek', tr: 'Su oluğu, çörten. (d.)', desc: 'Su oluğu, çörten.' },
+  { ku: 'çirtik (1)', tr: 'Hafif kadın, hoppa kadın. 2) Parmak şaklatma.', desc: 'Hafif kadın, hoppa kadın veya Parmak şaklatma.' },
+  { ku: 'çirtim', tr: 'Salkımdan bir parça, salkım parçası. (d.)', desc: 'Salkımdan bir parça, salkım parçası.' },
+  { ku: 'çirt û virt', tr: 'bkz. "tirt û virt"', desc: 'bkz. "tirt û virt".' },
+  { ku: 'çirûsîn', tr: 'Parıldamak.', desc: 'Parıldamak.' },
+  { ku: 'çirûsk', tr: 'Parıltı. (d.)', desc: 'Parıltı.' },
+  { ku: 'çiryan', tr: 'Yırtılmak.', desc: 'Yırtılmak.' },
+  { ku: 'çist', tr: 'Canlı, hareketli, zinde.', desc: 'Canlı, hareketli, zinde.' },
+  { ku: 'çişə', tr: 'Çiş. (çd.)', desc: 'Çiş. (Çocuk dilinde)' },
+  { ku: 'çito', tr: 'Nasıl.', desc: 'Nasıl.' },
+  { ku: 'çitonî', tr: 'Nasıl, ne şekilde.', desc: 'Nasıl, ne şekilde.' },
+  { ku: 'çiv', tr: '1) Zikzak. 2) Hile, oyun, düzen. (d.)', desc: 'Zikzak veya Hile, oyun, düzen.' },
+  { ku: 'çivandin', tr: 'Büzmek. (diçivîne, biçivîne)', desc: 'Büzmek. (Geniş zaman: diçivîne, emir: biçivîne)' },
+  { ku: 'çiv û dolab', tr: 'Hile, düzen, dalavere, üçkâğıt.', desc: 'Hile, düzen, dalavere, üçkâğıt.' },
+  { ku: 'çixe', tr: 'İneği sağıma sürerken söylenen sözcük.', desc: 'İneği sağıma sürerken söylenen sözcük.' },
+  { ku: 'çixir', tr: 'Karda açılan yol. (d.)', desc: 'Karda açılan yol.' },
+  { ku: 'çixlik', tr: 'İçi kof çıkan kurumuş nohut. (d.)', desc: 'İçi kof çıkan kurumuş nohut.' },
+  { ku: 'çiya', tr: 'Dağ. (e.)', desc: 'Dağ.' },
+  { ku: 'çiyayî', tr: 'Dağlı.', desc: 'Dağlı.' },
+  { ku: 'çizirik', tr: 'Kuyruk yağı veya içyağının eritilmesinden sonra geriye kalan posası. (d.)', desc: 'Kuyruk yağı veya içyağının eritilmesinden sonra geriye kalan posası.' },
+  { ku: 'çizirîn', tr: 'Sızmak, su sızmak. (diçizire, biçizire)', desc: 'Sızmak, su sızmak. (Geniş zaman: diçizire, emir: biçizire)' },
+  { ku: 'çiz kirin', tr: '1) İşemek. 2) Yakmak. (ça.)', desc: 'İşemek veya Yakmak. (Çocuk ağzı)' },
+  { ku: 'çîçik', tr: 'Az.', desc: 'Az.' },
+  { ku: 'çîk (1)', tr: 'Uzun namlulu bir çeşit silah. (d.)', desc: 'Uzun namlulu bir çeşit silah.' },
+  { ku: 'çîk (2)', tr: 'Şey.', desc: 'Şey.' },
+  { ku: 'çîksayî', tr: 'Apaçık (hava.)', desc: 'Apaçık (hava).' },
+  { ku: 'çîkufte', tr: 'Çiğköfte. (d.)', desc: 'Çiğköfte.' },
+  { ku: 'çîmen', tr: 'Çimen.', desc: 'Çimen.' },
+  { ku: 'çîp', tr: 'Baldır. (d.)', desc: 'Baldır.' },
+  { ku: 'çîprût', tr: 'Çıplak bacaklı.', desc: 'Çıplak bacaklı.' },
+  { ku: 'çîr', tr: 'Kayısı kurusu.', desc: 'Kayısı kurusu.' },
+  { ku: 'çît', tr: '1) Çadırların etrafına dikilen çubuklar. 2) Bezden kadın başörtüsü. (d.)', desc: 'Çadırların etrafına dikilen çubuklar veya Bezden kadın başörtüsü.' },
+  { ku: 'çîvandin', tr: '(Kurşun) Vınlamak.', desc: '(Kurşun) Vınlamak.' },
+  { ku: 'çîv-çîv', tr: 'Vınlama. (d.)', desc: 'Vınlama.' },
+  { ku: 'çîxsor', tr: 'Yiyilebilen bir bitki. (d.)', desc: 'Yiyilebilen bir bitki.' },
+  { ku: 'ço (1)', tr: 'Sopa. (e.)', desc: 'Sopa.' },
+  { ku: 'ço (2)', tr: 'Eşek, katır gibi hayvanlara hızlı yürümeleri için söylenen sözcük.', desc: 'Eşek, katır gibi hayvanlara hızlı yürümeleri için söylenen sözcük.' },
+  { ku: 'çoçik', tr: 'Derin kepçe. (d.)', desc: 'Derin kepçe.' },
+  { ku: 'çoço', tr: 'Eşek. (ça.)', desc: 'Eşek. (Çocuk dilinde)' },
+  { ku: 'çog', tr: 'Diz. (d.)', desc: 'Diz.' },
+  { ku: 'çoganî', tr: 'Çökerek, dizüstü.', desc: 'Çökerek, dizüstü.' },
+  { ku: 'çogerî', tr: 'Dizleri tutmaz olan.', desc: 'Dizleri tutmaz olan.' },
+  { ku: 'çogerî bûn', tr: 'Dizleri tutmaz olmak.', desc: 'Dizleri tutmaz olmak.' },
+  { ku: 'çol', tr: 'Çöl, kır, kırsal alan. çol û pol: Çöl, kır. çol û çepel: bkz. "çol û pol" (d.)', desc: 'Çöl, kır, kırsal alan. Örnek: çol û pol (Çöl, kır).' },
+  { ku: 'çolbir', tr: 'Kestirme yol. (d.)', desc: 'Kestirme yol.' },
+  { ku: 'çolik', tr: 'Bir sürü, pek çok. çolik peya: Bir sürü erkek. çolik zarê hûr: Bir sürü ufak çocuk.', desc: 'Bir sürü, pek çok. Örnek: çolik peya: Bir sürü erkek.' },
+  { ku: 'çoqal', tr: 'Eli sakat kimse.', desc: 'Eli sakat kimse.' },
+  { ku: 'çoqal bûn', tr: 'Eli sakat olmak.', desc: 'Eli sakat olmak.' },
+  { ku: 'çoqalî', tr: 'Eli sakat olma durumu. (d.)', desc: 'Eli sakat olma durumu.' },
+  { ku: 'çoqal kirin', tr: 'Elini sakat etmek.', desc: 'Elini sakat etmek.' },
+  { ku: 'çort', tr: 'Kaba, kırıcı (söz.)', desc: 'Kaba, kırıcı (söz.)' },
+  { ku: 'çortan', tr: 'Çökelek kurusu. (e.)', desc: 'Çökelek kurusu.' },
+  { ku: 'çortanî', tr: 'Çökelek kurusundan yapılan bir tür kışlık ayran çorbası. (d.)', desc: 'Çökelek kurusundan yapılan bir tür kışlık ayran çorbası.' },
+  { ku: 'çuqa', tr: 'Ne kadar.', desc: 'Ne kadar.' },
+  { ku: 'çuqas', tr: 'bkz. "çuqa"', desc: 'bkz. "çuqa".' },
+  { ku: 'çurmîş bûn', tr: 'bkz. "rizyan"', desc: 'bkz. "rizyan".' },
+  { ku: 'çurûg', tr: 'Çürük.', desc: 'Çürük.' },
+  { ku: 'çuxur', tr: 'Tezek kalıbı. (d.)', desc: 'Tezek kalıbı.' },
+  { ku: 'çûç!', tr: 'Otur! (çd.)', desc: 'Otur! (Çocuk dilinde)' },
+  { ku: 'çûçik (1)', tr: 'Küçük.', desc: 'Küçük.' },
+  { ku: 'çûçik (2)', tr: 'Serçe, serçegiller. (d.)', desc: 'Serçe, serçegiller.' },
+  { ku: 'çûçî kirin', tr: 'Oturmak. (ça.)', desc: 'Oturmak. (Çocuk ağzı)' },
+  { ku: 'çûk (1)', tr: 'Kuş. (d.)', desc: 'Kuş.' },
+  { ku: 'çûk (2)', tr: 'Küçük.', desc: 'Küçük.' },
+  { ku: 'çûktî', tr: 'Küçüklük. (d.)', desc: 'Küçüklük.' },
+  { ku: 'çûn', tr: 'Gitmek. çûn destê (...): (...) elini öpmek. çûn heyfa bavê qûna dê dan ser: Daha iyi şeyler elde etmeye çalışırken elindekini de kaybetmek; "Dimyat\'a pirince giderken evdeki bulgurdan olmak" çûn rehmetê: Rahmetli olmak, vefat etmek. çûn sala xu: (Çocuk) Bir yaşını doldurmak. çûn ser qismetê xu: (Gelin olacak çağa gelmiş kız) Kocaya varmak, kısmeti çıkıp evlenmek. çûn zora wî: Ağırına gitmek, gücüne gitmek.', desc: 'Gitmek. Deyimler: çûn destê (...) (elini öpmek), çûn rehmetê (rahmetli olmak), çûn ser qismetê xu (evlenmek), çûn zora wî (ağırına gitmek).' },
+  { ku: 'çûr', tr: 'Bir koyun çeşidi.', desc: 'Bir koyun çeşidi.' },
+  { ku: 'çûyin', tr: 'Gitmek.', desc: 'Gitmek.' },
+  { ku: 'çûz-çûz', tr: 'Sıçan, fare gibi hayvanların çıkardığı ses. (d.)', desc: 'Sıçan, fare gibi hayvanların çıkardığı ses.' },
+  { ku: 'dabançe', tr: 'Tabanca. (d.)', desc: 'Tabanca.' },
+  { ku: 'daçikandin', tr: 'Bağ, bahçe ekimi. (dadiçikîne, daçikîne)', desc: 'Bağ, bahçe ekimi. (Geniş zaman: dadiçikîne, emir: daçikîne)' },
+  { ku: 'daçivandin', tr: 'Büzmek. (dadiçivîne, daçivîne)', desc: 'Büzmek. (Geniş zaman: dadiçivîne, emir: daçivîne)' },
+  { ku: 'daç kirin', tr: 'Dikmek, dik duruma getirmek.', desc: 'Dikmek, dik duruma getirmek.' },
+  { ku: 'dadan', tr: '1) Ateş yakmak. 2) Kapmak.', desc: 'Ateş yakmak veya Kapmak.' },
+  { ku: 'dager', tr: 'Dönme, sapma. (d.)', desc: 'Dönme, sapma.' },
+  { ku: 'dagerandin', tr: 'Döndürmek.', desc: 'Döndürmek.' },
+  { ku: 'dageryan', tr: 'Dönmek, sapmak.', desc: 'Dönmek, sapmak.' },
+  { ku: 'dagirtin', tr: '1) Doldurmak. 2) Salamura yapmak. (diya min penêr dadigre, meta min jî îsota dadigre)', desc: 'Doldurmak veya Salamura yapmak. Örnek: diya min penêr dadigre, meta min jî îsota dadigre (Annem peynir salamura ediyor, halam da biber salamura ediyor).' },
+  { ku: 'dagirtî', tr: 'Soldurulmuş olan.', desc: 'Soldurulmuş olan.' },
+  { ku: 'dahatin', tr: 'İnmek.', desc: 'İnmek.' },
+  { ku: 'dak', tr: 'Anne. (d.)', desc: 'Anne.' },
+  { ku: 'daketin', tr: 'İnmek.', desc: 'İnmek.' },
+  { ku: 'daketî', tr: 'İnik, inmiş olan.', desc: 'İnik, inmiş olan.' },
+  { ku: 'dakirin', tr: 'Sokmak, hapsetmek.', desc: 'Sokmak, hapsetmek.' },
+  { ku: 'daliqandin', tr: 'Asmak. (didaliqîne, bidaliqîne)', desc: 'Asmak. (Geniş zaman: didaliqîne, emir: bidaliqîne)' },
+  { ku: 'daliqandî', tr: 'Asılı, asılmış olan.', desc: 'Asılı, asılmış olan.' },
+  { ku: 'daliqîn', tr: 'Asılmak. (didaliqe, bidaliqe)', desc: 'Asılmak. (Geniş zaman: didaliqe, emir: bidaliqe)' },
+  { ku: 'damarî', tr: 'Üvey anne. (d.)', desc: 'Üvey anne.' },
+  { ku: 'damîş bûn', tr: 'Dayanmak.', desc: 'Dayanmak.' },
+  { ku: 'dan (1)', tr: 'Dövülmüş buğday. 2) Günün üçte biri, öğün. (e.)', desc: 'Dövülmüş buğday veya Günün üçte biri, öğün.' },
+  { ku: 'dan (2)', tr: 'Vermek. dan ber gulla: Kurşun yağdırmak. dan bin çenga: Pohpohlamak, yağ çekmek. dan bin pihîna: (Birini) Tekmeyle dövmek. dan dest: Ele vermek, yakalatmak. Beko ez dam dest: Beko beni ele verdi, yakalattı. dan pê: Ardına koyulmak, takip etmek, peşinden gitmek. dan rê: Yola koyulmak: dan rû: Kabahatini, kusurunu yüzüne karşı söyleyip ayıplamak; yüz(ün)e vurmak. dan sûndê: Yemin ettirmek.', desc: 'Vermek. Deyimler: dan ber gulla (kurşun yağdırmak), dan bin çenga (pohpohlamak), dan dest (ele vermek), dan rû (yüzüne vurmak), dan sûndê (yemin ettirmek).' },
+  { ku: 'dangî', tr: 'Kuzuları emzirme zamanı. (d.)', desc: 'Kuzuları emzirme zamanı.' },
+  { ku: 'danhûrk', tr: 'Dövülmüş buğdaydan arta kalan ufak, kırık vb. kırıntısı. (d.)', desc: 'Dövülmüş buğdaydan arta kalan ufak, kırık vb. kırıntısı.' },
+  { ku: 'danizilandin', tr: 'Süzmek. (dadinızilîne, danizilîne)', desc: 'Süzmek. (Geniş zaman: dadınızilîne, emir: danizilîne)' },
+  { ku: 'danizilin', tr: 'Süzülmek. (dadinızile, danizile)', desc: 'Süzülmek. (Geniş zaman: dadınızile, emir: danizile)' },
+  { ku: 'danîn', tr: '1) Bırakmak. 2) Kurmak.', desc: 'Bırakmak veya Kurmak.' },
+  { ku: 'danîştin', tr: '1) İnmek, yere konmak. 2) Dinmek, sakinleşmek, yatışmak.', desc: 'İnmek, yere konmak veya Dinmek, sakinleşmek, yatışmak.' },
+  { ku: 'dan kirin', tr: 'Kuzuları emzirmek.', desc: 'Kuzuları emzirmek.' },
+  { ku: 'dankut', tr: 'Buğday döveceği. (e.)', desc: 'Buğday döveceği.' },
+  { ku: 'danok', tr: 'Dişbuğdayı. (d.)', desc: 'Dişbuğdayı.' },
+  { ku: 'danrijî', tr: 'Dövülmüş buğdaydan yapılan yağsız pilav. (d.)', desc: 'Dövülmüş buğdaydan yapılan yağsız pilav.' },
+  { ku: 'daqultandin', tr: 'Yutmak. (dadiqultîne, daqultîne)', desc: 'Yutmak. (Geniş zaman: dadiqultîne, emir: daqultîne)' },
+  { ku: 'dar (1)', tr: 'Ağaç. (d.)', desc: 'Ağaç.' },
+  { ku: 'dar (2)', tr: 'Sopa, çubuk vb. şeyler. (e.)', desc: 'Sopa, çubuk vb. şeyler.' },
+  { ku: 'darbest', tr: 'Sedye. (d.)', desc: 'Sedye.' },
+  { ku: 'darçîn', tr: 'Tarçın. (d.)', desc: 'Tarçın.' },
+  { ku: 'darda kirin', tr: 'Asmak.', desc: 'Asmak.' },
+  { ku: 'darê dunyayê', tr: 'Darıdünya.', desc: 'Darıdünya.' },
+  { ku: 'darê zorê', tr: 'Kaba kuvvet.', desc: 'Kaba kuvvet.' },
+  { ku: 'darik', tr: 'Sigara ağızlığı. (e.)', desc: 'Sigara ağızlığı.' },
+  { ku: 'darîn', tr: 'Ağaçtan yapılmış olan.', desc: 'Ağaçtan yapılmış olan.' },
+  { ku: 'darlop', tr: 'Dam loğunu çekmeye yarayan üçgen ağaç. (e.)', desc: 'Dam loğunu çekmeye yarayan üçgen ağaç.' },
+  { ku: 'darmoqe', tr: 'Darbuka. (d.)', desc: 'Darbuka.' },
+  { ku: 'darniklok', tr: 'Ağaçkakan.', desc: 'Ağaçkakan.' },
+  { ku: 'das', tr: 'Orak. (d.)', desc: 'Orak.' },
+  { ku: 'daşir', tr: 'Hela, kenef. (d.)', desc: 'Hela, kenef.' },
+  { ku: 'daşîr', tr: 'Süt anne. (d.)', desc: 'Süt anne.' },
+  { ku: 'daş kirin', tr: 'Yün taramak.', desc: 'Yün taramak.' },
+  { ku: 'daw (1)', tr: 'Koyun kuyruğu. 2) Elbisenin etek bölümü. (d.)', desc: 'Koyun kuyruğu veya Elbisenin etek bölümü.' },
+  { ku: 'dawet', tr: 'Düğün. daweta ruvî: Hava güneşliyken bastıran yağmur. (d.)', desc: 'Düğün. Örnek: daweta ruvî: Hava güneşliyken bastıran yağmur.' },
+  { ku: 'dawî', tr: 'Son. (d.)', desc: 'Son.' },
+  { ku: 'dawrivandin', tr: 'Süzmek. (dadiwrivîne, dawrivîne)', desc: 'Süzmek. (Geniş zaman: dadiwrivîne, emir: dawrivîne)' },
+  { ku: 'dawrivîn', tr: 'Süzülmek. (dadiwrive, dawrive)', desc: 'Süzülmek. (Geniş zaman: dadiwrive, emir: dawrive)' },
+  { ku: 'dawşandin', tr: 'Silkelemek, çırpmak. (dadiwşîne, dawşîne)', desc: 'Silkelemek, çırpmak. (Geniş zaman: dadiwşîne, emir: dawşîne)' },
+  { ku: 'daxistin', tr: 'İndirmek.', desc: 'İndirmek.' },
+  { ku: 'dax kirin', tr: 'Dağlamak. (d)', desc: 'Dağlamak.' },
+  { ku: 'daxme', tr: 'Dama.', desc: 'Dama.' },
+  { ku: 'dayê', tr: 'Anaya hitap şekli.', desc: 'Anaya hitap şekli.' },
+  { ku: 'dayik', tr: 'Anne. (d.)', desc: 'Anne.' },
+  { ku: 'dayin', tr: 'Vermek. dayina Xwedê: Allah vergisi.', desc: 'Vermek. Deyim: dayina Xwedê (Allah vergisi).' },
+  { ku: 'de', tr: 'Haydi. de ji xu ra ha!: Hoppala! Buyur bakalım!', desc: 'Haydi. Örnek: de ji xu ra ha!: Hoppala! Buyur bakalım!' },
+  { ku: 'debar', tr: 'Geçim. (d.)', desc: 'Geçim.' },
+  { ku: 'debax', tr: 'Dabak. (d.)', desc: 'Dabak.' },
+  { ku: 'debax kirin', tr: 'Dabaklamak.', desc: 'Dabaklamak.' },
+  { ku: 'debirandin', tr: 'Darındırmak. (didebirîne, bidebirîne)', desc: 'Barındırmak. (Geniş zaman: didebirîne, emir: bidebirîne)' },
+  { ku: 'debirîn', tr: 'Barınmak. (didebire, bidebire)', desc: 'Barınmak. (Geniş zaman: didebire, emir: bidebire)' },
+  { ku: 'debo', tr: 'Bidon. (e.)', desc: 'Bidon.' },
+  { ku: 'def', tr: 'Davul. (d.)', desc: 'Davul.' },
+  { ku: 'defin kirin', tr: 'Defnetmek.', desc: 'Defnetmek.' },
+  { ku: 'deh', tr: 'On. (e.)', desc: 'On.' },
+  { ku: 'dehdeh', tr: 'At. (çd.)', desc: 'At. (Çocuk dilinde)' },
+  { ku: 'delxe (1)', tr: 'Moral, keyif, neşe. 2) Alay, istihza, dalga. delxê xu pê derbas kirin: (Onunla) Alay etmek, dalga geçmek. (d.)', desc: 'Moral, keyif, neşe veya Alay, istihza, dalga. Deyim: delxê xu pê derbas kirin (alay etmek).' },
+  { ku: 'dehf', tr: 'At, katır gibi hayvanların uzun kuyruk kılları. (d.)', desc: 'At, katır gibi hayvanların uzun kuyruk kılları.' },
+  { ku: 'dehfik', tr: 'Kuş tuzağı. (d.)', desc: 'Kuş tuzağı.' },
+  { ku: 'dehf kirin', tr: 'Defetmek.', desc: 'Defetmek.' },
+  { ku: 'dehful bela', tr: 'Def-i bela.', desc: 'Def-i bela.' },
+  { ku: 'dehl', tr: 'Böğürtlen ormanı. (d.)', desc: 'Böğürtlen ormanı.' },
+  { ku: 'dehş', tr: 'bkz."dehşik"', desc: 'bkz."dehşik".' },
+  { ku: 'dehşik', tr: 'Sıpa.', desc: 'Sıpa.' },
+  { ku: 'dehw', tr: 'Dava. (d.)', desc: 'Dava.' },
+  { ku: 'dehwî', tr: 'Davalı.', desc: 'Davalı.' },
+  { ku: 'dehw kirin', tr: 'Bir şeyin davasını gütmek, iddiasında bulunmak, istemek.', desc: 'Bir şeyin davasını gütmek, iddiasında bulunmak, istemek.' },
+  { ku: 'dek', tr: 'Hile, aldatma.', desc: 'Hile, aldatma.' },
+  { ku: 'dek û dolab', tr: 'Hile, düzen, katakulli, dalavere.', desc: 'Hile, düzen, katakulli, dalavere.' },
+  { ku: 'delal', tr: 'Aziz, sevgili, değerli, güzel.', desc: 'Aziz, sevgili, değerli, güzel.' },
+  { ku: 'delalî', tr: 'Şımarık.', desc: 'Şımarık.' },
+  { ku: 'delav', tr: 'Çok ufak göl, gölcük. (d.)', desc: 'Çok ufak göl, gölcük.' },
+  { ku: 'deling', tr: 'Kadınların giydiği uzun don, şalvar vb. paçası. daw û deling hilkişandin: Bir işe girişmek için hazırlanmak; paçaları sıvamak.', desc: 'Kadınların giydiği uzun don, şalvar vb. paçası. Deyim: daw û deling hilkişandin (paçaları sıvamak).' },
+  { ku: 'delme', tr: 'Topaç. (d.)', desc: 'Topaç.' },
+  { ku: 'delo', tr: 'Beştaş oyunu. (d.)', desc: 'Beştaş oyunu.' },
+  { ku: 'delyan', tr: '(Mide açlıktan) Kazınmak. (didele, bidele)', desc: '(Mide açlıktan) Kazınmak. (Geniş zaman: didele, emir: bidele)' },
+  { ku: 'dem', tr: 'Zaman. (d.)', desc: 'Zaman.' },
+  { ku: 'dendik', tr: 'Çekirdek. (d.)', desc: 'Çekirdek.' },
+  { ku: 'dendî', tr: 'Dilim, tane.', desc: 'Dilim, tane.' },
+  { ku: 'deng', tr: 'Ses. bê deng û hes: Sessiz sedasız bir şekilde. deng girtin: Ses almak, ses kaydetmek. dengê defê ji dûr ve xweş e: "İşin içinde olmayanlar o işi kolay ya da kârlı sanırlar; davulun sesi uzaktan hoş gelir". dengê wî birrîn: Sesini kesmek. dengê wî ketin: Sesi düşmek, ses kısıklığı. dengê xu vê ra nekirin: (Onunla) Konuşmamak, dargın olmak. (e.)', desc: 'Ses. Deyimler: bê deng û hes (sessiz sedasız), dengê defê ji dûr ve xweş e (davulun sesi uzaktan hoş gelir), dengê wî birrîn (sesini kesmek), dengê xu vê ra nekirin (konuşmamak, dargın olmak).' },
+  { ku: 'dengbêj', tr: 'Ses sanatçısı.', desc: 'Ses sanatçısı.' },
+  { ku: 'dengbêjî', tr: 'Ses sanatçılığı. (d.)', desc: 'Ses sanatçılığı.' },
+  { ku: 'dengiz', tr: 'Deniz. (d.)', desc: 'Deniz.' },
+  { ku: 'deng kirin', tr: 'Ses etmek, konuşmak.', desc: 'Ses etmek, konuşmak.' },
+  { ku: 'dengvedan', tr: 'Aksetmek, yankı.', desc: 'Aksetmek, yankı.' },
+  { ku: 'dengxweş', tr: 'Güzel sesli.', desc: 'Güzel sesli.' },
+  { ku: 'deq', tr: 'Dövme, vücuda yapılan dövme. (d.)', desc: 'Dövme, vücuda yapılan dövme.' },
+  { ku: 'deqa-deq', tr: 'Ucu ucuna, santimi santimine.', desc: 'Ucu ucuna, santimi santimine.' },
+  { ku: 'deqandin', tr: 'Dövme yapmak.', desc: 'Dövme yapmak.' },
+  { ku: 'deqdeqî', tr: 'Benekli, benek benek, nokta nokta olan.', desc: 'Benekli, benek benek, nokta nokta olan.' },
+  { ku: 'deqe', tr: 'Dakika. deqe carê: İkide bir, zırt pırt. (d.)', desc: 'Dakika. Örnek: deqe carê: İkide bir, zırt pırt.' },
+  { ku: 'der (1)', tr: 'Yer, mahal. (d.)', desc: 'Yer, mahal.' },
+  { ku: 'der (2)', tr: 'Dış, dışarı.', desc: 'Dış, dışarı.' },
+  { ku: 'derab', tr: 'Yorgan, döşek gibi şeyleri dikmek.', desc: 'Yorgan, döşek gibi şeyleri dikmek.' },
+  { ku: 'derabe', tr: 'Kepenk. (d.)', desc: 'Kepenk.' },
+  { ku: 'derax', tr: 'Esirgeme, diriğ. (d.)', desc: 'Esirgeme, diriğ.' },
+  { ku: 'derax kirin', tr: 'Esirgemek, diriğ etmek.', desc: 'Esirgemek, diriğ etmek.' },
+  { ku: 'derb', tr: '1) Darbe. 2) Kere, kez. 3) Mermi, silah mermisi. (d.)', desc: 'Darbe veya Kere, kez veya Mermi, silah mermisi.' },
+  { ku: 'derbas bûn', tr: 'Geçmek.', desc: 'Geçmek.' },
+  { ku: 'derbas kirin', tr: 'Geçirmek.', desc: 'Geçirmek.' },
+  { ku: 'derbasok', tr: 'Su geçidi. (d.)', desc: 'Su geçidi.' },
+  { ku: 'derben', tr: 'Çuval kulpu. (e.)', desc: 'Çuval kulpu.' },
+  { ku: 'derbend', tr: 'Sarp geçit. (d.)', desc: 'Sarp geçit.' },
+  { ku: 'derbkanî', tr: 'Sapan taşı, sapana konulup fırlatılan taş.', desc: 'Sapan taşı, sapana konulup fırlatılan taş.' },
+  { ku: 'derbûn', tr: 'Sivilce veya çıbanın (ayrıca burun vb.) patlayarak irinin (ya da kanın) dışarı akması; sıvı şeylerin kapalı bir yerden baskı nedeniyle dışarı çıkması.', desc: 'Sivilce veya çıbanın patlayarak irinin dışarı akması; sıvı şeylerin kapalı bir yerden baskı nedeniyle dışarı çıkması.' },
+  { ku: 'derd', tr: 'Dert. (e.)', desc: 'Dert.' },
+  { ku: 'derdiyan', tr: 'Öteberi. (e.)', desc: 'Öteberi.' },
+  { ku: 'der dor', tr: 'Etraf, çevre. (d.)', desc: 'Etraf, çevre.' },
+  { ku: 'derdû', tr: 'Öteberi. (e.)', desc: 'Öteberi.' },
+  { ku: 'derem', tr: 'Dirhem. (d.)', desc: 'Dirhem.' },
+  { ku: 'deremît', tr: 'Dinamit. (d.)', desc: 'Dinamit.' },
+  { ku: 'dereng', tr: 'Geç, geç olma.', desc: 'Geç, geç olma.' },
+  { ku: 'derengî', tr: 'Geçlik, geç olma. (d.)', desc: 'Geçlik, geç olma.' },
+  { ku: 'dereng ketin', tr: 'Geç olmak, gecikmek.', desc: 'Geç olmak, gecikmek.' },
+  { ku: 'dereng xistin', tr: 'Geciktirmek.', desc: 'Geciktirmek.' },
+  { ku: 'derew', tr: 'Yalan. (d.)', desc: 'Yalan.' },
+  { ku: 'derewçîn', tr: 'bkz. "derewîn"', desc: 'bkz. "derewîn".' },
+  { ku: 'derewîn', tr: 'Yalancı.', desc: 'Yalancı.' },
+  { ku: 'derewîntî', tr: 'Yalancılık. (d.)', desc: 'Yalancılık.' },
+  { ku: 'derex', tr: 'Sıkışık an, dar vakit. (d.)', desc: 'Sıkışık an, dar vakit.' },
+  { ku: 'Derê Çiyê', tr: 'Diyarbakır\'ın kapılarından biri ve Dağkapı semti.', desc: 'Diyarbakır\'ın kapılarından biri ve Dağkapı semti.' },
+  { ku: 'Derê Mêrdînê', tr: 'Diyarbakır\'ın kapılarından biri ve Mardinkapı semti.', desc: 'Diyarbakır\'ın kapılarından biri ve Mardinkapı semti.' },
+  { ku: 'Derê Ruhayê', tr: 'Diyarbakır\'ın kapılarından biri ve Urfakapı semti.', desc: 'Diyarbakır\'ın kapılarından biri ve Urfakapı semti.' },
+  { ku: 'dergîstî', tr: 'Nişanlı kız. (d.)', desc: 'Nişanlı kız.' },
+  { ku: 'dergûş', tr: 'Bebek. (d.)', desc: 'Bebek.' },
+  { ku: 'derhal', tr: 'Derhal.', desc: 'Derhal.' },
+  { ku: 'deribandin', tr: 'Yorgan ve benzeri şeyleri ortasından dikmek.', desc: 'Yorgan ve benzeri şeyleri ortasından dikmek.' },
+  { ku: 'derizandin', tr: 'Çatlatmak, yarmak.', desc: 'Çatlatmak, yarmak.' },
+  { ku: 'derizîn', tr: 'Çatlamak.', desc: 'Çatlamak.' },
+  { ku: 'derî', tr: 'Kapı. (Bu sözcük çok az ve o da gerektiğinde kullanılıyor. bunun yerine Türkçe "qapî" kullanılıyor.) (e.)', desc: 'Kapı. (Çok az kullanılır, yerine "qapî" tercih edilir.)' },
+  { ku: 'derketin', tr: 'Çıkmak.', desc: 'Çıkmak.' },
+  { ku: 'derkirin', tr: 'İçinden çıkarmak, dışlamak, kovmak.', desc: 'İçinden çıkarmak, dışlamak, kovmak.' },
+  { ku: 'dermalok', tr: 'Evde oturmayı sevmeyen kimse.', desc: 'Evde oturmayı sevmeyen kimse.' },
+  { ku: 'derman', tr: 'Derman, ilaç. dermanê kulora: Çörek ilacı. (e.)', desc: 'Derman, ilaç. Örnek: dermanê kulora: Çörek ilacı.' },
+  { ku: 'derman kirin', tr: 'İlaçlamak, pansuman yapmak.', desc: 'İlaçlamak, pansuman yapmak.' },
+  { ku: 'dernixûn', tr: 'Ters, tersüstü.', desc: 'Ters, tersüstü.' },
+  { ku: 'dernixûn bûn', tr: 'Ters dönmek, tersüstü dönmek.', desc: 'Ters dönmek, tersüstü dönmek.' },
+  { ku: 'dernixûn kirin', tr: 'Ters döndürmek, tersüstü döndürmek.', desc: 'Ters döndürmek, tersüstü döndürmek.' },
+  { ku: 'derpê', tr: 'Don, kilot. (e.)', desc: 'Don, kilot.' },
+  { ku: 'der û ber', tr: 'Etraf, çevre.', desc: 'Etraf, çevre.' },
+  { ku: 'der ve', tr: 'Dış, dışarı, hariç.', desc: 'Dış, dışarı, hariç.' },
+  { ku: 'derxistin', tr: 'Çıkarmak.', desc: 'Çıkarmak.' },
+  { ku: 'derz', tr: 'Çatlak, katı cisimlerde oluşan çatlak. (d.)', desc: 'Çatlak, katı cisimlerde oluşan çatlak.' },
+  { ku: 'derzî', tr: 'İğne. derziya eba: Yorgan iğnesi. (d.)', desc: 'İğne. Örnek: derziya eba: Yorgan iğnesi.' },
+  { ku: 'derzîdank', tr: 'İğnelik. (d.)', desc: 'İğnelik.' },
+  { ku: 'desbirak', tr: 'Ahbap, dost. (e.)', desc: 'Ahbap, dost.' },
+  { ku: 'desgul', tr: 'Koz. (d.)', desc: 'Koz.' },
+  { ku: 'destbela', tr: 'Belalı, belayı seven kimse.', desc: 'Belalı, belayı seven kimse.' },
+  { ku: 'desmêj', tr: 'Abdest. desmêj girtin: Abdest almak. (d.)', desc: 'Abdest. Deyim: desmêj girtin (Abdest almak).' },
+  { ku: 'dest', tr: 'El. bi dest ketin/ketin dest: Ele geçmek. bi dest xistin: Ele geçirmek. dan dest: Ele vermek, yakalatmak. dest desta dişo vedigere ser çava dişo: Bazı durumlarda yardımcısız iş yapılamayacağını anlatır. dest û nig jê da ketin: (El ve ayakları) Soğuktan (veya yorgunluktan) üşümek veya bitkin düşmek. destê sibê: Sabahın körü, ortalığın daha ağarmamış olduğu vakit. destê wî jê nebûn: Bırakamamak, vazgeçememek, terkedememek. destê xu dan hev: El sıkışmak. destê xu li quranê xistin: Kuran\'ın üzerine elini koyarak yemin etmek, ant içmek; kuran\'a el basmak. dest dan ser: El koymak. dest hilanîn: El kaldırmak, karşı koymak, karşı gelmek. dest vegirtin: El açmak, avuç açmak. ji destê wî filitîn: Birinden kaçmayı başarmak; "elinden kurtulmak". ji destê wî hatin: Elinden gelmek. (e.)', desc: 'El. Deyimler: bi dest ketin (ele geçmek), dest desta dişo vedigere ser çava dişo (yardımcısız iş yapılamayacağını anlatır), destê sibê (sabahın körü), destê xu li quranê xistin (Kuran\'a el basmak).' },
+  { ku: 'destav', tr: 'Helaya çıkma. destava biçûk: Küçük abdest. destava mezin: Büyük abdest. (d.)', desc: 'Helaya çıkma. Örnek: destava biçûk (küçük abdest), destava mezin (büyük abdest).' },
+  { ku: 'dest dan', tr: 'Elle dokunmak.', desc: 'Elle dokunmak.' },
+  { ku: 'desteng', tr: 'Eli darda olan, maddi sıkıntı çeken kimse.', desc: 'Eli darda olan, maddi sıkıntı çeken kimse.' },
+  { ku: 'destengî', tr: 'Eli darda olma durumu. (d.)', desc: 'Eli darda olma durumu.' },
+  { ku: 'destfire', tr: 'Eli darda olmayan, maddi sıkıntısı olmayan.', desc: 'Eli darda olmayan, maddi sıkıntısı olmayan.' },
+  { ku: 'destfireyî', tr: 'Eli darda olmama durumu.', desc: 'Eli darda olmama durumu.' },
+  { ku: 'destgirtî', tr: 'Cimri, elisıkı.', desc: 'Cimri, elisıkı.' },
+  { ku: 'destik', tr: 'Dibek dövme kolu. (e.)', desc: 'Dibek dövme kolu.' },
+  { ku: 'destî (1)', tr: 'Tutam. (d.)', desc: 'Tutam.' },
+  { ku: 'destî (2)', tr: 'Kulp, kabza. (e.)', desc: 'Kulp, kabza.' },
+  { ku: 'dest pê kirin', tr: 'Başlamak.', desc: 'Başlamak.' },
+  { ku: 'dest û mist', tr: 'İşinde karışanının olmaması, işinde sorumsuz olma durumu. Asê bi dest û mistê xu ye: Asê işinde sorumsuzdur, karışanı, müdahale edeni yoktur.', desc: 'İşinde karışanının olmaması, işinde sorumsuz olma durumu. Örnek: Asê bi dest û mistê xu ye: Asê işinde sorumsuzdur.' },
+  { ku: 'destûr', tr: 'İzin. (d.)', desc: 'İzin.' },
+  { ku: 'destûr dan', tr: 'İzin vermek.', desc: 'İzin vermek.' },
+  { ku: 'destvala', tr: 'Eli boş.', desc: 'Eli boş.' },
+  { ku: 'destvalayî', tr: 'Eli boş olma durumu. (d.)', desc: 'Eli boş olma durumu.' },
+  { ku: 'deşil bûn', tr: 'Yayılmak, dağılmak.', desc: 'Yayılmak, dağılmak.' },
+  { ku: 'deşt', tr: 'Ova. (d.)', desc: 'Ova.' },
+  { ku: 'deştî', tr: 'Ovalı.', desc: 'Ovalı.' },
+  { ku: 'dev', tr: 'Ağız. devê rûvî negiya tirî, go tirş e: Elde edemedikleri şeyi hor göstermeye kalkışanlar için söylenir. devê wî ji hev çûn: Hayretten ağzı açıkta kalmak. devê wî li hev piçikîn: Korkudan, hastalıktan ya da sarhoşluktan söyleyeceği şeyi bir türlü anlatamamak; "dili dolaşmak". devê wî ji şîr şewitiye ji tirsa pifi dêw dike: Başlarına beklenmedik bir durum gelenler benzer durumlar karşısında çok ihtiyatlı davranırlar; "sütten ağzı yanan yoğurdu üfleyerek yer". devê xu li ber wî xwar kirin: Bir şeyi -ondan- yalvarırcasına istemek; ağız eğmek -ona- devê xu li xêrê veke!: Kötü ihtimallerden söz edenler için söylenen söz; ağzını hayra aç! devê xwe pê nekirin: (O şeyden) Hiç yememek, "ağzına sürmemek". ji devê xu revandin/filitandin: Söylemek istemediği bir şeyi boş bulunup söyleyivermek; ağzından kaçırmak. (e.)', desc: 'Ağız. Deyimler: devê rûvî negiya tirî, go tirş e (elde edemediğini hor görmek), devê wî li hev piçikîn (dili dolaşmak), devê wî ji şîr şewitiye ji tirsa pifi dêw dike (sütten ağzı yanan yoğurdu üfleyerek yer), ji devê xu revandin/filitandin (ağzından kaçırmak).' },
+  { ku: 'devbelaş', tr: 'Boş ve gereksiz şeyler söyleyen kimse.', desc: 'Boş ve gereksiz şeyler söyleyen kimse.' },
+  { ku: 'devbelaşî', tr: 'Boş ve gereksiz şeyler söyleme durumu. (d.)', desc: 'Boş ve gereksiz şeyler söyleme durumu.' },
+  { ku: 'devbest', tr: 'Vadi ağzı. (d.)', desc: 'Vadi ağzı.' },
+  { ku: 'devbikef', tr: 'Ağzı köpük saçan, ağzı köpüklü.', desc: 'Ağzı köpük saçan, ağzı köpüklü.' },
+  { ku: 'devçarox', tr: 'Çarpık, iri ve biçimsiz ağızlı (hakaret yollu kullanılır.)', desc: 'Çarpık, iri ve biçimsiz ağızlı.' },
+  { ku: 'deve', tr: 'Deve. (e.)', desc: 'Deve.' },
+  { ku: 'devekî', tr: 'Dizüstü, deve misali oturuş.', desc: 'Dizüstü, deve misali oturuş.' },
+  { ku: 'deveko', tr: 'Deve gibi, deveye yaraşır şekilde, kaba bir şekilde.', desc: 'Deve gibi, deveye yaraşır şekilde, kaba bir şekilde.' },
+  { ku: 'develik', tr: 'Deve barınağı. (d.)', desc: 'Deve barınağı.' },
+  { ku: 'devî', tr: 'Funda. (d.)', desc: 'Funda.' },
+  { ku: 'dev jê berdan', tr: 'Boşvermek.', desc: 'Boşvermek.' },
+  { ku: 'devkivil', tr: 'Beceriksizce konuşan, konuşmasını beceremeyen.', desc: 'Beceriksizce konuşan, konuşmasını beceremeyen.' },
+  { ku: 'devkox', tr: 'Üst çenesi alt çenesinden ileride olan.', desc: 'Üst çenesi alt çenesinden ileride olan.' },
+  { ku: 'devliken', tr: 'Güler yüzlü..', desc: 'Güler yüzlü.' },
+  { ku: 'devmesîl', tr: 'Küçük vadi. (d.)', desc: 'Küçük vadi.' },
+  { ku: 'devnerm', tr: 'Tatlı sözlü, yumuşak sözlü kimse.', desc: 'Tatlı sözlü, yumuşak sözlü kimse.' },
+  { ku: 'devnermik', tr: 'Yumuşak ağızlı kimse (alay yollu kullanılır.)', desc: 'Yumuşak ağızlı kimse.' },
+  { ku: 'devpozix', tr: 'Küfürbaz.', desc: 'Küfürbaz.' },
+  { ku: 'devşekal', tr: 'Çarpık, iri ve biçimsiz ağızlı (hakaret yollu kullanılır.)', desc: 'Çarpık, iri ve biçimsiz ağızlı.' },
+  { ku: 'devşewitî', tr: 'Yağda kızartılan pekmeze doğranan ekmekten oluşan yemek. (d.)', desc: 'Yağda kızartılan pekmeze doğranan ekmekten oluşan yemek.' },
+  { ku: 'devşil', tr: 'Ağzı salyalı (hakaret yollu söylenir.)', desc: 'Ağzı salyalı.' },
+  { ku: 'devşo', tr: 'Ayran artığı. (d.)', desc: 'Ayran artığı.' },
+  { ku: 'dey', tr: 'Ot yığını. (d.)', desc: 'Ot yığını.' },
+  { ku: 'devxwar', tr: 'Eğri ağızlı.', desc: 'Eğri ağızlı.' },
+  { ku: 'dew', tr: 'Ayran. (e.)', desc: 'Ayran.' },
+  { ku: 'deyax', tr: 'Dayanma, dayanma gücü. (d.)', desc: 'Dayanma, dayanma gücü.' },
+  { ku: 'deyax kirin', tr: 'Dayanmak.', desc: 'Dayanmak.' },
+  { ku: 'dewar', tr: 'Büyükbaş hayvan sürüsü, sığır. (e.)', desc: 'Büyükbaş hayvan sürüsü, sığır.' },
+  { ku: 'dewarkî', tr: 'bkz. "dewarko"', desc: 'bkz. "dewarko".' },
+  { ku: 'dewarko', tr: 'Sığırcasına, öküzvari, kaba bir şekilde.', desc: 'Sığırcasına, öküzvari, kaba bir şekilde.' },
+  { ku: 'dewçink', tr: 'Ayran tulumu. (d.)', desc: 'Ayran tulumu.' },
+  { ku: 'dewijn', tr: 'Tereyağ eritildiğinde üstte oluşan köpüğü. (d.)', desc: 'Tereyağ eritildiğinde üstte oluşan köpüğü.' },
+  { ku: 'dewixandin', tr: 'Baygınlaştırmak.', desc: 'Baygınlaştırmak.' },
+  { ku: 'dewixîn', tr: 'Baygınlaşmak.', desc: 'Baygınlaşmak.' },
+  { ku: 'dewkil', tr: 'Ayran yayan kadın.', desc: 'Ayran yayan kadın.' },
+  { ku: 'dewkîs', tr: 'Torbaya konularak süzdürülen ayran. (e.)', desc: 'Torbaya konularak süzdürülen ayran.' },
+  { ku: 'dewl', tr: 'Kova. (d.)', desc: 'Kova.' },
+  { ku: 'dewlet', tr: 'Zenginlik, servet. (d.)', desc: 'Zenginlik, servet.' },
+  { ku: 'dewletî', tr: 'Zengin, servet sahibi.', desc: 'Zengin, servet sahibi.' },
+  { ku: 'dewr', tr: '1) Zaman, dönem. 2) Yasin süresi. (d.)', desc: 'Zaman, dönem veya Yasin süresi.' },
+  { ku: 'dewran', tr: 'Zaman, dönem. (d.)', desc: 'Zaman, dönem.' },
+  { ku: 'dewrêş', tr: 'Derviş.', desc: 'Derviş.' },
+  { ku: 'dewrêştî', tr: 'Dervişlik. (d.)', desc: 'Dervişlik.' },
+  { ku: 'dews', tr: 'Yer, birinin veya bir şeyin işgal ettiği yer. (d.)', desc: 'Yer, birinin veya bir şeyin işgal ettiği yer.' },
+  { ku: 'dewsîrk', tr: 'İçine ezilmiş sarmısak katılan ayrana doğranan ekmekten oluşan yemek. (d.)', desc: 'İçine ezilmiş sarmısak katılan ayrana doğranan ekmekten oluşan yemek.' },
+  { ku: 'dewx', tr: 'Baygınlık, baş dönmesi. dewxa wî çûn: Baygınlık geçirmek, başı dönmek. (d.)', desc: 'Baygınlık, baş dönmesi. Deyim: dewxa wî çûn (Baygınlık geçirmek).' },
+  { ku: 'dexîl', tr: 'Masa gözü, çekmece. (d.)', desc: 'Masa gözü, çekmece.' },
+  { ku: 'dexl', tr: '(Birine) Sığınma, (ocağına) düşme. ez ketime dexlê te: Ocağına düşmüşüm, sana sığınmışım. (e.)', desc: 'Sığınma, (ocağına) düşme. Örnek: ez ketime dexlê te: Ocağına düşmüşüm, sana sığınmışım.' },
+  { ku: 'deyn', tr: 'Borç. deyn û dû: "Borç vb." anlamındaki söz. di bin deyna da mayin: Borcu çok olmak; "borca batmak." (e.)', desc: 'Borç. Deyimler: deyn û dû ("Borç vb." anlamındaki söz), di bin deyna da mayin (Borcu çok olmak).' },
+  { ku: 'deyndar', tr: 'Borçlu.', desc: 'Borçlu.' },
+  { ku: 'deyndarî', tr: 'Borçluluk. (d.)', desc: 'Borçluluk.' },
+  { ku: 'deyn kirin', tr: 'Borc etmek.', desc: 'Borc etmek.' },
+  { ku: 'dezge', tr: 'Tezgah. (d.)', desc: 'Tezgah.' },
+  { ku: 'dezgedar', tr: 'Tezgahtar.', desc: 'Tezgahtar.' },
+  { ku: 'dezî', tr: 'Dikiş ipliği. (e.)', desc: 'Dikiş ipliği.' },
+  { ku: 'dê', tr: 'Anne. diya mera tim lawa nayne/tim û tim diya merya lawa nayne: Durum ve koşullar her zaman uygun gitmez, fırsatlar da ele seyrek geçer. ji diya xu bûn: Dünyaya gelmek, doğmak. (d.)', desc: 'Anne. Deyimler: diya mera tim lawa nayne (Durum ve koşullar her zaman uygun gitmez), ji diya xu bûn (doğmak).' },
+  { ku: 'dê/tê', tr: 'Ta (uzaklık ifade eden sözcük.) mala wan dê li ku ye: Evleri ta nerdedir.', desc: 'Ta (uzaklık ifade eden sözcük.) Örnek: mala wan dê li ku ye: Evleri ta nerdedir.' },
+  { ku: 'dêjnik', tr: 'Tereotu. (d.)', desc: 'Tereotu.' },
+  { ku: 'dêl', tr: '1) Kuyruk. 2) Bedel, ıvaz. 3) Dişi kurt veya köpek. (d.)', desc: 'Kuyruk veya Bedel, ıvaz veya Dişi kurt veya köpek.' },
+  { ku: 'dêlgur', tr: 'Dişi kurt. (d.)', desc: 'Dişi kurt.' },
+  { ku: 'dêlik', tr: '1) Kancık. 2) Kadınlar için hakaret anlamında kullanılan ve "kancık" anlamına gelen sözcük. (d.)', desc: 'Kancık veya Kadınlar için hakaret anlamında kullanılan "kancık" anlamına gelen sözcük.' },
+  { ku: 'dêlîn', tr: '(Kurt ve köpek için) Dişil.', desc: '(Kurt ve köpek için) Dişil.' },
+  { ku: 'dêmax', tr: 'Demek, demek ki, şu halde.', desc: 'Demek, demek ki, şu halde.' },
+  { ku: 'dêr', tr: 'Kilise. (d.)', desc: 'Kilise.' },
+  { ku: 'Dêrik', tr: 'Mardin\'in Derik ilçesi. (d.)', desc: 'Mardin\'in Derik ilçesi.' },
+  { ku: 'Dêrsim', tr: 'Dersim, Tunceli. (d.)', desc: 'Dersim, Tunceli.' },
+  { ku: 'dêw', tr: 'Dev.', desc: 'Dev.' },
+  { ku: 'di', tr: 'Başka.', desc: 'Başka.' },
+  { ku: 'di ber ...', tr: '-den önce. ez di ber wî hatim: Ondan önce geldim.', desc: '-den önce. Örnek: ez di ber wî hatim: Ondan önce geldim.' },
+  { ku: 'di ber... da', tr: '-nin yerine. min di ber wî da jî da: Onun yerine de verdim.', desc: '-nin yerine. Örnek: min di ber wî da jî da: Onun yerine de verdim.' },
+  { ku: 'dihin', tr: 'Makina. (ça.)', desc: 'Makina. (Çocuk ağzı)' },
+  { ku: 'dik', tr: 'Seki. (d.)', desc: 'Seki.' },
+  { ku: 'dikan', tr: 'Dükkân. (d.)', desc: 'Dükkân.' },
+  { ku: 'dil', tr: 'Kalp, yürek, gönül. dilê şivan bixwaze di gunnê nêrî da gulmastê çêdike: Bir işi bitirecek kişi, isterse olmayacak gibi görünen işlere çözüm yolu bulur. dilê wî bijyan: Canı çekmek, imrenmek. dilê wî buhurîn: İçi geçmek. dilê wî çûn (xwarinê, vexwarinê): (Yiyecek, içecek vb.\'yi) Canı istemek, canı çekmek. dilê wî hîştin: Kalbini kırmak, gücendirmek. dilê wî ketin (yekê): Gönlü düşmek, sevdalanmak (birine). dilê wî mayin: Kalbi kırılmak, gücenmek. dilê wî neçûn: (Yiyecek, içecek vb.\'yi) Canı istememeki, canı çekmemek. dilê wî xweş kirin: İsteğini yerine getirerek sevindirmek; gönlünü hoş etmek. ji dil: Gönülden, içtenlikle. ji dilê safi: Gönülden, içtenlikle. (e.)', desc: 'Kalp, yürek, gönül. Deyimler: dilê wî bijyan (canı çekmek), dilê wî buhurîn (içi geçmek), dilê wî hîştin (kalbini kırmak), dilê wî ketin (sevdalanmak), ji dil (gönülden).' },
+  { ku: 'dilbijok', tr: 'İmrenen.', desc: 'İmrenen.' },
+  { ku: 'dilbirehm', tr: 'Merhametli.', desc: 'Merhametli.' },
+  { ku: 'dilêş', tr: 'Kalp veya gönül acısı çeken.', desc: 'Kalp veya gönül acısı çeken.' },
+  { ku: 'dil girtin', tr: 'Sevdalanmak.', desc: 'Sevdalanmak.' },
+  { ku: 'dil kirin', tr: 'İstemek, arzu etmek.', desc: 'İstemek, arzu etmek.' },
+  { ku: 'dilnerm', tr: 'Yumuşak kalpli, şefkatli.', desc: 'Yumuşak kalpli, şefkatli.' },
+  { ku: 'dilop', tr: 'Damla. (d.)', desc: 'Damla.' },
+  { ku: 'dilop kirin', tr: 'Damlamak.', desc: 'Damlamak.' },
+  { ku: 'dilreş', tr: 'Kötü kalpli, fesatçı.', desc: 'Kötü kalpli, fesatçı.' },
+  { ku: 'dilreşî', tr: 'Kötü kalplilik, fesatçılık. (d.)', desc: 'Kötü kalplilik, fesatçılık.' },
+  { ku: 'dilşa', tr: 'Mutlu, şen, sevinçli.', desc: 'Mutlu, şen, sevinçli.' },
+  { ku: 'dilşewitî', tr: 'Yufka yürekli.', desc: 'Yufka yürekli.' },
+  { ku: 'dilteng', tr: 'Hoşnut olmayan, içinde sıkıntı olan, yüreği daralan.', desc: 'Hoşnut olmayan, içinde sıkıntı olan, yüreği daralan.' },
+  { ku: 'diltengî', tr: 'Hoşnutsuzluk, canı sıkkın olma durumu, iç sıkıntısı. (d.)', desc: 'Hoşnutsuzluk, canı sıkkın olma durumu, iç sıkıntısı.' },
+  { ku: 'dilul', tr: 'Çift hörgüçlü deve.', desc: 'Çift hörgüçlü deve.' },
+  { ku: 'dilxwestik', tr: 'Canı isteyince yapan istemeyince yapmayan, isteğine göre davranan kimse.', desc: 'Canı isteyince yapan istemeyince yapmayan, isteğine göre davranan kimse.' },
+  { ku: 'dilxweş', tr: 'Memnun.', desc: 'Memnun.' },
+  { ku: 'dilxweşî', tr: 'Memnuniyet. (d.)', desc: 'Memnuniyet.' },
+  { ku: 'dims', tr: 'Pekmez.', desc: 'Pekmez.' },
+  { ku: 'din', tr: 'bkz. "di"', desc: 'bkz. "di".' },
+  { ku: 'diqdiqandin', tr: 'Gıdıklamak. (didiqdiqîni, bidiqdiqîni)', desc: 'Gıdıklamak. (Geniş zaman: didiqdiqîni, emir: bidiqdiqîni)' },
+  { ku: 'diran', tr: 'Diş. diranê heftsali: Yedi yaş dişi. diranê êqil: Azı dişi. diranê wî hişin hatin: Dişi çıkmak, dış çıkarmak. diranbêr: Kazmadiş. diranfiq: Seyrek dişli, dişleri aralıklı olan. diranketî: Dişi yerinden çıkmış olan, dişi düşmüş olan. diranqîç: Dişi fırlak olan, dişlek. diranzêr: Altın dişli. (e.)', desc: 'Diş. Örnek: diranê heftsali (Yedi yaş dişi), diranê êqil (Azı dişi), diranê wî hişin hatin (Dişi çıkmak).' },
+  { ku: 'dir-dir', tr: 'Motorlu araç vb. sesi. (d.)', desc: 'Motorlu araç vb. sesi.' },
+  { ku: 'dirêj', tr: 'Uzun. şût î dirêj: (Boy, endam için) Çok uzun, upuzun.', desc: 'Uzun. Örnek: şût î dirêj (Çok uzun, upuzun).' },
+  { ku: 'dirêj bûn', tr: 'Uzamak, uzanmak.', desc: 'Uzamak, uzanmak.' },
+  { ku: 'dirêjî', tr: 'Uzunluk. (d.)', desc: 'Uzunluk.' },
+  { ku: 'dirêj ketin', tr: 'Uzanmak, ayaklarını yere uzatıp yatmak.', desc: 'Uzanmak, ayaklarını yere uzatıp yatmak.' },
+  { ku: 'dirêj kirin', tr: 'Uzatmak.', desc: 'Uzatmak.' },
+  { ku: 'dirêş', tr: 'Biz aleti. (d.)', desc: 'Biz aleti.' },
+  { ku: 'dirik', tr: 'Diken. (d.)', desc: 'Diken.' },
+  { ku: 'dirî', tr: 'Böğürtlen. (d.)', desc: 'Böğürtlen.' },
+  { ku: 'dirîhop/dirîdop', tr: 'Tahterevalli. werin em xu dirîdop bikin: Gelin tahterevalli oyunu oynayalım. (Çocuklar söyler.) (d.)', desc: 'Tahterevalli. Örnek: werin em xu dirîdop bikin: Gelin tahterevalli oyunu oynayalım.' },
+  { ku: 'dirreh', tr: 'Koçu çağırırken söylenen sözcük.', desc: 'Koçu çağırırken söylenen sözcük.' },
+  { ku: 'dirrêt', tr: 'Davarı (koyunları) su içmeye çağırırken kullanılan sözcük.', desc: 'Davarı (koyunları) su içmeye çağırırken kullanılan sözcük.' },
+  { ku: 'dirûn (1)', tr: 'Dikiş. (d.)', desc: 'Dikiş.' },
+  { ku: 'dirûn (2)', tr: 'Dikmek. bi dirûn dan: Diktirmek. (bidirû, didirû)', desc: 'Dikmek. Deyim: bi dirûn dan (Diktirmek). (Geniş zaman: didirû, emir: bidirû)' },
+  { ku: 'dirûtin', tr: 'Dikmek.', desc: 'Dikmek.' },
+  { ku: 'dirûtî/dirûyî', tr: 'Dikili, dikilmiş olan.', desc: 'Dikili, dikilmiş olan.' },
+  { ku: 'dismal', tr: 'Mendil. (d.)', desc: 'Mendil.' },
+  { ku: 'distar', tr: 'Eldeğirmeni', desc: 'Eldeğirmeni.' },
+  { ku: 'distarhêr', tr: 'Eldeğirmencisi.', desc: 'Eldeğirmencisi.' },
+  { ku: 'dixan', tr: 'Toz toprakla karışık esen rüzgar. (d.)', desc: 'Toz toprakla karışık esen rüzgar.' },
+  { ku: 'di xu ra nediyin', tr: 'Üşenmek. min di xu ra nedî herim bajêr: Şehre gitmeye üşendim.', desc: 'Üşenmek. Örnek: min di xu ra nedî herim bajêr: Şehre gitmeye üşendim.' },
+  { ku: 'diyar', tr: 'Üst, yukarı, yukarı taraf. diyarê xênî: Dam, evin tepesi. diyarê xurbetê: Gurbet diyarı. (e.)', desc: 'Üst, yukarı, yukarı taraf. Örnek: diyarê xênî (Dam, evin tepesi), diyarê xurbetê (Gurbet diyarı).' },
+  { ku: 'Diyarbekir', tr: 'Diyarbakır. (d.)', desc: 'Diyarbakır.' },
+  { ku: 'diz', tr: 'Hırsız. dizo: Çocuklar bir şey aşırdıklarında, şaka yollu "seni gidi hırsız!" anlamına gelen bu sözcük kullanılır.', desc: 'Hırsız. Örnek: dizo (Çocuklar için şaka yollu "seni gidi hırsız!" anlamına gelen sözcük).' },
+  { ku: 'dizek', tr: 'Hırsız.', desc: 'Hırsız.' },
+  { ku: 'dizî (1)', tr: 'Hırsızlık. (d.)', desc: 'Hırsızlık.' },
+  { ku: 'dizî (2)', tr: 'Gizli. bi dizî: Gizliden, gizlice. dizî dizî: Gizli gizli.', desc: 'Gizli. Deyim: bi dizî (Gizliden, gizlice), dizî dizî (Gizli gizli).' },
+  { ku: 'dizîka', tr: 'Gizliden, gizlice. ez bi dizîka ketim hundir: Gizlice içeri girdim.', desc: 'Gizliden, gizlice. Örnek: ez bi dizîka ketim hundir: Gizlice içeri girdim.' },
+  { ku: 'dizîn', tr: 'Çalmak, hırsızlık yapmak.', desc: 'Çalmak, hırsızlık yapmak.' },
+  { ku: 'dizî kirin', tr: 'Hırsızlık yapmak.', desc: 'Hırsızlık yapmak.' },
+  { ku: 'dîk', tr: 'Horoz. (e.)', desc: 'Horoz.' },
+  { ku: 'dîksilêman', tr: 'İbibik kuşu. (e.)', desc: 'İbibik kuşu.' },
+  { ku: 'dîlan', tr: 'Eğlence, halay. (d.)', desc: 'Eğlence, halay.' },
+  { ku: 'dîlber', tr: 'Alımlı, şuh.', desc: 'Alımlı, şuh.' },
+  { ku: 'dîlok', tr: 'Halayda söylenen türkü. bûn dîlok: Herkesin diline düşmek; "herkesin ağzına sakız olmak." (d.)', desc: 'Halayda söylenen türkü. Deyim: bûn dîlok (Herkesin diline düşmek).' },
+  { ku: 'dîn (1)', tr: 'Din. dînê wî çûn ser serê wî: Aşırı öfkelenmek. li ser dînê xu: Dinine bağlı, dini bütün', desc: 'Din. Deyim: dînê wî çûn ser serê wî (Aşırı öfkelenmek).' },
+  { ku: 'dîn (2)', tr: 'Deli. ji dîna ra tim eyďî ye: Her fırsattan yararlanarak bayrammış gibi davrananlara ve herşeyi eğlenceli yönden alanlara alay yollu söylenir.', desc: 'Deli. Deyim: ji dîna ra tim eyďî ye (alay yollu söylenir).' },
+  { ku: 'dîn bûn', tr: 'Delirmek.', desc: 'Delirmek.' },
+  { ku: 'dîndar', tr: 'Dindar.', desc: 'Dindar.' },
+  { ku: 'dînê', tr: '(Kadınlar için) Hey, be, behey.', desc: '(Kadınlar için) Hey, be, behey.' },
+  { ku: 'ding', tr: 'Çeltik değirmeni. (d.)', desc: 'Çeltik değirmeni.' },
+  { ku: 'dînik', tr: 'Delice.', desc: 'Delice.' },
+  { ku: 'dîn î berradayî', tr: 'Zırdeli.', desc: 'Zırdeli.' },
+  { ku: 'dîn kirin', tr: 'Delirtmek.', desc: 'Delirtmek.' },
+  { ku: 'dîno', tr: '(Erkekler için) Hey, be, behey.', desc: '(Erkekler için) Hey, be, behey.' },
+  { ku: 'dîntî', tr: 'Delilik. (d.)', desc: 'Delilik.' },
+  { ku: 'dîsa', tr: 'Yine, bir daha.', desc: 'Yine, bir daha.' },
+  { ku: 'dîwar', tr: 'Duvar. dîwar bi guh in: Gizli konuşulan bir şey umulmadık bir yoldan başkalarınca duyulabilir; "yerin kulağı var." (e.)', desc: 'Duvar. Deyim: dîwar bi guh in (yerin kulağı var).' },
+  { ku: 'dîyin', tr: 'Görmek.', desc: 'Görmek.' },
+  { ku: 'dîzik', tr: 'Çömlek, toprak çömlek. (d.)', desc: 'Çömlek, toprak çömlek.' },
+  { ku: 'dîzme', tr: 'Çizme. (d.)', desc: 'Çizme.' },
+  { ku: 'do', tr: 'Dün.', desc: 'Dün.' },
+  { ku: 'dol', tr: 'Döl.', desc: 'Döl.' },
+  { ku: 'dolab', tr: '1) Çekmece, dolap. 2) Hile, oyun, düzen. (d.)', desc: 'Çekmece, dolap veya Hile, oyun, düzen.' },
+  { ku: 'dolbend', tr: 'Tülbent. (d.)', desc: 'Tülbent.' },
+  { ku: 'dolkûçik', tr: 'Erkek köpekle dişi tazıdan olan yavru.', desc: 'Erkek köpekle dişi tazıdan olan yavru.' },
+  { ku: 'dolme', tr: 'Taze kabak. (e.)', desc: 'Taze kabak.' },
+  { ku: 'doltajî', tr: 'Erkek tazıyla dişi köpekten olan yavru.', desc: 'Erkek tazıyla dişi köpekten olan yavru.' },
+  { ku: 'don', tr: '1) Kuyruk yağı. 2) Gazyağı. (e.)', desc: 'Kuyruk yağı veya Gazyağı.' },
+  { ku: 'donxiz', tr: 'bkz. "beraz"', desc: 'bkz. "beraz".' },
+  { ku: 'donzde', tr: 'On iki. (e.)', desc: 'On iki.' },
+  { ku: 'doq', tr: 'Dikilme.', desc: 'Dikilme.' },
+  { ku: 'doq bûn', tr: 'Dikilmek, dik durma, dikilip durma.', desc: 'Dikilmek, dik durma, dikilip durma.' },
+  { ku: 'doq kirin', tr: 'Dikmek, dik duruma getirmek.', desc: 'Dikmek, dik duruma getirmek.' },
+  { ku: 'dor', tr: '1) Sıra. bi dore: Sırayla, sırasıyla. bi dora (yekî) geryan: (Birine) Kurban olmak. Şemo bi dora te bigere: Şemo sana kurban olsun. dor lê girtin: Etrafını sarmak, kuşatmak. 2) Etraf, çevre. (d.)', desc: 'Sıra veya Etraf, çevre. Deyimler: bi dora (yekî) geryan (Kurban olmak), dor lê girtin (etrafını sarmak).' },
+  { ku: 'doran', tr: 'Hayvanın karnındaki (bağırsak, mide vb. yerlerdeki) yağlar.', desc: 'Hayvanın karnındaki (bağırsak, mide vb. yerlerdeki) yağlar.' },
+  { ku: 'dost', tr: 'Dost.', desc: 'Dost.' },
+  { ku: 'dostanî', tr: 'Dostluk. (d.)', desc: 'Dostluk.' },
+  { ku: 'dostik', tr: 'Kadın dost, metres. (d.)', desc: 'Kadın dost, metres.' },
+  { ku: 'dostî', tr: 'Dostluk. (d.)', desc: 'Dostluk.' },
+  { ku: 'doşab', tr: 'Pekmez şerbeti. (d.)', desc: 'Pekmez şerbeti.' },
+  { ku: 'doşanî', tr: 'Sağmal.', desc: 'Sağmal.' },
+  { ku: 'doş bûn', tr: 'Dolaşmak, tur atmak.', desc: 'Dolaşmak, tur atmak.' },
+  { ku: 'doşeg', tr: 'Döşek. (d.)', desc: 'Döşek.' },
+  { ku: 'doş kirin', tr: 'Dolaştırmak.', desc: 'Dolaştırmak.' },
+  { ku: 'dot', tr: 'Kız ocuğu. (d.)', desc: 'Kız ocuğu.' },
+  { ku: 'dotin', tr: 'Sağmak. (didoşe, bidoşe, dot)', desc: 'Sağmak. (Geniş zaman: didoşe, emir: bidoşe)' },
+  { ku: 'dotmam', tr: 'Amca kızı. (d.)', desc: 'Amca kızı.' },
+  { ku: 'dox', tr: 'Sap. doxa çêkûç: Çekiç sapı, doxa bêrê: Kürek sapı, doxa teşiyê: İğ sapı. (d.)', desc: 'Sap. Örnek: doxa çêkûç (Çekiç sapı), doxa bêrê (Kürek sapı).' },
+  { ku: 'doxîn', tr: 'Uçkur. devê xelkê ne doxîna min e gi girêdim: Elalemin ağzı uçkurum değil ki bağlayayım. (d.)', desc: 'Uçkur. Deyim: devê xelkê ne doxîna min e gi girêdim (Elalemin ağzı uçkurum değil ki bağlayayım).' },
+  { ku: 'doxînsist', tr: 'Zampara.', desc: 'Zampara.' },
+  { ku: 'doxteşî', tr: 'İğin ince ve uzun çubuğu. (d.)', desc: 'İğin ince ve uzun çubuğu.' },
+  { ku: 'doyîn', tr: 'Dünkü, düne ait olan.', desc: 'Dünkü, düne ait olan.' },
+  { ku: 'dozmam', tr: 'Amca kızı. (d.)', desc: 'Amca kızı.' },
+  { ku: 'du', tr: 'İki. (e.)', desc: 'İki.' },
+  { ku: 'dubend', tr: 'İkilik yapan.', desc: 'İkilik yapan.' },
+  { ku: 'dubendî', tr: 'İkilik. (d.)', desc: 'İkilik.' },
+  { ku: 'dudil', tr: 'Tereddütlü, kararsız.', desc: 'Tereddütlü, kararsız.' },
+  { ku: 'dudilî', tr: 'Tereddüt, kararsızlık. (d.)', desc: 'Tereddüt, kararsızlık.' },
+  { ku: 'dudu', tr: 'İki. çar berxê min hene, dudu ji te ra, dudu ji min ra: Dört kuzum var, ikisi sana ikisi bana. (e.)', desc: 'İki. Örnek: çar berxê min hene, dudu ji te ra, dudu ji min ra: Dört kuzum var, ikisi sana ikisi bana.' },
+  { ku: 'duhêl', tr: 'Kalburun deriden yapılan ipleri.', desc: 'Kalburun deriden yapılan ipleri.' },
+  { ku: 'dujîn', tr: 'Bitlenmiş kimse veya çamaşır.', desc: 'Bitlenmiş kimse veya çamaşır.' },
+  { ku: 'dujînî bûn', tr: 'Bitlenmek, kirlenmek.', desc: 'Bitlenmek, kirlenmek.' },
+  { ku: 'dujmin', tr: 'Düşman.', desc: 'Düşman.' },
+  { ku: 'dujminatî', tr: 'Düşmanlık. (d.)', desc: 'Düşmanlık.' },
+  { ku: 'dunig', tr: 'Halayda bir oyun.', desc: 'Halayda bir oyun.' },
+  { ku: 'dunya', tr: 'Dünya. dunya alem: Bütün herkes, bütün dünya. dunya neketin serê wî: Hiç bir şey umurunda olmamak, dünya umurunda olmamak. dunya walî: Öteki dünya. dunya xera kirin: Bir şeye kızarak bağırıp çağırmak, ortalığı velveleye vermek. hatin dunyê: Doğmak, dünyaya gelmek. (d.)', desc: 'Dünya. Deyimler: dunya alem (Bütün herkes), dunya neketin serê wî (Hiçbir şey umurunda olmamak), dunya xera kirin (ortalığı velveleye vermek).' },
+  { ku: 'dupelkî', tr: 'Doğuştan. ji dupelkî da devê wî xwar e: Onun ağzı doğuştan eğridir.', desc: 'Doğuştan. Örnek: ji dupelkî da devê wî xwar e: Onun ağzı doğuştan eğridir.' },
+  { ku: 'duqaf', tr: 'Çift kafa, kafası çiftmiş gibi olan.', desc: 'Çift kafa, kafası çiftmiş gibi olan.' },
+  { ku: 'duqolî', tr: 'bkz. "dubendî"', desc: 'bkz. "dubendî".' },
+  { ku: 'dure', tr: 'Melez.', desc: 'Melez.' },
+  { ku: 'durf', tr: 'Sima, yüz şekli. (e.)', desc: 'Sima, yüz şekli.' },
+  { ku: 'durû', tr: 'İkiyüzlü.', desc: 'İkiyüzlü.' },
+  { ku: 'durûtî', tr: 'İkiyüzlülük. (d.)', desc: 'İkiyüzlülük.' },
+  { ku: 'dusê', tr: 'Bir kaç.', desc: 'Bir kaç.' },
+  { ku: 'dusibe', tr: 'Öbür gün.', desc: 'Öbür gün.' },
+  { ku: 'dusid', tr: 'İki yüz. (b.)', desc: 'İki yüz.' },
+  { ku: 'duşemî', tr: 'Pazartesi. (d.)', desc: 'Pazartesi.' },
+  { ku: 'duşmış bûn', tr: 'Düşünmek.', desc: 'Düşünmek.' },
+  { ku: 'duwêl', tr: 'Düvel.', desc: 'Düvel.' },
+  { ku: 'dûr', tr: 'Uzak. dûrî vira: Kimsenin başına bu tür felaketlerin gelmemesini dilerim; burdan uzak olsun. ji dûr ve: Uzaktan. (Avesta: dûr)', desc: 'Uzak. Deyim: dûrî vira (burdan uzak olsun).' },
+  { ku: 'dû', tr: 'Art, Arka, geri. bi dû ketin: Bir kimsenin arkasından gitmek, arkasına düşmek, izlemek, peşine düşmek, peşi sıra gitmek. bi dû xistin: Bir kimseyi başka bir kimsenin arkasına salmak, peşine düşürmek. dû ra: Ardından, arkasından, sonra. ez ê dû ra werim: Sonra gelirim. gere kes nebê duyê êr tê te: En küçük bir şeyden alınınıyorsun, çok Alıngan olmuşsun; "buluttan nem kapıyorsun." li dû hev: Art arda, peş peşe. (e.)', desc: 'Art, Arka, geri. Deyimler: bi dû ketin (peşine düşmek), gere kes nebê duyê êr tê te (buluttan nem kapıyorsun).' },
+  { ku: 'dû (2)', tr: 'Duman. (e.)', desc: 'Duman.' },
+  { ku: 'dûajo', tr: 'Çoban yamağı.', desc: 'Çoban yamağı.' },
+  { ku: 'dû kirin', tr: 'Duman yapmak, duman çıkarmak.', desc: 'Duman yapmak, duman çıkarmak.' },
+  { ku: 'dûm', tr: 'Devam, devam etme.', desc: 'Devam, devam etme.' },
+  { ku: 'dûman', tr: 'Duman', desc: 'Duman.' },
+  { ku: 'dûm kirin', tr: 'Devam etmek.', desc: 'Devam etmek.' },
+  { ku: 'dûpişk', tr: 'Akrep. (d.)', desc: 'Akrep.' },
+  { ku: 'dûrbînk', tr: 'Dürbün. (d.)', desc: 'Dürbün.' },
+  { ku: 'dûr bûn', tr: 'Uzak olmak.', desc: 'Uzak olmak.' },
+  { ku: 'dürik', tr: 'Türkü', desc: 'Türkü.' },
+  { ku: 'dûr ketin', tr: 'Uzaklaşmak.', desc: 'Uzaklaşmak.' },
+  { ku: 'dûrme', tr: 'Etli butlu, dolgun, şişmanca kimse', desc: 'Etli butlu, dolgun, şişmanca kimse.' },
+  { ku: 'dûr xistin', tr: 'Uzaklaştırmak.', desc: 'Uzaklaştırmak.' },
+  { ku: 'ebare', tr: 'Nohut kalburu. (d.)', desc: 'Nohut kalburu.' },
+  { ku: 'ebe', tr: 'Aba. ębequt: Kolsuz bir çeşit aba. ebê kindokî: Yarım kollu bir çeşit aba.', desc: 'Aba. Çeşitleri: ębequt (kolsuz aba), ebê kindokî (yarım kollu aba).' },
+  { ku: 'ebr', tr: 'Dara. (d.)', desc: 'Dara.' },
+  { ku: 'ecel', tr: 'Ecel. ecelê xafil: Habersiz ve hazırlıksız bir sırada gelen ölüm. ecelê wî hatin: Eceli gelmek. (e.)', desc: 'Ecel. Örnek: ecelê wî hatin (Eceli gelmek).' },
+  { ku: 'ecêb', tr: 'Tuhaf, garip, acaip.', desc: 'Tuhaf, garip, acaip.' },
+  { ku: 'ecêb mayin', tr: 'Şaşıp kalmak.', desc: 'Şaşıp kalmak.' },
+  { ku: 'ecêmayî', tr: 'Şaşıp kalan, şaşkın.', desc: 'Şaşıp kalan, şaşkın.' },
+  { ku: 'ecibandin', tr: 'Beğenmek.', desc: 'Beğenmek.' },
+  { ku: 'eçî kirin', tr: 'çd. Dövmek, vurmak.', desc: 'Dövmek, vurmak. (Çocuk dilinde)' },
+  { ku: 'edem bûn', tr: 'Kökü kazınmak, kökten yok olmak.', desc: 'Kökü kazınmak, kökten yok olmak.' },
+  { ku: 'edem kirin', tr: 'Kökünü kazımak, kökten yok etmek.', desc: 'Kökünü kazımak, kökten yok etmek.' },
+  { ku: 'edet', tr: 'Huy, alışkanlık, adet. (d.)', desc: 'Huy, alışkanlık, adet.' },
+  { ku: 'ediland/in', tr: '1) Mükemmelleştirmek. 2) Bir şeyi olması gereken duruma getirmek, düzene sokmak.', desc: 'Mükemmelleştirmek veya Bir şeyi olması gereken duruma getirmek, düzene sokmak.' },
+  { ku: 'edilî/n', tr: '1) Mükemmelleşmek. 2) Bir şeyin olması gereken duruma gelmesi, düzene girmesi.', desc: 'Mükemmelleşmek veya Bir şeyin olması gereken duruma gelmesi, düzene girmesi.' },
+  { ku: 'edxem', tr: 'Kıskanç.', desc: 'Kıskanç.' },
+  { ku: 'ee', tr: 'çd. Kaka.', desc: 'Kaka. (Çocuk dilinde)' },
+  { ku: 'Eferim', tr: 'Aferin, bravo.', desc: 'Aferin, bravo.' },
+  { ku: 'Efin defin kirin', tr: 'Yerle bir etmek.', desc: 'Yerle bir etmek.' },
+  { ku: 'efletûn', tr: 'Tatlı dilli, münasip, canayakın kimse.', desc: 'Tatlı dilli, münasip, canayakın kimse.' },
+  { ku: 'efrût', tr: 'İfrit. (e.)', desc: 'İfrit.' },
+  { ku: 'efû', tr: 'Af. (d.)', desc: 'Af.' },
+  { ku: 'efûkar', tr: 'Affedici, bağışlayıcı.', desc: 'Affedici, bağışlayıcı.' },
+  { ku: 'efû kirin', tr: 'Affetmek.', desc: 'Affetmek.' },
+  { ku: 'efûn', tr: 'Afyon. (d.)', desc: 'Afyon.' },
+  { ku: 'egal', tr: 'Agel.', desc: 'Agel.' },
+  { ku: 'egal (2)', tr: 'Deve ayağını bağlama işi.', desc: 'Deve ayağını bağlama işi.' },
+  { ku: 'egal kirin', tr: 'Deve ayağını bağlamak.', desc: 'Deve ayağını bağlamak.' },
+  { ku: 'egîd', tr: 'Yiğit.', desc: 'Yiğit.' },
+  { ku: 'egîdî', tr: 'Yiğitlik.', desc: 'Yiğitlik.' },
+  { ku: 'eheh', tr: 'Eyvah!', desc: 'Eyvah!' },
+  { ku: 'ehlî kêf', tr: 'Keyif düşkünü, eğlence meraklısı.', desc: 'Keyif düşkünü, eğlence meraklısı.' },
+  { ku: 'ekl', tr: 'Lezzet. (d.)', desc: 'Lezzet.' },
+  { ku: 'eks', tr: 'İnat, aksi.', desc: 'İnat, aksi.' },
+  { ku: 'eksûg', tr: 'Kadın, kadıncağız.', desc: 'Kadın, kadıncağız.' },
+  { ku: 'elaf', tr: 'Hububat tüccarı.', desc: 'Hububat tüccarı.' },
+  { ku: 'elb', tr: 'Tahta kova. (d.)', desc: 'Tahta kova.' },
+  { ku: 'elbik', tr: '1) Tahta kova. 2) Tamburalı tüfek.', desc: 'Tahta kova veya Tamburalı tüfek.' },
+  { ku: 'elebazarî', tr: '(Pazarlıkta) Götürü usulüyle, pazarlıklı olarak.', desc: '(Pazarlıkta) Götürü usulüyle, pazarlıklı olarak.' },
+  { ku: 'alebrûs', tr: 'Amerikan tıraşı.', desc: 'Amerikan tıraşı.' },
+  { ku: 'alefranqe', tr: 'Alafranga.', desc: 'Alafranga.' },
+  { ku: 'eletexmînî', tr: 'Tahmini olarak.', desc: 'Tahmini olarak.' },
+  { ku: 'eletirik', tr: 'Elektrik. (d.)', desc: 'Elektrik.' },
+  { ku: 'eletirkî', tr: 'Alaturka.', desc: 'Alaturka.' },
+  { ku: 'elewî', tr: 'Alevi.', desc: 'Alevi.' },
+  { ku: 'eleykîmeselam', tr: 'Aleykümselam.', desc: 'Aleykümselam.' },
+  { ku: 'Elezîz', tr: 'Elazığ. (d.)', desc: 'Elazığ.' },
+  { ku: 'elhemdula', tr: 'Elhamdülillah.', desc: 'Elhamdülillah.' },
+  { ku: 'elimand/in', tr: 'Alıştırmak, öğretmek.', desc: 'Alıştırmak, öğretmek.' },
+  { ku: 'elimandî', tr: 'Alışık, alışmış olan, öğrenmiş olan.', desc: 'Alışık, alışmış olan, öğrenmiş olan.' },
+  { ku: 'elimîn', tr: 'Alışmak, öğrenmek.', desc: 'Alışmak, öğrenmek.' },
+  { ku: 'Ela (2)', tr: 'bkz. "Xwedê"', desc: 'bkz. "Xwedê".' },
+  { ku: 'Ela hê', tr: 'Zikredenlerin, zikir sırasında tekrarladıkları söz.', desc: 'Zikredenlerin, zikir sırasında tekrarladıkları söz.' },
+  { ku: 'elok', tr: 'bkz. "Huli"', desc: 'bkz. "Huli".' },
+  { ku: 'em', tr: 'Biz (birinci çoğul şahıs zamiri.)', desc: 'Biz (birinci çoğul şahıs zamiri).' },
+  { ku: 'eman', tr: 'Aman.', desc: 'Aman.' },
+  { ku: 'emaret', tr: 'e. 1) Temizlik yönünden evin iç görünümü. 2) Deri temizleme işi, dabaklama.', desc: 'Temizlik yönünden evin iç görünümü veya Deri temizleme işi, dabaklama.' },
+  { ku: 'emaret kirin', tr: 'Deri temizlemek, dabaklamak.', desc: 'Deri temizlemek, dabaklamak.' },
+  { ku: 'embar', tr: 'Ambar, depo. (d.)', desc: 'Ambar, depo.' },
+  { ku: 'embar kirin', tr: 'Depolamak.', desc: 'Depolamak.' },
+  { ku: 'emel', tr: 'İshal. (e.)', desc: 'İshal.' },
+  { ku: 'emelyat', tr: 'Ameliyat. (d.)', desc: 'Ameliyat.' },
+  { ku: 'Emerîqa', tr: 'Amerika. mîna Emerîqayê binê erdê: Gizli gizli bir takım işler çevirenlere söylenir. (d.)', desc: 'Amerika. Deyim: mîna Emerîqayê binê erdê (Gizli gizli işler çevirenlere söylenir).' },
+  { ku: 'emir (1)', tr: 'Ömür. (e.)', desc: 'Ömür.' },
+  { ku: 'emir (2)', tr: 'Emir. (e.)', desc: 'Emir.' },
+  { ku: 'emir dan', tr: 'Emretmek.', desc: 'Emretmek.' },
+  { ku: 'emir kirin (1)', tr: 'Emretmek.', desc: 'Emretmek.' },
+  { ku: 'emir kirin (2)', tr: 'Ömür sürmek.', desc: 'Ömür sürmek.' },
+  { ku: 'emr', tr: 'Ömür. (e.)', desc: 'Ömür.' },
+  { ku: 'encûr', tr: 'Acur. (e.)', desc: 'Acur.' },
+  { ku: 'enî', tr: 'Alın. (d.)', desc: 'Alın.' },
+  { ku: 'enîşk', tr: 'Dirsek. (d.)', desc: 'Dirsek.' },
+  { ku: 'ennê', tr: 'çd. Anne.', desc: 'Anne. (Çocuk dilinde)' },
+  { ku: 'Entab', tr: 'Antep. (d.)', desc: 'Antep.' },
+  { ku: 'entîke', tr: 'Sağlam, dayanıklı, kaliteli (özellikle eşya.)', desc: 'Sağlam, dayanıklı, kaliteli (özellikle eşya.)' },
+  { ku: 'erbane', tr: 'Tef. (d.)', desc: 'Tef.' },
+  { ku: 'erd (1)', tr: 'Tarla. (e.)', desc: 'Tarla.' },
+  { ku: 'erd (2)', tr: 'Yer. (d.)', desc: 'Yer.' },
+  { ku: 'Ereb', tr: 'Arap.', desc: 'Arap.' },
+  { ku: 'erebe', tr: 'Araba. ereba desta: El arabası. ereba hespa: At arabası. (d.)', desc: 'Araba. Çeşitleri: ereba desta (El arabası), ereba hespa (At arabası).' },
+  { ku: 'Erebî', tr: 'Arapça. (d.)', desc: 'Arapça.' },
+  { ku: 'Erebko', tr: 'Arap usulü, Arapvari.', desc: 'Arap usulü, Arapvari.' },
+  { ku: 'erê', tr: 'evet. erê welle: Oh olsun!, canıma değsin!', desc: 'Evet. Deyim: erê welle (Oh olsun!, canıma değsin!).' },
+  { ku: 'erfat', tr: 'Arife. (d.)', desc: 'Arife.' },
+  { ku: 'ero', tr: 'Behey, be, hey, yahu.', desc: 'Behey, be, hey, yahu.' },
+  { ku: 'Erqenîn', tr: 'Diyarbakır\'ın Ergani ilçesi. (d.)', desc: 'Diyarbakır\'ın Ergani ilçesi.' },
+  { ku: 'err...', tr: '"Vay be!" "Vay anasını!" anlamında hayret sözcüğü.', desc: '"Vay be!" "Vay anasını!" anlamında hayret sözcüğü.' },
+  { ku: 'errik', tr: 'bkz. "err..."', desc: 'bkz. "err...".' },
+  { ku: 'erûg', tr: 'Erik. (d.)', desc: 'Erik.' },
+  { ku: 'erzan', tr: 'Ucuz.', desc: 'Ucuz.' },
+  { ku: 'erzan bûn', tr: 'Ucuzlamak.', desc: 'Ucuzlamak.' },
+  { ku: 'erzanî', tr: 'Ucuzluk. (d.)', desc: 'Ucuzluk.' },
+  { ku: 'erzan kirin', tr: 'Ucuzlatmak.', desc: 'Ucuzlatmak.' },
+  { ku: 'esir', tr: 'İkindi. (d.)', desc: 'İkindi.' },
+  { ku: 'esirkî', tr: 'İkindi vakti.', desc: 'İkindi vakti.' },
+  { ku: 'esmer', tr: 'Buğday rengi.', desc: 'Buğday rengi.' },
+  { ku: 'eşa', tr: 'Yatsı:', desc: 'Yatsı.' },
+  { ku: 'eşakî', tr: 'Yatsı vakti.', desc: 'Yatsı vakti.' },
+  { ku: 'eşaret', tr: 'Tipsiz, çirkin.', desc: 'Tipsiz, çirkin.' },
+  { ku: 'eşar kirin', tr: 'Ham tulumu terbiye etmek.', desc: 'Ham tulumu terbiye etmek.' },
+  { ku: 'eşed', tr: 'Kelime-i şahadet. eşeda xu anîn: Şahadet getirmek. (d.)', desc: 'Kelime-i şahadet. Örnek: eşeda xu anîn: Şahadet getirmek.' },
+  { ku: 'eşîr', tr: 'Aşiret. (d.)', desc: 'Aşiret.' },
+  { ku: 'eşîrtî', tr: 'Aşiretçilik.', desc: 'Aşiretçilik.' },
+  { ku: 'eşkere', tr: 'Açık, aleni. eşkere eşkere: Açık açık, açıktan açığa.', desc: 'Açık, aleni. Örnek: eşkere eşkere (Açık açık, açıktan açığa).' },
+  { ku: 'eşkere kirin', tr: 'Açığa çıkarmak, alenileştirmek.', desc: 'Açığa çıkarmak, alenileştirmek.' },
+  { ku: 'eşpabî', tr: 'Kayısı kurusu. (d.)', desc: 'Kayısı kurusu.' },
+  { ku: 'eşq', tr: '1) Merak, heves. 2) Aşk, sevda. (d.)', desc: 'Merak, heves veya Aşk, sevda.' },
+  { ku: 'eta kirin', tr: 'Hibe etmek.', desc: 'Hibe etmek.' },
+  { ku: 'etar', tr: 'Aktar.', desc: 'Aktar.' },
+  { ku: 'etarî', tr: 'Aktarlık. (d.)', desc: 'Aktarlık.' },
+  { ku: 'etifand/in', tr: 'Yeni doğmuş deve yavrusuna süt emzirtmek.', desc: 'Yeni doğmuş deve yavrusuna süt emzirtmek.' },
+  { ku: 'etor', tr: 'Dürüm. (d.)', desc: 'Dürüm.' },
+  { ku: 'etor kirin', tr: 'Dürmek, dürüm yapmak.', desc: 'Dürmek, dürüm yapmak.' },
+  { ku: 'etrakî', tr: 'Uzun kulaklı koyun.', desc: 'Uzun kulaklı koyun.' },
+  { ku: 'etraki (2)', tr: 'Uzun kulaklı koyun.', desc: 'Uzun kulaklı koyun.' },
+  { ku: 'ev', tr: 'Bu. ev ji me kêm bû!: Bir bu eksikti!', desc: 'Bu. Deyim: ev ji me kêm bû! (Bir bu eksikti!).' },
+  { ku: 'evd', tr: '1) Kul. 2) Simsiyah tenli, kara Arap, zenci.', desc: 'Kul veya Simsiyah tenli, kara Arap, zenci.' },
+  { ku: 'evdal', tr: '1) Yoksul gezgin. 2) Zavallı.', desc: 'Yoksul gezgin veya Zavallı.' },
+  { ku: 'ew', tr: 'O. ew ro va ro: "Söz konusu durumun olduğu günden bu yana; o gün bugün." (e.)', desc: 'O. Deyim: ew ro va ro (o gün bugün).' },
+  { ku: 'ewan', tr: 'Bozgunçu, fesatçı.', desc: 'Bozgunçu, fesatçı.' },
+  { ku: 'eware', tr: 'Meşgul olan.', desc: 'Meşgul olan.' },
+  { ku: 'eware bûn', tr: 'Meşgul olmak.', desc: 'Meşgul olmak.' },
+  { ku: 'eware kirin', tr: 'Meşgul etmek, zahmet vermek. efû bike, min tu heya vê derê eware kir: Bağışla, seni buraya kadar zahmete soktum.', desc: 'Meşgul etmek, zahmet vermek.' },
+  { ku: 'Merheba', tr: 'Merhaba', desc: 'Merhaba.' },
+  { ku: 'Rojbaş', tr: 'Günaydın / Tünaydın', desc: 'Günaydın / Tünaydın.' },
+  { ku: 'Şevbaş', tr: 'İyi Geceler', desc: 'İyi Geceler.' },
+  { ku: 'Spas', tr: 'Teşekkürler', desc: 'Teşekkürler.' },
+  { ku: 'Fermû', tr: 'Buyrun / Rica ederim', desc: 'Buyrun / Rica ederim.' },
+  { ku: 'Çawa yî?', tr: 'Nasılsın?', desc: 'Nasılsın?' },
+  { ku: 'Baş im', tr: 'İyiyim', desc: 'İyiyim.' },
+  { ku: 'Tu ji ku yî?', tr: 'Nerelisin?', desc: 'Nerelisin?' },
+  { ku: 'Navê te çi ye?', tr: 'Adın ne?', desc: 'Adın ne?' },
+  { ku: 'Xatirê te', tr: 'Hoşça kal', desc: 'Hoşça kal.' },
+  { ku: 'Aşîtî', tr: 'Barış', desc: 'Barış.' },
+  { ku: 'Azadî', tr: 'Özgürlük', desc: 'Özgürlük.' },
+  { ku: 'Evîn', tr: 'Aşk', desc: 'Aşk.' },
+  { ku: 'Jiyan', tr: 'Yaşam', desc: 'Yaşam.' },
+  { ku: 'Jin', tr: 'Kadın', desc: 'Kadın.' },
+  { ku: 'Mêr', tr: 'Erkek', desc: 'Erkek.' },
+  { ku: 'Zarok', tr: 'Çocuk', desc: 'Çocuk.' },
+  { ku: 'Xwendekar', tr: 'Öğrenci', desc: 'Öğrenci.' },
+  { ku: 'Mamoste', tr: 'Öğretmen', desc: 'Öğretmen.' },
+  { ku: 'Pirtûk', tr: 'Kitap', desc: 'Kitap.' },
+  { ku: 'Pênûs', tr: 'Kalem', desc: 'Kalem.' },
+  { ku: 'Dibistan', tr: 'Okul', desc: 'Okul.' },
+  { ku: 'Zanîngeh', tr: 'Üniversite', desc: 'Üniversite.' },
+  { ku: 'Bajêr', tr: 'Şehir', desc: 'Şehir.' },
+  { ku: 'Gund', tr: 'Köy', desc: 'Köy.' },
+  { ku: 'Çiya', tr: 'Dağ', desc: 'Dağ.' },
+  { ku: 'Av', tr: 'Su', desc: 'Su.' },
+  { ku: 'Nan', tr: 'Ekmek', desc: 'Ekmek.' },
+  { ku: 'Heval', tr: 'Arkadaş', desc: 'Arkadaş.' },
+  { ku: 'Malbat', tr: 'Aile', desc: 'Aile.' },
+  { ku: 'Dayik', tr: 'Anne', desc: 'Anne.' },
+  { ku: 'Bav', tr: 'Baba', desc: 'Baba.' },
+  { ku: 'Birayê min', tr: 'Kardeşim (Erkek)', desc: 'Kardeşim (Erkek).' },
+  { ku: 'Xwişka min', tr: 'Kardeşim (Kız)', desc: 'Kardeşim (Kız).' },
+  { ku: 'Dil', tr: 'Kalp / Gönül / Dil', desc: 'Kalp / Gönül / Dil.' },
+  { ku: 'Çav', tr: 'Göz', desc: 'Göz.' },
+  { ku: 'Dest', tr: 'El', desc: 'El.' },
+  { ku: 'Ser', tr: 'Baş / Kafa', desc: 'Baş / Kafa.' },
+  { ku: 'Ling', tr: 'Ayak', desc: 'Ayak.' },
+  { ku: 'Xweş', tr: 'Güzel / Hoş', desc: 'Güzel / Hoş.' },
+
+  // PDF Dosyasından Çıkarılan Kelimeler (E'den Z'ye)
+  { ku: 'ewil', tr: 'İlk. ewila ewil: Her şeyden önce, ilk önce. ji ewil da: Öteden beri, önceden.', desc: 'İlk. Örnek: ewila ewil: Her şeyden önce, ilk önce. ji ewil da: Öteden beri, önceden.' },
+  { ku: 'ewilî', tr: 'İlkin.', desc: 'İlkin.' },
+  { ku: 'ewirand/in', tr: 'bkz. "eware kirin"', desc: 'bkz. "eware kirin".' },
+  { ku: 'ewirîn', tr: 'bkz. "eware bûn"', desc: 'bkz. "eware bûn".' },
+  { ku: 'ewled', tr: 'Evlat.', desc: 'Evlat.' },
+  { ku: 'ewlê buharê', tr: 'Baharın ilk vakitleri, bahar başlangıcı.', desc: 'Baharın ilk vakitleri, bahar başlangıcı.' },
+  { ku: 'ewr', tr: 'Bulut. (d.)', desc: 'Bulut.' },
+  { ku: 'ewravî', tr: 'Parçalı bulutlu hava. (d.)', desc: 'Parçalı bulutlu hava.' },
+  { ku: 'ewtandin', tr: 'Havlatmak.', desc: 'Havlatmak.' },
+  { ku: 'ewt-ewt', tr: 'Havlama. (d.)', desc: 'Havlama.' },
+  { ku: 'ewtyan', tr: 'Havlamak.', desc: 'Havlamak.' },
+  { ku: 'exlaq', tr: 'Ahlak. (e.)', desc: 'Ahlak.' },
+  { ku: 'exlemûr', tr: 'Ihlamur. (d.)', desc: 'Ihlamur.' },
+  { ku: 'eyar', tr: 'e. Oğlak derisi, tuluk.', desc: 'Oğlak derisi, tuluk.' },
+  { ku: 'eyarşîr', tr: 'Oğlak derisinden yapılmış olan süt tulumu.', desc: 'Oğlak derisinden yapılmış olan süt tulumu.' },
+  { ku: 'eyb', tr: 'Ayıp. eyba reş: Utanılacak durum, büyük ayıp. (d.)', desc: 'Ayıp. Örnek: eyba reş: Utanılacak durum, büyük ayıp.' },
+  { ku: 'eyb kirin', tr: 'Ayıp etmek.', desc: 'Ayıp etmek.' },
+  { ku: 'eydanî', tr: 'Bayramlık, bayramlaşma. (d.)', desc: 'Bayramlık, bayramlaşma.' },
+  { ku: 'eydanî kirin', tr: 'Bayramlaşmak.', desc: 'Bayramlaşmak.' },
+  { ku: 'eydî', tr: 'Bayram. eydiya te bimbarek be!: Bayramın kutlu olsun! (d.)', desc: 'Bayram. Örnek: eydiya te bimbarek be!: Bayramın kutlu olsun!' },
+  { ku: 'ey ey', tr: 'Keçilere seslenirken söylenen sözcük.', desc: 'Keçilere seslenirken söylenen sözcük.' },
+  { ku: 'eynat', tr: 'İnatçı.', desc: 'İnatçı.' },
+  { ku: 'eynatî', tr: 'İnat. (d.)', desc: 'İnat.' },
+  { ku: 'eynik', tr: 'bkz. "neynik" (d.)', desc: 'bkz. "neynik".' },
+  { ku: 'eynî', tr: 'Aynı.', desc: 'Aynı.' },
+  { ku: 'eywan', tr: 'Salon, eyvan. (d.)', desc: 'Salon, eyvan.' },
+  { ku: 'ez', tr: 'Ben (birinci tekil şahıs zamiri.)', desc: 'Ben (birinci tekil şahıs zamiri.)' },
+  { ku: 'ezab', tr: 'Azap. ezabê cehnimê: 1. Cehennemde uğranılacağına inanılan ceza 2. Zorlu eziyet, insafsızca çektirilen sıkıntı (e.)', desc: 'Azap. Örnek: ezabê cehnimê (Cehennemde uğranılacağına inanılan ceza veya zorlu eziyet).' },
+  { ku: 'ezber', tr: 'Ezber.', desc: 'Ezber.' },
+  { ku: 'ezber kirin', tr: 'Ezberlemek.', desc: 'Ezberlemek.' },
+  { ku: 'Ezircan', tr: 'Erzincan. (d.)', desc: 'Erzincan.' },
+  { ku: 'Ezirgan', tr: 'Erzincan. (d.)', desc: 'Erzincan.' },
+  { ku: 'ezman', tr: 'Gök. (e.)', desc: 'Gök.' },
+  { ku: 'ezmanê dêv', tr: 'Damak.', desc: 'Damak.' },
+  { ku: 'ê', tr: '1) Sahiplik belirtme sözcüğü. 2) Birinin konuşmaya başlamasını veya konuşmaya devam etmesini sağlamak için söylenen sözcük.', desc: 'Sahiplik belirtme sözcüğü veya Birinin konuşmaya başlamasını sağlamak için söylenen sözcük.' },
+  { ku: 'êg/ê gi', tr: 'O ki, kim ki.', desc: 'O ki, kim ki.' },
+  { ku: 'êl', tr: 'Aşiret, kabile. (d.)', desc: 'Aşiret, kabile.' },
+  { ku: 'êleg', tr: 'Yelek. (e.)', desc: 'Yelek.' },
+  { ku: 'êlek', tr: 'Çingene.', desc: 'Çingene.' },
+  { ku: 'êletî', tr: 'Geçici, eğreti. bi êletî bidrû: Eğreti dik, geçici olarak dik.', desc: 'Geçici, eğreti. Örnek: bi êletî bidrû: Eğreti dik, geçici olarak dik.' },
+  { ku: 'êlûn', tr: 'Eylül. (d.)', desc: 'Eylül.' },
+  { ku: 'êm', tr: 'Yem. (e.)', desc: 'Yem.' },
+  { ku: 'êmidî', tr: 'Yuvarlak acur. (e.)', desc: 'Yuvarlak acur.' },
+  { ku: 'êmilk', tr: 'Yeni doğmuş kuzu.', desc: 'Yeni doğmuş kuzu.' },
+  { ku: 'êmîş', tr: 'Yemiş. (d.)', desc: 'Yemiş.' },
+  { ku: 'êriş', tr: 'Saldırı. (d.)', desc: 'Saldırı.' },
+  { ku: 'êriş kirin', tr: 'Saldırmak.', desc: 'Saldırmak.' },
+  { ku: 'êrî', tr: 'Masum. êrî û bêrî: Masum, suçsuz, günahsız.', desc: 'Masum. Örnek: êrî û bêrî: Masum, suçsuz, günahsız.' },
+  { ku: 'êş', tr: 'Acı, ağrı, hastalık. (d.)', desc: 'Acı, ağrı, hastalık.' },
+  { ku: 'êşandin', tr: 'Ağrıtmak, acıtmak.', desc: 'Ağrıtmak, acıtmak.' },
+  { ku: 'êşyan', tr: 'Ağrımak, acımak.', desc: 'Ağrımak, acımak.' },
+  { ku: 'êtam', tr: 'Yetim.', desc: 'Yetim.' },
+  { ku: 'êvar', tr: 'Akşam. êvar bi êvar: Akşam akşam, akşamdan akşama. êvara te bi xêr: Hayırlı akşamlar. êvarê: Akşamleyin. êvarkî: akşamleyin. (d.)', desc: 'Akşam. Örnek: êvara te bi xêr (Hayırlı akşamlar), êvar bi êvar (akşam akşam).' },
+  { ku: 'ezidî', tr: 'Yezidi.', desc: 'Yezidi.' },
+  { ku: 'êzing', tr: 'Odun. (e.)', desc: 'Odun.' },
+  { ku: 'êzingvan', tr: 'Oduncu.', desc: 'Oduncu.' },
+  { ku: 'fal', tr: 'Damızlık, tohumluk erkek hayvan.', desc: 'Damızlık, tohumluk erkek hayvan.' },
+  { ku: 'falxes', tr: 'Tohumluk olmaktan çıkmış olan erkek hayvan.', desc: 'Tohumluk olmaktan çıkmış olan erkek hayvan.' },
+  { ku: 'fam', tr: 'Anlama.', desc: 'Anlama.' },
+  { ku: 'fam kirin', tr: 'Anlamak. bi famkirin dan: Anlamasını sağlamak.', desc: 'Anlamak. Deyim: bi famkirin dan (Anlamasını sağlamak).' },
+  { ku: 'famxirab', tr: 'Kötü anlayışlı.', desc: 'Kötü anlayışlı.' },
+  { ku: 'famxirabî', tr: 'Kötü anlayışlılık. (d.)', desc: 'Kötü anlayışlılık.' },
+  { ku: 'fanolye/fanolî', tr: 'e. Fanila.', desc: 'Fanila.' },
+  { ku: 'fanos', tr: 'Fener. (d.)', desc: 'Fener.' },
+  { ku: 'farîg', tr: 'Piliç. (d.)', desc: 'Piliç.' },
+  { ku: 'fasiq', tr: 'Fasik.', desc: 'Fasik.' },
+  { ku: 'fatreşk', tr: 'Dalak. (d.)', desc: 'Dalak.' },
+  { ku: 'fayiz', tr: 'Faiz. (d.)', desc: 'Faiz.' },
+  { ku: 'fecir', tr: 'Felç, felç olma.', desc: 'Felç, felç olma.' },
+  { ku: 'fecrî', tr: 'Felçli.', desc: 'Felçli.' },
+  { ku: 'fecrî bûn', tr: 'Felç olmak.', desc: 'Felç olmak.' },
+  { ku: 'fedeqî bûn', tr: 'Fıtık olmak.', desc: 'Fıtık olmak.' },
+  { ku: 'fediq', tr: 'Fıtık.', desc: 'Fıtık.' },
+  { ku: 'fediyok', tr: 'Utangaç.', desc: 'Utangaç.' },
+  { ku: 'fedî', tr: 'Utanma. (d.)', desc: 'Utanma.' },
+  { ku: 'fedîkar', tr: 'Mahcup.', desc: 'Mahcup.' },
+  { ku: 'fedîkarî', tr: 'Mahcubiyet.', desc: 'Mahcubiyet.' },
+  { ku: 'fedî kirin', tr: 'Utanmak.', desc: 'Utanmak.' },
+  { ku: 'fedqî', tr: 'Fıtık, fıtık olan.', desc: 'Fıtık, fıtık olan.' },
+  { ku: 'fedqî bûn', tr: 'Fıtık olmak.', desc: 'Fıtık olmak.' },
+  { ku: 'fehş', tr: 'Fahiş.', desc: 'Fahiş.' },
+  { ku: 'feks', tr: 'Engel, engelleme.', desc: 'Engel, engelleme.' },
+  { ku: 'feks lêxistin', tr: 'Engellemek, mani olmak. ez ê feks li ber Simo xim: Sımo\'ya mani olacağım.', desc: 'Engellemek, mani olmak. Örnek: ez ê feks li ber Simo xim: Sımo\'ya mani olacağım.' },
+  { ku: 'felqe (1)', tr: 'Dilim. (d.)', desc: 'Dilim.' },
+  { ku: 'felqe (2)', tr: 'İkizlerden her biri.', desc: 'İkizlerden her biri.' },
+  { ku: 'felqe kirin', tr: 'Dilimlemek.', desc: 'Dilimlemek.' },
+  { ku: 'fen', tr: 'Hile, oyun, düzen. fen (lê) kirin: (Ona) Hile yapmak, dalavere yapmak. (d.)', desc: 'Hile, oyun, düzen. Deyim: fen (lê) kirin (Hile yapmak, dalavere yapmak).' },
+  { ku: 'fena', tr: 'Gibi, benzer. fena ro lê hilê: Çok sevindi. fen û fût: Hile, oyun, düzen, dalavere, katakulli. tu jî fena min bike: Sen de benim gibi yap.', desc: 'Gibi, benzer. Deyimler: fena ro lê hilê (Çok sevindi), fen û fût (hile, düzen), tu jî fena min bike (Sen de benim gibi yap).' },
+  { ku: 'feq', tr: 'Tuzak. (d.)', desc: 'Tuzak.' },
+  { ku: 'feqî', tr: 'Din öğrenimi yapan öğrenci.', desc: 'Din öğrenimi yapan öğrenci.' },
+  { ku: 'feqîr', tr: '1) Fakir. 2) Kendi halinde, kimseye bir zararı olmayan kimse.', desc: 'Fakir veya Kendi halinde, kimseye bir zararı olmayan kimse.' },
+  { ku: 'feqîrokî', tr: 'Utangaç davranışlı.', desc: 'Utangaç davranışlı.' },
+  { ku: 'fer', tr: 'Tek. (d.)', desc: 'Tek.' },
+  { ku: 'fera', tr: 'Kap. (d.)', desc: 'Kap.' },
+  { ku: 'feraşo', tr: 'e. Bulaşık bezi.', desc: 'Bulaşık bezi.' },
+  { ku: 'Ferat', tr: 'e. Fırat nehri.', desc: 'Fırat nehri.' },
+  { ku: 'fera û fol', tr: 'Kap kacak.', desc: 'Kap kacak.' },
+  { ku: 'ferikandin', tr: '1) (Düğünü) Sona erdirmek, bitirmek, dağıtmak. 2) Hazmetme. şîv li ınin ferikî: Yemeği hazmettim.', desc: '(Düğünü) Sona erdirmek veya Hazmetme. Örnek: şîv li ınin ferikî: Yemeği hazmettim.' },
+  { ku: 'ferikîn', tr: '(Düğün) Sona ermek, bitmek, dağılmak.', desc: '(Düğün) Sona ermek, bitmek, dağılmak.' },
+  { ku: 'ferman', tr: 'Emir, ferman. (d.)', desc: 'Emir, ferman.' },
+  { ku: 'fersend', tr: 'Fırsat. (d.)', desc: 'Fırsat.' },
+  { ku: 'ferş', tr: 'e. Yassı ve geniş kaya.', desc: 'Yassı ve geniş kaya.' },
+  { ku: 'feşir', tr: 'Hayret etme.', desc: 'Hayret etme.' },
+  { ku: 'feşir bûn', tr: 'Hayret etmek.', desc: 'Hayret etmek.' },
+  { ku: 'fetisandin', tr: 'Boğmak.', desc: 'Boğmak.' },
+  { ku: 'fetisîn', tr: 'Boğulmak.', desc: 'Boğulmak.' },
+  { ku: 'fexr', tr: 'Kıvanç. (d.)', desc: 'Kıvanç.' },
+  { ku: 'fehl', tr: 'Foya, açık, kusur, uygunsuz yol.', desc: 'Foya, açık, kusur, uygunsuz yol.' },
+  { ku: 'fêkî', tr: 'Meyve. (d.)', desc: 'Meyve.' },
+  { ku: 'fesat', tr: 'Bozgunçu.', desc: 'Bozgunçu.' },
+  { ku: 'fesatî', tr: 'Bozgunçuluk. fisk û fesati: Adam çekiştirme işi, fesatçılık, fitne fücur.', desc: 'Bozgunçuluk. Örnek: fisk û fesati (Adam çekiştirme işi, fesatçılık).' },
+  { ku: 'fez', tr: 'Koyunların dinlenme yeri. (d.)', desc: 'Koyunların dinlenme yeri.' },
+  { ku: 'fikar', tr: 'Düşünce, kaygı. (d.)', desc: 'Düşünce, kaygı.' },
+  { ku: 'fikirîn', tr: 'Düşünmek.', desc: 'Düşünmek.' },
+  { ku: 'fikr', tr: 'Fikir. (d.)', desc: 'Fikir.' },
+  { ku: 'filankes', tr: 'Falan kişi.', desc: 'Falan kişi.' },
+  { ku: 'filan û bîvan', tr: 'Falan filan.', desc: 'Falan filan.' },
+  { ku: 'file', tr: 'Hıristiyan.', desc: 'Hıristiyan.' },
+  { ku: 'filekî', tr: 'Gavurcasına, zalimce.', desc: 'Gavurcasına, zalimce.' },
+  { ku: 'filetî', tr: 'Hıristiyanlık. (d.)', desc: 'Hıristiyanlık.' },
+  { ku: 'filhan', tr: 'Bir cins toprak. (d.)', desc: 'Bir cins toprak.' },
+  { ku: 'find', tr: 'Kibrit. (d.)', desc: 'Kibrit.' },
+  { ku: 'fir (1)', tr: 'Yudum. 2) Uçuş, uçma', desc: 'Yudum veya Uçuş, uçma.' },
+  { ku: 'firandin', tr: 'Uçurmak.', desc: 'Uçurmak.' },
+  { ku: 'fire', tr: 'Geniş, bol.', desc: 'Geniş, bol.' },
+  { ku: 'fire bûn', tr: 'Genişlemek, bol olmak.', desc: 'Genişlemek, bol olmak.' },
+  { ku: 'fire kirin', tr: 'Genişletmek, bol etmek.', desc: 'Genişletmek, bol etmek.' },
+  { ku: 'fireyî', tr: 'Genişlik, bolluk. (d.)', desc: 'Genişlik, bolluk.' },
+  { ku: 'firêse', tr: 'İri yarı ve güçlü kuvvetli kimse.', desc: 'İri yarı ve güçlü kuvvetli kimse.' },
+  { ku: 'firfirok', tr: 'Uçurtma. (d.)', desc: 'Uçurtma.' },
+  { ku: 'firikandin', tr: 'Oğuşturmak.', desc: 'Oğuşturmak.' },
+  { ku: 'firildaq', tr: 'Hile, dalavere. (d.)', desc: 'Hile, dalavere.' },
+  { ku: 'firingî', tr: 'Domates. (d.)', desc: 'Domates.' },
+  { ku: 'firiz', tr: 'e. Ayrıkotu.', desc: 'Ayrıkotu.' },
+  { ku: 'firîg', tr: 'Olgunlaşmamış buğday başağı.', desc: 'Olgunlaşmamış buğday başağı.' },
+  { ku: 'firk', tr: 'Omurgada oluşan ağrı. (d.)', desc: 'Omurgada oluşan ağrı.' },
+  { ku: 'fir kirin', tr: 'Yudumlamak.', desc: 'Yudumlamak.' },
+  { ku: 'firne', tr: 'Fırın. (d.)', desc: 'Fırın.' },
+  { ku: 'firnik', tr: 'Burun deliği.', desc: 'Burun deliği.' },
+  { ku: 'firo', tr: 'Süt hayvanlarının doğumdan sonraki ilk sütü. (d.)', desc: 'Süt hayvanlarının doğumdan sonraki ilk sütü.' },
+  { ku: 'firotan', tr: 'Satım, satmak işi, satış.', desc: 'Satım, satmak işi, satış.' },
+  { ku: 'firotin', tr: 'Satmak.', desc: 'Satmak.' },
+  { ku: 'firşik', tr: 'Kuzu ve oğlak midesi. (d.)', desc: 'Kuzu ve oğlak midesi.' },
+  { ku: 'firtone', tr: 'Fırtına. (d.)', desc: 'Fırtına.' },
+  { ku: 'firtone (2)', tr: 'Hileci, dalavereci.', desc: 'Hileci, dalavereci.' },
+  { ku: 'firyan', tr: 'Uçmak. dike ji kêfa bifire: "Çok sevinçlidir, sevincinden neredeyse kanatlanıp uçacak."', desc: 'Uçmak. Örnek: dike ji kêfa bifire: "Çok sevinçlidir, sevincinden neredeyse kanatlanıp uçacak."' },
+  { ku: 'fis', tr: 'Sessiz ve fena kokulu osuruk. (d.)', desc: 'Sessiz ve fena kokulu osuruk.' },
+  { ku: 'fisek', tr: 'Sürekli sessiz ve fena kokulu osuruk yapan kimse.', desc: 'Sürekli sessiz ve fena kokulu osuruk yapan kimse.' },
+  { ku: 'fisirîn', tr: 'Kaytarmak. (difisire, bifisire)', desc: 'Kaytarmak. (Geniş zaman: difisire, emir: bifisire)' },
+  { ku: 'fisteq', tr: 'e. Kokarca.', desc: 'Kokarca.' },
+  { ku: 'fistiqîn', tr: 'Tökezlemek, sendelemek.', desc: 'Tökezlemek, sendelemek.' },
+  { ku: 'fistoqî', tr: 'Kolay çözülebilen düğüm.', desc: 'Kolay çözülebilen düğüm.' },
+  { ku: 'fiş-fiş', tr: 'Sümüklü veya burnu tıkalı olanların çıkardığı sesi anlatmakta kullanılan sözcük. (d.)', desc: 'Sümüklü veya burnu tıkalı olanların çıkardığı sesi anlatmakta kullanılan sözcük.' },
+  { ku: 'fiş kirin', tr: 'Sümkürmek.', desc: 'Sümkürmek.' },
+  { ku: 'fıtar', tr: 'İftar. (d.)', desc: 'İftar.' },
+  { ku: 'fıtar (2)', tr: 'Oruçlu olmayan.', desc: 'Oruçlu olmayan.' },
+  { ku: 'fıtıl', tr: 'Büküm. (d.)', desc: 'Büküm.' },
+  { ku: 'fıtılandin', tr: 'Bir şeyi burup başka bir şeyin etrafına sarmak.', desc: 'Bir şeyi burup başka bir şeyin etrafına sarmak.' },
+  { ku: 'fıtılîn', tr: 'Bir şeyin burulup başka bir şeyin etrafına sarılması.', desc: 'Bir şeyin burulup başka bir şeyin etrafına sarılması.' },
+  { ku: 'fıkandin', tr: 'Islık çalmak.', desc: 'Islık çalmak.' },
+  { ku: 'fık-fık', tr: 'Islık sesi. (d.)', desc: 'Islık sesi.' },
+  { ku: 'fılket', tr: 'Firkete. (d.)', desc: 'Firkete.' },
+  { ku: 'Firewn', tr: 'Firavun.', desc: 'Firavun.' },
+  { ku: 'fiso', tr: 'Hangi kuzu sütünü emerse emsin itiraz etmeyen koyun.', desc: 'Hangi kuzu sütünü emerse emsin itiraz etmeyen koyun.' },
+  { ku: 'fistan', tr: 'e. Fistan.', desc: 'Fistan.' },
+  { ku: 'fıt', tr: 'İri yarı, güçlü kuvvetli kimse.', desc: 'İri yarı, güçlü kuvvetli kimse.' },
+  { ku: 'fıt bûn', tr: '(Borçta) Ödeşmek.', desc: '(Borçta) Ödeşmek.' },
+  { ku: 'fite', tr: 'bkz. "fıt"', desc: 'bkz. "fıt".' },
+  { ku: 'fıtê', tr: 'Şıllık.', desc: 'Şıllık.' },
+  { ku: 'fıtık', tr: 'Islık. (d.)', desc: 'Islık.' },
+  { ku: 'fors', tr: 'Hava atma, fiyaka, gösteriş. (d.)', desc: 'Hava atma, fiyaka, gösteriş.' },
+  { ku: 'fort', tr: 'Palavra. (d.)', desc: 'Palavra.' },
+  { ku: 'fotêr', tr: 'e. Fötr şapka.', desc: 'Fötr şapka.' },
+  { ku: 'fûr-fûr', tr: 'Terin biteviye ve damla damla aktığını anlatmakta kullanılan söz. (d.)', desc: 'Terin biteviye ve damla damla aktığını anlatmakta kullanılan söz.' },
+  { ku: 'ga', tr: 'e. Öküz.', desc: 'Öküz.' },
+  { ku: 'gac', tr: 'd. İplik yumağı.', desc: 'İplik yumağı.' },
+  { ku: 'gafkê', tr: 'Bir ara, biraz sonra. ez ê gafkê werim: Biraz sonra gelirim.', desc: 'Bir ara, biraz sonra. Örnek: ez ê gafkê werim: Biraz sonra gelirim.' },
+  { ku: 'gakwîvî', tr: 'e. Yaban öküzü.', desc: 'Yaban öküzü.' },
+  { ku: 'galgal', tr: 'd. Laf, konuşma. bi gal- gala da ketin: Lafa dalmak, konuşmaya dalmak. galgal lêxistin: Dolayısıyla anlatmak istemek, "laf dokundurmak". galgala li min dixe: Bana laf dokunduruyor. galgala bi qûnê fam kirin: Sözü tersinden anlamak; "kazı koz anlamak". galgalê belaş: Boş ve saçma laf, önemi ve değeri olmayan laf. min galgala te bi şekir birî: "Sözünü balla kestim."', desc: 'Laf, konuşma. Deyimler: bi galgala da ketin (Lafa dalmak), galgal lêxistin (laf dokundurmak), galgala bi qûnê fam kirin (sözü tersinden anlamak).' },
+  { ku: 'galgal kirin', tr: 'Laf etmek, konuşmak.', desc: 'Laf etmek, konuşmak.' },
+  { ku: 'galik', tr: 'e. Nakışsız, düz ve kalın yün çorap,', desc: 'Nakışsız, düz ve kalın yün çorap.' },
+  { ku: 'gamêş', tr: 'e. Manda,', desc: 'Manda.' },
+  { ku: 'ganî', tr: 'd. Öküz arabası, kağnı,', desc: 'Öküz arabası, kağnı.' },
+  { ku: 'garan', tr: 'd. Sığır sürüsü,', desc: 'Sığır sürüsü.' },
+  { ku: 'garis', tr: 'e. Darı,', desc: 'Darı.' },
+  { ku: 'garisê misrî', tr: 'Mısır,', desc: 'Mısır (bitkisi).' },
+  { ku: 'garisî', tr: 'Darıdan yapılmış olan,', desc: 'Darıdan yapılmış olan.' },
+  { ku: 'gav', tr: 'd. 1) Adım, 2) An, kısa zaman parçası, gav bi gav: Adım adım. gava di: Az önce.', desc: 'Adım veya An, kısa zaman parçası. Örnek: gav bi gav (Adım adım), gava di (Az önce).' },
+  { ku: 'gavan', tr: 'e. Sığırtmaç.', desc: 'Sığırtmaç.' },
+  { ku: 'gavantî', tr: 'd. Sığırtmaçlık.', desc: 'Sığırtmaçlık.' },
+  { ku: 'gawir', tr: 'Gavur. mîna gawira: Hiç acımaksızın, insafsızca.', desc: 'Gavur. Deyim: mîna gawira (Hiç acımaksızın, insafsızca).' },
+  { ku: 'gawirko', tr: 'Gavurcasına, zalimce.', desc: 'Gavurcasına, zalimce.' },
+  { ku: 'gazinc', tr: 'd. Sitem, serzeniş.', desc: 'Sitem, serzeniş.' },
+  { ku: 'gazincok', tr: 'Çok sitemde bulunan, hep dert yanan kimse.', desc: 'Çok sitemde bulunan, hep dert yanan kimse.' },
+  { ku: 'gazî', tr: 'd. Çağrı.', desc: 'Çağrı.' },
+  { ku: 'gazî kirin', tr: 'Çağırmak.', desc: 'Çağırmak.' },
+  { ku: 'ge', tr: 'Bazen, kâh.', desc: 'Bazen, kâh.' },
+  { ku: 'gebe', tr: 'd. 1) Bir çeşit kilim. 2) Koyunların boyunlarında oluşan şişkinlik.', desc: 'Bir çeşit kilim veya Koyunların boyunlarında oluşan şişkinlik.' },
+  { ku: 'gede', tr: 'Çocuk.', desc: 'Çocuk.' },
+  { ku: 'gedetî', tr: 'd. Çocukluk.', desc: 'Çocukluk.' },
+  { ku: 'gef', tr: 'd. Tehdit, korkutma.', desc: 'Tehdit, korkutma.' },
+  { ku: 'gef xwarin', tr: 'Tehdit etmek.', desc: 'Tehdit etmek.' },
+  { ku: 'gelek', tr: 'Çok, pek çok.', desc: 'Çok, pek çok.' },
+  { ku: 'gelî', tr: 'e. Derin vadi.', desc: 'Derin vadi.' },
+  { ku: 'gelî (2)', tr: 'Ey!', desc: 'Ey! (seslenme)' },
+  { ku: 'gelo', tr: '1) Acaba. 2) Mı? (soru şekli, soru edatı.)', desc: 'Acaba veya Mı? (soru edatı).' },
+  { ku: 'gelt', tr: 'd. Bir çeşit kilim.', desc: 'Bir çeşit kilim.' },
+  { ku: 'gemar', tr: 'd. Kir, pasak.', desc: 'Kir, pasak.' },
+  { ku: 'gemarî', tr: 'Kirli, pasaklı.', desc: 'Kirli, pasaklı.' },
+  { ku: 'gemarî bûn', tr: 'Kirlenmek.', desc: 'Kirlenmek.' },
+  { ku: 'gemarî kirin', tr: 'Kirletmek.', desc: 'Kirletmek.' },
+  { ku: 'gen', tr: 'Keskin aletlerde meydana gelen aşınma.', desc: 'Keskin aletlerde meydana gelen aşınma.' },
+  { ku: 'gend', tr: 'd. Pislik, pasak.', desc: 'Pislik, pasak.' },
+  { ku: 'gendel', tr: 'Pis, pasaklı, mundar kimse.', desc: 'Pis, pasaklı, mundar kimse.' },
+  { ku: 'gend û gemar', tr: 'd. Kir, pasak, pislik.', desc: 'Kir, pasak, pislik.' },
+  { ku: 'gend û gû', tr: 'e. Bokla karışık pislik, iğrenç kir.', desc: 'Bokla karışık pislik, iğrenç kir.' },
+  { ku: 'geneg', tr: 'd. Ayçiçeği.', desc: 'Ayçiçeği.' },
+  { ku: 'genim', tr: 'e. Buğday.', desc: 'Buğday.' },
+  { ku: 'genimî', tr: 'Buğdaydan yapılmış olan, buğdaydan olan.', desc: 'Buğdaydan yapılmış olan, buğdaydan olan.' },
+  { ku: 'genimok', tr: 'Bir tür yabani buğday.', desc: 'Bir tür yabani buğday.' },
+  { ku: 'genî', tr: '1) Kokuşmuş, içine koku düşmüş olan. 2) Sinsi.', desc: 'Kokuşmuş, içine koku düşmüş olan veya Sinsi.' },
+  { ku: 'genî bûn', tr: 'İçine koku düşmek, kokuşmak.', desc: 'İçine koku düşmek, kokuşmak.' },
+  { ku: 'genî kirin', tr: 'İçine koku düşürmek, kokuşmasını sağlamak.', desc: 'İçine koku düşürmek, kokuşmasını sağlamak.' },
+  { ku: 'genîtî', tr: 'd. Sinsilik.', desc: 'Sinsilik.' },
+  { ku: 'gep', tr: 'd. Yanak.', desc: 'Yanak.' },
+  { ku: 'ger', tr: 'd. Gezi, gezme, dolaşma.', desc: 'Gezi, gezme, dolaşma.' },
+  { ku: 'gerandin', tr: 'Gezdirmek, dolaştırmak.', desc: 'Gezdirmek, dolaştırmak.' },
+  { ku: 'gerden', tr: 'd. Boyun, gerdan.', desc: 'Boyun, gerdan.' },
+  { ku: 'gere (1)', tr: 'Gerek.', desc: 'Gerek (zarf).' },
+  { ku: 'gere (2)', tr: 'Gerek, -sı lazım.', desc: 'Gerek, -sı lazım.' },
+  { ku: 'gergerok', tr: 'çd. Çocukların yürümelerini sağlamakta kullanılan üç tekerlekli araba.', desc: 'Çocukların yürüme arabası.' },
+  { ku: 'germ', tr: 'Sıcak.', desc: 'Sıcak.' },
+  { ku: 'germajok', tr: 'd. İsilik.', desc: 'İsilik.' },
+  { ku: 'germajokî bûn', tr: 'İsilik olmak.', desc: 'İsilik olmak.' },
+  { ku: 'germav', tr: 'd. Ilıca.', desc: 'Ilıca.' },
+  { ku: 'germayî', tr: 'd. Sıcaklık.', desc: 'Sıcaklık.' },
+  { ku: 'germ bûn', tr: 'Sıcak olmak, ısınmak.', desc: 'Sıcak olmak, ısınmak.' },
+  { ku: 'germijîn', tr: '(Türkçe karşılığı yok.) Çok ısınmaktan dolayı lapalaşmak, lapalaşıp tadı bozulmak. (digermije, bigermije)', desc: 'Çok ısınmaktan dolayı lapalaşmak, lapalaşıp tadı bozulmak. (Geniş zaman: digermije, emir: bigermije)' },
+  { ku: 'germ kirin', tr: 'Sıcak etmek, ısıtmak.', desc: 'Sıcak etmek, ısıtmak.' },
+  { ku: 'gerok', tr: 'Çok gezen, gezmeyi seven, gezgin.', desc: 'Çok gezen, gezmeyi seven, gezgin.' },
+  { ku: 'gerrek', tr: 'İğrenç kir.', desc: 'İğrenç kir.' },
+  { ku: 'geryan', tr: 'Gezmek, dolaşmak.', desc: 'Gezmek, dolaşmak.' },
+  { ku: 'geryayî', tr: 'Gezmiş olan.', desc: 'Gezmiş olan.' },
+  { ku: 'ges kirin', tr: 'Isırmak, dişlemek.', desc: 'Isırmak, dişlemek.' },
+  { ku: 'geşt', tr: 'd. Parsa.', desc: 'Parsa.' },
+  { ku: 'gevizandin', tr: 'Ağnamak, debelenmek.', desc: 'Ağnamak, debelenmek.' },
+  { ku: 'gevler', tr: 'Bezgin, bezmiş olan.', desc: 'Bezgin, bezmiş olan.' },
+  { ku: 'gewad', tr: 'Pezevenk (hakaret için kullanılır.)', desc: 'Pezevenk.' },
+  { ku: 'gewende', tr: 'Serseri, başıboş kimse.', desc: 'Serseri, başıboş kimse.' },
+  { ku: 'gewez', tr: 'Koyu kahverengi.', desc: 'Koyu kahverengi.' },
+  { ku: 'gewî', tr: 'Kibirli, kaba kimse.', desc: 'Kibirli, kaba kimse.' },
+  { ku: 'gewr', tr: 'Kirli beyaz.', desc: 'Kirli beyaz.' },
+  { ku: 'gewr bûn', tr: 'Beyazlaşmak.', desc: 'Beyazlaşmak.' },
+  { ku: 'gewrî', tr: '1) Beyazlık. 2) Yemek borusu, iç boğaz. 3) Gözde oluşan beyaz leke. di gewriya wî ra neçûn xwarê: (Kaygı, üzüntü, acı bir durum vb.\'den dolayı) İsteksiz yemek, iştahı kesilmek. gewriya wî iş (hişk) bûn: Çok susamak, "boğazı kurumak."', desc: 'Beyazlık, Yemek borusu, iç boğaz veya Gözde oluşan beyaz leke. Deyim: gewriya wî iş (hişk) bûn (Çok susamak).' },
+  { ku: 'gewr î boz', tr: 'Beyaz tenli.', desc: 'Beyaz tenli.' },
+  { ku: 'gewr kirin', tr: 'Beyazlaştırmak.', desc: 'Beyazlaştırmak.' },
+  { ku: 'gewroxî', tr: 'Beyaza çalan renkte olan.', desc: 'Beyaza çalan renkte olan.' },
+  { ku: 'gewşeg', tr: '1) İçimi sert olmayan tütün. 2) Eli kalkmayan, korkak kimse.', desc: 'İçimi sert olmayan tütün veya Eli kalkmayan, korkak kimse.' },
+  { ku: 'geyîk', tr: 'd. El parmağı eklemi.', desc: 'El parmağı eklemi.' },
+  { ku: 'gezî/geze/gize', tr: 'çd Isır!', desc: 'Isır! (Çocuk dilinde)' },
+  { ku: 'gezî kirin', tr: 'çd. Isırmak.', desc: 'Isırmak. (Çocuk dilinde)' },
+  { ku: 'gezo', tr: 'd. Bir tür bostan hastalığı.', desc: 'Bir tür bostan hastalığı.' },
+  { ku: 'gêj', tr: 'Sersem, başı dönen. gêjê: sersem kadın. gêjo: Sersem herif.', desc: 'Sersem, başı dönen. Örnek: gêjê (sersem kadın), gêjo (sersem herif).' },
+  { ku: 'gêj bûn', tr: 'Sersemlemek, başı dönmek.', desc: 'Sersemlemek, başı dönmek.' },
+  { ku: 'gêjgele', tr: 'd. İzdiham.', desc: 'İzdiham.' },
+  { ku: 'gêjî', tr: 'd. Sersemlik.', desc: 'Sersemlik.' },
+  { ku: 'gêj kirin', tr: 'Sersemletmek.', desc: 'Sersemletmek.' },
+  { ku: 'gêr bûn', tr: 'Yuvarlanmak.', desc: 'Yuvarlanmak.' },
+  { ku: 'gêre', tr: 'd. Karınca.', desc: 'Karınca.' },
+  { ku: 'gêr kirin', tr: 'Yuvarlamak.', desc: 'Yuvarlamak.' },
+  { ku: 'gêrmî', tr: 'd. Pilav, ayran çorbası vb. türden yemekler. gêrmiya rizê: Pirinç pilavı. gêrmiya bilxurê: Bulgur pilavı.', desc: 'Pilav, ayran çorbası vb. türden yemekler. Örnek: gêrmiya rizê (Pirinç pilavı).' },
+  { ku: 'gi', tr: 'Ki, ise, eğer, şayet.', desc: 'Ki, ise, eğer, şayet.' },
+  { ku: 'gidî', tr: 'Gidi.', desc: 'Gidi.' },
+  { ku: 'gidîno', tr: '"Gidî"nin çoğulu.', desc: '"Gidî"nin çoğulu.' },
+  { ku: 'gidîş', tr: 'd. Biçilip dizilmiş ekin yığını.', desc: 'Biçilip dizilmiş ekin yığını.' },
+  { ku: 'gijgijandin', tr: 'İnek veya düve ile çiftleşmesi için boğayı tahrik etmek. (digijgijîne, bigijgijîne)', desc: 'İnek veya düve ile çiftleşmesi için boğayı tahrik etmek. (Geniş zaman: digijgijîne, emir: bigijgijîne)' },
+  { ku: 'gijik', tr: 'Darmadağın ve birbirine karışmış olan saç, tüy vb. şeyler.', desc: 'Darmadağın ve birbirine karışmış olan saç, tüy vb. şeyler.' },
+  { ku: 'gilik', tr: 'd. Klitoris.', desc: 'Klitoris.' },
+  { ku: 'gilî', tr: 'e. Şikâyet, yakınma. giliyê xu (pê) kirin: Dert yanmak (ona.)', desc: 'Şikâyet, yakınma. Deyim: giliyê xu (pê) kirin (Dert yanmak).' },
+  { ku: 'gilîkar', tr: 'Şikâyetçi.', desc: 'Şikâyetçi.' },
+  { ku: 'gilî kirin', tr: 'Şikâyet etmek, yakınmak.', desc: 'Şikâyet etmek, yakınmak.' },
+  { ku: 'gir', tr: 'e. Tepe, tümsek.', desc: 'Tepe, tümsek.' },
+  { ku: 'gir (2)', tr: 'İri.', desc: 'İri.' },
+  { ku: 'giran', tr: 'e. Balyoz.', desc: 'Balyoz.' },
+  { ku: 'giran (2)', tr: '1) Ağırbaşlı kimse. 2) Ağır.', desc: 'Ağırbaşlı kimse veya Ağır.' },
+  { ku: 'giran bûn', tr: 'Ağırlaşmak.', desc: 'Ağırlaşmak.' },
+  { ku: 'giranî', tr: 'd. 1) Ağırlık. 2) Ağır oynanan bir halay oyunu.', desc: 'Ağırlık veya Ağır oynanan bir halay oyunu.' },
+  { ku: 'giran kirin', tr: 'Ağırlaştırmak.', desc: 'Ağırlaştırmak.' },
+  { ku: 'girboxe', tr: 'İri yarı.', desc: 'İri yarı.' },
+  { ku: 'gir bûn', tr: 'İrileşmek.', desc: 'İrileşmek.' },
+  { ku: 'girêdan', tr: 'Bağlamak.', desc: 'Bağlamak.' },
+  { ku: 'girêdan (2)', tr: 'd. Giyiniş, giyim kuşam. girêdana Keja: Kejanlıların giyim tarzı.', desc: 'Giyiniş, giyim kuşam. Örnek: girêdana Keja: Kejanlıların giyim tarzı.' },
+  { ku: 'girêdayî', tr: 'Bağlı, bağlanmış olan.', desc: 'Bağlı, bağlanmış olan.' },
+  { ku: 'girêk', tr: 'd. Düğüm.', desc: 'Düğüm.' },
+  { ku: 'girêkwîrk', tr: 'd. Kördüğüm.', desc: 'Kördüğüm.' },
+  { ku: 'girêz', tr: 'd. Salya.', desc: 'Salya.' },
+  { ku: 'girik (1)', tr: 'd. Başparmak.', desc: 'Başparmak.' },
+  { ku: 'girik (2)', tr: 'e. Küçük tepe.', desc: 'Küçük tepe.' },
+  { ku: 'girî', tr: 'e. Ağlama, ağlayış. bi girî kirin: Ağlatmak.', desc: 'Ağlama, ağlayış. Deyim: bi girî kirin (Ağlatmak).' },
+  { ku: 'gir kirin', tr: 'İrileştirmek.', desc: 'İrileştirmek.' },
+  { ku: 'girmik', tr: 'd. Eklem.', desc: 'Eklem.' },
+  { ku: 'girmikê piya', tr: 'bkz. "gurzê piya"', desc: 'bkz. "gurzê piya".' },
+  { ku: 'girnase', tr: 'Zengin, servet sahibi kimse.', desc: 'Zengin, servet sahibi kimse.' },
+  { ku: 'girr', tr: 'Kin, inat.', desc: 'Kin, inat.' },
+  { ku: 'girrîn', tr: 'd. Motorlu kara taşıtlarının çıkardığı ses.', desc: 'Motorlu kara taşıtlarının çıkardığı ses.' },
+  { ku: 'girtin', tr: '1) Almak, tutmak, tutuklamak. bi girtin dan: Yakalatmak, ele vermek. girtin ser: Baskın yapmak. esker girt ser gund: Asker köye baskın yaptı. 2) Ağzını kapatmak.', desc: 'Almak, tutmak, tutuklamak veya Ağzını kapatmak. Deyimler: bi girtin dan (Yakalatmak), girtin ser (Baskın yapmak).' },
+  { ku: 'girtî', tr: 'Kapalı, tutuklu.', desc: 'Kapalı, tutuklu.' },
+  { ku: 'girûzî', tr: 'd. Acıklı ağlama.', desc: 'Acıklı ağlama.' },
+  { ku: 'giryan', tr: 'Ağlamak.', desc: 'Ağlamak.' },
+  { ku: 'giş', tr: 'hep, Tümü, hepsi, genel.', desc: 'Hep, Tümü, hepsi, genel.' },
+  { ku: 'gişk', tr: 'bkz. "giş"', desc: 'bkz. "giş".' },
+  { ku: 'giv', tr: 'Sütün, mayalanmış ama daha tam peynir olmamış peltek hali.', desc: 'Sütün, mayalanmış ama daha tam peynir olmamış peltek hali.' },
+  { ku: 'Gixe!/gixik!', tr: 'çd. Gül!', desc: 'Gül! (Çocuk dilinde)' },
+  { ku: 'gizêr', tr: 'd. Havuç.', desc: 'Havuç.' },
+  { ku: 'gizêrê tirê', tr: 'İshal yapıcı bir bitki.', desc: 'İshal yapıcı bir bitki.' },
+  { ku: 'gizgizîn', tr: 'Zonklamak.', desc: 'Zonklamak.' },
+  { ku: 'gizûz', tr: 'd. Güve.', desc: 'Güve.' },
+  { ku: 'gîha', tr: 'e. Ot.', desc: 'Ot.' },
+  { ku: 'gîhan', tr: 'Yetişmek, ulaşmak. digê, bigê, gîha)', desc: 'Yetişmek, ulaşmak. (Geniş zaman: digê, emir: bigê)' },
+  { ku: 'gîhandin', tr: 'Yetiştirmek, ulaştırmak. (digihîne, bigihîne)', desc: 'Yetiştirmek, ulaştırmak. (Geniş zaman: digihîne, emir: bigihîne)' },
+  { ku: 'gîsin', tr: 'e. Saban demiri.', desc: 'Saban demiri.' },
+  { ku: 'gîsk', tr: 'e. Çepiç, keçi tekesi.', desc: 'Çepiç, keçi tekesi.' },
+  { ku: 'goç/goçê/goço', tr: 'çd. Et.', desc: 'Et. (Çocuk dilinde)' },
+  { ku: 'gog', tr: 'd. Top. goga zêr: Güzel ve tombul olan kucak çocukları için bir benzetme sözü.', desc: 'Top. Deyim: goga zêr (Güzel ve tombul çocuklar için benzetme sözü).' },
+  { ku: 'gol', tr: 'd. Göl.', desc: 'Göl.' },
+  { ku: 'golik', tr: 'Buzağı.', desc: 'Buzağı.' },
+  { ku: 'gom', tr: 'd. Koyun ini.', desc: 'Koyun ini.' },
+  { ku: 'gome', tr: 'e. Büyük ve yere sabit taş.', desc: 'Büyük ve yere sabit taş.' },
+  { ku: 'gonc', tr: 'e. Düğümü olan ve çok zor kırılabilen odun.', desc: 'Düğümü olan ve çok zor kırılabilen odun.' },
+  { ku: 'gopal', tr: 'e. Baston.', desc: 'Baston.' },
+  { ku: 'gor', tr: 'd. Mezar.', desc: 'Mezar.' },
+  { ku: 'gore', tr: 'd. Çorap.', desc: 'Çorap.' },
+  { ku: 'gore (2)', tr: 'Göre. gorey qal dikin: Dediklerine bakılırsa, dediklerine göre.', desc: 'Göre. Örnek: gorey qal dikin: Dediklerine bakılırsa.' },
+  { ku: 'gorim', tr: 'd. Görümce.', desc: 'Görümce.' },
+  { ku: 'goristan', tr: 'd. Mezarlık.', desc: 'Mezarlık.' },
+  { ku: 'gornepişk', tr: 'Özellikle mezardaki ölülere dadanan bir tür böcek.', desc: 'Özellikle mezardaki ölülere dadanan bir tür böcek.' },
+  { ku: 'goroz', tr: 'd. Tomar.', desc: 'Tomar.' },
+  { ku: 'gorpişk', tr: 'bkz. "gornepişk"', desc: 'bkz. "gornepişk".' },
+  { ku: 'goşe', tr: 'd. Köşe.', desc: 'Köşe.' },
+  { ku: 'goşt', tr: 'e. Et.', desc: 'Et.' },
+  { ku: 'gotin (1)', tr: 'd. Söz, laf, konuşma, deyiş. gotina ewil: İlk söz. hatin ser gotina wî: İlk başta birinin düşüncesini kabul etmezken sonradan doğru bulup onu kabul etmek, "dediğine gelmek."', desc: 'Söz, laf, konuşma, deyiş. Deyim: hatin ser gotina wî (dediğine gelmek).' },
+  { ku: 'gotin (2)', tr: 'Söylemek, demek. ez dibêm qey: Sanırım, tahminimce. merî dibê qey: sanırsın ki, sanki. tu dibê qey: Sanki, sanırsın ki. tu mebê: Deme! tu nabê: Meğer, meğerse.', desc: 'Söylemek, demek. Örnek: ez dibêm qey (sanırım), tu dibê qey (sanki), tu nabê (meğer).' },
+  { ku: 'gotinê pêşiya', tr: 'Atasözü.', desc: 'Atasözü.' },
+  { ku: 'govend', tr: 'd. Halay.', desc: 'Halay.' },
+  { ku: 'gozleg', tr: 'd. İri gözlü nohut kalburu.', desc: 'İri gözlü nohut kalburu.' },
+  { ku: 'gozlîg', tr: 'bkz. "çavik"', desc: 'bkz. "çavik".' },
+  { ku: 'guç', tr: 'e. (Bez, halı, masa vb. şeylerde) Köşe, uç.', desc: 'Köşe, uç (bez, halı, masa vb. şeylerde).' },
+  { ku: 'guh', tr: 'e. Kulak. guhê wî giran e: Onun kulakları ağır işitiyor. guh dagirtin: Belli etmeden söylenilenleri duymaya çalışmak; "kulak kabartmak". guhê xu kerr kirin: Duymamış gibi davranmak; "duymazlıktan gelmek". ji guh kirin/ji guha da kirin: Gürültü veya gevezelikle bir kimseyi tedirgin etmek, "kafa şişirme.k" guhan e. Hayvan memesi.', desc: 'Kulak. Deyimler: guhê wî giran e (kulakları ağır işitiyor), guh dagirtin (kulak kabartmak), guhê xu kerr kirin (duymazlıktan gelmek), ji guh kirin/ji guha da kirin (kafa şişirmek).' },
+  { ku: 'guhan', tr: 'e. Hayvan memesi.', desc: 'Hayvan memesi.' },
+  { ku: 'guhanreşî', tr: 'd. Hayvanlarda meme iltihabı.', desc: 'Hayvanlarda meme iltihabı.' },
+  { ku: 'guhar', tr: 'e. Küpe.', desc: 'Küpe.' },
+  { ku: 'guh dan', tr: '1) Dinlemek, kulak vermek. 2) Bir şeyi korumak, önemsemek; kulak asmak.', desc: 'Dinlemek, kulak vermek veya Bir şeyi korumak, önemsemek.' },
+  { ku: 'guhdar', tr: 'Dinleyici.', desc: 'Dinleyici.' },
+  { ku: 'guhdar bûn', tr: 'Dinlemek.', desc: 'Dinlemek.' },
+  { ku: 'guhdarî', tr: 'Dinleme.', desc: 'Dinleme.' },
+  { ku: 'guhdarî kirin', tr: 'Dinlemek. (Bazen "guhdar"daki h düşer ve bu "gudarî kirin" biçiminde kullanılır.)', desc: 'Dinlemek.' },
+  { ku: 'guher', tr: 'd. Açık alan.', desc: 'Açık alan.' },
+  { ku: 'guherandin', tr: 'Değiştirmek, değiş tokuş etmek. bi hev guherandin: (Birbiriyle) Değiş tokuş etmek. (diguherîne, biguherîne)', desc: 'Değiştirmek, değiş tokuş etmek. Deyim: bi hev guherandin (Birbiriyle değiş tokuş etmek). (Geniş zaman: diguherîne, emir: biguherîne)' },
+  { ku: 'guhestin', tr: 'Nakletmek, taşımak, yer değiştirmek. (diguhêze, biguhêze, guhest)', desc: 'Nakletmek, taşımak, yer değiştirmek. (Geniş zaman: diguhêze, emir: biguhêze)' },
+  { ku: 'guhfire', tr: 'Aldırış etmeyen, vurdumduymaz, ihmalkâr.', desc: 'Aldırış etmeyen, vurdumduymaz, ihmalkâr.' },
+  { ku: 'guhişk', tr: 'd. Dizlerin iç kısmı.', desc: 'Dizlerin iç kısmı.' },
+  { ku: 'guj', tr: 'Su vb. boşaltırken çıkan sesi anlatmakta kullanılan sözcük.', desc: 'Su vb. boşaltırken çıkan sesi anlatmakta kullanılan sözcük.' },
+  { ku: 'gul', tr: 'd. Gül.', desc: 'Gül.' },
+  { ku: 'gulan', tr: 'd. Mayıs (ayı.)', desc: 'Mayıs (ayı.)' },
+  { ku: 'gulaş', tr: 'd. Güreş.', desc: 'Güreş.' },
+  { ku: 'gulfan', tr: 'Aşırı yalancı.', desc: 'Aşırı yalancı.' },
+  { ku: 'gulgulî', tr: 'Gül desenli.', desc: 'Gül desenli.' },
+  { ku: 'gulik', tr: 'd. Püskül.', desc: 'Püskül.' },
+  { ku: 'gulî (1)', tr: 'd. Dal.', desc: 'Dal.' },
+  { ku: 'gulî (2)', tr: 'e. Saç örgüsü, belik. gulî- sor: Sarışın veya kızıl saçlı bayan. gulîzer: Sarışın bayan. gulîbir: Yas vb. bir olaydan dolayı örgüsü kesilmiş bayan. (bkz. "porkur")', desc: 'Saç örgüsü, belik. Çeşitleri: gulîsor (Sarışın veya kızıl saçlı bayan), gulîzer (Sarışın bayan), gulîbir (örgüsü kesilmiş bayan).' },
+  { ku: 'gulle', tr: 'd. 1) Kurşun, gülle. gulle tê da sar kirin: Kurşunlamak, vücuduna kurşun saplamak. 2) Misket. 3) Gözbebeği.', desc: 'Kurşun, gülle veya Misket veya Gözbebeği. Deyim: gulle tê da sar kirin (Kurşunlamak, vücuduna kurşun saplamak).' },
+  { ku: 'gulok', tr: 'd. İplik yumağı.', desc: 'İplik yumağı.' },
+  { ku: 'gulover/gurover', tr: 'Yuvarlak.', desc: 'Yuvarlak.' },
+  { ku: 'gulover bûn', tr: 'Yuvarlaklaşmak.', desc: 'Yuvarlaklaşmak.' },
+  { ku: 'guloverî', tr: 'd. Yuvarlaklık.', desc: 'Yuvarlaklık.' },
+  { ku: 'gulover kirin', tr: 'Yuvarlaklaştırmak.', desc: 'Yuvarlaklaştırmak.' },
+  { ku: 'gulp', tr: 'İnsan veya hayvan yere düşerken çıkan sesi anlatmakta kullanılan sözcük.', desc: 'İnsan veya hayvan yere düşerken çıkan sesi anlatmakta kullanılan sözcük.' },
+  { ku: 'gulyê hespê', tr: 'bkz. "bujî"', desc: 'bkz. "bujî".' },
+  { ku: 'guman', tr: 'd. Kuşku.', desc: 'Kuşku.' },
+  { ku: 'gumgumok', tr: 'd. Bir cins semender.', desc: 'Bir cins semender.' },
+  { ku: 'gumîn', tr: 'd. Gümbürtü.', desc: 'Gümbürtü.' },
+  { ku: 'gun', tr: 'e. Testis.', desc: 'Testis.' },
+  { ku: 'gund', tr: 'e. Köy.', desc: 'Köy.' },
+  { ku: 'gundî', tr: 'Köylü.', desc: 'Köylü.' },
+  { ku: 'gundîko', tr: 'Köylü usulü, köylüvari.', desc: 'Köylü usulü, köylüvari.' },
+  { ku: 'gundîtî', tr: 'd. Köylülük, köylü olma durumu.', desc: 'Köylülük, köylü olma durumu.' },
+  { ku: 'gune', tr: 'e. Günah, suç. gunekê: "Vay haline!" "Zavallıcık!" anlamındaki sözcük. gunê xu pê anîn: (Ona) Acımak, yazığı gelmek.', desc: 'Günah, suç. Örnek: gunê xu pê anîn (Acımak, yazığı gelmek).' },
+  { ku: 'gunek', tr: 'Fıtıklı olan kimse.', desc: 'Fıtıklı olan kimse.' },
+  { ku: 'gunekar', tr: 'Günahkâr.', desc: 'Günahkâr.' },
+  { ku: 'gunekarî', tr: 'd. Günahkârlık.', desc: 'Günahkârlık.' },
+  { ku: 'gunekî', tr: 'Fıtık.', desc: 'Fıtık.' },
+  { ku: 'gunîr', tr: 'Çift öküzlerinde boyunduruk ipi.', desc: 'Çift öküzlerinde boyunduruk ipi.' },
+  { ku: 'gupandin', tr: '1) Sıvı olmayan şeyleri herhangi bir Kaba sıkıştırarak doldurmak. 2) (Mecazi olarak) Cinsel ilişkide bulunmak, sikmek. (digupîne, bigupîne)', desc: 'Sıvı olmayan şeyleri herhangi bir Kaba sıkıştırarak doldurmak veya (Mecazi olarak) Cinsel ilişkide bulunmak. (Geniş zaman: digupîne, emir: bigupîne)' },
+  { ku: 'gupik', tr: 'd. Penis başı.', desc: 'Penis başı.' },
+  { ku: 'gur', tr: 'e. Kurt, yırtıcı hayvanlardan olan kurt.', desc: 'Kurt, yırtıcı hayvanlardan olan kurt.' },
+  { ku: 'guran', tr: 'Deriyi elle yüzmek. (diguro, biguro)', desc: 'Deriyi elle yüzmek. (Geniş zaman: diguro, emir: biguro)' },
+  { ku: 'gurcan', tr: 'e. Alaca renkli bir tür tarla faresi.', desc: 'Alaca renkli bir tür tarla faresi.' },
+  { ku: 'gurçik', tr: 'd. Böbrek.', desc: 'Böbrek.' },
+  { ku: 'gurd', tr: 'e. Dokuma tezgahının bir parçası.', desc: 'Dokuma tezgahının bir parçası.' },
+  { ku: 'gurê manco', tr: 'Umacı, öcü.', desc: 'Umacı, öcü.' },
+  { ku: 'gurêx', tr: 'bkz. "gurxenêq"', desc: 'bkz. "gurxenêq".' },
+  { ku: 'gur-gur', tr: 'd. Gök gürültüsü.', desc: 'Gök gürültüsü.' },
+  { ku: 'guricîn', tr: '(Gök) Gürlemek. (digurice, bigurice)', desc: '(Gök) Gürlemek. (Geniş zaman: digurice, emir: bigurice)' },
+  { ku: 'gurî', tr: 'Kel.', desc: 'Kel.' },
+  { ku: 'gurî bûn', tr: 'Kelleşmek, tüysüzleşmek.', desc: 'Kelleşmek, tüysüzleşmek.' },
+  { ku: 'gurî kirin', tr: 'Kelleştirmek, tüysüz hale sokmak.', desc: 'Kelleştirmek, tüysüz hale sokmak.' },
+  { ku: 'gurîtî', tr: 'd. Kellik, tüysüzlük.', desc: 'Kellik, tüysüzlük.' },
+  { ku: 'gurmih', tr: 'd. Pamuk, yapağı, kıl vb. şeylerin yumağı.', desc: 'Pamuk, yapağı, kıl vb. şeylerin yumağı.' },
+  { ku: 'gurr', tr: 'd. İtaat, söz dinleme. gurra wî kirin: Sözünden çıkmamak, itaat etmek, sözünü dinlemek.', desc: 'İtaat, söz dinleme. Deyim: gurra wî kirin (Sözünden çıkmamak, itaat etmek).' },
+  { ku: 'gurxenêq', tr: 'Kurtboğan köpek, kurtçul köpek.', desc: 'Kurtboğan köpek, kurtçul köpek.' },
+  { ku: 'gurz (1)', tr: 'd. Demet.', desc: 'Demet.' },
+  { ku: 'gurz (2)', tr: 'e. Gürz, topuz.', desc: 'Gürz, topuz.' },
+  { ku: 'gurzê piya', tr: 'Omuz başları.', desc: 'Omuz başları.' },
+  { ku: 'gustîl', tr: 'd. Yüzük.', desc: 'Yüzük.' },
+  { ku: 'guvaştin', tr: 'Sıkmak, limon veya yaş çamaşır misali sıkmak.', desc: 'Sıkmak, limon veya yaş çamaşır misali sıkmak.' },
+  { ku: 'guv-guv', tr: 'd. Rüzgarın uğultulu sesi.', desc: 'Rüzgarın uğultulu sesi.' },
+  { ku: 'guvişk', tr: '1) (Helva, haşlanmış sebze vb. şeyler için) Avuçta sıkılarak oluşturulan lokma. 2, Yaş çamaşır.', desc: '(Helva, haşlanmış sebze vb. şeyler için) Avuçta sıkılarak oluşturulan lokma veya Yaş çamaşır.' },
+  { ku: 'guvîj', tr: 'd. Alıç.', desc: 'Alıç.' },
+  { ku: 'gû', tr: 'e. İnsan dışkısı, bok. gû di xu dan: Çok kızmak, çok öfkelenmek; "ifrit olmak". ji gûkî ra nabe: Bir boka yaramıyor. gûgerîn d. Bokböceği.', desc: 'İnsan dışkısı, bok. Deyimler: gû di xu dan (Çok kızmak, çok öfkelenmek), ji gûkî ra nabe (Bir boka yaramıyor).' },
+  { ku: 'gûgerîn', tr: 'd. Bokböceği.', desc: 'Bokböceği.' },
+  { ku: 'gû kirin', tr: 'bkz. "rîyin"', desc: 'bkz. "rîyin".' },
+  { ku: 'gûmişk', tr: 'Fare dışkısı.', desc: 'Fare dışkısı.' },
+  { ku: 'gûxur', tr: '"Bok yiyen" anlamındaki hakaret sözcüğü.', desc: '"Bok yiyen" anlamındaki hakaret sözcüğü.' },
+  { ku: 'gûyîn', tr: 'Boktan olan, boka ait olan, bokçul.', desc: 'Boktan olan, boka ait olan, bokçul.' },
+  { ku: 'gwîn', tr: 'Bozuntuya vermeme, istifini bozmama.', desc: 'Bozuntuya vermeme, istifini bozmama.' },
+  { ku: 'gwînî', tr: 'e. Geven.', desc: 'Geven.' },
+  { ku: 'gwînîkurk', tr: 'e. Ufak ve dikenli bir cins geven.', desc: 'Ufak ve dikenli bir cins geven.' },
+  { ku: 'gwîriz', tr: 'd. Çirişotu denilen yiyilebilen bir bitki. yaprakları ilaç diye kullanılır, ağrıyı keser, yaranın cerahatını çeker. (Lat. Folium Asphodeli)', desc: 'Çirişotu denilen yiyilebilen bir bitki. (Lat. Folium Asphodeli)' },
+  { ku: 'gwîşî', tr: 'd. Salkım.', desc: 'Salkım.' },
+  { ku: 'gwîz', tr: 'd. Ceviz.', desc: 'Ceviz.' },
+  { ku: 'gwîzan', tr: 'd. Ustura.', desc: 'Ustura.' },
+  { ku: 'gwîzik', tr: 'd. Bacak kemiğinin ayakla birleştiği yerin iki tarafında bulunan ceviz şeklinde olan şişkin kemik.', desc: 'Bacak kemiğinin ayakla birleştiği yerin iki tarafında bulunan ceviz şeklinde olan şişkin kemik.' },
+  { ku: 'ha', tr: 'Seslenişi duyan kimsenin kendisine seslenildiğini duyduğunu belirten ve "buyur", "ne var?", "ne istiyorsun?" anlamına gelen sözcük. ha bibê ha bibê: "Ha söyle ha söyle, para etmiyor ki, laf anlamıyor ki."', desc: 'Seslenişi duyan kimsenin kendisine seslenildiğini duyduğunu belirten sözcük. Örnek: ha bibê ha bibê (Ha söyle ha söyle, para etmiyor ki).' },
+  { ku: 'hac', tr: 'd. Haber, bilgi, malumat. hac û bac: Haber, bilgi, malumat. bê hac û bac: Herşeyden habersiz.', desc: 'Haber, bilgi, malumat. Örnek: bê hac û bac (Herşeyden habersiz).' },
+  { ku: 'hadê', tr: 'Haydi.', desc: 'Haydi.' },
+  { ku: 'hafiz', tr: 'Kör.', desc: 'Kör.' },
+  { ku: 'haho', tr: 'd. Feryat, figan.', desc: 'Feryat, figan.' },
+  { ku: 'hak-hak', tr: 'd. Kahkaha.', desc: 'Kahkaha.' },
+  { ku: 'hal (1)', tr: 'd. Nezle.', desc: 'Nezle.' },
+  { ku: 'hal (2)', tr: 'e. Hal, durum. ji hal da ketin: Halden düşmek, takatten düşmek. ji hal da xistin: Halden düşürmek, takatsiz bırakmak. ji hal û heş da ketin: Halden düşmek, takatten düşmek. hal mesele: Bütün mesele, meselenin tamamı. hal û hewal: Ahval. bi halkî: Hamile (kadın.)', desc: 'Hal, durum. Deyimler: ji hal da ketin/xistin (Halden düşmek/düşürmek), bi halkî (Hamile kadın).' },
+  { ku: 'halbû', tr: 'Halbuki.', desc: 'Halbuki.' },
+  { ku: 'hal bûn', tr: 'Hallolmak.', desc: 'Hallolmak.' },
+  { ku: 'halet', tr: 'e. Saban.', desc: 'Saban.' },
+  { ku: 'hal kirin', tr: 'Halletmek.', desc: 'Halletmek.' },
+  { ku: 'halkirî', tr: 'Halledilmiş olan.', desc: 'Halledilmiş olan.' },
+  { ku: 'halmewt', tr: 'd. Nezle. (Soranca: helamet)', desc: 'Nezle.' },
+  { ku: 'halmewtî', tr: 'Nezleli.', desc: 'Nezleli.' },
+  { ku: 'halxirab', tr: 'Durumu kötü olan, kötü durumdaki kimse.', desc: 'Durumu kötü olan, kötü durumdaki kimse.' },
+  { ku: 'halxweş', tr: 'Durumu iyi olan, hali vakti yerinde olan.', desc: 'Durumu iyi olan, hali vakti yerinde olan.' },
+  { ku: 'hamiş', tr: 'Atı durdurmakta kullanılan sözcük, durması için ata söylenen sözcük.', desc: 'Atı durdurmakta kullanılan sözcük.' },
+  { ku: 'hamûd', tr: 'e. At semeri.', desc: 'At semeri.' },
+  { ku: 'ham û tam', tr: 'Bihaber, alakası bulunmayan.', desc: 'Bihaber, alakası bulunmayan.' },
+  { ku: 'han', tr: 'İsimlerin sonuna gelen ve "filan" anlamı taşıyan bir zamir.', desc: 'İsimlerin sonuna gelen ve "filan" anlamı taşıyan bir zamir.' },
+  { ku: 'har', tr: 'Kuduz, kuduruk.', desc: 'Kuduz, kuduruk.' },
+  { ku: 'har bûn', tr: 'Kudurmak.', desc: 'Kudurmak.' },
+  { ku: 'har kirin', tr: 'Kudurtmak.', desc: 'Kudurtmak.' },
+  { ku: 'hasilandin', tr: 'Muhtaç etmek. (dihasiline, bihasiline)', desc: 'Muhtaç etmek. (Geniş zaman: dihasiline, emir: bihasiline)' },
+  { ku: 'hasilîn', tr: 'Muhtaç olmak. (dihasile, bihasile)', desc: 'Muhtaç olmak. (Geniş zaman: dihasile, emir: bihasile)' },
+  { ku: 'hatê', tr: 'd. Teyze.', desc: 'Teyze.' },
+  { ku: 'hatin', tr: 'Gelmek. hatin bîra wî: Aklına gelmek, anımsamak. hatin cî: Yerine gelmek. hatin dunyê: Doğmak, dünyaya gelmek. hatin îmanê: 1. İslamlığı benimsemek 2. Sonunda doğruyu söylemek. 3. Önce karşı çıktığı birşeyi kabul edip istenileni yapmak.', desc: 'Gelmek. Deyimler: hatin bîra wî (Aklına gelmek), hatin dunyê (Doğmak), hatin îmanê (doğruyu söylemek/kabul etmek).' },
+  { ku: 'havil', tr: 'd. Çare, çıkar yol, çözüm.', desc: 'Çare, çıkar yol, çözüm.' },
+  { ku: 'havîn', tr: 'd. Yaz.', desc: 'Yaz.' },
+  { ku: 'havînge', tr: 'd. Yazlık.', desc: 'Yazlık.' },
+  { ku: 'hawe', tr: 'e. 1) Biçim, şekil. 2) Müzik parçalarında tür, hava.', desc: 'Biçim, şekil veya Müzik parçalarında tür, hava.' },
+  { ku: 'hawûd', tr: 'e. Deve semeri.', desc: 'Deve semeri.' },
+  { ku: 'hay', tr: 'd. Haber, malumat, haberi olma. bê hay û bay: Herşeyden habersiz. feqîro bê hay û bay hat kuştin: Zavallı herşeyden habersiz öldürüldü. hay jê bûn: Haberi olmak. haya min jê hebû: Haberim vardı, haberdardım. lê hay bûn: Farkına varmak, -ni farketmek. ez lê hay nebûm: Farkına varmadım, fark etmedim.', desc: 'Haber, malumat, haberi olma. Deyimler: bê hay û bay (Herşeyden habersiz), hay jê bûn (Haberi olmak), lê hay bûn (Farkına varmak).' },
+  { ku: 'haylo', tr: 'Bir kimseye bir şey hatırlatıldığında, hatırlayan kişi tarafından kullanılan ünlem.', desc: 'Bir kimseye bir şey hatırlatıldığında kullanılan ünlem.' },
+  { ku: 'heb', tr: 'd. 1) Hap.2) Tane.3) Bir tür hayvan hastalığı.', desc: 'Hap veya Tane veya Bir tür hayvan hastalığı.' },
+  { ku: 'heban', tr: 'd. Kuzu postundan yapılan ve içine ekmek konulan çoban çantası.', desc: 'Kuzu postundan yapılan ve içine ekmek konulan çoban çantası.' },
+  { ku: 'hebilmêlûk', tr: 'd. İshal yapıcı bir bitki.', desc: 'İshal yapıcı bir bitki.' },
+  { ku: 'hebin', tr: 'e. Halat.', desc: 'Halat.' },
+  { ku: 'hebirman', tr: 'd. Kış için kurutulup saklanan nar taneleri.', desc: 'Kış için kurutulup saklanan nar taneleri.' },
+  { ku: 'hebirmanî', tr: 'd. Kış için kurutulup saklanan nar tanelerinden yapılan şerbet.', desc: 'Kış için kurutulup saklanan nar tanelerinden yapılan şerbet.' },
+  { ku: 'hebîn (2)', tr: 'bkz. "Xwedê hebînî"', desc: 'bkz. "Xwedê hebînî".' },
+  { ku: 'hebûn (2)', tr: 'd. Varlık, servet.', desc: 'Varlık, servet.' },
+  { ku: 'hebûn (3)', tr: 'Varolmak. hebû tunebû: Masallarda "bir varmış bir yokmuş" diye başlayan tekerleme.', desc: 'Varolmak. Örnek: hebû tunebû: Masallarda "bir varmış bir yokmuş" diye başlayan tekerleme.' },
+  { ku: 'hec', tr: 'd. 1) Çalı, çırpı. 2) Hac.', desc: 'Çalı, çırpı veya Hac.' },
+  { ku: 'hecac', tr: 'd. Kasırga.', desc: 'Kasırga.' },
+  { ku: 'hecheck', tr: 'd. Kırlangıç.', desc: 'Kırlangıç.' },
+  { ku: 'heciqandin', tr: 'Ezmek.', desc: 'Ezmek.' },
+  { ku: 'heciqîn', tr: 'Ezilmek.', desc: 'Ezilmek.' },
+  { ku: 'heçî', tr: 'd. Çengel.', desc: 'Çengel.' },
+  { ku: 'hedar', tr: 'Uyanık, tetikte olan, dikkatli.', desc: 'Uyanık, tetikte olan, dikkatli.' },
+  { ku: 'hedik', tr: 'd. Kışın karda batmamak için giyilen bir çeşit kar ayakkabısı.', desc: 'Kışın karda batmamak için giyilen bir çeşit kar ayakkabısı.' },
+  { ku: 'hedimandin', tr: '1) Yıkmak, harabeye döndürmek.', desc: 'Yıkmak, harabeye döndürmek.' },
+  { ku: 'hedimîn', tr: 'Yıkılmak, harap olmak.', desc: 'Yıkılmak, harap olmak.' },
+  { ku: 'hedûr', tr: 'd. Yalnızlığını giderme işi.', desc: 'Yalnızlığını giderme işi.' },
+  { ku: 'hefs', tr: 'd. 1) Hapishane. 2) İçtinap, sakınma. hefsa xu kirin: İçtinap etmek, sakınmak.', desc: 'Hapishane veya İçtinap, sakınma. Deyim: hefsa xu kirin (İçtinap etmek, sakınmak).' },
+  { ku: 'hefsar', tr: 'e. Hayvan yuları.', desc: 'Hayvan yuları.' },
+  { ku: 'hefsid', tr: 'e. Yedi yüz.', desc: 'Yedi yüz.' },
+  { ku: 'hefsî', tr: 'Tutuklu, mahpus.', desc: 'Tutuklu, mahpus.' },
+  { ku: 'hefşo', tr: 'e. Ağıl.', desc: 'Ağıl.' },
+  { ku: 'heft', tr: 'e. Yedi.', desc: 'Yedi.' },
+  { ku: 'hefte', tr: 'd. Hafta.', desc: 'Hafta.' },
+  { ku: 'heftê', tr: 'e. Yetmiş.', desc: 'Yetmiş.' },
+  { ku: 'heftreng', tr: 'Rengarenk giysi veya dokuma türünden şeyler.', desc: 'Rengarenk giysi veya dokuma türünden şeyler.' },
+  { ku: 'heftruh', tr: 'Ölümle sonuçlanabilecek birçok tehlikeyi atlatıp sağ kalabilen (kimse ya da canlı.)', desc: 'Ölümle sonuçlanabilecek birçok tehlikeyi atlatıp sağ kalabilen.' },
+  { ku: 'heftûzk', tr: 'd. Çıban.', desc: 'Çıban.' },
+  { ku: 'heg', tr: 'Eğer, şayet.', desc: 'Eğer, şayet.' },
+  { ku: 'heger', tr: 'Eğer, şayet.', desc: 'Eğer, şayet.' },
+  { ku: 'hek', tr: 'd. Abla.', desc: 'Abla.' },
+  { ku: 'hela hela', tr: 'Allah Allah! Şuna bak hele! Yok be!', desc: 'Allah Allah! Şuna bak hele! Yok be!' },
+  { ku: 'helak', tr: 'Ağır hasta.', desc: 'Ağır hasta.' },
+  { ku: 'helal', tr: '1) Helal. 2) Temiz, pâk, haram olmayan.', desc: 'Helal veya Temiz, pâk, haram olmayan.' },
+  { ku: 'helamet', tr: 'd. Nezle.', desc: 'Nezle.' },
+  { ku: 'helandin', tr: 'Eritmek.', desc: 'Eritmek.' },
+  { ku: 'helandî', tr: 'Eritilmiş olan.', desc: 'Eritilmiş olan.' },
+  { ku: 'helaw', tr: 'd. Helva.', desc: 'Helva.' },
+  { ku: 'helawa êrd', tr: 'İrmik helvası.', desc: 'İrmik helvası.' },
+  { ku: 'helawa sor', tr: 'bkz. "helawa êrd"', desc: 'bkz. "helawa êrd".' },
+  { ku: 'hel-hel', tr: 'd. Hızlı hızlı soluk alıp verirken çıkan sesi anlatmakta kullanılan sözcük.', desc: 'Hızlı hızlı soluk alıp verirken çıkan sesi.' },
+  { ku: 'helikandin/(xu lê helikandin)', tr: '(Cinsel olarak birine) Sulanmak. xu lê dihelikîne, xu lê bihelikîne.', desc: '(Cinsel olarak birine) Sulanmak. (Geniş zaman: xu lê dihelikîne, emir: xu lê bihelikîne)' },
+  { ku: 'helisandin', tr: 'Ezmek.', desc: 'Ezmek.' },
+  { ku: 'helisîn', tr: 'Ezilmek.', desc: 'Ezilmek.' },
+  { ku: 'heliz', tr: '1) Bir ot cinsi. 2) Çok şişman olan ve zor hareket edebilen kimseler için kullanılan sözcük.', desc: 'Bir ot cinsi veya Çok şişman olan ve zor hareket edebilen kimseler için kullanılan sözcük.' },
+  { ku: 'helîl', tr: 'd. İpek.', desc: 'İpek.' },
+  { ku: 'helyan', tr: 'Erimek.', desc: 'Erimek.' },
+  { ku: 'hem', tr: 'çd. Yemek, yiyecek.', desc: 'Yemek, yiyecek. (Çocuk dilinde)' },
+  { ku: 'hema', tr: '1) Ama, lakin. 2) Hemen. hema hema: Aşağı yukarı, neredeyse, hemen hemen. hema wer: Öylesine, öylece.', desc: 'Ama, lakin veya Hemen. Örnek: hema hema (Aşağı yukarı), hema wer (Öylesine, öylece).' },
+  { ku: 'hemawî', tr: 'd. Bir çeşit kefiye.', desc: 'Bir çeşit kefiye.' },
+  { ku: 'hember', tr: 'Karşı, mukabil.', desc: 'Karşı, mukabil.' },
+  { ku: 'hemd', tr: 'e. İstenç, irade. bi hemdê xu: Kendi iradesiyle.', desc: 'İstenç, irade. Örnek: bi hemdê xu (Kendi iradesiyle).' },
+  { ku: 'hemet', tr: 'Himaye, koruma.', desc: 'Himaye, koruma.' },
+  { ku: 'hemetî', tr: 'd. Himaye.', desc: 'Himaye.' },
+  { ku: 'hemetkar', tr: 'Himaye eden, koruyucu.', desc: 'Himaye eden, koruyucu.' },
+  { ku: 'hemet kirin', tr: 'Himaye etmek, korumak.', desc: 'Himaye etmek, korumak.' },
+  { ku: 'hemilandin', tr: 'At, katır gibi hayvanları eyerlemeye, palan vurmaya alıştırmak. (dihemiline, bihemiline)', desc: 'At, katır gibi hayvanları eyerlemeye, palan vurmaya alıştırmak. (Geniş zaman: dihemiline, emir: bihemiline)' },
+  { ku: 'hemilîn', tr: 'At, katır gibi hayvanların eyerlenmeye, palan vurulmaya alışması. (dihemile, bihemile)', desc: 'At, katır gibi hayvanların eyerlenmeye, palan vurulmaya alışması. (Geniş zaman: dihemile, emir: bihemile)' },
+  { ku: 'hem kirin', tr: 'çd. Yemek veya yiyecek yemek yemek.', desc: 'Yemek veya yiyecek yemek yemek. (Çocuk dilinde)' },
+  { ku: 'hempişt', tr: 'Bir kardeşten sonra gelen kardeş.', desc: 'Bir kardeşten sonra gelen kardeş.' },
+  { ku: 'hemzik', tr: 'd. Bir çeşit yemek.', desc: 'Bir çeşit yemek.' },
+  { ku: 'henek', tr: 'd. Şaka. henekê xu pê kirin: (Onunla) Alay etmek, dalga geçmek.', desc: 'Şaka. Deyim: henekê xu pê kirin (Alay etmek, dalga geçmek).' },
+  { ku: 'henekçî', tr: 'Şakacı.', desc: 'Şakacı.' },
+  { ku: 'henekvan', tr: 'Şakacı.', desc: 'Şakacı.' },
+  { ku: 'hepê/hepo', tr: 'çd. Yemek, yiyecek.', desc: 'Yemek, yiyecek. (Çocuk dilinde)' },
+  { ku: 'hepis kirin', tr: 'Hapsetmek.', desc: 'Hapsetmek.' },
+  { ku: 'hepisxane', tr: 'd. Hapishane.', desc: 'Hapishane.' },
+  { ku: 'hep kirin', tr: 'çd. Yemek vb. Yemek.', desc: 'Yemek vb. Yemek. (Çocuk dilinde)' },
+  { ku: 'heq', tr: 'e. Hak. heq neheq: Haklı da olsa haksız da olsa, başka yolu yok. heqê mêra înkar meke: "Yiğidi öldür ama hakkını yeme". ji heq derketin: Zor bir işi başarı ile bitirmek, gereğini tüm olarak yerine getirmek, hakkından gelmek. heqê xu helal kirin: Hakkını, emeğini bağışlamak; hakkını helal etmek.', desc: 'Hak. Deyimler: heq neheq (Haklı da olsa haksız da olsa), ji heq derketin (hakkından gelmek), heqê xu helal kirin (hakkını helal etmek).' },
+  { ku: 'heqî', tr: 'd. Haklılık.', desc: 'Haklılık.' },
+  { ku: 'heqîb', tr: 'd. Heybe.', desc: 'Heybe.' },
+  { ku: 'heqîq', tr: 'Akik.', desc: 'Akik.' },
+  { ku: 'heq kirin', tr: 'Hak etmek.', desc: 'Hak etmek.' },
+  { ku: 'her', tr: 'Her. her carê: Her seferinde. her dîk li ser ziblê xu xurt e: Herkes ancak kendi çevresinde bir değer taşır ve sözünü orada geçirebilir. her gav: Her zaman. her ro: Hergün. her ro duro: Her gün; "Tanrı\'nın günü." her ruyê Xwedê: bkz. "Her ro duro." her tim: Her zaman. her tişt: Her şey. her yek: Her bir, her biri.', desc: 'Her. Deyimler: her dîk li ser ziblê xu xurt e (Herkes kendi çevresinde değerlidir), her ro duro ("Tanrı\'nın günü").' },
+  { ku: 'heram', tr: '1) Haram. hil û heram kirin: Bir şeyi berbat hale sokmak, içinden çıkılmaz hale getirmek. 2) Bozguncu.', desc: 'Haram veya Bozguncu. Deyim: hil û heram kirin (Berbat hale sokmak).' },
+  { ku: 'heram bûn', tr: 'Bozulmak, kirlenmek, haram olmak.', desc: 'Bozulmak, kirlenmek, haram olmak.' },
+  { ku: 'heramî', tr: 'd. Bozgunçuluk.', desc: 'Bozgunçuluk.' },
+  { ku: 'heram kirin', tr: 'Bozmak, kirletmek, haram etmek.', desc: 'Bozmak, kirletmek, haram etmek.' },
+  { ku: 'herb', tr: 'd. Savaş.', desc: 'Savaş.' },
+  { ku: 'herçî', tr: 'Her, ise, her ki, ...gelince, hepsi.', desc: 'Her, ise, her ki, ...gelince, hepsi.' },
+  { ku: 'herdu', tr: 'Her ikisi.', desc: 'Her ikisi.' },
+  { ku: 'hergî', tr: '-ça, -e. hergî dihere zehîf dibe: Gittikçe zayıflıyor. hergî serî bimîne qul (qûn) ecêba dibîne: Yaşadıkça insanın türlü olaylarla, ilginç durumlarla karşılaşabileceğini anlatır.', desc: '-ça, -e. Örnek: hergî dihere zehîf dibe: Gittikçe zayıflıyor.' },
+  { ku: 'heri', tr: '"Git" anlamındaki düzensiz fiil.', desc: '"Git" anlamındaki düzensiz fiil.' },
+  { ku: 'herikîn', tr: 'Akmak.', desc: 'Akmak.' },
+  { ku: 'herimandin', tr: 'Bozmak, işe yaramaz hale getirmek, haram etmek.', desc: 'Bozmak, işe yaramaz hale getirmek, haram etmek.' },
+  { ku: 'herimîn', tr: 'Bozulmak, işe yaramaz hale gelmek, haram olmak.', desc: 'Bozulmak, işe yaramaz hale gelmek, haram olmak.' },
+  { ku: 'herî', tr: 'd. Çamur.', desc: 'Çamur.' },
+  { ku: 'herkes', tr: 'Herkes. herkes û xu: Herkes kendine.', desc: 'Herkes. Örnek: herkes û xu: Herkes kendine.' },
+  { ku: 'herq', tr: 'd. Kanal, ark.', desc: 'Kanal, ark.' },
+  { ku: 'herqidor', tr: 'Çepeçevre.', desc: 'Çepeçevre.' },
+  { ku: 'herwanî', tr: 'e. Bir çeşit kürk.', desc: 'Bir çeşit kürk.' },
+  { ku: 'hesab', tr: 'e. Hesap. bi hesabê min: Bence, sanırım. biratî bi qeyntera, hesab bi misqala: İnsanlar, aralarındaki akrabalık derecesi ne kadar ileri olursa olsun, alış verişte yabancı imiş gibi davranmalı, birbirinden menfaat beklememelidir. hatin hesabê wî: Ona uygun ve elverişli olmak. hesabê mal û çarşiyê nabe yek: İşler önceden tasarlandığı halde, umulmayan durumlar ortaya çıkabilir.', desc: 'Hesap. Deyimler: bi hesabê min (Bence, sanırım), biratî bi qeyntera, hesab bi misqala (alışverişte titiz olmak).' },
+  { ku: 'hesan', tr: 'd. Bileği taşı.', desc: 'Bileği taşı.' },
+  { ku: 'hesandin', tr: 'Haberdar etmek. pê hesandin: Duyurmak, haberdar etmek', desc: 'Haberdar etmek. Deyim: pê hesandin (Duyurmak, haberdar etmek).' },
+  { ku: 'hesan kirin', tr: 'Bilemek.', desc: 'Bilemek.' },
+  { ku: 'hesibandin', tr: '1) Hesaplamak. 2) Saygı göstermek, hesaba katmak, (birşeyden) saymak. bi tiştekî nehesibandin: (Birini) Hiç bir şeyden saymamak.', desc: 'Hesaplamak veya Saygı göstermek, hesaba katmak. Deyim: bi tiştekî nehesibandin (Hiç bir şeyden saymamak).' },
+  { ku: 'hesin', tr: 'e. Demir.', desc: 'Demir.' },
+  { ku: 'hesinî', tr: 'Demirden yapılmış olan.', desc: 'Demirden yapılmış olan.' },
+  { ku: 'hesîr', tr: 'd. Hasır.', desc: 'Hasır.' },
+  { ku: 'hesk', tr: 'd. Kepçe.', desc: 'Kepçe.' },
+  { ku: 'hesnî', tr: 'Kederli, üzgün.', desc: 'Kederli, üzgün.' },
+  { ku: 'hesp', tr: 'At.', desc: 'At.' },
+  { ku: 'hespikê hesinî', tr: '(Eskiden) Bisiklet. (Bizim dedelerimiz bisikleti ilk gördüklerinde, ona, tıpkı Kızılderililer gibi "hespikê hesinî hespê hesinî" (demir atçık veya demir at) demişler. Ama herhalde bu isim uzun ve telaffuzu zor olduğu için fazla uzun ömürlü olamamış.)', desc: '(Eskiden) Bisiklet.' },
+  { ku: 'heste', tr: 'e. Çakmak.', desc: 'Çakmak.' },
+  { ku: 'hestî', tr: 'e. Kemik.', desc: 'Kemik.' },
+  { ku: 'hestîhêr', tr: 'İnatçı, şirret kadın.', desc: 'İnatçı, şirret kadın.' },
+  { ku: 'hesûd', tr: 'Kıskanç.', desc: 'Kıskanç.' },
+  { ku: 'hesûdî', tr: 'd. Kıskançlık.', desc: 'Kıskançlık.' },
+  { ku: 'hesyan', tr: 'Haberdar olmak. bi xu hesyan: Kendine gelmek, uyanmak, aklı başına gelmek. pê hesyan Duymak, haberdar olmak.', desc: 'Haberdar olmak. Deyimler: bi xu hesyan (Kendine gelmek, uyanmak), pê hesyan (Duymak, haberdar olmak).' },
+  { ku: 'heş', tr: 'e. Akıl. heşê wî çûn: Başı dolanmak. heşê wî çûn ser serê wî: Tepesi atmak. heşê wî hatin serê wî: 1. Kendine gelmek, ayılmak 2. Doğruyu yanlıştan ayırabilecek duruma gelmek, gerçeğin farkına varmak; aklı başına gelmek. heşê xu wenda kirin: Hafızasını kaybetmek.', desc: 'Akıl. Deyimler: heşê wî çûn (Başı dolanmak), heşê wî çûn ser serê wî (Tepesi atmak), heşê wî hatin serê wî (Aklı başına gelmek).' },
+  { ku: 'heşa', tr: 'Haşa. heşa ji hizûrê heşa ji hizûra we: Haşa huzurdan.', desc: 'Haşa. Örnek: heşa ji hizûrê heşa ji hizûra we: Haşa huzurdan.' },
+  { ku: 'heştir', tr: 'e. Deve.', desc: 'Deve.' },
+  { ku: 'heta', tr: 'Kadar, değin.', desc: 'Kadar, değin.' },
+  { ku: 'hetanî', tr: 'Kadar, değin.', desc: 'Kadar, değin.' },
+  { ku: 'hetikandin', tr: 'Rezil etmek.', desc: 'Rezil etmek.' },
+  { ku: 'hetikîn', tr: 'Rezil olmak.', desc: 'Rezil olmak.' },
+  { ku: 'hev', tr: 'Beraberlik, birleştiricilik görevi yapan bir sözcük. hev girtin: Birbirini tutmak, birbirine destek olmak, birbirine arka çıkmak.', desc: 'Beraberlik, birleştiricilik görevi yapan bir sözcük. Deyim: hev girtin (Birbirini tutmak, destek olmak).' },
+  { ku: 'heval', tr: 'Arkadaş.', desc: 'Arkadaş.' },
+  { ku: 'hevalçûk', tr: 'd. Etene, meşime, son.', desc: 'Etene, meşime, son.' },
+  { ku: 'hevalkiras', tr: 'e. Kadın iç giysisi.', desc: 'Kadın iç giysisi.' },
+  { ku: 'hevaltî', tr: 'd. Arkadaşlık.', desc: 'Arkadaşlık.' },
+  { ku: 'hevcark', tr: 'd. Yedi defa soktuktan sonra insanı bıraktığına inanılan bir böcek.', desc: 'Yedi defa soktuktan sonra insanı bıraktığına inanılan bir böcek.' },
+  { ku: 'hevdaketî', tr: 'Parçaları birbirinden ayrılmış, darmadağın, demonteleşmiş olan şey.', desc: 'Parçaları birbirinden ayrılmış, darmadağın, demonteleşmiş olan şey.' },
+  { ku: 'hev dan/dan hev', tr: 'Biriktirmek.', desc: 'Biriktirmek.' },
+  { ku: 'hevde', tr: 'd. Dokuma tezgahında kullanılan yün.', desc: 'Dokuma tezgahında kullanılan yün.' },
+  { ku: 'hevdu', tr: 'Birbirini.', desc: 'Birbirini.' },
+  { ku: 'hevgel', tr: 'Karma koyun sürüsü.', desc: 'Karma koyun sürüsü.' },
+  { ku: 'hevîr', tr: 'e. Hamur.', desc: 'Hamur.' },
+  { ku: 'hevîrtirş', tr: 'e. Mayalı hamur.', desc: 'Mayalı hamur.' },
+  { ku: 'hevkidank', tr: 'd. Hamur açmada kullanılan hamur bezi.', desc: 'Hamur açmada kullanılan hamur bezi.' },
+  { ku: 'hevnîsk', tr: 'd. Mercimek, nohut, soğandan oluşan bir yemek.', desc: 'Mercimek, nohut, soğandan oluşan bir yemek.' },
+  { ku: 'hevrîng', tr: 'd. Yapağı makası.', desc: 'Yapağı makası.' },
+  { ku: 'hevrîş', tr: 'bkz. "helîl"', desc: 'bkz. "helîl".' },
+  { ku: 'hevrîşk', tr: 'd. Yağa doğranan ekmekten oluşan yemek.', desc: 'Yağa doğranan ekmekten oluşan yemek.' },
+  { ku: 'hev ra', tr: 'Birlikte, beraber.', desc: 'Birlikte, beraber.' },
+  { ku: 'hevser', tr: 'Arkadaş, denk.', desc: 'Arkadaş, denk.' },
+  { ku: 'hev û di', tr: 'Birbirini. hev û di maçkirin: Öpüşmek. hev û di xwarin: (İki ya da daha fazla kişi) Birbiriyle uğraşmak.', desc: 'Birbirini. Deyim: hev û di maçkirin (Öpüşmek), hev û di xwarin (Birbiriyle uğraşmak).' },
+  { ku: 'hevûrî', tr: 'bkz. "gîsk"', desc: 'bkz. "gîsk".' },
+  { ku: 'hew', tr: '1) Son, tamam. 2) Yalnız, yalnızca, bir tek, sadece. hew Aso hat: Bir tek Aso geldi.', desc: 'Son, tamam veya Yalnız, yalnızca, bir tek, sadece. Örnek: hew Aso hat: Bir tek Aso geldi.' },
+  { ku: 'hewa', tr: 'd. Hava. bi hewa ketin: Havalanmak. tiyare bi hewa dikeve: Uçak havalanıyor.', desc: 'Hava. Deyim: bi hewa ketin (Havalanmak).' },
+  { ku: 'hewadîs', tr: 'Havadis.', desc: 'Havadis.' },
+  { ku: 'hewal', tr: 'd. Ahval.', desc: 'Ahval.' },
+  { ku: 'hewale', tr: 'd. Havale.', desc: 'Havale.' },
+  { ku: 'hewan', tr: 'd. Havan.', desc: 'Havan.' },
+  { ku: 'hewandin', tr: '1) Yatıştırmak, teskin etmek. 2) Barındırmak.', desc: 'Yatıştırmak, teskin etmek veya Barındırmak.' },
+  { ku: 'hewante', tr: 'd. Avanta. hewante ye!: "Yağma yok!" "Öyle şey olmaz!"', desc: 'Avanta. Örnek: hewante ye!: "Yağma yok!"' },
+  { ku: 'hewar', tr: 'd. İmdat sözcüğü.', desc: 'İmdat sözcüğü.' },
+  { ku: 'hewayî', tr: 'Boş, havai.', desc: 'Boş, havai.' },
+  { ku: 'hew bûn', tr: 'Bir şeyin bitmesi, sona ermesi, son bulması.', desc: 'Bir şeyin bitmesi, sona ermesi, son bulması.' },
+  { ku: 'hewce', tr: 'Gerekme.', desc: 'Gerekme.' },
+  { ku: 'hewce kirin', tr: 'Gerekmek.', desc: 'Gerekmek.' },
+  { ku: 'hewceyî', tr: 'Gereklilik.', desc: 'Gereklilik.' },
+  { ku: 'hewcêg/hewcê gi', tr: '-ına, -ine. hewcêg tê wî bikirî vîya bikire: Onu satın alacağına bunu satın al.', desc: '-ına, -ine. Örnek: hewcêg tê wî bikirî vîya bikire: Onu satın alacağına bunu satın al.' },
+  { ku: 'hewes', tr: 'd. Heves', desc: 'Heves.' },
+  { ku: 'hewî', tr: 'd. Kuma', desc: 'Kuma.' },
+  { ku: 'hewînî', tr: 'd. Can sıkıntısının yok olması, avuntu, yatışma.', desc: 'Can sıkıntısının yok olması, avuntu, yatışma.' },
+  { ku: 'hewîtî', tr: 'd. Kumalık, kuma olma durumu.', desc: 'Kumaluk, kuma olma durumu.' },
+  { ku: 'hewq', tr: 'd. Sebze bahçesi.', desc: 'Sebze bahçesi.' },
+  { ku: 'hewqa', tr: 'O kadar, bu kadar.', desc: 'O kadar, bu kadar.' },
+  { ku: 'hewqas', tr: 'bkz. "hewqa"', desc: 'bkz. "hewqa".' },
+  { ku: 'hewş', tr: 'd. Avlu.', desc: 'Avlu.' },
+  { ku: 'hewyan', tr: 'Yatışmak, teskin olmak.', desc: 'Yatışmak, teskin olmak.' },
+  { ku: 'hewz', tr: 'Havuz.', desc: 'Havuz.' },
+  { ku: 'heya', tr: 'Kadar, değin. heya dêv: Boş yer kalmamak üzere; "ağzına kadar." heya îmanê: Boş yer kalmamak üzere; "ağzına kadar." heya navê mera derdikeve bira canê mera derkeve: İnsanın bir kere adı çıktıktan sonra onun hakkındaki genel kanı artık düzelmez. heya nuha: Şimdiye kadar. heya qiyametê: Dünya durdukça, sonsuzluğa dek, "kıyamete kadar."', desc: 'Kadar, değin. Deyimler: heya dêv (ağzına kadar), heya qiyametê (sonsuzluğa dek).' },
+  { ku: 'heyanî', tr: 'Kadar, değin', desc: 'Kadar, değin.' },
+  { ku: 'heyn', tr: 'e. Kendi halindelik. Şîrîn di heynê xu da ye: Şirin kendi halindedir. Şîrîn hiç kimsenin işine karışmaz.', desc: 'Kendi halindelik. Örnek: Şîrîn di heynê xu da ye: Şirin kendi halindedir.' },
+  { ku: 'heyr', tr: 'd. Şaşkınlık.', desc: 'Şaşkınlık.' },
+  { ku: 'heyran', tr: 'd. Hayran, kurban. bi heyran û qurban: Dil dökerek, yalvarırcasına.', desc: 'Hayran, kurban. Deyim: bi heyran û qurban (Dil dökerek, yalvarırcasına).' },
+  { ku: 'heysid', tr: 'e. Sekiz yüz.', desc: 'Sekiz yüz.' },
+  { ku: 'heyşt', tr: 'e. Sekiz.', desc: 'Sekiz.' },
+  { ku: 'heyştê', tr: 'e. Seksen.', desc: 'Seksen.' },
+  { ku: 'heyştik', tr: 'Yeni evlenmiş olan gelinin sekiz günlüğüne baba evini ziyareti.', desc: 'Yeni evlenmiş olan gelinin sekiz günlüğüne baba evini ziyareti.' },
+  { ku: 'heyvan', tr: 'e. Maya.', desc: 'Maya.' },
+  { ku: 'heyvan kirin', tr: 'Mayalamak.', desc: 'Mayalamak.' },
+  { ku: 'heywan', tr: 'e. Hayvan.', desc: 'Hayvan.' },
+  { ku: 'heywax', tr: 'Eyvah.', desc: 'Eyvah.' },
+  { ku: 'hezandin', tr: 'Titretmek, sarsmak.', desc: 'Titretmek, sarsmak.' },
+  { ku: 'hezar', tr: 'e. Bin.', desc: 'Bin.' },
+  { ku: 'hezaz', tr: 'd. Bataklık.', desc: 'Bataklık.' },
+  { ku: 'hezek', tr: 'd. Batak.', desc: 'Batak.' },
+  { ku: 'hezêran', tr: 'd. Haziran.', desc: 'Haziran.' },
+  { ku: 'hez kirin', tr: 'Sevmek. bi hezkirin dan: Sevdirmek.', desc: 'Sevmek. Deyim: bi hezkirin dan (Sevdirmek).' },
+  { ku: 'hezok', tr: 'Titrek.', desc: 'Titrek.' },
+  { ku: 'hezyan', tr: 'Titremek, sarsılmak.', desc: 'Titremek, sarsılmak.' },
+  { ku: 'hêbet', tr: 'Can havli. ji hêbeta: Ölüm korkusundan kaynaklanan güçlü tepkiyle; "can havli ile."', desc: 'Can havli. Örnek: ji hêbeta (can havli ile).' },
+  { ku: 'hêc', tr: 'Çıldıran, sağa sola saldıran, zaptedilemeyen hayvan.', desc: 'Çıldıran, sağa sola saldıran, zaptedilemeyen hayvan.' },
+  { ku: 'hêc bûn', tr: 'Hayvanın çıldırması, sağa sola saldırması.', desc: 'Hayvanın çıldırması, sağa sola saldırması.' },
+  { ku: 'hêcîr', tr: 'd. İncir.', desc: 'İncir.' },
+  { ku: 'hêcîrkerk', tr: 'd. Yabani incir.', desc: 'Yabani incir.' },
+  { ku: 'hêc kirin', tr: 'Hayvanı çıldırtmak, sağa sola saldırmasına neden olmak.', desc: 'Hayvanı çıldırtmak, sağa sola saldırmasına neden olmak.' },
+  { ku: 'hêdî', tr: 'Yavaş.', desc: 'Yavaş.' },
+  { ku: 'hêdî hêdî', tr: 'Yavaş yavaş.', desc: 'Yavaş yavaş.' },
+  { ku: 'hêdîka', tr: 'Yavaşça, yavaş bir şekilde.', desc: 'Yavaşça, yavaş bir şekilde.' },
+  { ku: 'hêdî kirin', tr: 'Yavaşlatmak.', desc: 'Yavaşlatmak.' },
+  { ku: 'hêge', tr: 'd. Eye.', desc: 'Eye.' },
+  { ku: 'hêja', tr: 'Değerli.', desc: 'Değerli.' },
+  { ku: 'hêjandin', tr: 'Sallamak.', desc: 'Sallamak.' },
+  { ku: 'hêj kirin', tr: 'Sallamak.', desc: 'Sallamak.' },
+  { ku: 'hêk', tr: 'd. Yumurta.', desc: 'Yumurta.' },
+  { ku: 'hêkel', tr: 'e. Heykel.', desc: 'Heykel.' },
+  { ku: 'hê ketin', tr: 'Zikredip kendinden geçmek.', desc: 'Zikredip kendinden geçmek.' },
+  { ku: 'hêl (1)', tr: 'd. Taraf, yan, yön.', desc: 'Taraf, yan, yön.' },
+  { ku: 'hêl (2)', tr: 'd. Güç, kuvvet.', desc: 'Güç, kuvvet.' },
+  { ku: 'hêlîn', tr: 'd. Yuva, kuş yuvası.', desc: 'Yuva, kuş yuvası.' },
+  { ku: 'hêlînkew', tr: 'd. Keklik yuvası.', desc: 'Keklik yuvası.' },
+  { ku: 'hêlkan', tr: 'd. Salıncak.', desc: 'Salıncak.' },
+  { ku: 'Hêlwan', tr: 'd. Urfa\'nın Hilvan ilçesi.', desc: 'Urfa\'nın Hilvan ilçesi.' },
+  { ku: 'hêmî', tr: 'Çürüme (giysi, kumaş vb. şeyler için kullanılır.)', desc: 'Çürüme (giysi, kumaş vb. şeyler için kullanılır.)' },
+  { ku: 'hêmî bûn', tr: '(Giysi, kumaş vb.) Çürümek.', desc: '(Giysi, kumaş vb.) Çürümek.' },
+  { ku: 'Hênê', tr: 'd. Diyarbakır\'ın Hani ilçesi.', desc: 'Diyarbakır\'ın Hani ilçesi.' },
+  { ku: 'hênijîn', tr: 'Uyuklamak.', desc: 'Uyuklamak.' },
+  { ku: 'hênî', tr: 'd. (Taş fırlatma şeklinde oynanan oyunlarda) Taşı hedefe atmak için durulan yer.', desc: '(Taş fırlatma şeklinde oynanan oyunlarda) Taşı hedefe atmak için durulan yer.' },
+  { ku: 'hêram', tr: 'Kâbe\'ye girerken hacıların örtündükleri dikişsiz örtü.', desc: 'Kâbe\'ye girerken hacıların örtündükleri dikişsiz örtü.' },
+  { ku: 'hêran', tr: 'Öğütmek.', desc: 'Öğütmek.' },
+  { ku: 'hêrfonek', tr: 'Gevrek.', desc: 'Gevrek.' },
+  { ku: 'hêrifandin', tr: '(Gevrek veya benzeri şeyleri) Ufaltmak, toz haline getirmek. (dihêrifine, bihêrifine)', desc: '(Gevrek veya benzeri şeyleri) Ufaltmak, toz haline getirmek. (Geniş zaman: dihêrifine, emir: bihêrifine)' },
+  { ku: 'hêrifîn', tr: '(Gevrek veya benzeri şeyler) Ufalmak, toz haline gelmek. (dihêrife, bihêrife)', desc: '(Gevrek veya benzeri şeyler) Ufalmak, toz haline gelmek. (Geniş zaman: dihêrife, emir: bihêrife)' },
+  { ku: 'hêrik', tr: 'e. Küçük tepe.', desc: 'Küçük tepe.' },
+  { ku: 'hêrs', tr: 'd. Kızgınlık, öfke. hêrsa wî danîştin: Öfkesi dinmek, sinirleri yatışmak.', desc: 'Kızgınlık, öfke. Deyim: hêrsa wî danîştin (Öfkesi dinmek).' },
+  { ku: 'hêrs bûn', tr: 'Kızmak, öfkelenmek. hêrs ketin: Sinirlenmek..', desc: 'Kızmak, öfkelenmek. Deyim: hêrs ketin (Sinirlenmek).' },
+  { ku: 'hêrs kirin', tr: 'Kızdırmak, öfkelendirmek.', desc: 'Kızdırmak, öfkelendirmek.' },
+  { ku: 'hêrsok', tr: 'Çabuk kızan, çabuk öfkelenen kimse.', desc: 'Çabuk kızan, çabuk öfkelenen kimse.' },
+  { ku: 'hêsir', tr: 'Gözyaşı. hêsir barandin: Hüngür hüngür ağlamak. hêsir bi çava ketin: Duygulandırıcı bir durum ya da olay karşısında gözleri yaşla dolmak; "gözleri yaşarmak". hêsir quraftin: İki gözü iki çeşme ağlamak, hüngür hüngür ağlamak.', desc: 'Gözyaşı. Deyimler: hêsir barandin (Hüngür hüngür ağlamak), hêsir bi çava ketin (gözleri yaşarmak).' },
+  { ku: 'hêsîr', tr: 'Esir.', desc: 'Esir.' },
+  { ku: 'hêsîrtî', tr: 'd. Esirlik.', desc: 'Esirlik.' },
+  { ku: 'hêstir', tr: 'd. Katır.', desc: 'Katır.' },
+  { ku: 'hêşiftî', tr: 'Koyun ve sığırların memelerinde oluşan ve sütlerinin kesilmesine neden olan bir hastalık.', desc: 'Koyun ve sığırların memelerinde oluşan ve sütlerinin kesilmesine neden olan bir hastalık.' },
+  { ku: 'hêşî', tr: 'd. Kurulan çadırın yanı.', desc: 'Kurulan çadırın yanı.' },
+  { ku: 'hêşîg', tr: 'd. Eşik.', desc: 'Eşik.' },
+  { ku: 'hêt', tr: 'd. But.', desc: 'But.' },
+  { ku: 'hêwir', tr: 'Barınma.', desc: 'Barınma.' },
+  { ku: 'hêwirandin', tr: 'Barındırmak. (dıhêwırine, bıhêwırine)', desc: 'Barındırmak. (Geniş zaman: dıhêwırine, emir: bıhêwırine)' },
+  { ku: 'hêwirîn', tr: 'Barınmak. (dihêwire, bihêwire)', desc: 'Barınmak. (Geniş zaman: dihêwire, emir: bihêwire)' },
+  { ku: 'hêzranî', tr: 'e. Bir çeşit kamıştan yapılan baston.', desc: 'Bir çeşit kamıştan yapılan baston.' },
+  { ku: 'hibrî', tr: 'd. İpekli başörtüsü.', desc: 'İpekli başörtüsü.' },
+  { ku: 'hibûbk', tr: 'd. El ve ayak parmağı eklemi.', desc: 'El ve ayak parmağı eklemi.' },
+  { ku: 'hiciz', tr: 'Haciz. hiciz hatin ser: Haciz konmak (bir şeye.)', desc: 'Haciz. Deyim: hiciz hatin ser (Haciz konmak).' },
+  { ku: 'hidet', tr: 'd. Hiddet.', desc: 'Hiddet.' },
+  { ku: 'hi hi', tr: 'Olması beklenen bir şeyin gerçekleşmesi durumunda söylenen ve "işte şimdi tamam", "şimdi oldu işte" anlamına gelen söz.', desc: 'Olması beklenen bir şeyin gerçekleşmesi durumunda söylenen söz.' },
+  { ku: 'hihi', tr: '"Hele hele!", "bak hele!" anlamındaki ünlem.', desc: '"Hele hele!", "bak hele!" anlamındaki ünlem.' },
+  { ku: 'hi ihi', tr: '"Oldu mu şimdi?" "Yaptığını beğendin mi?" anlamındaki söz.', desc: '"Oldu mu şimdi?" "Yaptığını beğendin mi?" anlamındaki söz.' },
+  { ku: 'hijde', tr: 'e. On sekiz.', desc: 'On sekiz.' },
+  { ku: 'hilanîn', tr: '1) Bir şeyi kaldırmak, bir kenara ayırmak veya saklamak. 2) İçine almak, çekmek. birinc avê pir hiltîne: Pirinç çok su çekiyor.', desc: 'Bir şeyi kaldırmak, ayırmak/saklamak veya İçine almak, çekmek. Örnek: birinc avê pir hiltîne: Pirinç çok su çekiyor.' },
+  { ku: 'hilatin', tr: '(Güneş) Doğmak. (hiltê, hilê)', desc: '(Güneş) Doğmak. (Geniş zaman: hiltê, emir: hilê)' },
+  { ku: 'hilatî', tr: 'Kabarık ekmek, ekşi ekmek.', desc: 'Kabarık ekmek, ekşi ekmek.' },
+  { ku: 'hilbijartin', tr: 'Ayıklamak.', desc: 'Ayıklamak.' },
+  { ku: 'hilborîk', tr: 'd. Şamata, curcuna.', desc: 'Şamata, curcuna.' },
+  { ku: 'hildan (1)', tr: 'd. Hareketli oynanan bir folklor oyunu.', desc: 'Hareketli oynanan bir folklor oyunu.' },
+  { ku: 'hildan (2)', tr: 'Kaldırmak.', desc: 'Kaldırmak.' },
+  { ku: 'hilêbî', tr: 'Koyun sağımcısı.', desc: 'Koyun sağımcısı.' },
+  { ku: 'hilfirandin', tr: 'Uçurmak. (hildifirîne, hilfirîne)', desc: 'Uçurmak. (Geniş zaman: hildifirîne, emir: hilfirîne)' },
+  { ku: 'hilfiryan', tr: 'Uçmak. (hildifire, hilfire)', desc: 'Uçmak. (Geniş zaman: hildifire, emir: hilfire)' },
+  { ku: 'hilgirtin', tr: 'Taşımak, yüklemek. (hildigre, hilgire)', desc: 'Taşımak, yüklemek. (Geniş zaman: hildigre, emir: hilgire)' },
+  { ku: 'hilhatin', tr: '1) Yükselmek. dû hiltê: Duman yükseliyor. 2) Sığmak. ce di torbe hilnayê: Arpa torbaya sığmıyor.', desc: 'Yükselmek veya Sığmak. Örnek: dû hiltê: Duman yükseliyor.' },
+  { ku: 'hilhilî', tr: 'Çok yaşlı kimse.', desc: 'Çok yaşlı kimse.' },
+  { ku: 'hilîk', tr: 'Sarı başlı bir koyun cinsi.', desc: 'Sarı başlı bir koyun cinsi.' },
+  { ku: 'hilî (2)', tr: '1) 5-6 Aylık kuzu. 2) Baharın erken gelmesi.', desc: '5-6 Aylık kuzu veya Baharın erken gelmesi.' },
+  { ku: 'hilî (3)', tr: '"Kalk, fırla!" anlamındaki sözcük.', desc: '"Kalk, fırla!" anlamındaki sözcük.' },
+  { ku: 'hilkirin', tr: 'Kaldimak. (hildike, hilke)', desc: 'Kaldırmak. (Geniş zaman: hildike, emir: hilke)' },
+  { ku: 'hilkişandin', tr: 'Çekmek, çekip çıkarmak. (hildikşîne, hilkişîne)', desc: 'Çekmek, çekip çıkarmak. (Geniş zaman: hildikşîne, emir: hilkişîne)' },
+  { ku: 'hilkişyan', tr: '1) Çekilmek, çekip çıkarılmak. 2) Tırmanmak. (hildikşe, hilkişe)', desc: 'Çekilmek, çekip çıkarılmak veya Tırmanmak. (Geniş zaman: hildikşe, emir: hilkişe)' },
+  { ku: 'hilkutan', tr: 'Çakmak, dövmek. (hildikute, hilkute)', desc: 'Çakmak, dövmek. (Geniş zaman: hildikute, emir: hilkute)' },
+  { ku: 'hilkutandin', tr: 'Hoplatmak, sarsmak. (hildikutîne, hilkutine)', desc: 'Hoplatmak, sarsmak. (Geniş zaman: hildikutîne, emir: hilkutine)' },
+  { ku: 'hilm', tr: 'd. 1) Nefes. 2) Buhar.', desc: 'Nefes veya Buhar.' },
+  { ku: 'hilmoşkî', tr: 'Sıcaktan tadı bozulmuş olan yemek vb.', desc: 'Sıcaktan tadı bozulmuş olan yemek vb.' },
+  { ku: 'hilmoşkî bûn', tr: 'Yemek vb. şeylerin sıcaktan tadının bozulması.', desc: 'Yemek vb. şeylerin sıcaktan tadının bozulması.' },
+  { ku: 'hilopirçî', tr: 'Birbirine karışmış olan saç, tüy vb. şeyler.', desc: 'Birbirine karışmış olan saç, tüy vb. şeyler.' },
+  { ku: 'hilpekyan', tr: '1) Aniden tüm hızıyla kaçmak, fırlamak. 2) Şiş olmak, balon gibi şişmek. (hildipeke, hilpeke)', desc: 'Aniden tüm hızıyla kaçmak, fırlamak veya Şiş olmak, balon gibi şişmek. (Geniş zaman: hildipeke, emir: hilpeke)' },
+  { ku: 'hilpifandin', tr: 'Üfleyerek tozunu almak. birincê hildipifinim: pirincin tozunu üfleyerek alıyorum. (hildipifine, hilpifine)', desc: 'Üfleyerek tozunu almak. (Geniş zaman: hildipifine, emir: hilpifine)' },
+  { ku: 'hilqûm', tr: 'd. Can çekişme.', desc: 'Can çekişme.' },
+  { ku: 'hilşandin', tr: 'Yıkmak. (hildişîne, hilşîne)', desc: 'Yıkmak. (Geniş zaman: hildişîne, emir: hilşîne)' },
+  { ku: 'hilşyan', tr: 'Yıkılmak. (hildişe, hilşe)', desc: 'Yıkılmak. (Geniş zaman: hildişe, emir: hilşe)' },
+  { ku: 'hilşyayî', tr: 'Yıkık, yıkılmış olan.', desc: 'Yıkık, yıkılmış olan.' },
+  { ku: 'hilûp', tr: 'Koni, mahrut.', desc: 'Koni, mahrut.' },
+  { ku: 'hilûpî', tr: 'Konik. satila hilûpî: konik bakraç.', desc: 'Konik. Örnek: satila hilûpî: konik bakraç.' },
+  { ku: 'him', tr: 'Hem.', desc: 'Hem.' },
+  { ku: 'himêlî', tr: 'd. Hamayli.', desc: 'Hamayli.' },
+  { ku: 'himêz', tr: 'd. Kucak.', desc: 'Kucak.' },
+  { ku: 'himêz kirin', tr: 'Kucaklamak.', desc: 'Kucaklamak.' },
+  { ku: 'himîn', tr: 'd. Gümbürtü.', desc: 'Gümbürtü.' },
+  { ku: 'hinar', tr: 'd. Nar.', desc: 'Nar.' },
+  { ku: 'hincik', tr: 'd. Taranmamış ve birbirine karışmış olan saçlar. hincê: Saçları taranmamış ve birbirine karışmış olan kız. hinco: Saçları taranmamış ve birbirine karışmış olan erkek.', desc: 'Taranmamış ve birbirine karışmış olan saçlar.' },
+  { ku: 'hincirandin', tr: 'Ezmek, paramparça etmek. (dihincirîne, bihincirîne)', desc: 'Ezmek, paramparça etmek. (Geniş zaman: dihincirîne, emir: bihincirîne)' },
+  { ku: 'hincirîn', tr: 'Ezilmek, paramparça olmak. (dihincire, bihincire)', desc: 'Ezilmek, paramparça olmak. (Geniş zaman: dihincire, emir: bihincire)' },
+  { ku: 'hinda', tr: 'Nezd.', desc: 'Nezd.' },
+  { ku: 'hindik', tr: 'Az. (hindik hindik: Azar azar. hindik mabû: Az daha, az kalsın, hemen hemen olacaktı. hindikê xu: En azından, yoksa yoksa.', desc: 'Az. Örnek: hindik hindik (Azar azar), hindik mabû (Az daha, az kalsın).' },
+  { ku: 'hindik bûn', tr: 'Azalmak.', desc: 'Azalmak.' },
+  { ku: 'hindikî', tr: 'd. Azlık.', desc: 'Azlık.' },
+  { ku: 'hindik kirin', tr: 'Azaltmak.', desc: 'Azaltmak.' },
+  { ku: 'hine', tr: 'd. Kına.', desc: 'Kına.' },
+  { ku: 'hinedaşk', tr: 'd. Kayaların yüzünde biten yosun, yapraklı kara yosunları.', desc: 'Kayaların yüzünde biten yosun, yapraklı kara yosunları.' },
+  { ku: 'hine kirin', tr: 'Kınalamak.', desc: 'Kınalamak.' },
+  { ku: 'hingirîn', tr: 'Kişneme.', desc: 'Kişneme.' },
+  { ku: 'hingirme', tr: 'd. Münakaşa, ağız dalaşı.', desc: 'Münakaşa, ağız dalaşı.' },
+  { ku: 'hingiv', tr: 'd. Bal.', desc: 'Bal.' },
+  { ku: 'hingulisk', tr: 'd. Yüzük.', desc: 'Yüzük.' },
+  { ku: 'hinik', tr: '1) Pis koku, iğrenç koku. 2) Az, biraz, bazı.', desc: 'Pis koku, iğrenç koku veya Az, biraz, bazı.' },
+  { ku: 'hirç', tr: 'd. Ayı.', desc: 'Ayı.' },
+  { ku: 'hirço pirço', tr: 'Saçları, tüyleri, püskülleri vb. şeyleri birbirine karışmış olan herhangi biri veya herhangi bir şey.', desc: 'Saçları, tüyleri, püskülleri vb. şeyleri birbirine karışmış olan herhangi biri veya herhangi bir şey.' },
+  { ku: 'hirhop', tr: 'Hoppa kimse.', desc: 'Hoppa kimse.' },
+  { ku: 'hirî', tr: 'd. Yün.', desc: 'Yün.' },
+  { ku: 'hirîşə', tr: 'Yün yıkayıcısı, yün yıkayan kimse.', desc: 'Yün yıkayıcısı, yün yıkayan kimse.' },
+  { ku: 'hirmî', tr: 'd. Armut.', desc: 'Armut.' },
+  { ku: 'hise', tr: 'd. Hisse.', desc: 'Hisse.' },
+  { ku: 'hisedar', tr: 'Hissedar.', desc: 'Hissedar.' },
+  { ku: 'hisret', tr: 'd. Hasret.', desc: 'Hasret.' },
+  { ku: 'hisretî', tr: 'd. Hasret çeken, hasretlik.', desc: 'Hasret çeken, hasretlik.' },
+  { ku: 'histirî', tr: 'e. Diken.', desc: 'Diken.' },
+  { ku: 'histirîbirk', tr: 'd. Çalı, çırpı, diken vb. şeyleri biçmede kullanılan bir alet.', desc: 'Çalı, çırpı, diken vb. şeyleri biçmede kullanılan bir alet.' },
+  { ku: 'histûn', tr: 'd. Sütun, direk. te histûna dilê min şikand: Sen beni kırdın, gönlümü incittin.', desc: 'Sütun, direk. Örnek: te histûna dilê min şikand: Sen beni kırdın, gönlümü incittin.' },
+  { ku: 'histûr', tr: 'Kaba, kalın.', desc: 'Kaba, kalın.' },
+  { ku: 'histûrî', tr: 'd. Kabalık, kalınlık.', desc: 'Kabalık, kalınlık.' },
+  { ku: 'hiş', tr: '"Sus", "ses çıkarma" anlamındaki sözcük.', desc: '"Sus", "ses çıkarma" anlamındaki sözcük.' },
+  { ku: 'hiş bi', tr: 'Sus! de hiş be lo!: Sus be!', desc: 'Sus! Örnek: de hiş be lo!: Sus be!' },
+  { ku: 'hişin', tr: 'Mavi.', desc: 'Mavi.' },
+  { ku: 'hişin bûn', tr: '1) Mavileşmek. 2) Yeşermek.', desc: 'Mavileşmek veya Yeşermek.' },
+  { ku: 'hişin hatin', tr: 'Yeşermek. diranê pitika me hişin tê: Bebeğimizin dişleri çıkıyor.', desc: 'Yeşermek. Örnek: diranê pitika me hişin tê: Bebeğimizin dişleri çıkıyor.' },
+  { ku: 'hişin kirin', tr: 'Mavileştirmek.', desc: 'Mavileştirmek.' },
+  { ku: 'hişk', tr: 'Kuru. (Pehlevice: huşk, xuşk)', desc: 'Kuru.' },
+  { ku: 'hiş ke', tr: 'Sus! de hiş ke lo!: Sus be!', desc: 'Sus! Örnek: de hiş ke lo!: Sus be!' },
+  { ku: 'hişnayî', tr: 'd. Yeşillik, sebze.', desc: 'Yeşillik, sebze.' },
+  { ku: 'hîcim', tr: 'e. Büyük kaya.', desc: 'Büyük kaya.' },
+  { ku: 'Hîk-hîk', tr: 'd. "Kıs kıs" gülme.', desc: '"Kıs kıs" gülme.' },
+  { ku: 'hîle', tr: 'd. 1) Bilinmez hastalık, maraz. 2) Tiksinti. hîla wî jê çûn: (Birinden) Tiksinmek, nefret etmek. hîla min ji Sîno dihere: Sino\'dan tiksinti duyuyorum.', desc: 'Bilinmez hastalık, maraz veya Tiksinti. Deyim: hîla wî jê çûn (Tiksinmek, nefret etmek).' },
+  { ku: 'hîm', tr: 'e. Temel.', desc: 'Temel.' },
+  { ku: 'hîn (1)', tr: 'Daha, henüz. hîn û hîn: "Ta o zamandan", "daha o tarihten beri."', desc: 'Daha, henüz. Örnek: hîn û hîn: "Ta o zamandan", "daha o tarihten beri."' },
+  { ku: 'hînd', tr: 'Dövüş horozu.', desc: 'Dövüş horozu.' },
+  { ku: 'hînga', tr: 'O halde, o zaman.', desc: 'O halde, o zaman.' },
+  { ku: 'hîngî', tr: '-ken daha. hîngî eyarê te pere dike xanîkî ji wî bixwaze: Daha değerin varken ondan bir ev iste.', desc: '-ken daha. Örnek: hîngî eyarê te pere dike xanîkî ji wî bixwaze: Daha değerin varken ondan bir ev iste.' },
+  { ku: 'hînik', tr: 'Serin.', desc: 'Serin.' },
+  { ku: 'hînik bûn', tr: 'Serinlemek.', desc: 'Serinlemek.' },
+  { ku: 'hînik kirin', tr: 'Serinletmek.', desc: 'Serinletmek.' },
+  { ku: 'hînkayî', tr: 'd. Serinlik.', desc: 'Serinlik.' },
+  { ku: 'hîq-hîq', tr: 'd. Nefessiz kalan birinin çıkardığı sesi anlatmakta kullanılan söz.', desc: 'Nefessiz kalan birinin çıkardığı sesi anlatmakta kullanılan söz.' },
+  { ku: 'hîr-hîr', tr: 'd. Kişneme, kişneyiş.', desc: 'Kişneme, kişneyiş.' },
+  { ku: 'hîro', tr: 'd. Hatmi çiçeği.', desc: 'Hatmi çiçeği.' },
+  { ku: 'hîryan', tr: 'Kişnemek. (dihîre, bihîre)', desc: 'Kişnemek. (Geniş zaman: dihîre, emir: bihîre)' },
+  { ku: 'hîştin', tr: 'Bırakmak.', desc: 'Bırakmak.' },
+  { ku: 'hîtik', tr: 'Tiftik keçisi.', desc: 'Tiftik keçisi.' },
+  { ku: 'hîv', tr: 'd. Ay, gökteki ay. hîva bin ewr: Uzun süre ortalıkta gözükmeyenler için söylenir.', desc: 'Ay, gökteki ay. Deyim: hîva bin ewr (Uzun süre ortalıkta gözükmeyenler için söylenir).' },
+  { ku: 'hîvastin', tr: 'Örmek. (dihîvêse, bihîvêse)', desc: 'Örmek. (Geniş zaman: dihîvêse, emir: bihîvêse)' },
+  { ku: 'hîvî', tr: 'd. Umut, beklenti. hîvya xu birrîn: Umudunu kesmek, artık umutlanmamak. hîvya min ji Xwedê heye...: Umarım..., inşallah...', desc: 'Umut, beklenti. Deyimler: hîvya xu birrîn (Umudunu kesmek), hîvya min ji Xwedê heye... (Umarım..., inşallah...)' },
+  { ku: 'hîvron', tr: 'd. Dolunay.', desc: 'Dolunay.' },
+  { ku: 'hîz', tr: 'e. Yağ tulumu.', desc: 'Yağ tulumu.' },
+  { ku: 'ho', tr: '1) Sığırları güderken kullanılan sözcük. 2) Uzaktaki kimselere seslenirken kullanılan sözcük.', desc: 'Sığırları güderken kullanılan sözcük veya Uzaktaki kimselere seslenirken kullanılan sözcük.' },
+  { ku: 'hoç kirin', tr: 'çd. Kalkmak.', desc: 'Kalkmak. (Çocuk dilinde)' },
+  { ku: 'hogeç', tr: 'e. 2 Yaşındaki koç.', desc: '2 Yaşındaki koç.' },
+  { ku: 'hogir', tr: '1) Alışık. hogirî hev bûn: Biribirine alışmak. hogirî hev kirin: Biribirine alıştırmak. hogirî nimê bûye: Namaza alışmış. 2) Yoldaş, arkadaş.', desc: 'Alışık veya Yoldaş, arkadaş. Örnek: hogirî nimê bûye: Namaza alışmış.' },
+  { ku: 'hogir bûn', tr: 'Alışmak.', desc: 'Alışmak.' },
+  { ku: 'hogir kirin', tr: 'Alıştırmak.', desc: 'Alıştırmak.' },
+  { ku: 'ho ho...', tr: 'Usanç veya sevinç belirten bir ünlem.', desc: 'Usanç veya sevinç belirten bir ünlem.' },
+  { ku: 'hol', tr: 'd. Harman dövme, harman sürme işi.', desc: 'Harman dövme, harman sürme işi.' },
+  { ku: 'hol (2)', tr: 'Harman sürme sırasında harmanı daha çabuk sürmesi için hayvana söylenen sözcük.', desc: 'Harman sürme sırasında hayvana söylenen sözcük.' },
+  { ku: 'hol bûn', tr: 'Hoplamak, zıplamak, sıçramak.', desc: 'Hoplamak, zıplamak, sıçramak.' },
+  { ku: 'holik', tr: 'd. Çoban kulübesi.', desc: 'Çoban kulübesi.' },
+  { ku: 'hol kirin (1)', tr: 'Hoplamak, atlamak. Şero xu holi ser xalî kir: Şero halının üstüne atladı.', desc: 'Hoplamak, atlamak. Örnek: Şero xu holi ser xalî kir: Şero halının üstüne atladı.' },
+  { ku: 'hol kirin (2)', tr: 'Harman dövmek, harman sürmek.', desc: 'Harman dövmek, harman sürmek.' },
+  { ku: 'hophop', tr: 'çd. Araba.', desc: 'Araba. (Çocuk dilinde)' },
+  { ku: 'hophop (2)', tr: 'Develeri durdurmak için söylenir.', desc: 'Develeri durdurmak için söylenir.' },
+  { ku: 'hoqe', tr: 'Bir ağırlık ölçüsü.', desc: 'Bir ağırlık ölçüsü.' },
+  { ku: 'horî', tr: 'd. Huri.', desc: 'Huri.' },
+  { ku: 'hors', tr: 'e. Örs.', desc: 'Örs.' },
+  { ku: 'hoste', tr: 'Usta. (Pehlevice: ostat)', desc: 'Usta.' },
+  { ku: 'hostetî', tr: 'd. Ustalık.', desc: 'Ustalık.' },
+  { ku: 'host', tr: 'Hoşt.', desc: 'Hoşt.' },
+  { ku: 'hov', tr: 'Vahşi.', desc: 'Vahşi.' },
+  { ku: 'hovtî', tr: 'd. Vahşilik.', desc: 'Vahşilik.' },
+  { ku: 'hukim', tr: 'e. Egemenlik, erk, güç. hukmê wî pere kirin: Hükmü (sözü) geçmek, hükmü yetmek.', desc: 'Egemenlik, erk, güç. Deyim: hukmê wî pere kirin (Hükmü geçmek).' },
+  { ku: 'hukimat', tr: 'd. Hükümet.', desc: 'Hükümet.' },
+  { ku: 'hukimdar', tr: 'Hükümdar.', desc: 'Hükümdar.' },
+  { ku: 'hukim kirin', tr: 'Hükmetmek.', desc: 'Hükmetmek.' },
+  { ku: 'hula kirin', tr: 'Yuhlamak, kovmak.', desc: 'Yuhlamak, kovmak.' },
+  { ku: 'hulî', tr: 'd. Hindi.', desc: 'Hindi.' },
+  { ku: 'hulo', tr: 'bkz. "huli"', desc: 'bkz. "huli".' },
+  { ku: 'hundik', tr: 'd. Yumruk.', desc: 'Yumruk.' },
+  { ku: 'hundir', tr: 'İç, içeri. hundir lê qetandin: Ödünü koparmak. te hundir li min qetand/te hundirê min qetand: Ödümü kopardın. hundirê wî xerabûn: Midesi bozulmak. hundir lê qetyan: Ödü kopmak. ji hundir da: İçten, içerden.', desc: 'İç, içeri. Deyimler: hundir lê qetandin (Ödünü koparmak), hundirê wî xerabûn (Midesi bozulmak), hundir lê qetyan (Ödü kopmak).' },
+  { ku: 'hur', tr: 'Tam manasıyla, bütünüyle, tümden, safi, gerçek manasıyla.', desc: 'Tam manasıyla, bütünüyle, tümden, safi, gerçek manasıyla.' },
+  { ku: 'hustu', tr: 'e. Boyun. di hustu da hîştin: Boynunda bırakmak. di hustu ra kirin: 1. Başkasının suçunu ona yüklemek 2. Bir işin sorumluluğunu, ağırlığını ona yüklemek. "üstüne yıkmak." hustu di ber da mayin: Boynu altında kalmak. hustyê xu xwar kirin: Kendisine acındırıcı davranışta bulunmak.', desc: 'Boyun. Deyimler: di hustu da hîştin (Boynunda bırakmak), di hustu ra kirin (Üstüne yıkmak), hustyê xu xwar kirin (Acındırıcı davranışta bulunmak).' },
+  { ku: 'hustukur', tr: 'd. Yaka.', desc: 'Yaka.' },
+  { ku: 'hustuxwar', tr: 'Boynu bükük.', desc: 'Boynu bükük.' },
+  { ku: 'huş', tr: 'Eşek ve katırı durdurmak için kullanılan sözcük.', desc: 'Eşek ve katırı durdurmak için kullanılan sözcük.' },
+  { ku: 'hutik', tr: 'd. Yumruk.', desc: 'Yumruk.' },
+  { ku: 'hut kirin', tr: 'Yumruklamak.', desc: 'Yumruklamak.' },
+  { ku: 'huvde', tr: 'e. On yedi.', desc: 'On yedi.' },
+  { ku: 'hûf kirin', tr: 'Yutmak.', desc: 'Yutmak.' },
+  { ku: 'hû kirin', tr: 'Ağzını yaklaştırıp soluğunu bir şeyin üzerine hızla vermek, hohlamak.', desc: 'Ağzını yaklaştırıp soluğunu bir şeyin üzerine hızla vermek, hohlamak.' },
+  { ku: 'hûn', tr: 'Siz (ikinci çoğul şahıs zamiri.)', desc: 'Siz (ikinci çoğul şahıs zamiri.)' },
+  { ku: 'hûnan', tr: 'Örmek. (dihûne, bihûne)', desc: 'Örmek. (Geniş zaman: dihûne, emir: bihûne)' },
+  { ku: 'hûr', tr: 'e. Mide.', desc: 'Mide.' },
+  { ku: 'hûr (2)', tr: 'Ufak.', desc: 'Ufak.' },
+  { ku: 'hûr bûn', tr: 'Ufalmak.', desc: 'Ufalmak.' },
+  { ku: 'hûrgir', tr: 'İri göbekli kimse.', desc: 'İri göbekli kimse.' },
+  { ku: 'hûrhûrî bûn', tr: 'Unufak olmak.', desc: 'Unufak olmak.' },
+  { ku: 'hûrhûrî kirin', tr: 'Unufak etmek.', desc: 'Unufak etmek.' },
+  { ku: 'hûrik', tr: 'd. Pirinç kırığı, pirinç ufağı.', desc: 'Pirinç kırığı, pirinç ufağı.' },
+  { ku: 'hûrik (2)', tr: 'Ufak, ufacık, küçücük.', desc: 'Ufak, ufacık, küçücük.' },
+  { ku: 'hûr kirin', tr: 'Ufaltmak.', desc: 'Ufaltmak.' },
+  { ku: 'hûrkirî', tr: 'Ufaltılmış veya bozdurulmuş olan.', desc: 'Ufaltılmış veya bozdurulmuş olan.' },
+  { ku: 'hûr mûr', tr: 'Ufak tefek şeyler, öte beri.', desc: 'Ufak tefek şeyler, öte beri.' },
+  { ku: 'hût', tr: 'e. Dev.', desc: 'Dev.' },
+  { ku: 'i', tr: '"Evet" anlamında kullanılan bir sözcük.', desc: '"Evet" anlamında kullanılan bir sözcük.' },
+  { ku: 'icêl', tr: 'd. Bir çeşit kilim.', desc: 'Bir çeşit kilim.' },
+  { ku: 'ilim', tr: 'İlla.', desc: 'İlla.' },
+  { ku: 'ingirîn', tr: 'Darılmak. (diingire, biingire)', desc: 'Darılmak. (Geniş zaman: diingire, emir: biingire)' },
+  { ku: 'inînî/enînî', tr: 'Meydan okuma.', desc: 'Meydan okuma.' },
+  { ku: 'inînî xwestin', tr: 'Meydan okumak.', desc: 'Meydan okumak.' },
+  { ku: 'int-int', tr: 'd. Ikınma, inilti, inleme.', desc: 'Ikınma, inilti, inleme.' },
+  { ku: 'intyan', tr: 'İnlemek veya nefesini içinde tutarak kendini zorlamak; ıkınmak. (diinte, biinte)', desc: 'İnlemek veya nefesini içinde tutarak kendini zorlamak; ıkınmak. (Geniş zaman: diinte, emir: biinte)' },
+  { ku: 'iş (1)', tr: 'Kuru, sert.', desc: 'Kuru, sert.' },
+  { ku: 'İşbihîv', tr: 'd. Bir ağaç çeşidi.', desc: 'Bir ağaç çeşidi.' },
+  { ku: 'iş bûn', tr: 'Kurumak.', desc: 'Kurumak.' },
+  { ku: 'işk', tr: 'Kuru, sert. işk î ola: Kupkuru, pek kuru, çok sert.', desc: 'Kuru, sert. Örnek: işk î ola (Kupkuru, pek kuru, çok sert).' },
+  { ku: 'işka', tr: 'Yüksek sesle.', desc: 'Yüksek sesle.' },
+  { ku: 'işkî', tr: 'd. Kuruluk.', desc: 'Kuruluk.' },
+  { ku: 'işk kirin', tr: 'Kurutmak.', desc: 'Kurutmak.' },
+  { ku: 'işkolekî', tr: 'Kuruca, sertçe.', desc: 'Kuruca, sertçe.' },
+  { ku: 'işkonekî', tr: 'Kuruca, sertçe.', desc: 'Kuruca, sertçe.' },
+  { ku: 'itim', tr: 'Kör.', desc: 'Kör.' },
+  { ku: 'istefila', tr: 'Estağfurullah.', desc: 'Estağfurullah.' },
+  { ku: 'îdî', tr: 'Artık, bundan böyle.', desc: 'Artık, bundan böyle.' },
+  { ku: 'îfade', tr: 'd. İfade. îfada wî girtin: 1. İfadesini almak. 2. Cezasını vermek.', desc: 'İfade. Deyim: îfada wî girtin (İfadesini almak veya Cezasını vermek).' },
+  { ku: 'îftere', tr: 'd. İftira.', desc: 'İftira.' },
+  { ku: 'îjar', tr: 'Bu sefer, bu kez.', desc: 'Bu sefer, bu kez.' },
+  { ku: 'îlancux', tr: 'd. Yılancık hastalığı.', desc: 'Yılancık hastalığı.' },
+  { ku: 'îlehîm', tr: 'İlle.', desc: 'İlle.' },
+  { ku: 'îlela', tr: 'İlallah. îlela kirin: Bıkıp usanmış olmak; "yaka silkmek."', desc: 'İlallah. Deyim: îlela kirin (Bıkıp usanmış olmak; "yaka silkmek").' },
+  { ku: 'îlhes', tr: 'İlle.', desc: 'İlle.' },
+  { ku: 'îlim (2)', tr: 'İlle.', desc: 'İlle.' },
+  { ku: 'îlm', tr: 'e. İlim.', desc: 'İlim.' },
+  { ku: 'îman', tr: 'd. İman. hatin îmanê: 1. İslamlığı benimsemek. 2. Sonunda doğruyu söylemek 3. Önce karşı çıktığı birşeyi kabul edip istenileni yapmak. îmana wî çikandin: (Birini) Çok yormak, (ona) çok sıkıntı vermek imanını gevretmek. îmana wî jê çûn: bkz. "hîla wî jê çûn."', desc: 'İman. Deyimler: hatin îmanê (İslamlığı benimsemek/doğruyu kabul etmek), îmana wî çikandin (Çok yormak).' },
+  { ku: 'îna kirin', tr: 'İnanmak.', desc: 'İnanmak.' },
+  { ku: 'încaz', tr: 'd. Kara erik.', desc: 'Kara erik.' },
+  { ku: 'înciraxî bûn', tr: 'Büyük acı, eziyet ve sıkıntılar çekmek.', desc: 'Büyük acı, eziyet ve sıkıntılar çekmek.' },
+  { ku: 'înciraxî kirin', tr: 'Büyük acı, eziyet ve sıkıntılar çektirmek.', desc: 'Büyük acı, eziyet ve sıkıntılar çektirmek.' },
+  { ku: 'înî', tr: 'd. Cuma.', desc: 'Cuma.' },
+  { ku: 'îpirnî', tr: 'd. Yiyilebilen bir bitki.', desc: 'Yiyilebilen bir bitki.' },
+  { ku: 'îro', tr: 'Bugün.', desc: 'Bugün.' },
+  { ku: 'îroyîn', tr: 'Bugünkü, bugüne ait olan.', desc: 'Bugünkü, bugüne ait olan.' },
+  { ku: 'îs', tr: '"Vay be!" "Vay anasını!" anlamındaki ünlem.', desc: '"Vay be!" "Vay anasını!" anlamındaki ünlem.' },
+  { ku: 'îsal', tr: 'Bu yıl.', desc: 'Bu yıl.' },
+  { ku: 'îskînî', tr: 'd. Hıçkırık.', desc: 'Hıçkırık.' },
+  { ku: 'îskyan', tr: 'Hıçkırmak. (diîske, biîske)', desc: 'Hıçkırmak. (Geniş zaman: diîske, emir: biîske)' },
+  { ku: 'îsot', tr: 'd. Biber.', desc: 'Biber.' },
+  { ku: 'îspatî', tr: 'd. İskambilde, elliiki oyununda sinekli.', desc: 'İskambilde, elliiki oyununda sinekli.' },
+  { ku: 'îspenax', tr: 'd. Ispanak.', desc: 'Ispanak.' },
+  { ku: 'Îspeyî', tr: 'd. Diyarbakır\'daki ünlü Sipahi Çarşısı', desc: 'Diyarbakır\'daki ünlü Sipahi Çarşısı.' },
+  { ku: 'îsteson/istesûn', tr: 'd. İstasyon.', desc: 'İstasyon.' },
+  { ku: 'îstop', tr: 'Stop, durma.', desc: 'Stop, durma.' },
+  { ku: 'îstop kirin', tr: 'Stop etmek.', desc: 'Stop etmek.' },
+  { ku: 'îşela', tr: 'İnşallah.', desc: 'İnşallah.' },
+  { ku: 'îşev', tr: 'Bu gece.', desc: 'Bu gece.' },
+  { ku: 'îşlig', tr: 'e. Gömlek.', desc: 'Gömlek.' },
+  { ku: 'îzin', tr: 'd. İzin. bi îzna Xwedê: Allah\'ın izniyle.', desc: 'İzin. Örnek: bi îzna Xwedê: Allah\'ın izniyle.' },
+  { ku: 'jan', tr: 'd. Sızı.', desc: 'Sızı.' },
+  { ku: 'jana zirav', tr: 'Verem.', desc: 'Verem.' },
+  { ku: 'jan dan', tr: 'Sızlamak, sızı vermek.', desc: 'Sızlamak, sızı vermek.' },
+  { ku: 'jarjor', tr: 'd. Şarjör.', desc: 'Şarjör.' },
+  { ku: 'jan kirin', tr: 'Sızlamak, sızı yapmak.', desc: 'Sızlamak, sızı yapmak.' },
+  { ku: 'jehr', tr: 'd. Zehir.', desc: 'Zehir.' },
+  { ku: 'jehra silêmanî', tr: 'Aşırı acı şeyler için kullanılan bir deyim.', desc: 'Aşırı acı şeyler için kullanılan bir deyim.' },
+  { ku: 'jehrdadayî', tr: 'Zehirlenmiş olan.', desc: 'Zehirlenmiş olan.' },
+  { ku: 'jehrdadayî bûn', tr: 'Zehirlenmek.', desc: 'Zehirlenmek.' },
+  { ku: 'jehrdadayî kirin', tr: 'Zehirlemek.', desc: 'Zehirlemek.' },
+  { ku: 'jehr û ziqûm', tr: 'bkz. "jehra silêmanî"', desc: 'bkz. "jehra silêmanî".' },
+  { ku: 'jendin', tr: 'Ditmek, pamuk yün gibi nesneleri tellere ayırıp kabartmak. (dijene, bijene)', desc: 'Ditmek, pamuk yün gibi nesneleri tellere ayırıp kabartmak. (Geniş zaman: dijene, emir: bijene)' },
+  { ku: 'jê', tr: '-den, -dan, ondan. jê birin: (Oyun vb. şeyler için) Yutmak, kazanmak. jê da ketin: -den düşmek. jê da xistin: -den düşürmek. jê danîn: -den düşürmek, -den indirmek, fiyatını düşürmek. jê geribîn: İlişmemek, karışmamak, rahat bırakmak. Beko ji min nageribe: Beko beni rahat bırakmıyor. Beko bana karışıyor. jê geryan: bkz. "jê geribîn". jê hewyan: İlişmemek, karışmamak, rahat bırakmak. Beko ji min nahewe: Beko beni rahat bırakmıyor. Beko bana karışıyor. jê sar bûn: (Birinden veya bir şeyden) Soğumak. jê vebûn: -den kesilmek, -den soğumak, canı veya iştahı (onu) çekmez olmak. ez ji goșt vebûme: Etten soğumuşum. jê veqetandin: -den ayırmak. jê xwîn verşiyan: (Ondan) Aşırı nefret etmek.', desc: '-den, -dan, ondan. Deyimler: jê birin (yutmak, kazanmak), jê sar bûn (soğumak), jê vebûn (canı çekmez olmak), jê xwîn verşiyan (aşırı nefret etmek).' },
+  { ku: 'jêbûn', tr: 'Kesilmek.', desc: 'Kesilmek.' },
+  { ku: 'jêhatî', tr: 'Becerikli.', desc: 'Becerikli.' },
+  { ku: 'jêkirin', tr: 'Kesmek.', desc: 'Kesmek.' },
+  { ku: 'jêlî', tr: 'Aşağı, aşağıdan, aşağı taraftan.', desc: 'Aşağı, aşağıdan, aşağı taraftan.' },
+  { ku: 'jêr', tr: 'Aşağı.', desc: 'Aşağı.' },
+  { ku: 'jêrin', tr: 'Aşağı taraftaki, aşağıya ait olan.', desc: 'Aşağı taraftaki, aşağıya ait olan.' },
+  { ku: 'ji', tr: '-den, -dan, -le, -leyin.', desc: '-den, -dan, -le, -leyin.' },
+  { ku: 'ji ber çûn', tr: 'Düşük yapmak. gede ji ber Sarê çûye: Sarê düşük yapmış.', desc: 'Düşük yapmak. Örnek: gede ji ber Sarê çûye: Sarê düşük yapmış.' },
+  { ku: 'ji bo', tr: 'İçin.', desc: 'İçin.' },
+  { ku: 'ji bona', tr: 'İçin.', desc: 'İçin.' },
+  { ku: 'ji hev', tr: 'Birbirinden. ji hev bûn: Birbirinden ayrılmak. ji hev da ketin: Demonte olmak. ji hev da xistin: Demonte etmek, parçalarını birbirinden ayırmak. ji hev gerandin: Birbirinden ayırmak, ayırt etmek. wan ji hev bigerîne: Onları birbirinden ayır. Xwedê Asê û Zînê ji hev gerandîye: Tanrı Asê ile Zinê\'yi birbirinden ayırt etmiş. ji hev kirin: Birbirinden ayırmak. ji hev safi bûn: Ayrışmak, saflaşmak....', desc: 'Birbirinden. Deyimler: ji hev bûn (ayrılmak), ji hev da ketin/xistin (demonte olmak/etmek), ji hev gerandin (ayırmak).' },
+  { ku: 'jijo', tr: 'Kirpi.', desc: 'Kirpi.' },
+  { ku: 'jimartin', tr: 'Saymak. (dijmêre, bijmêre)', desc: 'Saymak. (Geniş zaman: dijmêre, emir: bijmêre)' },
+  { ku: 'ji nêz da', tr: 'Açlıktan.', desc: 'Açlıktan.' },
+  { ku: 'jin', tr: 'd. Kadın.', desc: 'Kadın.' },
+  { ku: 'jinbî', tr: 'd. Dul kadın.', desc: 'Dul kadın.' },
+  { ku: 'jinik', tr: 'd. Kadın.', desc: 'Kadın.' },
+  { ku: 'jintî', tr: 'd. Kadın elti.', desc: 'Kadın elti.' },
+  { ku: 'jinxal', tr: 'd. Dayı karısı.', desc: 'Dayı karısı.' },
+  { ku: 'ji pez', tr: 'İrade dışı, bilinç dışı.', desc: 'İrade dışı, bilinç dışı.' },
+  { ku: 'ji pezn', tr: 'İrade dışı, bilinç dışı. ji pezna qisa dike: İrade dışı konuşuyor, sayıklıyor.', desc: 'İrade dışı, bilinç dışı. Örnek: ji pezna qisa dike: İrade dışı konuşuyor, sayıklıyor.' },
+  { ku: 'jirgî', tr: '-den beri. jirgî tu hatîyî Sîno qet rehet nasekine: Sen geldiğinden beridir Sino hiç rahat durmuyor.', desc: '-den beri. Örnek: jirgî tu hatîyî Sîno qet rehet nasekine: Sen geldiğinden beridir Sino hiç rahat durmuyor.' },
+  { ku: 'jirra', tr: 'Ciddi, sahi.', desc: 'Ciddi, sahi.' },
+  { ku: 'jixu', tr: 'Zaten.', desc: 'Zaten.' },
+  { ku: 'ji xu', tr: 'Kendinden.', desc: 'Kendinden.' },
+  { ku: 'ji xu kirin', tr: '(Giysiyi) Üzerinden çıkarmak, soymak.', desc: '(Giysiyi) Üzerinden çıkarmak, soymak.' },
+  { ku: 'jî', tr: 'De, dahi.', desc: 'De, dahi.' },
+  { ku: 'jîk', tr: 'e. Direk, kiriş.', desc: 'Direk, kiriş.' },
+  { ku: 'jolî', tr: 'Yukarıdan, yukarı taraftan. ew ji jolî tê: O yukarıdan geliyor.', desc: 'Yukarıdan, yukarı taraftan. Örnek: ew ji jolî tê: O yukarıdan geliyor.' },
+  { ku: 'jor', tr: 'Yukarı.', desc: 'Yukarı.' },
+  { ku: 'jorin', tr: 'Yukarıya ait olan, yukarı taraftaki.', desc: 'Yukarıya ait olan, yukarı taraftaki.' },
+  { ku: 'ka', tr: 'bkz. "kanê"', desc: 'bkz. "kanê".' },
+  { ku: 'ka (2)', tr: 'd. Saman.', desc: 'Saman.' },
+  { ku: 'kab', tr: 'd. Aşık kemiği ve aşık kemiğiyle oynanan oyun.', desc: 'Aşık kemiği ve aşık kemiğiyle oynanan oyun.' },
+  { ku: 'kabgawir', tr: 'Aşık kemiğiyle oynanan bir çeşit oyun.', desc: 'Aşık kemiğiyle oynanan bir çeşit oyun.' },
+  { ku: 'kabok', tr: 'd. Diz.', desc: 'Diz.' },
+  { ku: 'kadiz', tr: 'd. Samanyolu.', desc: 'Samanyolu.' },
+  { ku: 'kadîn', tr: 'd. Samanlık.', desc: 'Samanlık.' },
+  { ku: 'kakil', tr: 'Ceviz, badem gibi şeylerin içi.', desc: 'Ceviz, badem gibi şeylerin içi.' },
+  { ku: 'kal (1)', tr: 'Çiğ (meyve, yemiş gibi şeyler.)', desc: 'Çiğ (meyve, yemiş gibi şeyler.)' },
+  { ku: 'kal (2)', tr: 'Yaşlı, ihtiyar adam.', desc: 'Yaşlı, ihtiyar adam.' },
+  { ku: 'kalan', tr: 'e. Kın.', desc: 'Kın.' },
+  { ku: 'kalanî', tr: 'd.Enli, yassı ve kaba bıçak.', desc: 'Enli, yassı ve kaba bıçak.' },
+  { ku: 'kal bûn', tr: 'İhtiyarlamak, yaşlanmak.', desc: 'İhtiyarlamak, yaşlanmak.' },
+  { ku: 'kalik', tr: 'e. Dede.', desc: 'Dede.' },
+  { ku: 'kalî', tr: 'd. 1) İhtiyarlık, yaşlılık 2) Çiğlik.', desc: 'İhtiyarlık, yaşlılık veya Çiğlik.' },
+  { ku: 'kalîn', tr: 'Melemek. (dikale, bikale)', desc: 'Melemek. (Geniş zaman: dikale, emir: bikale)' },
+  { ku: 'kal-kal', tr: 'd. Meleme, koyunların "me" diye çıkardıkları ses.', desc: 'Meleme, koyunların "me" diye çıkardıkları ses.' },
+  { ku: 'kalo', tr: 'Dedeye hitap şekli.', desc: 'Dedeye hitap şekli.' },
+  { ku: 'kalo (2)', tr: 'e. Uğurböceği.', desc: 'Uğurböceği.' },
+  { ku: 'kalome', tr: '1) Yaşlı ve güçlü kuvvetli erkek. 2) Eski bıçak, kılıç vb. şeyler.', desc: 'Yaşlı ve güçlü kuvvetli erkek veya Eski bıçak, kılıç vb. şeyler.' },
+  { ku: 'kalşûv', tr: 'd. Nadas süresi bittikten sonra sürülüp ekilen tarla.', desc: 'Nadas süresi bittikten sonra sürülüp ekilen tarla.' },
+  { ku: 'kalxenî', tr: 'd. Bir çeşit yemek.', desc: 'Bir çeşit yemek.' },
+  { ku: 'kalyan', tr: 'Melemek. (dikale, bikale)', desc: 'Melemek. (Geniş zaman: dikale, emir: bikale)' },
+  { ku: 'kamaş', tr: 'd. Yeşilken koparılıp kurutulan tütün.', desc: 'Yeşilken koparılıp kurutulan tütün.' },
+  { ku: 'kanê', tr: '"Nerde" "Hani?" anlamındaki sözcük.', desc: '"Nerde" "Hani?" anlamındaki sözcük.' },
+  { ku: 'kanî', tr: 'd. 1) Pınar. 2) Sapan.', desc: 'Pınar veya Sapan.' },
+  { ku: 'kanîn', tr: 'Edebilmek, yapabilmek. nikane bi kerê, bi daşikê kane: Büyüklerden birine kızıp da ondan alamadığı hıncını kendisinden daha zayıf olandan (veya çevresindekilerden) çıkarmaya çalışanları anlatır. nikane qûna xu ji erdê rake: Hantal, şişman veya tembel insanlar için söylenir. (ez kanim, ez ê bikanibim, tu dikanî)', desc: 'Edebilmek, yapabilmek. Deyimler: nikane bi kerê, bi daşikê kane (hıncını zayıftan çıkarmak), nikane qûna xu ji erdê rake (hantal, tembel insanlar için söylenir).' },
+  { ku: 'kanûn', tr: 'd. Aralık ve ocak aylarının ortak adı.', desc: 'Aralık ve ocak aylarının ortak adı.' },
+  { ku: 'kapek', tr: 'd. Kepek.', desc: 'Kepek.' },
+  { ku: 'kapik', tr: 'İpten bir parça.', desc: 'İpten bir parça.' },
+  { ku: 'kapol', tr: 'd. Çok ufak saman, toz halindeki saman.', desc: 'Çok ufak saman, toz halindeki saman.' },
+  { ku: 'kar (1)', tr: 'Oğlak.', desc: 'Oğlak.' },
+  { ku: 'kar (2)', tr: 'd. Kâr, kazanç.', desc: 'Kâr, kazanç.' },
+  { ku: 'kar (3)', tr: 'e. İş, çalışma.', desc: 'İş, çalışma.' },
+  { ku: 'karçî', tr: 'Çalışkan.', desc: 'Çalışkan.' },
+  { ku: 'karik', tr: 'çd. Oğlak.', desc: 'Oğlak. (Çocuk dilinde)' },
+  { ku: 'karî', tr: 'd. Yılanyastığı otu.', desc: 'Yılanyastığı otu.' },
+  { ku: 'karîn', tr: 'Acıyla bağırmak. (dikare, bikare)', desc: 'Acıyla bağırmak. (Geniş zaman: dikare, emir: bikare)' },
+  { ku: 'karkir', tr: 'İşçi.', desc: 'İşçi.' },
+  { ku: 'kar kirin (1)', tr: '1) İş yapmak, çalışmak. 2) Tesir etmek, para etmek.', desc: 'İş yapmak, çalışmak veya Tesir etmek, para etmek.' },
+  { ku: 'karrî', tr: 'Uyuz ve uyuzlu.', desc: 'Uyuz ve uyuzlu.' },
+  { ku: 'kartol', tr: 'd. Patates.', desc: 'Patates.' },
+  { ku: 'kar û hal', tr: 'e. İş güç, meşguliyet.', desc: 'İş güç, meşguliyet.' },
+  { ku: 'karvan', tr: 'Oğlak çobanı.', desc: 'Oğlak çobanı.' },
+  { ku: 'karwan', tr: 'e. Kervan.', desc: 'Kervan.' },
+  { ku: 'karya gulika', tr: 'Yılanyastığı otunun bir cinsi.', desc: 'Yılanyastığı otunun bir cinsi.' },
+  { ku: 'karyan', tr: 'Acıyla bağırmak. (dikare, bikare)', desc: 'Acıyla bağırmak. (Geniş zaman: dikare, emir: bikare)' },
+  { ku: 'karya zinara', tr: 'Yılanyastığı otunun bir cinsi.', desc: 'Yılanyastığı otunun bir cinsi.' },
+  { ku: 'kaş', tr: 'e. Dik yokuş.', desc: 'Dik yokuş.' },
+  { ku: 'kaş kirin', tr: 'Çekmek, sürükleyerek çekmek.', desc: 'Çekmek, sürükleyerek çekmek.' },
+  { ku: 'kat', tr: 'd. Ekinler biçilirken tarlaya dökülen tanelerden ertesi yıl kendiliğinden yetişen ekin, halaza.', desc: 'Ekinler biçilirken tarlaya dökülen tanelerden ertesi yıl kendiliğinden yetişen ekin, halaza.' },
+  { ku: 'katib', tr: 'Kâtip.', desc: 'Kâtip.' },
+  { ku: 'katik', tr: 'd. Halaza.', desc: 'Halaza.' },
+  { ku: 'kavir', tr: '2 Yaşındaki koyun, şişek.', desc: '2 Yaşındaki koyun, şişek.' },
+  { ku: 'kaxet', tr: 'd. Kâğıt.', desc: 'Kâğıt.' },
+  { ku: 'kaxetîn', tr: 'Kâğıttan yapılmış olan.', desc: 'Kâğıttan yapılmış olan.' },
+  { ku: 'kayik', tr: 'd. Geviş.', desc: 'Geviş.' },
+  { ku: 'kayin', tr: 'Geviş getirmek. (dikaye, bikaye)', desc: 'Geviş getirmek. (Geniş zaman: dikaye, emir: bikaye)' },
+  { ku: 'keç', tr: 'd. Kız.', desc: 'Kız.' },
+  { ku: 'keçel', tr: 'Kel.', desc: 'Kel.' },
+  { ku: 'keçel bûn', tr: 'Kelleşmek.', desc: 'Kelleşmek.' },
+  { ku: 'keçelî', tr: 'd. Kellik.', desc: 'Kellik.' },
+  { ku: 'keçik', tr: 'd. Kız.', desc: 'Kız.' },
+  { ku: 'keçiktî', tr: 'd. Kızlık, kız olma durumu.', desc: 'Kızlık, kız olma durumu.' },
+  { ku: 'ked', tr: 'd. Emek.', desc: 'Emek.' },
+  { ku: 'keda enîyê', tr: 'Öz emek.', desc: 'Öz emek.' },
+  { ku: 'kedik', tr: 'd. Küçük ayran tulumu.', desc: 'Küçük ayran tulumu.' },
+  { ku: 'kedî', tr: 'Evcil.', desc: 'Evcil.' },
+  { ku: 'kedî bûn', tr: 'Evcilleşmek.', desc: 'Evcilleşmek.' },
+  { ku: 'kedî kirin', tr: 'Evcilleştirmek.', desc: 'Evcilleştirmek.' },
+  { ku: 'kef (1)', tr: 'd. 1) Köpük. 2) Avuç içi, aya.', desc: 'Köpük veya Avuç içi, aya.' },
+  { ku: 'kef dan', tr: 'Köpük vermek, köpürmek.', desc: 'Köpük vermek, köpürmek.' },
+  { ku: 'kefenê mara', tr: 'Yılan gömleği.', desc: 'Yılan gömleği.' },
+  { ku: 'keftar', tr: 'e. Sırtlan.', desc: 'Sırtlan.' },
+  { ku: 'kefz/kevz', tr: 'd. Kurbağa köpüğü, yosun.', desc: 'Kurbağa köpüğü, yosun.' },
+  { ku: 'kej', tr: 'Sarışın.', desc: 'Sarışın.' },
+  { ku: 'kejî', tr: 'd. (Kadınlarda) Kuşak, bele bağlanan kuşak.', desc: 'Kuşak, bele bağlanan kuşak (kadınlarda).' },
+  { ku: 'kek', tr: 'e. Ağabey.', desc: 'Ağabey.' },
+  { ku: 'keke (1)', tr: 'çd. Ağabey.', desc: 'Ağabey. (Çocuk dilinde)' },
+  { ku: 'keke (2)', tr: 'Kekeme.', desc: 'Kekeme.' },
+  { ku: 'kekej', tr: 'Kekeme.', desc: 'Kekeme.' },
+  { ku: 'kekemî', tr: 'd. Nezle.', desc: 'Nezle.' },
+  { ku: 'kekibe', tr: 'Meydan okuma.', desc: 'Meydan okuma.' },
+  { ku: 'kekibe xwestin', tr: 'Meydan okumak.', desc: 'Meydan okumak.' },
+  { ku: 'kekir', tr: 'çd. Şeker.', desc: 'Şeker. (Çocuk dilinde)' },
+  { ku: 'keko', tr: 'Ağabeye hitap şekli.', desc: 'Ağabeye hitap şekli.' },
+  { ku: 'kel', tr: 'd. Kaynama.', desc: 'Kaynama.' },
+  { ku: 'kela', tr: 'd. Kale.', desc: 'Kale.' },
+  { ku: 'kelandin', tr: 'Kaynatmak.', desc: 'Kaynatmak.' },
+  { ku: 'kelbitan', tr: 'd. Kerpeten.', desc: 'Kerpeten.' },
+  { ku: 'kelboqî', tr: 'Kolay çözülebilen düğüm.', desc: 'Kolay çözülebilen düğüm.' },
+  { ku: 'keldiz', tr: 'd. Haydut ini, hırsız kalesi.', desc: 'Haydut ini, hırsız kalesi.' },
+  { ku: 'kelem', tr: 'd. Lahana.', desc: 'Lahana.' },
+  { ku: 'keleş', tr: 'Fedai.', desc: 'Fedai.' },
+  { ku: 'keleşkof', tr: 'd. Kalaşnikof.', desc: 'Kalaşnikof.' },
+  { ku: 'kel-kel', tr: 'd. Kaynamayı veya aşırı sıcaklığı anlatan söz.', desc: 'Kaynamayı veya aşırı sıcaklığı anlatan söz.' },
+  { ku: 'kelmê', tr: 'Sık sık altını ıslatan kız çocuğu.', desc: 'Sık sık altını ıslatan kız çocuğu.' },
+  { ku: 'kelmêş', tr: 'd. Sivrisinek.', desc: 'Sivrisinek.' },
+  { ku: 'kelmîzek', tr: 'Sık sık altını ıslatan çocuk.', desc: 'Sık sık altını ıslatan çocuk.' },
+  { ku: 'kelmkarî', tr: 'Eski püskü olmuş, çürümüş, işe yaramaz hale gelmiş olan eşya vb.', desc: 'Eski püskü olmuş, çürümüş, işe yaramaz hale gelmiş olan eşya vb.' },
+  { ku: 'kelmkarî bûn', tr: 'Eski püskü hale gelmek, çürümek, işe yaramaz hale gelmek.', desc: 'Eski püskü hale gelmek, çürümek, işe yaramaz hale gelmek.' },
+  { ku: 'kelmo', tr: 'Sık sık altını ıslatan erkek çocuk.', desc: 'Sık sık altını ıslatan erkek çocuk.' },
+  { ku: 'kelogirî', tr: 'Yarı ağlamaklı olma durumu.', desc: 'Yarı ağlamaklı olma durumu.' },
+  { ku: 'kelogirî bûn', tr: 'Yarı ağlamaklı olmak.', desc: 'Yarı ağlamaklı olmak.' },
+  { ku: 'kelogirî kirin', tr: 'Yarı ağlamaklı hale getirmek.', desc: 'Yarı ağlamaklı hale getirmek.' },
+  { ku: 'keloşk', tr: 'd. Kale harabesi.', desc: 'Kale harabesi.' },
+  { ku: 'kelox', tr: 'Etsiz, cılız hayvan.', desc: 'Etsiz, cılız hayvan.' },
+  { ku: 'kelpîç', tr: 'e. Kerpiç.', desc: 'Kerpiç.' },
+  { ku: 'kelxwî', tr: 'Ani gelen terleme, aniden bastıran terleme.', desc: 'Ani gelen terleme, aniden bastıran terleme.' },
+  { ku: 'kelyan', tr: 'Kaynamak.', desc: 'Kaynamak.' },
+  { ku: 'kember', tr: 'd. 1) Kemer. 2) Yabani gül.', desc: 'Kemer veya Yabani gül.' },
+  { ku: 'kemêl', tr: 'd. Koyun, keçi gibi hayvanların kuyruk altındaki kıllarına takılıp kuruyan pislik; çakıldak.', desc: 'Koyun, keçi gibi hayvanların kuyruk altındaki kıllarına takılıp kuruyan pislik; çakıldak.' },
+  { ku: 'kemilîn', tr: 'Olgunlaşmak.', desc: 'Olgunlaşmak.' },
+  { ku: 'kem kirin', tr: 'Kılları, tüyleri kesmek, kısaltmak.', desc: 'Kılları, tüyleri kesmek, kısaltmak.' },
+  { ku: 'ken', tr: 'e. Gülüş. bûn kenê xelkê: El alemin eğlenip alay ettiği biri durumuna düşmek. ji kena iş (hişk) bûn: Gülmekten kırılmak. kenkî da ser min: Gülme tuttu beni. ji kena rwîvî di zik da neman: Gülmekten kırılmak. kenê wî hatin: Gülesi gelmek:', desc: 'Gülüş. Deyimler: bûn kenê xelkê (Alay konusu olmak), ji kena iş (hişk) bûn (Gülmekten kırılmak), kenê wî hatin (Gülesi gelmek).' },
+  { ku: 'kenandin', tr: 'Güldürmek.', desc: 'Güldürmek.' },
+  { ku: 'kenar', tr: 'e. Kenar.', desc: 'Kenar.' },
+  { ku: 'kendal', tr: 'd. Bayır.', desc: 'Bayır.' },
+  { ku: 'kenêr', tr: 'd. Sedir ağacı.', desc: 'Sedir ağacı.' },
+  { ku: 'kenîfe', tr: 'd. Hela, tuvalet.', desc: 'Hela, tuvalet.' },
+  { ku: 'kenîn', tr: 'Gülmek.', desc: 'Gülmek.' },
+  { ku: 'kenyan', tr: 'Gülmek.', desc: 'Gülmek.' },
+  { ku: 'kepir', tr: 'Sert toprak.', desc: 'Sert toprak.' },
+  { ku: 'kepiro', tr: 'Bir cins kumaş.', desc: 'Bir cins kumaş.' },
+  { ku: 'ker (1)', tr: 'Eşek. kerê pîr hefsarê rengîn: Gereksiz özenti ve gösterişi anlatır. kerajo: Eşek sürücüsü.', desc: 'Eşek. Deyim: kerê pîr hefsarê rengîn (Gereksiz özenti ve gösterişi anlatır).' },
+  { ku: 'kerajo', tr: 'Eşek sürücüsü.', desc: 'Eşek sürücüsü.' },
+  { ku: 'kerax', tr: 'Pirinç tarlasına bakıp gözetleyen görevli.', desc: 'Pirinç tarlasına bakıp gözetleyen görevli.' },
+  { ku: 'kerb', tr: 'd. Üzüntü. ez ji kerba nexweş ketim: Üzüntüden hastalandım.', desc: 'Üzüntü. Örnek: ez ji kerba nexweş ketim: Üzüntüden hastalandım.' },
+  { ku: 'kerbe', tr: 'Kehribar.', desc: 'Kehribar.' },
+  { ku: 'kerbeşk', tr: 'd. Yiyilebilen dikenli bir bitki.', desc: 'Yiyilebilen dikenli bir bitki.' },
+  { ku: 'kerdiz', tr: 'Eşek hırsızı.', desc: 'Eşek hırsızı.' },
+  { ku: 'kerdî', tr: 'd. "mişar"ın yuvarlak olanı ("mişar" sözcüğüne bakınız.)', desc: 'Dairesel "mişar" (bkz. "mişar").' },
+  { ku: 'kerem', tr: 'd. Lütuf.', desc: 'Lütuf.' },
+  { ku: 'kerem kirin', tr: 'Lütfetmek.', desc: 'Lütfetmek.' },
+  { ku: 'kereng', tr: 'e. Kenger.', desc: 'Kenger.' },
+  { ku: 'kerê (2)', tr: '(Kadınlar için) Hey, behey, yahu. kerê tu tu: (Kadınlar için) "Gördün mü gününü!" anlamındaki söz.', desc: '(Kadınlar için) Hitap kelimesi. Örnek: kerê tu tu (Gördün mü gününü!).' },
+  { ku: 'kerge', tr: 'd. Üzüm kaynatma kazanı.', desc: 'Üzüm kaynatma kazanı.' },
+  { ku: 'kerî', tr: 'e. Koyun sürüsü.', desc: 'Koyun sürüsü.' },
+  { ku: 'kerkere', tr: 'İriyarı kimse.', desc: 'İriyarı kimse.' },
+  { ku: 'kerkon', tr: 'e.Eskimiş, eski püskü hale gelmiş çadır.', desc: 'Eskimiş, eski püskü hale gelmiş çadır.' },
+  { ku: 'kerme', tr: 'e. Ahır ve ağıllarda kuruyan gübre parçaları.', desc: 'Ahır ve ağıllarda kuruyan gübre parçaları.' },
+  { ku: 'kero (2)', tr: '(Erkekler için) Behey, be, yahu. kero tu tu: (Erkekler için) "Gördün mü gününü!" anlamındaki söz.', desc: '(Erkekler için) Hitap kelimesi. Örnek: kero tu tu (Gördün mü gününü!).' },
+  { ku: 'kerr', tr: 'Sağır. bi kerr û lalî: Kimsenin ruhu bile duymadan, sessiz sedasız bir biçimde.', desc: 'Sağır. Deyim: bi kerr û lalî (Sessiz sedasız bir biçimde).' },
+  { ku: 'kerr bûn', tr: 'Sağırlaşmak.', desc: 'Sağırlaşmak.' },
+  { ku: 'kerr kirin', tr: 'Sağırlaştırmak.', desc: 'Sağırlaştırmak.' },
+  { ku: 'kerre', tr: 'Çok iri, azman.', desc: 'Çok iri, azman.' },
+  { ku: 'kerrî', tr: 'd. Sağırlık.', desc: 'Sağırlık.' },
+  { ku: 'kertal', tr: 'e. Kenger kurusu.', desc: 'Kenger kurusu.' },
+  { ku: 'kertî', tr: 'd. Eşeklik.', desc: 'Eşeklik.' },
+  { ku: 'kerxane', tr: 'd. Genelev.', desc: 'Genelev.' },
+  { ku: 'kes', tr: 'Kimse. kes nabê dewê min tirş e: Herkes sattığı malı, herkes kendi işini, tutumunu ve davranışını över.', desc: 'Kimse. Deyim: kes nabê dewê min tirş e (Herkes kendi malını/işini över).' },
+  { ku: 'keser', tr: 'd. İç çekmesi.', desc: 'İç çekmesi.' },
+  { ku: 'kesîre', tr: 'Zavallı, kendi halinde kimse.', desc: 'Zavallı, kendi halinde kimse.' },
+  { ku: 'kesk', tr: 'Yeşil.', desc: 'Yeşil.' },
+  { ku: 'kevanî', tr: 'd. Ev hanımı.', desc: 'Ev hanımı.' },
+  { ku: 'kevantî', tr: 'd. Ev hanımlığı.', desc: 'Ev hanımlığı.' },
+  { ku: 'kesk bûn', tr: 'Yeşil olmak.', desc: 'Yeşil olmak.' },
+  { ku: 'kevir', tr: 'e. Taş.', desc: 'Taş.' },
+  { ku: 'kevirê hedê', tr: 'Mezarda, ölünün başı üstüne gelecek şekilde enlemesine bırakılan uzun ve yassı taş.', desc: 'Mezarda, ölünün başı üstüne gelecek şekilde enlemesine bırakılan uzun ve yassı taş.' },
+  { ku: 'kevirê hesta', tr: 'Çakmak taşı.', desc: 'Çakmak taşı.' },
+  { ku: 'kevirhêr', tr: 'Taş öğütücü, taş öğüten makine.', desc: 'Taş öğütücü, taş öğüten makine.' },
+  { ku: 'keskî', tr: 'd. Yeşillik, yeşil olma durumu.', desc: 'Yeşillik, yeşil olma durumu.' },
+  { ku: 'kesk kirin', tr: 'Yeşil etmek.', desc: 'Yeşil etmek.' },
+  { ku: 'keskûsor', tr: 'd. Gökkuşağı.', desc: 'Gökkuşağı.' },
+  { ku: 'kespik', tr: 'd. Nazar boncuğu.', desc: 'Nazar boncuğu.' },
+  { ku: 'kesp û kar', tr: 'e. İş, iş güç, hizmet.', desc: 'İş, iş güç, hizmet.' },
+  { ku: 'kesrewan', tr: 'd. Bir cins kadın başörtüsü.', desc: 'Bir cins kadın başörtüsü.' },
+  { ku: 'keşîş', tr: 'e. Papaz.', desc: 'Papaz.' },
+  { ku: 'keşke', tr: 'd. Bir yemek çeşidi.', desc: 'Bir yemek çeşidi.' },
+  { ku: 'ketin', tr: 'Düşmek. bi hev ketin: Aralarında anlaşmazlık çıkmak, birbirine düşmek. bi ser av û arê ketim: Delirmek, çıldırmak. ketin ber desta: Yaşlılık, sakatlık gibi nedenlerle çalışma gücünü yitirip yaşamını tek başına yürütememek, düşkünleşmek. ketin bextê wî: bkz. "ketin dexlê wî". ketin destê hev: El ele tutuşmak. ketin dexlê wî: (Ona) Koruması için sığınmak ya da ondan yardım istemek; "ocağına düşmek". ketin hefsê/hepsê: Suçlu bulunup cezaevine konmak; hapse girmek. ketin qirika hev: Kavga etmek; boğaz boğaza gelmek. ketin serê wî: Kafasına yatmak. tiştê gi te go ket serê min: Söylediğin şey kafama yattı. ketin şikê: Kuşkuya düşmek, şüphelenmek.', desc: 'Düşmek. Deyimler: bi hev ketin (birbirine düşmek), ketin ber desta (düşkünleşmek), ketin dexlê wî (ocağına düşmek), ketin qirika hev (kavga etmek), ketin serê wî (kafasına yatmak), ketin şikê (kuşkuya düşmek).' },
+  { ku: 'kevn', tr: 'Eski.', desc: 'Eski.' },
+  { ku: 'kevnar', tr: 'Eski, antik.', desc: 'Eski, antik.' },
+  { ku: 'kevn bûn', tr: 'Eskimek.', desc: 'Eskimek.' },
+  { ku: 'kevnî', tr: 'd. Eskilik.', desc: 'Eskilik.' },
+  { ku: 'kevn kirin', tr: 'Eskitmek.', desc: 'Eskitmek.' },
+  { ku: 'kevn û kot', tr: 'Eskimiş eşya, eski püskü eşya.', desc: 'Eskimiş eşya, eski püskü eşya.' },
+  { ku: 'kevok', tr: 'd. Güvercin.', desc: 'Güvercin.' },
+  { ku: 'kevot', tr: 'd. Akçaağaç, isfendan.', desc: 'Akçaağaç, isfendan.' },
+  { ku: 'kevûrk', tr: 'd. Dikenli bir bitki.', desc: 'Dikenli bir bitki.' },
+  { ku: 'kew (1)', tr: 'd Dağlama, kaynaştırma.', desc: 'Dağlama, kaynaştırma.' },
+  { ku: 'kew (2)', tr: 'd. Keklik.', desc: 'Keklik.' },
+  { ku: 'kew (3)', tr: 'Gri.', desc: 'Gri.' },
+  { ku: 'kewa çîr', tr: 'Çil keklik.', desc: 'Çil keklik.' },
+  { ku: 'kewa gozel', tr: 'Kınalı keklik.', desc: 'Kınalı keklik.' },
+  { ku: 'kewandin', tr: 'Yarayı dağlamak, kaynaştırmak.', desc: 'Yarayı dağlamak, kaynaştırmak.' },
+  { ku: 'kewar', tr: 'd. 1) Arı kovanı. 2) Hububat ambarı.', desc: 'Arı kovanı veya Hububat ambarı.' },
+  { ku: 'kewaşe', tr: 'e. Kurumuş ot, dal, çalı vb. şeyler.', desc: 'Kurumuş ot, dal, çalı vb. şeyler.' },
+  { ku: 'kewhişink', tr: 'd. Bir cins yabani güvercin.', desc: 'Bir cins yabani güvercin.' },
+  { ku: 'kewn', tr: 'd. Devir, dönem.', desc: 'Devir, dönem.' },
+  { ku: 'kewyan', tr: 'Yaranın dağlanması, kaynaşmak.', desc: 'Yaranın dağlanması, kaynaşmak.' },
+  { ku: 'keya', tr: 'Kâhya.', desc: 'Kâhya.' },
+  { ku: 'keyatî', tr: 'd. Kâhyalık', desc: 'Kâhyalık' },
+  { ku: 'keys', tr: 'd. Fırsat, olanak.', desc: 'Fırsat, olanak.' },
+  { ku: 'kezab', tr: 'Yalancı.', desc: 'Yalancı.' },
+  { ku: 'kezeb', tr: 'd. Ciğer. kezeba wî hatin devê wî: Yüreği ağzına gelmek. kezeba wî şewitîn: 1. Susamak. 2. Çok üzülmek.', desc: 'Ciğer. Deyimler: kezeba wî hatin devê wî (Yüreği ağzına gelmek), kezeba wî şewitîn (Susamak veya çok üzülmek).' },
+  { ku: 'kezebhilûk', tr: 'Yufka yürekli.', desc: 'Yufka yürekli.' },
+  { ku: 'kezebreqî', tr: 'd. Bir çeşit hayvan hastalığı.', desc: 'Bir çeşit hayvan hastalığı.' },
+  { ku: 'kezî', tr: 'd. Saç örgüsü, belik.', desc: 'Saç örgüsü, belik.' },
+  { ku: 'kêç', tr: 'd. Pire.', desc: 'Pire.' },
+  { ku: 'kêf', tr: 'd. Neşe, sevinç, keyif. dike ji kêfa bifire: "Çok sevinçlidir, mutluluktan neredeyse kanatlanıp uçacak" anlamında çok sevinçli birinin durumunu ifade ederken kullanılan söz. kêfa mîra kirin: Bolluk içinde yaşamak; bey gibi yaşamak. kêfa te zane: Nasıl istersen öyle yap, keyfın bilir. kêfa wî hatin: Neşelenmek, keyfi gelmek. kêfa wî hatin cî: Keyfi yerine gelmek. kêfa wî xera kirin: Canını sıkmak, keyfini bozmak. kêfa wî xweş bûn: Keyfi yerine gelmek, sevinmek, neşelenmek. kêfa wî xweş kirin: Sevindirmek, neşelendirmek. li kêfa xu mêze kirin: Dilediğince yaşamak, güzel vakit geçirmek, keyfine bakmak.', desc: 'Neşe, sevinç, keyif. Deyimler: dike ji kêfa bifire (Çok sevinçli olmak), kêfa mîra kirin (Bolluk içinde yaşamak), kêfa te zane (Keyfin bilir), kêfa wî xera kirin (Keyfini bozmak).' },
+  { ku: 'kêf kirin', tr: 'Keyif sürmek.w', desc: 'Keyif sürmek.' },
+  { ku: 'kêfxweş', tr: 'Neşeli, sevinçli, keyifli.', desc: 'Neşeli, sevinçli, keyifli.' },
+  { ku: 'kêfxweşî', tr: 'd. Neşeli olma durumu, sevinçlilik.', desc: 'Neşeli olma durumu, sevinçlilik.' },
+  { ku: 'kêl (1)', tr: 'd.1) Dikiş. 2) Kile. 3) Mezar taşı.', desc: 'Dikiş veya Kile veya Mezar taşı.' },
+  { ku: 'kêlek', tr: 'd. Yan, yan taraf. li ser kêlekê: Yanlama, yanlamasına, yan olarak veya yampiri bir şekilde.', desc: 'Yan, yan taraf. Örnek: li ser kêlekê (Yanlama, yanlamasına).' },
+  { ku: 'kêlik', tr: '1) Mezar taşı. 2) Direk.', desc: 'Mezar taşı veya Direk.' },
+  { ku: 'kêlimandin', tr: 'Konuşturmak. (dikêlimîne, bikêlimîne)', desc: 'Konuşturmak. (Geniş zaman: dikêlimîne, emir: bikêlimîne)' },
+  { ku: 'kêlimîn', tr: 'Konuşmak. (dikêlime, bikêlime)', desc: 'Konuşmak. (Geniş zaman: dikêlime, emir: bikêlime)' },
+  { ku: 'kêlîşk', tr: 'd. Çapak, gözde oluşan çapak. çavê min kêlîşka dibire: Gözlerimde çapak oluşuyor.', desc: 'Çapak, gözde oluşan çapak. Örnek: çavê min kêlîşka dibire: Gözlerimde çapak oluşuyor.' },
+  { ku: 'kêm', tr: 'Eksik, noksan. ev ji me kêm bû!: Bir bu eksikti!', desc: 'Eksik, noksan. Örnek: ev ji me kêm bû! (Bir bu eksikti!).' },
+  { ku: 'kêmanî', tr: 'd. Eksiklik, noksanlık, kusur.', desc: 'Eksiklik, noksanlık, kusur.' },
+  { ku: 'kêmaqil', tr: 'Ahmak, aklı kıt kimse.', desc: 'Ahmak, aklı kıt kimse.' },
+  { ku: 'kêmber', tr: 'Dar enli, eni dar olan.', desc: 'Dar enli, eni dar olan.' },
+  { ku: 'kêm bûn', tr: 'Eksilmek, noksanlaşmak.', desc: 'Eksilmek, noksanlaşmak.' },
+  { ku: 'kêmfersend', tr: 'Fırsatçı, oportunist.', desc: 'Fırsatçı, oportunist.' },
+  { ku: 'kêmfersendî', tr: 'd. Fırsatçılık.', desc: 'Fırsatçılık.' },
+  { ku: 'kêm kirin', tr: 'Eksiltmek, noksanlaştırmak.', desc: 'Eksiltmek, noksanlaştırmak.' },
+  { ku: 'kêmtir', tr: 'Daha eksik, daha noksan.', desc: 'Daha eksik, daha noksan.' },
+  { ku: 'kêr (1)', tr: 'd. Bıçak.', desc: 'Bıçak.' },
+  { ku: 'kêran', tr: 'd. Mertek, kiriş.', desc: 'Mertek, kiriş.' },
+  { ku: 'kêrhatin', tr: 'İşe yaramak, elvermek.', desc: 'İşe yaramak, elvermek.' },
+  { ku: 'kêrik', tr: 'd. Küçük bıçak.', desc: 'Küçük bıçak.' },
+  { ku: 'kêrt/kert', tr: 'Eskiden kullanılan yirmi beş kuruş değerindeki para.', desc: 'Eskiden kullanılan yirmi beş kuruş değerindeki para.' },
+  { ku: 'kês', tr: 'd. Harmanda, kalburdan geçirilen üründen geriye kalan çer çöple karışık tahıl taneleri.', desc: 'Harmanda, kalburdan geçirilen üründen geriye kalan çer çöple karışık tahıl taneleri.' },
+  { ku: 'kêsat', tr: 'Zayıf.', desc: 'Zayıf.' },
+  { ku: 'kêsim', tr: 'd. Fiyaka, caka.', desc: 'Fiyaka, caka.' },
+  { ku: 'kêsreg', tr: 'e. Kesek.', desc: 'Kesek.' },
+  { ku: 'kêş', tr: '1) Çeken, çekici. 2) İri yarı, güçlü kuvvetli erkek.', desc: 'Çeken, çekici veya İri yarı, güçlü kuvvetli erkek.' },
+  { ku: 'kêzik', tr: 'd. Böcek.', desc: 'Böcek.' },
+  { ku: 'kidê', tr: 'çd. Oğlak.', desc: 'Oğlak. (Çocuk dilinde)' },
+  { ku: 'kid-kid', tr: 'd. Oğlaklara seslenirken kullanılan sözcük.', desc: 'Oğlaklara seslenirken kullanılan sözcük.' },
+  { ku: 'kifş', tr: 'd. Keşif.', desc: 'Keşif.' },
+  { ku: 'kihêl', tr: 'd. Küheylan.', desc: 'Küheylan.' },
+  { ku: 'kijale', tr: '/ Kirişlerin üzerine serilen çalı çırpı gibi şeyler.', desc: 'Kirişlerin üzerine serilen çalı çırpı gibi şeyler.' },
+  { ku: 'kil', tr: 'd. Sürme, göz sürmesi.', desc: 'Sürme, göz sürmesi.' },
+  { ku: 'kilam', tr: 'd. Türkü.', desc: 'Türkü.' },
+  { ku: 'kilamê qedîm', tr: 'Kur\'an, kelam-1 kadiın. bi kilamê qedîm: "Kutsal kitap üzerine yemin ederim ki."', desc: 'Kur\'an, kelam-1 kadiın. Deyim: bi kilamê qedîm ("Kutsal kitap üzerine yemin ederim ki").' },
+  { ku: 'kilandin', tr: 'Yayık yaymak. (dik- ilîne, bikiline)', desc: 'Yayık yaymak. (Geniş zaman: dikiline, emir: bikiline)' },
+  { ku: 'kildank', tr: 'd. Sürme kabı.', desc: 'Sürme kabı.' },
+  { ku: 'kil kirin', tr: '1) Göze sürme çekmek. 2) bkz. "kilandin"', desc: 'Göze sürme çekmek veya bkz. "kilandin".' },
+  { ku: 'kin', tr: 'Kısa. kin î kutek: Kısa ve şişman kimse. kino mino: Ufak tefek, minicik, mini minnacık.', desc: 'Kısa. Örnek: kin î kutek (Kısa ve şişman kimse), kino mino (Ufak tefek, minicik).' },
+  { ku: 'kin bûn', tr: 'Kısalmak.', desc: 'Kısalmak.' },
+  { ku: 'kinc', tr: 'e. Giysi. kine û kol: bkz. "çek û çol"', desc: 'Giysi. Örnek: kine û kol: bkz. "çek û çol".' },
+  { ku: 'kindir', tr: 'd. Kenevirden yapılmış ip. kindira wî bi dar da kirin: Asacak kadar (ona) kızmak.', desc: 'Kenevirden yapılmış ip. Deyim: kindira wî bi dar da kirin (Asacak kadar kızmak).' },
+  { ku: 'kinik', tr: 'Kısa boylu kimse.', desc: 'Kısa boylu kimse.' },
+  { ku: 'kinî', tr: 'd. Kısalık.', desc: 'Kısalık.' },
+  { ku: 'kin kirin', tr: 'Kısaltmak.', desc: 'Kısaltmak.' },
+  { ku: 'kir (1)', tr: 'Güdük kulaklı oğlak, kuzu vb.', desc: 'Güdük kulaklı oğlak, kuzu vb.' },
+  { ku: 'kiras', tr: 'e. Entari.', desc: 'Entari.' },
+  { ku: 'kiraşə', tr: 'Çamaşır yıkayan kadın, çamaşırcı kadın.', desc: 'Çamaşır yıkayan kadın, çamaşırcı kadın.' },
+  { ku: 'kirbît/kibrît/kufrît', tr: 'd. Kibrit.', desc: 'Kibrit.' },
+  { ku: 'kirê', tr: 'd. Kira. dan kirê: Kiraya vermek.', desc: 'Kira. Deyim: dan kirê (Kiraya vermek).' },
+  { ku: 'kirêc', tr: 'd. Kireç.', desc: 'Kireç.' },
+  { ku: 'kirêçî', tr: 'Kiracı.', desc: 'Kiracı.' },
+  { ku: 'kirê kirin', tr: 'Kiralamak.', desc: 'Kiralamak.' },
+  { ku: 'kirênek', tr: 'd. Kıkırdak.', desc: 'Kıkırdak.' },
+  { ku: 'kirin', tr: 'Yapmak, etmek. kir nekir: Her ne yaptıysa; bütün çabasına rağmen. dike: -mek üzere. dike lêxe: Vurmak üzere. dikira: -mek üzereyken, -mek üzereydi. dikira lêxista: Vurmak üzereydi, vurmak üzereyken.', desc: 'Yapmak, etmek. Deyimler: kir nekir (Her ne yaptıysa), dike lêxe (Vurmak üzere).' },
+  { ku: 'kiritandin', tr: 'Katı bir şey yerken ağızdan ses çıkarmak, gıcırdatmak.', desc: 'Katı bir şey yerken ağızdan ses çıkarmak, gıcırdatmak.' },
+  { ku: 'kirîb', tr: 'Kirve.', desc: 'Kirve.' },
+  { ku: 'kirîbatî', tr: 'd. Kirvelik.', desc: 'Kirvelik.' },
+  { ku: 'kirî boz', tr: 'Bembeyaz ve güdük kulaklı oğlak, teke gibi hayvanlar.', desc: 'Bembeyaz ve güdük kulaklı oğlak, teke gibi hayvanlar.' },
+  { ku: 'kirîn', tr: 'Satın almak.', desc: 'Satın almak.' },
+  { ku: 'kirkişîn', tr: 'Kahırlanmak. (dikirkişe, bikirkişe)', desc: 'Kahırlanmak. (Geniş zaman: dikirkişe, emir: bikirkişe)' },
+  { ku: 'kirt', tr: 'bkz. "kirtîn"', desc: 'bkz. "kirtîn".' },
+  { ku: 'kirtik', tr: 'd. Kıkırdak.', desc: 'Kıkırdak.' },
+  { ku: 'kirtîn', tr: 'En ufak ses, çıt (ses çıkarmama.)', desc: 'En ufak ses, çıt (ses çıkarmama.)' },
+  { ku: 'kiryaz', tr: 'd. Kiraz.', desc: 'Kiraz.' },
+  { ku: 'kitab', tr: 'd. Kitap.', desc: 'Kitap.' },
+  { ku: 'kitan', tr: 'd. Bir çeşit kadın başörtüsü.', desc: 'Bir çeşit kadın başörtüsü.' },
+  { ku: 'kitanbelaş', tr: 'Pamuklu fabrika bezi.', desc: 'Pamuklu fabrika bezi.' },
+  { ku: 'kiş', tr: 'Tavukları kovarken kullanılan sözcük.', desc: 'Tavukları kovarken kullanılan sözcük.' },
+  { ku: 'kişandin', tr: 'Çekmek.', desc: 'Çekmek.' },
+  { ku: 'kişyan', tr: 'Çekilmek. bi erdê ve kişyan: (Etek, yaygı, giysi ya da paçalar, etek bölümü vb.) Yerlere sürünmek.', desc: 'Çekilmek. Deyim: bi erdê ve kişyan (Yere sürünmek).' },
+  { ku: 'kitim', tr: 'Ketum.', desc: 'Ketum.' },
+  { ku: 'kivil', tr: 'd. Ölü davar (koyun) tüyü.', desc: 'Ölü davar (koyun) tüyü.' },
+  { ku: 'kix', tr: 'Küçük çocuklara zararlı, pis şeyleri yememeleri için söylenen sözcük.', desc: 'Küçük çocuklara zararlı, pis şeyleri yememeleri için söylenen sözcük.' },
+  { ku: 'kixs', tr: 'bkz. "kixsik"', desc: 'bkz. "kixsik".' },
+  { ku: 'kixsik', tr: 'd. Soğan arpacığı.', desc: 'Soğan arpacığı.' },
+  { ku: 'kiyan', tr: 'Ayran yaymak. (ez dikêm, ez ê bikêm, min kiya, min kiyabû, min kiyaye, min bikiya, dikê, bikê)', desc: 'Ayran yaymak.' },
+  { ku: 'kiz', tr: 'Yanık yün kokusu.', desc: 'Yanık yün kokusu.' },
+  { ku: 'kizin', tr: 'Burçak.', desc: 'Burçak.' },
+  { ku: 'kizirandin', tr: 'Alazlamak, tütsülemek.', desc: 'Alazlamak, tütsülemek.' },
+  { ku: 'kizirîn', tr: 'Alazlanmak, tütsülenmek.', desc: 'Alazlanmak, tütsülenmek.' },
+  { ku: 'kiz-kiz', tr: 'd. Bebeğin yarı ağlamaklı sesi veya iniltisi.', desc: 'Bebeğin yarı ağlamaklı sesi veya iniltisi.' },
+  { ku: 'kizot', tr: 'Kor.', desc: 'Kor.' },
+  { ku: 'kizûrî', tr: 'Yanmış yemek.', desc: 'Yanmış yemek.' },
+  { ku: 'kizûrî bûn', tr: 'Yemeğin yanması.', desc: 'Yemeğin yanması.' },
+  { ku: 'kizûrî kirin', tr: 'Yemeği yakmak.', desc: 'Yemeği yakmak.' },
+  { ku: 'kizwan', tr: 'd. Çitlembik.', desc: 'Çitlembik.' },
+  { ku: 'kî', tr: 'Kim. kî mêr e...!: "İçinizde erkek varsa..! "Kendine güvenen...!" anlamında meydan okuma.', desc: 'Kim. Örnek: kî mêr e...!: "İçinizde erkek varsa...!"' },
+  { ku: 'kîjan', tr: 'Hangi, hangisi.', desc: 'Hangi, hangisi.' },
+  { ku: 'kînga', tr: 'Ne zaman.', desc: 'Ne zaman.' },
+  { ku: 'kîp kirin', tr: 'Kenetlemek. min pacê kîp kir: Pencereyi kenetledim, tam kapattım.', desc: 'Kenetlemek. Örnek: min pacê kîp kir: Pencereyi kenetledim, tam kapattım.' },
+  { ku: 'kîr', tr: 'e. Penis.', desc: 'Penis.' },
+  { ku: 'kîrxirîn', tr: 'Orospu.', desc: 'Orospu.' },
+  { ku: 'kîs', tr: 'e. Kese. ji kîsî diya xu çûn: Bok yoluna gitmek.', desc: 'Kese. Deyim: ji kîsî diya xu çûn (Bok yoluna gitmek).' },
+  { ku: 'kîsik', tr: 'e. Ufak kese.', desc: 'Ufak kese.' },
+  { ku: 'kîs kirin', tr: 'Keselemek.', desc: 'Keselemek.' },
+  { ku: 'ko', tr: 'Kör, keskin olmayan.', desc: 'Kör, keskin olmayan.' },
+  { ku: 'ko bûn', tr: 'Körelmek.', desc: 'Körelmek.' },
+  { ku: 'koç', tr: 'd. Göç ve yüklenen göç eşyası.', desc: 'Göç ve yüklenen göç eşyası.' },
+  { ku: 'koç kirin', tr: 'Göç etmek.', desc: 'Göç etmek.' },
+  { ku: 'koçek', tr: 'İyi rakseden, iyi danseden kimse.', desc: 'İyi rakseden, iyi danseden kimse.' },
+  { ku: 'koçer', tr: 'Göçebe.', desc: 'Göçebe.' },
+  { ku: 'koçerî', tr: 'd. Göçebelik.', desc: 'Göçebelik.' },
+  { ku: 'kofi', tr: 'd. Kadınların başörtülerini başlarına dolayıp düğümlemeleri.', desc: 'Kadınların başörtülerini başlarına dolayıp düğümlemeleri.' },
+  { ku: 'koka wî anîn', tr: 'Kökünü kazımak, kırıma uğratmak, soyunu tüketmek.', desc: 'Kökünü kazımak, kırıma uğratmak, soyunu tüketmek.' },
+  { ku: 'kokim', tr: 'Yaşlı, ihtiyar.', desc: 'Yaşlı, ihtiyar.' },
+  { ku: 'ko kirin', tr: 'Köreltmek.', desc: 'Köreltmek.' },
+  { ku: 'kol (1)', tr: 'Boynuzsuz keçi veya koç.', desc: 'Boynuzsuz keçi veya koç.' },
+  { ku: 'kol (2)', tr: 'd. Omuz.', desc: 'Omuz.' },
+  { ku: 'kolan', tr: 'Kazmak.', desc: 'Kazmak.' },
+  { ku: 'kole', tr: 'Köle.', desc: 'Köle.' },
+  { ku: 'koletî', tr: 'd. Kölelik.', desc: 'Kölelik.' },
+  { ku: 'kolm', tr: 'd. Büyük ve içi çukurlu taş.', desc: 'Büyük ve içi çukurlu taş.' },
+  { ku: 'kolme', tr: 'd. Evin yağmur suyundan korunmasını sağlamak için arkasında açılan ark.', desc: 'Evin yağmur suyundan korunmasını sağlamak için arkasında açılan ark.' },
+  { ku: 'koloz', tr: 'e. Erkek yün başlığı.', desc: 'Erkek yün başlığı.' },
+  { ku: 'kom', tr: 'd. Topluluk, yığın. kom û kuflet: Topluca, hep birlikte, cümbür cemaat.', desc: 'Topluluk, yığın. Örnek: kom û kuflet (Topluca, hep birlikte, cümbür cemaat).' },
+  { ku: 'kom bûn', tr: 'Yığılmak, kümelenmek.', desc: 'Yığılmak, kümelenmek.' },
+  { ku: 'komir', tr: 'd. Kömür.', desc: 'Kömür.' },
+  { ku: 'kom kirin', tr: 'Yığmak, toplamak.', desc: 'Yığmak, toplamak.' },
+  { ku: 'kon', tr: 'e. Çadır. konê sê histûnî: Üç direkli çadır.', desc: 'Çadır. Örnek: konê sê histûnî: Üç direkli çadır.' },
+  { ku: 'kone', tr: 'Savuşan, kaytarıcı.', desc: 'Savuşan, kaytarıcı.' },
+  { ku: 'konê pîrê', tr: 'Örümcek ağı.', desc: 'Örümcek ağı.' },
+  { ku: 'kor', tr: 'Kör.', desc: 'Kör.' },
+  { ku: 'koranî', tr: 'Körce, körcesine.', desc: 'Körce, körcesine.' },
+  { ku: 'kor bûn', tr: 'Kör olmak.', desc: 'Kör olmak.' },
+  { ku: 'korfam', tr: 'Kalın kafalı.', desc: 'Kalın kafalı.' },
+  { ku: 'kormîşk', tr: 'd. Kör fare, köstebek.', desc: 'Kör fare, köstebek.' },
+  { ku: 'koro', tr: 'Körolasıca! Kör herif!', desc: 'Körolasıca! Kör herif!' },
+  { ku: 'kort', tr: 'd. Çukur. kert kort: Çarpık çurpuk, çukurlu yol, sokak vb.', desc: 'Çukur. Örnek: kert kort: Çarpık çurpuk, çukurlu yol.' },
+  { ku: 'kortaxî', tr: 'd. Tavukkarası hastalığı.', desc: 'Tavukkarası hastalığı.' },
+  { ku: 'kortik', tr: 'd. Küçük çukur, çukurcuk. kortika çav: Göz çukuru, göz yuvarı.', desc: 'Küçük çukur, çukurcuk. Örnek: kortika çav: Göz çukuru, göz yuvarı.' },
+  { ku: 'korûcax/korîcax', tr: 'Çocuksuz aile.', desc: 'Çocuksuz aile.' },
+  { ku: 'korx', tr: 'd. İçinde çeltik, buğday vb. şeyler dövülen içi çukur veya oyuk taş.', desc: 'İçinde çeltik, buğday vb. şeyler dövülen içi çukur veya oyuk taş.' },
+  { ku: 'kose', tr: 'Köse.', desc: 'Köse.' },
+  { ku: 'kosemisrî', tr: 'd. Bir çeşit kılıç.', desc: 'Bir çeşit kılıç.' },
+  { ku: 'kosetî', tr: 'd. Köselik.', desc: 'Köselik.' },
+  { ku: 'kosre', tr: 'Bıçak vb. şeyleri bilemekte kullanılan bir cins taş.', desc: 'Bıçak vb. şeyleri bilemekte kullanılan bir cins taş.' },
+  { ku: 'kostekqetandin', tr: 'Çocukların kendi başlarına yürüyebilmeleri, "ipini koparmak."', desc: 'Çocukların kendi başlarına yürüyebilmeleri, "ipini koparmak."' },
+  { ku: 'koş', tr: 'd. (Mecazi) Kadın cinsel organı.', desc: '(Mecazi) Kadın cinsel organı.' },
+  { ku: 'koşk', tr: 'd. Köşk.', desc: 'Köşk.' },
+  { ku: 'koşkar', tr: 'Ayakkabı tamircisi.', desc: 'Ayakkabı tamircisi.' },
+  { ku: 'koşkarî', tr: 'd. Ayakkabı tamirciliği.', desc: 'Ayakkabı tamirciliği.' },
+  { ku: 'kotek', tr: 'd. Dayak, kötek. kotek xwarin: Dövülmek, dayak yemek. (Bu sözcük "vurmak, dövmek" anlamına gelen "kutan" fiilinden türemiş.)', desc: 'Dayak, kötek. Deyim: kotek xwarin (Dövülmek, dayak yemek).' },
+  { ku: 'kotin', tr: 'Kemirmek. (dikoje, bikoje)', desc: 'Kemirmek. (Geniş zaman: dikoje, emir: bikoje)' },
+  { ku: 'kotî', tr: 'İğrenç bir hastalığı olan kimse.', desc: 'İğrenç bir hastalığı olan kimse.' },
+  { ku: 'kotî bûn', tr: 'İğrenç bir hastalığa yakalanmak.', desc: 'İğrenç bir hastalığa yakalanmak.' },
+  { ku: 'koval', tr: 'Sarmal, helezon.', desc: 'Sarmal, helezon.' },
+  { ku: 'kovik', tr: 'd. Huni biçiminde, külah biçiminde olan şey.', desc: 'Huni biçiminde, külah biçiminde olan şey.' },
+  { ku: 'kox', tr: 'bkz. "devkox"', desc: 'bkz. "devkox".' },
+  { ku: 'koxpinîk', tr: 'Enayi.', desc: 'Enayi.' },
+  { ku: 'koz', tr: 'd. Kuzu-oğlak ağılı.', desc: 'Kuzu-oğlak ağılı.' },
+  { ku: 'kozik', tr: 'd. Eneze, gözleği, siper.', desc: 'Eneze, gözleği, siper.' },
+  { ku: 'kozir', tr: 'd. Köz.', desc: 'Köz.' },
+  { ku: 'ku', tr: 'Nere, neresi', desc: 'Nere, neresi.' },
+  { ku: 'kubab', tr: 'd. Kebap.', desc: 'Kebap.' },
+  { ku: 'kubar', tr: 'Kibar.', desc: 'Kibar.' },
+  { ku: 'kuç', tr: 'Ele sığabilen irilikteki taş. kuçê qewetê: Taşı ileri fırlatarak oynanan bir tür güç sınama oyunu.', desc: 'Ele sığabilen irilikteki taş. Örnek: kuçê qewetê (Taşı ileri fırlatarak oynanan bir tür güç sınama oyunu).' },
+  { ku: 'kuçe', tr: 'd. Sokak.', desc: 'Sokak.' },
+  { ku: 'kuçe (2)', tr: 'İtibarsız, değersiz kimse.', desc: 'İtibarsız, değersiz kimse.' },
+  { ku: 'kuçik (2)', tr: 'Ateş ocağına bırakılan ve üzerinde yemek vb. pişirilen taşlar.', desc: 'Ateş ocağına bırakılan ve üzerinde yemek vb. pişirilen taşlar.' },
+  { ku: 'ku da', tr: 'Nereye.', desc: 'Nereye.' },
+  { ku: 'ku der', tr: 'Hangi yer, neresi.', desc: 'Hangi yer, neresi.' },
+  { ku: 'kudik', tr: 'Aslan, ayı gibi hayvanların yavrusu.', desc: 'Aslan, ayı gibi hayvanların yavrusu.' },
+  { ku: 'kufik', tr: 'd. 1) Küf. 2) Sümük.', desc: 'Küf veya Sümük.' },
+  { ku: 'kufikî', tr: 'Küflü.', desc: 'Küflü.' },
+  { ku: 'kufikî bûn', tr: 'Küflenmek.', desc: 'Küflenmek.' },
+  { ku: 'kufikî kirin', tr: 'Küflendirmek.', desc: 'Küflendirmek.' },
+  { ku: 'kufir', tr: 'd. Küfür.', desc: 'Küfür.' },
+  { ku: 'kufirbaz', tr: 'Küfürbaz.', desc: 'Küfürbaz.' },
+  { ku: 'kuflet', tr: 'd. Külfet.', desc: 'Külfet.' },
+  { ku: 'kufte', tr: 'd. Köfte.', desc: 'Köfte.' },
+  { ku: 'kuftîn', tr: 'd. Sigara püfürdetme.', desc: 'Sigara püfürdetme.' },
+  { ku: 'kuft-kuft', tr: 'd. Sigara püfürdetme.', desc: 'Sigara püfürdetme.' },
+  { ku: 'kul', tr: 'd. Yara, dert, hastalık. kula dû mirinê: Çok kötü bir durumun (felaket vb.) üzerine daha kötüsünün gelmesini anlatır. kula şewatê: Acı veren yara, çıban vb. şeyler. kula xirab: Kanser.', desc: 'Yara, dert, hastalık. Deyimler: kula dû mirinê (Çok kötü bir durumun üzerine daha kötüsünün gelmesi), kula xirab (Kanser).' },
+  { ku: 'kulab', tr: 'd. Koyun kuyruğunun etli ve yağlı kısmı.', desc: 'Koyun kuyruğunun etli ve yağlı kısmı.' },
+  { ku: 'kulandin', tr: 'Topallatmak. (dikuline, bikulîne)', desc: 'Topallatmak. (Geniş zaman: dikuline, emir: bikulîne)' },
+  { ku: 'kulav', tr: 'e. Keçe.', desc: 'Keçe.' },
+  { ku: 'kul bûn', tr: 'Yara, çıban vb. şeyler oluşmak.', desc: 'Yara, çıban vb. şeyler oluşmak.' },
+  { ku: 'kulek', tr: 'Topal.', desc: 'Topal.' },
+  { ku: 'kulêmek', tr: 'd. Kalça.', desc: 'Kalça.' },
+  { ku: 'kulêmekî', tr: 'Kalça nahiyesinde oluşan romatizmal hastalığa yakalanmış olan kimse.', desc: 'Kalça nahiyesinde oluşan romatizmal hastalığa yakalanmış olan kimse.' },
+  { ku: 'kulih', tr: 'e. Küllah.', desc: 'Küllah.' },
+  { ku: 'kulik', tr: 'e. Yastık kılıfı.', desc: 'Yastık kılıfı.' },
+  { ku: 'kulî (1)', tr: 'd. Çekire.', desc: 'Çekire.' },
+  { ku: 'kulî (2)', tr: 'd. Kar tanesi.', desc: 'Kar tanesi.' },
+  { ku: 'kulî (3)', tr: 'e. Yumak.', desc: 'Yumak.' },
+  { ku: 'kulîlk', tr: 'd. Çiçek.', desc: 'Çiçek.' },
+  { ku: 'kulîn', tr: 'd. Divan altı.', desc: 'Divan altı.' },
+  { ku: 'kulînçe', tr: 'd. Çörek.', desc: 'Çörek.' },
+  { ku: 'kulk', tr: 'd. 1) Gevenin pamuksu tüyleri. 2) Keçi kılındaki beyaz ve pamuksu tüyler.', desc: 'Gevenin pamuksu tüyleri veya Keçi kılındaki beyaz ve pamuksu tüyler.' },
+  { ku: 'kulm', tr: 'd. 1) İki elin açılmasıyla oluşturulan avuç. 2) Yumruk.', desc: 'İki elin açılmasıyla oluşturulan avuç veya Yumruk.' },
+  { ku: 'kulmist', tr: 'd. İki elin birleştirilmesiyle oluşturulan avuç.', desc: 'İki elin birleştirilmesiyle oluşturulan avuç.' },
+  { ku: 'kulor', tr: 'd. Ortası delikli ekmek, çörek.', desc: 'Ortası delikli ekmek, çörek.' },
+  { ku: 'kulp-kulp', tr: 'd. Tulumdaki ayran vb.\'yi yayarken çıkan ses.', desc: 'Tulumdaki ayran vb.\'yi yayarken çıkan ses.' },
+  { ku: 'kulyan', tr: 'Topallamak. (dikule, bikule)', desc: 'Topallamak. (Geniş zaman: dikule, emir: bikule)' },
+  { ku: 'kum', tr: 'e. Başlık.', desc: 'Başlık.' },
+  { ku: 'kumêt', tr: 'Koyu kızıl renkli bir at cinsi.', desc: 'Koyu kızıl renkli bir at cinsi.' },
+  { ku: 'kumik', tr: 'd. Şişe, çaydan vb. şeylerin kapağı.', desc: 'Şişe, çaydan vb. şeylerin kapağı.' },
+  { ku: 'kun', tr: 'e. Su tulumu.', desc: 'Su tulumu.' },
+  { ku: 'kuncandin', tr: 'Kumaş, bez türü şeyleri diş, taş veya benzeri bir şeyle ezmek. (dikuncîne, bikuncîne)', desc: 'Kumaş, bez türü şeyleri diş, taş veya benzeri bir şeyle ezmek. (Geniş zaman: dikuncîne, emir: bikuncîne)' },
+  { ku: 'kuncî', tr: 'e. Susam.', desc: 'Susam.' },
+  { ku: 'kuncyan', tr: 'Kumaş, bez türü şeylerin diş, taş veya benzeri bir şeyle ezilmesi. (dikunce, bikunce)', desc: 'Kumaş, bez türü şeylerin diş, taş veya benzeri bir şeyle ezilmesi. (Geniş zaman: dikunce, emir: bikunce)' },
+  { ku: 'kund', tr: 'e. Baykuş.', desc: 'Baykuş.' },
+  { ku: 'kundê kwîr', tr: 'bkz. "kund"', desc: 'bkz. "kund".' },
+  { ku: 'kundir', tr: 'e. Kabak. kundirê avê: su kabağı. kundirê zivistanî: Kış kabağı.', desc: 'Kabak. Çeşitleri: kundirê avê (su kabağı), kundirê zivistanî (Kış kabağı).' },
+  { ku: 'kungî', tr: 'd. Çadırda, üzerine yatakların konulduğu özel tahtalar.', desc: 'Çadırda, üzerine yatakların konulduğu özel tahtalar.' },
+  { ku: 'kur (1)', tr: 'e. Oğul.', desc: 'Oğul.' },
+  { ku: 'kur (2)', tr: 'd. Dağı oluşturan tepelerden her biri.', desc: 'Dağı oluşturan tepelerden her biri.' },
+  { ku: 'kur (3)', tr: '1) Tıraş, tıraş olma. kur û kem kirin: Kılları, tüyleri kesmek, kesip kısaltmak. 2) Kısa. 3) Güdük kulaklı koyun.', desc: 'Tıraş, tıraş olma veya Kısa veya Güdük kulaklı koyun.' },
+  { ku: 'kur bûn', tr: 'Tıraş olmak.', desc: 'Tıraş olmak.' },
+  { ku: 'kurbeşk', tr: 'e. Porsuk.', desc: 'Porsuk.' },
+  { ku: 'Kurd', tr: 'Kürt.', desc: 'Kürt.' },
+  { ku: 'Kurdistan', tr: 'd. Kürdistan.', desc: 'Kürdistan.' },
+  { ku: 'kurik', tr: 'Sıpa.', desc: 'Sıpa.' },
+  { ku: 'kurisandin', tr: 'Aşındırmak. (dikurisîne, bikurisîne)', desc: 'Aşındırmak. (Geniş zaman: dikurisîne, emir: bikurisîne)' },
+  { ku: 'kurisîn', tr: 'Aşınmak. (dikurise, bikurise)', desc: 'Aşınmak. (Geniş zaman: dikurise, emir: bikurise)' },
+  { ku: 'kurîşk', tr: 'Kıvırcık.', desc: 'Kıvırcık.' },
+  { ku: 'kur kirin', tr: 'Tıraş etmek.', desc: 'Tıraş etmek.' },
+  { ku: 'kurk', tr: 'e. Kürk.', desc: 'Kürk.' },
+  { ku: 'kurm', tr: 'e. Kurt, solucan, tırtıl. kurm bi çavê wî ketin: Gözüne uyku girmemek, hiç uyumamak. kurmê xu rijandin: Kurtlarını dökmek.', desc: 'Kurt, solucan, tırtıl. Deyimler: kurm bi çavê wî ketin (Gözüne uyku girmemek), kurmê xu rijandin (Kurtlarını dökmek).' },
+  { ku: 'Kurmanc', tr: 'Bir Kürt boyu.', desc: 'Bir Kürt boyu.' },
+  { ku: 'Kurmancî', tr: 'd. "Kurmanc" denilen Kürt boyunun konuştuğu lehçe.', desc: '"Kurmanc" denilen Kürt boyunun konuştuğu lehçe.' },
+  { ku: 'kurmancko', tr: 'Köylüvari, köylü usulü.', desc: 'Köylüvari, köylü usulü.' },
+  { ku: 'kurmik', tr: 'e. Kavun, karpuz, hıyar gibi şeylerin ufak olanları.', desc: 'Kavun, karpuz, hıyar gibi şeylerin ufak olanları.' },
+  { ku: 'kurmî', tr: 'Kurtlu, içine kurt düşmüş olan, kurtlanmış olan.', desc: 'Kurtlu, içine kurt düşmüş olan, kurtlanmış olan.' },
+  { ku: 'kurmî bûn', tr: 'Kurtlanmak.', desc: 'Kurtlanmak.' },
+  { ku: 'kurmî kirin', tr: 'Kurtlandırmak.', desc: 'Kurtlandırmak.' },
+  { ku: 'kurmwîrî/kurmürî', tr: 'Karınca.', desc: 'Karınca.' },
+  { ku: 'kuro', tr: 'Be! Behey! Oğul! Yahu!', desc: 'Be! Behey! Oğul! Yahu!' },
+  { ku: 'kurot', tr: 'Basık, küt, yassı.', desc: 'Basık, küt, yassı.' },
+  { ku: 'kur-pist', tr: 'd. Fısıltı.', desc: 'Fısıltı.' },
+  { ku: 'kursî', tr: 'd. İskemle, kürsü.', desc: 'İskemle, kürsü.' },
+  { ku: 'kurtêl', tr: 'd. Ekmek kırıntısı.', desc: 'Ekmek kırıntısı.' },
+  { ku: 'kus', tr: 'd. Sessiz ve kokusuz osuruk.', desc: 'Sessiz ve kokusuz osuruk.' },
+  { ku: 'kuş', tr: 'Bir taş cinsi.', desc: 'Bir taş cinsi.' },
+  { ku: 'kuştin', tr: 'Öldürmek. bi kuştin dan/dan kuştin: Öldürtmek. (dikuje, bikuje)', desc: 'Öldürmek. Deyim: bi kuştin dan/dan kuştin (Öldürtmek). (Geniş zaman: dikuje, emir: bikuje)' },
+  { ku: 'kuştî', tr: 'Maktul.', desc: 'Maktul.' },
+  { ku: 'kutan', tr: 'Dövmek, çakmak.', desc: 'Dövmek, çakmak.' },
+  { ku: 'kut kirin', tr: 'Dövmek, vurmak.', desc: 'Dövmek, vurmak.' },
+  { ku: 'kuvan', tr: 'd. Yay.', desc: 'Yay.' },
+  { ku: 'kuvark', tr: 'd. Mantar.', desc: 'Mantar.' },
+  { ku: 'kuxandin', tr: 'Öksürtmek.', desc: 'Öksürtmek.' },
+  { ku: 'kuxik', tr: 'd. Öksürük.', desc: 'Öksürük.' },
+  { ku: 'kuxikî', tr: 'Öksürüklü, sürekli öksüren kimse.', desc: 'Öksürüklü, sürekli öksüren kimse.' },
+  { ku: 'kuxtîn', tr: 'd. Öksürme.', desc: 'Öksürme.' },
+  { ku: 'kuxt-kuxt', tr: 'd. Öksüren birinin öksürüşünü anlatmakta kullanılan söz.', desc: 'Öksüren birinin öksürüşünü anlatmakta kullanılan söz.' },
+  { ku: 'kuxyan', tr: 'Öksürmek.', desc: 'Öksürmek.' },
+  { ku: 'kûçik', tr: 'e. Köpek. kûçikbab: "Köpeğin dölü" anlamına gelen bir küfür biçimi. kûçikê Helebê: Züğürt, önemsiz, değer verilmeyen kimse.', desc: 'Köpek. Örnek: kûçikbab ("Köpeğin dölü" anlamına gelen bir küfür), kûçikê Helebê (Züğürt, önemsiz kimse).' },
+  { ku: 'kûçiktî', tr: 'd. Köpeklik.', desc: 'Köpeklik.' },
+  { ku: 'kûçî', tr: 'çd. Köpek.', desc: 'Köpek. (Çocuk dilinde)' },
+  { ku: 'kûlik', tr: 'd. Kir, toz, pasak.', desc: 'Kir, toz, pasak.' },
+  { ku: 'kûp', tr: 'e. Küp.', desc: 'Küp.' },
+  { ku: 'kûpandin', tr: 'Berelemek, çökertmek, (madeni şeylerin içe doğru çökertilmesi.) (dikûpîne, bikûpîne)', desc: 'Berelemek, çökertmek. (Geniş zaman: dikûpîne, emir: bikûpîne)' },
+  { ku: 'kûp kirin', tr: 'Hastanın karnına küp ile hacamat yapmak.', desc: 'Hastanın karnına küp ile hacamat yapmak.' },
+  { ku: 'kûpyan', tr: 'Berelenmek, çökmek (madeni şeylerin içe doğru çökmesi.) (dikûpe, bikûpe)', desc: 'Berelenmek, çökmek (madeni şeylerin içe doğru çökmesi.) (Geniş zaman: dikûpe, emir: bikûpe)' },
+  { ku: 'kûr', tr: 'Derin.', desc: 'Derin.' },
+  { ku: 'kûr bûn', tr: 'Derinleşmek.', desc: 'Derinleşmek.' },
+  { ku: 'kûrayî', tr: 'd. Derinlik.', desc: 'Derinlik.' },
+  { ku: 'kûre', tr: 'd. Demirci körüğü.', desc: 'Demirci körüğü.' },
+  { ku: 'kûrik', tr: 'd. Issız yer, tenha, köşe bucak.', desc: 'Issız yer, tenha, köşe bucak.' },
+  { ku: 'kûr kirin', tr: 'Derinleştirmek.', desc: 'Derinleştirmek.' },
+  { ku: 'kût (1)', tr: 'Topal. kel û kût: "Uyuz, sakat, topal vb." anlamındaki söz.', desc: 'Topal. Örnek: kel û kût ("Uyuz, sakat, topal vb." anlamındaki söz).' },
+  { ku: 'kût bûn', tr: 'Topal olmak.', desc: 'Topal olmak.' },
+  { ku: 'kûtî', tr: 'Köpek yavrularına seslenirken kullanılan sözcük.', desc: 'Köpek yavrularına seslenirken kullanılan sözcük.' },
+  { ku: 'kût kirin', tr: 'Topal etmek.', desc: 'Topal etmek.' },
+  { ku: 'kûz', tr: 'e. Su testisi.', desc: 'Su testisi.' },
+  { ku: 'kûze', tr: 'e. Sansar.', desc: 'Sansar.' },
+  { ku: 'kûzik', tr: 'e. Küçük su testisi.', desc: 'Küçük su testisi.' },
+  { ku: 'kwêrgî', tr: 'Tavşan. kwêrgî ji çiya xeyidiye haya çiyê jê tuneye: İstenilen etkiyi yapmaktan çok uzak kalan dargınlıklar karşısında söylenir.', desc: 'Tavşan. Deyim: kwêrgî ji çiya xeyidiye haya çiyê jê tuneye (İstenilen etkiyi yapmaktan çok uzak kalan dargınlıklar karşısında söylenir).' },
+  { ku: 'kwêrî', tr: 'd Yayığı gergin tutan iki ağacı.', desc: 'Yayığı gergin tutan iki ağacı.' },
+  { ku: 'kwînêr', tr: 'd. Çıban.', desc: 'Çıban.' },
+  { ku: 'kwîr', tr: 'Kör.', desc: 'Kör.' },
+  { ku: 'kwîr bûn', tr: 'Kör olmak.', desc: 'Kör olmak.' },
+  { ku: 'kwîrik', tr: 'd. Buğday başaklarının boş olması.', desc: 'Buğday başaklarının boş olması.' },
+  { ku: 'kwîr kirin', tr: 'Kör etmek.', desc: 'Kör etmek.' },
+  { ku: 'kwîsî', tr: 'e. Kaplumbağa.', desc: 'Kaplumbağa.' },
+  { ku: 'kwîvî', tr: 'Yabani.', desc: 'Yabani.' },
+  { ku: 'kõrgi', tr: 'Tavşan.', desc: 'Tavşan.' },
+  { ku: 'kõrî', tr: 'd. Yayığı gergin tutan iki ağacı.', desc: 'Yayığı gergin tutan iki ağacı.' },
+  { ku: 'labût', tr: 'd. Çift sürerken saban demirini temizlemek için üvendireye geçirilen demir.', desc: 'Çift sürerken saban demirini temizlemek için üvendireye geçirilen demir.' },
+  { ku: 'la hewli wela', tr: 'La havle.', desc: 'La havle.' },
+  { ku: 'lakan', tr: 'd. 1) Bir çeşit kar ayakkabısı. 2) Ayakkabıya yapışan çamur.', desc: 'Bir çeşit kar ayakkabısı veya Ayakkabıya yapışan çamur.' },
+  { ku: 'lal', tr: 'Dilsiz.', desc: 'Dilsiz.' },
+  { ku: 'lal bûn', tr: 'Dilsizleşmek, lal olmak.', desc: 'Dilsizleşmek, lal olmak.' },
+  { ku: 'lala', tr: 'çd. Uyku.', desc: 'Uyku. (Çocuk dilinde)' },
+  { ku: 'lala kirin', tr: 'çd. Uyumak.', desc: 'Uyumak. (Çocuk dilinde)' },
+  { ku: 'lalê', tr: 'Dilsiz kadın.', desc: 'Dilsiz kadın.' },
+  { ku: 'lalî', tr: 'd. Dilsizlik.', desc: 'Dilsizlik.' },
+  { ku: 'lalî kirin', tr: 'çd. Uyumak.', desc: 'Uyumak. (Çocuk dilinde)' },
+  { ku: 'lal kirin', tr: 'Dilsizleştirmek.', desc: 'Dilsizleştirmek.' },
+  { ku: 'lalo', tr: 'Dilsiz erkek.', desc: 'Dilsiz erkek.' },
+  { ku: 'lalûte', tr: 'Konuşma yeteneği kıt olan, dilsiz kimseler gibi konuşan.', desc: 'Konuşma yeteneği kıt olan, dilsiz kimseler gibi konuşan.' },
+  { ku: 'lapat', tr: 'd. Elin bütünüyle vurulan şamar, kaba bir şekilde vurulan tokat.', desc: 'Elin bütünüyle vurulan şamar, kaba bir şekilde vurulan tokat.' },
+  { ku: 'lapûrî', tr: 'bkz. "hirço pirço", "hevdaketî"', desc: 'bkz. "hirço pirço", "hevdaketî".' },
+  { ku: 'laş', tr: 'e. Vücut.', desc: 'Vücut.' },
+  { ku: 'law', tr: 'e. Oğul, erkek evlat.', desc: 'Oğul, erkek evlat.' },
+  { ku: 'lawik', tr: 'e. Oğlan, genç adam.', desc: 'Oğlan, genç adam.' },
+  { ku: 'lawîn', tr: 'Erkek cinsten olan.', desc: 'Erkek cinsten olan.' },
+  { ku: 'lawmet', tr: 'e. Hala oğlu.', desc: 'Hala oğlu.' },
+  { ku: 'lawxal', tr: 'c. Dayı oğlu.', desc: 'Dayı oğlu.' },
+  { ku: 'le', tr: '"Ya" anlamındaki ilgeç.', desc: '"Ya" anlamındaki ilgeç.' },
+  { ku: 'lebelê', tr: 'Ama, lâkin, bununla birlikte.', desc: 'Ama, lâkin, bununla birlikte.' },
+  { ku: 'lec', tr: 'e. Kavga, vuruşma. lee û bec: Büyük kavga, büyük vuruşma.', desc: 'Kavga, vuruşma. Örnek: lee û bec (Büyük kavga, büyük vuruşma).' },
+  { ku: 'lee', tr: '"Ya, işte böyle" anlamındaki sözcük.', desc: '"Ya, işte böyle" anlamındaki sözcük.' },
+  { ku: 'leflefk', tr: 'd. Sarmaşıklı bir ot.', desc: 'Sarmaşıklı bir ot.' },
+  { ku: 'legan', tr: 'd. Leğen.', desc: 'Leğen.' },
+  { ku: 'legleg', tr: 'd. Leylek.', desc: 'Leylek.' },
+  { ku: 'leht', tr: 'e. İri ve yassı taş.', desc: 'İri ve yassı taş.' },
+  { ku: 'leke', tr: 'd. Leke.', desc: 'Leke.' },
+  { ku: 'lem', tr: 'd. 1) Sebze bitkisi, tevek. 2) Hayvan memeleri.', desc: 'Sebze bitkisi, tevek veya Hayvan memeleri.' },
+  { ku: 'lema', tr: 'Onun için, o yüzden.', desc: 'Onun için, o yüzden.' },
+  { ku: 'lem-lem', tr: 'd. Kendi kendine söylenme. çi lem-lema te ye?: Nedir kendi kendine söylenip duruyorsun?', desc: 'Kendi kendine söylenme. Örnek: çi lem-lema te ye?: Nedir kendi kendine söylenip duruyorsun?' },
+  { ku: 'lemreş', tr: 'd. Koyunların memesinde oluşan bir hastalık.', desc: 'Koyunların memesinde oluşan bir hastalık.' },
+  { ku: 'lenger', tr: 'd. Kapı zıvanası.', desc: 'Kapı zıvanası.' },
+  { ku: 'lengerî', tr: 'd. Büyük tepsi.', desc: 'Büyük tepsi.' },
+  { ku: 'lep', tr: 'e. El.', desc: 'El.' },
+  { ku: 'lepik', tr: 'e. Eldiven.', desc: 'Eldiven.' },
+  { ku: 'lep-lep', tr: 'd. Karın yağışını anlatmakta kullanılan sözcük.', desc: 'Karın yağışını anlatmakta kullanılan sözcük.' },
+  { ku: 'leq', tr: 'Kıpırdama, kımıldama.', desc: 'Kıpırdama, kımıldama.' },
+  { ku: 'leqandin', tr: 'Kıpırdatmak, kımıldatmak.', desc: 'Kıpırdatmak, kımıldatmak.' },
+  { ku: 'leqat', tr: 'İkinci sefer sürülen, iki sefer üst üste sürülen tarla.', desc: 'İkinci sefer sürülen, iki sefer üst üste sürülen tarla.' },
+  { ku: 'leqeb', tr: 'e. Lakap.', desc: 'Lakap.' },
+  { ku: 'leqitîn', tr: '(Ayağı) Takılmak. (dileqite, bileqite)', desc: '(Ayağı) Takılmak. (Geniş zaman: dileqite, emir: bileqite)' },
+  { ku: 'leqyan', tr: 'Kıpırdamak, kımıldamak.', desc: 'Kıpırdamak, kımıldamak.' },
+  { ku: 'lewante', tr: 'd. Lavanta.', desc: 'Lavanta.' },
+  { ku: 'lewitandin', tr: 'Bulaştırmak.', desc: 'Bulaştırmak.' },
+  { ku: 'lewitîn', tr: 'Bulaşmak.', desc: 'Bulaşmak.' },
+  { ku: 'lewlewok', tr: 'Velveleci.', desc: 'Velveleci.' },
+  { ku: 'lexem', tr: 'd. Lağım.', desc: 'Lağım.' },
+  { ku: 'lexerî', tr: 'Atıl, durağan, hareketsiz.', desc: 'Atıl, durağan, hareketsiz.' },
+  { ku: 'lext', tr: 'd. İtme.', desc: 'İtme.' },
+  { ku: 'lext kirin', tr: 'İtmek.', desc: 'İtmek.' },
+  { ku: 'leylan', tr: 'd. Serap, ılgıt.', desc: 'Serap, ılgıt.' },
+  { ku: 'leymûn', tr: 'd. Limon.', desc: 'Limon.' },
+  { ku: 'lez', tr: 'Hızlı, acele. lez û bez: Çabucak, çok acele olarak.', desc: 'Hızlı, acele. Örnek: lez û bez (Çabucak, çok acele olarak).' },
+  { ku: 'lez kirin', tr: 'Acele etmek, çabuk olmak.', desc: 'Acele etmek, çabuk olmak.' },
+  { ku: 'lê (1)', tr: 'Kadınlara seslenirken kullanılan sözcük.', desc: 'Kadınlara seslenirken kullanılan sözcük.' },
+  { ku: 'lê çûn', tr: '(Birisine) Çekmek, (birisine) benzemek. Zînê li diya xu çûye: Zînê annesine çekmiş.', desc: '(Birisine) Çekmek, (birisine) benzemek. Örnek: Zînê li diya xu çûye: Zînê annesine çekmiş.' },
+  { ku: 'lê gerandin', tr: 'Etrafına sarmak, dolamak.', desc: 'Etrafına sarmak, dolamak.' },
+  { ku: 'lê geryan', tr: '1) Etrafına sarılmak, dolanmak. 2) Aramak, araştırmak.', desc: 'Etrafına sarılmak, dolanmak veya Aramak, araştırmak.' },
+  { ku: 'lê hatin', tr: 'Uymak, uygun gelmek, yakışmak. pantor li te nayê: Pantolon sana yakışmıyor.', desc: 'Uymak, uygun gelmek, yakışmak. Örnek: pantor li te nayê: Pantolon sana yakışmıyor.' },
+  { ku: 'lêketin', tr: 'Değmek.', desc: 'Değmek.' },
+  { ku: 'lêkirin', tr: '1) (Sıvı vb.) Dökmek. 2) Kar ve yağmurun yağması. 3) İnşa etmek, duvar örmek', desc: '(Sıvı vb.) Dökmek veya Kar ve yağmurun yağması veya İnşa etmek, duvar örmek.' },
+  { ku: 'lêmişt', tr: 'd. Alüvyon.', desc: 'Alüvyon.' },
+  { ku: 'lêqewimî', tr: 'Görmüş geçirmiş, tecrübeli kimse, güngörmüş.', desc: 'Görmüş geçirmiş, tecrübeli kimse, güngörmüş.' },
+  { ku: 'lêv', tr: 'd. Dudak.', desc: 'Dudak.' },
+  { ku: 'lêvse', tr: 'Dişlek.', desc: 'Dişlek.' },
+  { ku: 'lêvsor', tr: 'Dudağı boyalı, dudağına ruj vb. sürmüş olan.', desc: 'Dudağı boyalı, dudağına ruj vb. sürmüş olan.' },
+  { ku: 'lêxistin', tr: 'Dövmek, vurmak. bi lêxistin dan: Dövdürmek.', desc: 'Dövmek, vurmak. Deyim: bi lêxistin dan (Dövdürmek).' },
+  { ku: 'li', tr: 'Yer bildiren bir edat.', desc: 'Yer bildiren bir edat.' },
+  { ku: 'libêf (2)', tr: 'e. Yorgan.', desc: 'Yorgan.' },
+  { ku: 'libikîn', tr: 'Zayıflamak, cılızlaşmak. (dilibike, bilibike)', desc: 'Zayıflamak, cılızlaşmak. (Geniş zaman: dilibike, emir: bilibike)' },
+  { ku: 'libûn', tr: 'd. Keçe yapımında kullanılan yün.', desc: 'Keçe yapımında kullanılan yün.' },
+  { ku: 'libûnçî', tr: 'bkz "libûnkar"', desc: 'bkz "libûnkar".' },
+  { ku: 'libûnkar', tr: 'Keçe yapımcısı.', desc: 'Keçe yapımcısı.' },
+  { ku: 'Licê', tr: 'd. Diyarbakır\'ın Lice ilçesi.', desc: 'Diyarbakır\'ın Lice ilçesi.' },
+  { ku: 'licimîn', tr: 'Topallamak. (dilicime, bilicime)', desc: 'Topallamak. (Geniş zaman: dilicime, emir: bilicime)' },
+  { ku: 'li dar xistin', tr: '1) Kurmak. 2) Asmak.', desc: 'Kurmak veya Asmak.' },
+  { ku: 'li hev (2)', tr: 'Birbirine, birbirini', desc: 'Birbirine, birbirini.' },
+  { ku: 'li hev anîn', tr: '1) Barştırmak, uzlaştırmak. 2) (Allah) Rast getirmek, uygun getirmek, başarılı kılmak. Xwedê îşê te li hev bîne: Allah işini rast getirsin.', desc: 'Barştırmak, uzlaştırmak veya (Allah) Rast getirmek. Örnek: Xwedê îşê te li hev bîne: Allah işini rast getirsin.' },
+  { ku: 'li hev gerandin', tr: 'Birbirine sarmak, birbirine dolamak.', desc: 'Birbirine sarmak, birbirine dolamak.' },
+  { ku: 'li hev geryan', tr: 'Birbirine sarılmak, birbirine dolanmak.', desc: 'Birbirine sarılmak, birbirine dolanmak.' },
+  { ku: 'li hev hatin', tr: 'Barışmak, uzlaşmak.', desc: 'Barışmak, uzlaşmak.' },
+  { ku: 'li hev ketin', tr: 'Birbirine değmek, karışmak.', desc: 'Birbirine değmek, karışmak.' },
+  { ku: 'li hev kirin', tr: 'Uzlaşmak, anlaşmak.', desc: 'Uzlaşmak, anlaşmak.' },
+  { ku: 'li hev piçikandin', tr: 'Birbirine sarmak, birbirine dolamak.', desc: 'Birbirine sarmak, birbirine dolamak.' },
+  { ku: 'li hev piçikîn', tr: 'Birbirine sarılmak, birbirine dolanmak.', desc: 'Birbirine sarılmak, birbirine dolanmak.' },
+  { ku: 'li hev xistin', tr: 'Birbirini dövmek, birbiriyle kavga etmek.', desc: 'Birbirini dövmek, birbiriyle kavga etmek.' },
+  { ku: 'li hewa', tr: 'Anında, hemencecik, bir çırpıda.', desc: 'Anında, hemencecik, bir çırpıda.' },
+  { ku: 'likimîn', tr: 'Sendelemek. (dilikime, bilikime)', desc: 'Sendelemek. (Geniş zaman: dilikime, emir: bilikime)' },
+  { ku: 'likyan', tr: '(Keçi) Melemek. (dilike, bilike)', desc: '(Keçi) Melemek. (Geniş zaman: dilike, emir: bilike)' },
+  { ku: 'lilaw', tr: 'Behey! Yahu! oğul!', desc: 'Behey! Yahu! oğul!' },
+  { ku: 'liv', tr: 'd. Kımıltı, kıpırtı, teprenme.', desc: 'Kımıltı, kıpırtı, teprenme.' },
+  { ku: 'liva', tr: 'd. Kuzu yünü, ince yün.', desc: 'Kuzu yünü, ince yün.' },
+  { ku: 'livandin', tr: 'Kımıldatmak, kıpırdatmak, tepretmek.', desc: 'Kımıldatmak, kıpırdatmak, tepretmek.' },
+  { ku: 'livyan', tr: 'Kımıldamak, kıpırdamak, teprenmek.', desc: 'Kımıldamak, kıpırdamak, teprenmek.' },
+  { ku: 'li xu danîn', tr: 'Tenezzül etmek. li xu danayne bi me ra qisa bike: Bizimle konuşmaya tenezzül etmiyor.', desc: 'Tenezzül etmek. Örnek: li xu danayne bi me ra qisa bike: Bizimle konuşmaya tenezzül etmiyor.' },
+  { ku: 'li xu hay bûn', tr: 'Kendine gelmek, uyanmak, bilinci yerine gelmek.', desc: 'Kendine gelmek, uyanmak, bilinci yerine gelmek.' },
+  { ku: 'li xu kirin', tr: 'Giymek, giysi giymek.', desc: 'Giymek, giysi giymek.' },
+  { ku: 'liyaq', tr: 'Layık.', desc: 'Layık.' },
+  { ku: 'lîçê', tr: 'Sürekli sümüğü akan kız çocuğu.', desc: 'Sürekli sümüğü akan kız çocuğu.' },
+  { ku: 'lîçik', tr: 'd. Sümük.', desc: 'Sümük.' },
+  { ku: 'liço', tr: 'Sürekli sümüğü akan erkek çocuk.', desc: 'Sürekli sümüğü akan erkek çocuk.' },
+  { ku: 'lîlandin', tr: 'Zılgıt çekmek. (dilîlîne, bilîlîne, liland)', desc: 'Zılgıt çekmek. (Geniş zaman: dilîlîne, emir: bilîlîne)' },
+  { ku: 'lîskandin', tr: 'Oynatmak.', desc: 'Oynatmak.' },
+  { ku: 'lîstik', tr: 'd. Oyun. lîstika fincana: Fincanların altına yüzük saklayarak oynanan oyun, yüzük oyunu.', desc: 'Oyun. Örnek: lîstika fincana (Yüzük oyunu).' },
+  { ku: 'lîstin', tr: 'Oynamak.', desc: 'Oynamak.' },
+  { ku: 'lîtir', tr: 'd. Batman.', desc: 'Batman.' },
+  { ku: 'liwan', tr: 'Gem.', desc: 'Gem.' },
+  { ku: 'lo', tr: 'Erkeklere seslenirken kullanılan sözcük.', desc: 'Erkeklere seslenirken kullanılan sözcük.' },
+  { ku: 'lod', tr: 'd. Yığın.', desc: 'Yığın.' },
+  { ku: 'lodik', tr: 'd. Küçük yığın.', desc: 'Küçük yığın.' },
+  { ku: 'lok', tr: 'e. Erkek deve.', desc: 'Erkek deve.' },
+  { ku: 'lokiz', tr: 'd. Lüks lambası.', desc: 'Lüks lambası.' },
+  { ku: 'lôlib', tr: 'd. 1) Ayran tulumunun ayaklarını tutan iki çubuk. 2) Kaval kemiği.', desc: 'Ayran tulumunun ayaklarını tutan iki çubuk veya Kaval kemiği.' },
+  { ku: 'lolik', tr: 'd. Top biçiminde olan, top gibi yuvarlak olan şeyler.', desc: 'Top biçiminde olan, top gibi yuvarlak olan şeyler.' },
+  { ku: 'lome', tr: 'd. Sitem, serzeniş.', desc: 'Sitem, serzeniş.' },
+  { ku: 'londer', tr: 'Pek çok, bir sürü.', desc: 'Pek çok, bir sürü.' },
+  { ku: 'lop', tr: 'd. Kalın şayak, çul.', desc: 'Kalın şayak, çul.' },
+  { ku: 'lopax', tr: 'd. Çiğköfte vb. şeylerin avuçta sıkılarak top şeklinde lokma haline getirilmişi.', desc: 'Çiğköfte vb. şeylerin avuçta sıkılarak top şeklinde lokma haline getirilmişi.' },
+  { ku: 'lopik', tr: 'İçli köfte.', desc: 'İçli köfte.' },
+  { ku: 'loq', tr: 'e. Loğ.', desc: 'Loğ.' },
+  { ku: 'loqandin', tr: 'At, eşek gibi hayvanların sarsılarak, zıplayarak yürümeleri. (diloqîne, biloqîne)', desc: 'At, eşek gibi hayvanların sarsılarak, zıplayarak yürümeleri. (Geniş zaman: diloqîne, emir: biloqîne)' },
+  { ku: 'lorandin', tr: 'Ninni söylemek. (dilorîne, bilorîne)', desc: 'Ninni söylemek. (Geniş zaman: dilorîne, emir: bilorîne)' },
+  { ku: 'lorik', tr: 'd. Lor peyniri.', desc: 'Lor peyniri.' },
+  { ku: 'lorî', tr: 'd. Ninni.', desc: 'Ninni.' },
+  { ku: 'lûle', tr: 'bkz. "lûlî"', desc: 'bkz. "lûlî".' },
+  { ku: 'lûlik', tr: 'bkz. "lûlî"', desc: 'bkz. "lûlî".' },
+  { ku: 'lûlî', tr: 'd. 1) Boru. 2) Namlu.', desc: 'Boru veya Namlu.' },
+  { ku: 'lûl kirin', tr: 'İpliği makaraya veya hamuru oklavaya sarmak, kıvrımlı hale getirmek, bükümlü hale getirmek, lüle yapmak.', desc: 'İpliği makaraya veya hamuru oklavaya sarmak, kıvrımlı hale getirmek, bükümlü hale getirmek, lüle yapmak.' },
+  { ku: 'ma', tr: 'Bir soru sözcüğü.', desc: 'Bir soru sözcüğü.' },
+  { ku: 'macir', tr: 'Göçmen.', desc: 'Göçmen.' },
+  { ku: 'maç', tr: 'Öpme, öpücük.', desc: 'Öpme, öpücük.' },
+  { ku: 'maçî kirin', tr: 'çd. Öpmek.', desc: 'Öpmek. (Çocuk dilinde)' },
+  { ku: 'maç kirin', tr: 'Öpmek.', desc: 'Öpmek.' },
+  { ku: 'mahfûr', tr: 'd. Halı.', desc: 'Halı.' },
+  { ku: 'mak (1)', tr: '(Oyunda) Ebe.', desc: '(Oyunda) Ebe.' },
+  { ku: 'mak (2)', tr: 'd. Ana, anaç.', desc: 'Ana, anaç.' },
+  { ku: 'makîne', tr: 'd. Makine. makîna şuştinê: Çamaşır makinesi. makîna çeka: Çamaşır makinesi. makîna dirûnê: Dikiş makinesi.', desc: 'Makine. Çeşitleri: makîna şuştinê (Çamaşır makinesi), makîna dirûnê (Dikiş makinesi).' },
+  { ku: 'mal (1)', tr: 'e. Mal, emtia. malê dizyê: Çalıntı mal. malê firotanê: Satılık mal. malê heram: Haram mal.', desc: 'Mal, emtia. Örnek: malê dizyê (Çalıntı mal), malê firotanê (Satılık mal).' },
+  { ku: 'mal (2)', tr: 'd. 1) Ev. mala minê: "Pek yazık oldu, vah valk!" anlamına gelen bu söz acınma anlatır. mala te ava be: "Evin şen olsun!" anlamına gelen bu söz minnettarlık ve şükran duyguları ifade eder. mala Xwedê: Cami. malneketo: "Evi yıkılmayasıca!" anlamına gelen bu sözcük yakınma vb. durumlarda kullanılır. 2) Aile.', desc: 'Ev veya Aile. Deyimler: mala minê (Pek yazık oldu), mala te ava be (Evin şen olsun), mala Xwedê (Cami), malneketo (Evi yıkılmayasıca!).' },
+  { ku: 'malbat', tr: 'd. Aile, sülale.', desc: 'Aile, sülale.' },
+  { ku: 'malbûk', tr: 'd. 1) Gelin evi. 2) Çocukların oynadığı evcilik oyunu.', desc: 'Gelin evi veya Çocukların oynadığı evcilik oyunu.' },
+  { ku: 'malêz', tr: 'd. Bulamaç.', desc: 'Bulamaç.' },
+  { ku: 'malhazirî', tr: '(Evde) Halihazırda.', desc: '(Evde) Halihazırda.' },
+  { ku: 'maliq', tr: 'Bakakalan, dalan, dalıp giden.', desc: 'Bakakalan, dalan, dalıp giden.' },
+  { ku: 'maliqîn', tr: 'Dalmak, bakakalmak. (dimaliqe, bimaliqe)', desc: 'Dalmak, bakakalmak. (Geniş zaman: dimaliqe, emir: bimaliqe)' },
+  { ku: 'maliştin', tr: 'Silmek, süpürmek. (dimale, bimale)', desc: 'Silmek, süpürmek. (Geniş zaman: dimale, emir: bimale)' },
+  { ku: 'malino', tr: 'Ev sakinlerine hitap şekli.', desc: 'Ev sakinlerine hitap şekli.' },
+  { ku: 'malkir', tr: 'Hamarat.', desc: 'Hamarat.' },
+  { ku: 'malmeyt', tr: 'Ölecekmiş gibi bir durumda olan.', desc: 'Ölecekmiş gibi bir durumda olan.' },
+  { ku: 'malmîrat', tr: 'Malı mirasa kalan.', desc: 'Malı mirasa kalan.' },
+  { ku: 'malofi', tr: 'Evcil.', desc: 'Evcil.' },
+  { ku: 'malxwê', tr: 'Aile reisi.', desc: 'Aile reisi.' },
+  { ku: 'malxwêtî', tr: 'd. Aile reisliği.', desc: 'Aile reisliği.' },
+  { ku: 'Mandel', tr: 'd. Urfa il sınırları içinde bulunan Karacadağ\'ın en yüksek tepesi.', desc: 'Urfa il sınırları içinde bulunan Karacadağ\'ın en yüksek tepesi.' },
+  { ku: 'mange', tr: 'd. İnek.', desc: 'İnek.' },
+  { ku: 'mangedoş', tr: 'İnek sağan kadın, kadın inek sağımcısı.', desc: 'İnek sağan kadın, kadın inek sağımcısı.' },
+  { ku: 'manih', tr: 'Engel, engelleme.', desc: 'Engel, engelleme.' },
 ];
   
-  
-  // --- 2. ACİL DURUM VERİSİ (Yedek) ---
+  // --- 2. ACİL DURUM VERİSİ (Yedek - İnternet Yoksa) ---
   export const INTERNAL_DICTIONARY = [
     { id: 'int_1', ku: 'Erê', tr: 'Evet', desc: 'Erê, ez têm. (Evet, geliyorum.)' },
     { id: 'int_2', ku: 'Na', tr: 'Hayır', desc: 'Na, spas dikim. (Hayır, teşekkür ederim.)' },
     { id: 'int_6', ku: 'Heval', tr: 'Arkadaş', desc: 'Hevalê min ê hêja. (Değerli arkadaşım.)' },
-    { id: 'int_7', ku: 'Evîn', tr: 'Aşk' },
-    { id: 'int_8', ku: 'Azadî', tr: 'Özgürlük' },
+    { id: 'int_7', ku: 'Evîn', tr: 'Aşk', desc: 'Evîn jiyan e. (Aşk hayattır.)' },
+    { id: 'int_8', ku: 'Azadî', tr: 'Özgürlük', desc: 'Azadî mafê her kesî ye. (Özgürlük herkesin hakkıdır.)' },
     { id: 'int_9', ku: 'Jiyan', tr: 'Yaşam', desc: 'Jiyan xweş e. (Yaşam güzeldir.)' },
-    { id: 'int_10', ku: 'Aşitî', tr: 'Barış' }
+    { id: 'int_10', ku: 'Aşitî', tr: 'Barış', desc: 'Em aşitiyê dixwazin. (Biz barış istiyoruz.)' }
   ];
   
   // --- 3. KÜRTÇE ÖZEL HARFLER ---

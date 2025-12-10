@@ -5,7 +5,7 @@ import { Search, Book, X, Loader2, AlertCircle, Heart, Copy, Check, Filter, Book
 import { useLanguage } from '../context/LanguageContext';
 import { useUser } from '../context/UserContext'; 
 
-// Verileri Dışarıdan Alıyoruz (Clean Code)
+// Verileri Dışarıdan Alıyoruz
 import { STATIC_DICTIONARY, INTERNAL_DICTIONARY, KURDISH_CHARS } from '../data/dictionary';
 
 // Firebase
@@ -65,13 +65,11 @@ const Dictionary = () => {
     }
   }[lang] || {};
 
-  // State
   const [searchTerm, setSearchTerm] = useState("");
   const [allDictionaryData, setAllDictionaryData] = useState([]); 
   const [displayedWords, setDisplayedWords] = useState([]);
   const [loading, setLoading] = useState(true);
   const [copiedId, setCopiedId] = useState(null);
-  
   const [dailyWord, setDailyWord] = useState(null);
   const [randomSuggestions, setRandomSuggestions] = useState([]);
 
@@ -134,13 +132,13 @@ const Dictionary = () => {
           }
         });
 
-        // 2. VERİ BİRLEŞTİRME (Merge)
+        // 2. VERİ BİRLEŞTİRME
         const dictionaryMap = new Map();
 
         // A. Kod İçi Yedekler
         INTERNAL_DICTIONARY.forEach(word => dictionaryMap.set(word.ku.toLowerCase(), word));
 
-        // B. Statik Dosyadan Gelenler (src/data/dictionary.js)
+        // B. Statik Dosyadan Gelenler
         STATIC_DICTIONARY.forEach((word, index) => {
              // ID çakışmaması için statik verilere ID atıyoruz
              dictionaryMap.set(word.ku.toLowerCase(), { ...word, id: `static_${index}` });
@@ -152,7 +150,7 @@ const Dictionary = () => {
         const uniqueList = Array.from(dictionaryMap.values());
         setAllDictionaryData(uniqueList);
 
-        // Günün Kelimesi & Öneriler
+        // Günün Kelimesi
         if (uniqueList.length > 0) {
             const today = new Date();
             const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
@@ -165,7 +163,6 @@ const Dictionary = () => {
 
       } catch (err) {
         console.error("Hata:", err);
-        // Hata durumunda statik veriyi göster
         setAllDictionaryData([...INTERNAL_DICTIONARY, ...STATIC_DICTIONARY]);
       } finally {
         setLoading(false);
@@ -206,7 +203,6 @@ const Dictionary = () => {
       if(searchInputRef.current) searchInputRef.current.focus();
   };
 
-  // Kart İçeriğini Arama Diline Göre Ayarla
   const getDisplayContent = (word) => {
       const term = searchTerm.toLowerCase();
       let mainText = word.ku;
@@ -231,7 +227,7 @@ const Dictionary = () => {
       <div className="min-h-screen bg-slate-50 dark:bg-slate-900 pt-28 pb-12 px-4 transition-colors duration-300">
         <div className="max-w-4xl mx-auto">
 
-          {/* 1. BAŞLIK VE ARAMA ALANI */}
+          {/* BAŞLIK */}
           <div className="text-center mb-10">
               <h1 className="text-4xl font-black text-slate-800 dark:text-white mb-2">{t('dictionary')}</h1>
               <p className="text-slate-500 dark:text-slate-400 mb-8">{localT.desc}</p>
@@ -271,10 +267,9 @@ const Dictionary = () => {
               </div>
           </div>
 
-          {/* 2. KEŞFET (ARAMA YOKKEN GÖRÜNÜR) */}
+          {/* KEŞFET MODÜLLERİ (BOŞKEN) */}
           {!searchTerm && !loading && (
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
-                  {/* Günün Kelimesi */}
                   {dailyWord && (
                       <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl group">
                           <div className="absolute top-0 right-0 p-4 opacity-20"><Sparkles size={64} /></div>
@@ -299,7 +294,6 @@ const Dictionary = () => {
                       </div>
                   )}
 
-                  {/* Modüller */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm">
                           <h3 className="flex items-center gap-2 font-bold text-slate-800 dark:text-white mb-4"><Lightbulb className="text-yellow-500" size={20} /> {localT.random_explore}</h3>
@@ -325,7 +319,7 @@ const Dictionary = () => {
               </motion.div>
           )}
 
-          {/* 3. SONUÇLAR */}
+          {/* 3. ARAMA SONUÇLARI */}
           <div className="space-y-4">
             <AnimatePresence>
                 {searchTerm && displayedWords.length === 0 && !loading && (
