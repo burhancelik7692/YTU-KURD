@@ -5,28 +5,12 @@ import { Search, Book, X, Loader2, AlertCircle, Heart, Copy, Check, Filter, Book
 import { useLanguage } from '../context/LanguageContext';
 import { useUser } from '../context/UserContext'; 
 
+// Verileri Dışarıdan Alıyoruz (Clean Code)
+import { STATIC_DICTIONARY, INTERNAL_DICTIONARY, KURDISH_CHARS } from '../data/dictionary';
+
 // Firebase
 import { db } from '../firebase';
 import { collection, getDocs, query, where } from 'firebase/firestore';
-
-// --- YEDEK VERİLER ---
-let EXTERNAL_DATA = [];
-
-// Acil Durum Verisi
-const INTERNAL_DICTIONARY = [
-  { id: 'int_1', ku: 'Erê', tr: 'Evet', desc: 'Erê, ez têm. (Evet, geliyorum.)' },
-  { id: 'int_2', ku: 'Na', tr: 'Hayır', desc: 'Na, spas dikim. (Hayır, teşekkür ederim.)' },
-  { id: 'int_3', ku: 'Spas', tr: 'Teşekkürler' },
-  { id: 'int_4', ku: 'Rojbaş', tr: 'Günaydın', desc: 'Rojbaş hevalno! (Günaydın arkadaşlar!)' },
-  { id: 'int_5', ku: 'Şevbaş', tr: 'İyi geceler' },
-  { id: 'int_6', ku: 'Heval', tr: 'Arkadaş', desc: 'Hevalê min ê hêja. (Değerli arkadaşım.)' },
-  { id: 'int_7', ku: 'Evîn', tr: 'Aşk' },
-  { id: 'int_8', ku: 'Azadî', tr: 'Özgürlük' },
-  { id: 'int_9', ku: 'Jiyan', tr: 'Yaşam', desc: 'Jiyan xweş e. (Yaşam güzeldir.)' },
-  { id: 'int_10', ku: 'Aşitî', tr: 'Barış' }
-];
-
-const KURDISH_CHARS = ['ê', 'î', 'û', 'x', 'w', 'q', 'Ê', 'Î', 'Û'];
 
 const Dictionary = () => {
   const { t, lang } = useLanguage();
@@ -88,7 +72,6 @@ const Dictionary = () => {
   const [loading, setLoading] = useState(true);
   const [copiedId, setCopiedId] = useState(null);
   
-  // Keşfet Modülü State'leri
   const [dailyWord, setDailyWord] = useState(null);
   const [randomSuggestions, setRandomSuggestions] = useState([]);
 
@@ -133,6 +116,7 @@ const Dictionary = () => {
     const fetchDictionary = async () => {
       setLoading(true);
       try {
+        // 1. Firebase'den Veri Çek
         const q = query(collection(db, "dynamicContent"), where("type", "==", "dictionary"));
         const querySnapshot = await getDocs(q);
         const firebaseWords = [];
@@ -140,7 +124,6 @@ const Dictionary = () => {
         querySnapshot.forEach((doc) => {
           const data = doc.data();
           if (data.ku && data.tr) { 
-              // 'desc' alanını da alıyoruz (Örnek cümleler için)
               firebaseWords.push({ 
                   id: doc.id, 
                   ku: data.ku, 
@@ -151,15 +134,25 @@ const Dictionary = () => {
           }
         });
 
+        // 2. VERİ BİRLEŞTİRME (Merge)
         const dictionaryMap = new Map();
+
+        // A. Kod İçi Yedekler
         INTERNAL_DICTIONARY.forEach(word => dictionaryMap.set(word.ku.toLowerCase(), word));
-        EXTERNAL_DATA.forEach(word => dictionaryMap.set(word.ku.toLowerCase(), word));
+
+        // B. Statik Dosyadan Gelenler (src/data/dictionary.js)
+        STATIC_DICTIONARY.forEach((word, index) => {
+             // ID çakışmaması için statik verilere ID atıyoruz
+             dictionaryMap.set(word.ku.toLowerCase(), { ...word, id: `static_${index}` });
+        });
+
+        // C. Firebase (En Güncel) - Diğerlerini ezer
         firebaseWords.forEach(word => dictionaryMap.set(word.ku.toLowerCase(), word));
 
         const uniqueList = Array.from(dictionaryMap.values());
         setAllDictionaryData(uniqueList);
 
-        // Günün Kelimesi
+        // Günün Kelimesi & Öneriler
         if (uniqueList.length > 0) {
             const today = new Date();
             const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
@@ -172,7 +165,8 @@ const Dictionary = () => {
 
       } catch (err) {
         console.error("Hata:", err);
-        setAllDictionaryData(INTERNAL_DICTIONARY);
+        // Hata durumunda statik veriyi göster
+        setAllDictionaryData([...INTERNAL_DICTIONARY, ...STATIC_DICTIONARY]);
       } finally {
         setLoading(false);
       }
@@ -189,12 +183,11 @@ const Dictionary = () => {
       }
       const term = searchTerm.toLowerCase();
       
-      // Filtreleme
       const results = allDictionaryData.filter(item => 
           item.ku.toLowerCase().includes(term) || item.tr.toLowerCase().includes(term)
       );
 
-      // Sıralama (Tam eşleşmeler en üste)
+      // Akıllı Sıralama
       results.sort((a, b) => {
           const aKu = a.ku.toLowerCase() === term;
           const aTr = a.tr.toLowerCase() === term;
@@ -208,23 +201,19 @@ const Dictionary = () => {
       setDisplayedWords(results.slice(0, 50));
   }, [searchTerm, allDictionaryData]);
 
-  // Hızlı Kategori Arama
   const handleQuickSearch = (term) => {
       setSearchTerm(term);
       if(searchInputRef.current) searchInputRef.current.focus();
   };
 
-  // --- AKILLI GÖRÜNTÜLEME FONKSİYONU ---
-  // Arama terimine göre hangi dilin başa geleceğini belirler
+  // Kart İçeriğini Arama Diline Göre Ayarla
   const getDisplayContent = (word) => {
       const term = searchTerm.toLowerCase();
-      // Varsayılan: Kürtçe - Türkçe
       let mainText = word.ku;
       let subText = word.tr;
       let mainLang = "KU";
       let subLang = "TR";
 
-      // Eğer arama terimi Türkçe kısmında geçiyor ve Kürtçe kısmında geçmiyorsa yer değiştir
       if (term && word.tr.toLowerCase().includes(term) && !word.ku.toLowerCase().includes(term)) {
           mainText = word.tr;
           subText = word.ku;
@@ -282,10 +271,10 @@ const Dictionary = () => {
               </div>
           </div>
 
-          {/* 2. BOŞ EKRAN MODÜLLERİ (Keşfet) */}
+          {/* 2. KEŞFET (ARAMA YOKKEN GÖRÜNÜR) */}
           {!searchTerm && !loading && (
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
-                  {/* Günün Kelimesi Kartı */}
+                  {/* Günün Kelimesi */}
                   {dailyWord && (
                       <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl group">
                           <div className="absolute top-0 right-0 p-4 opacity-20"><Sparkles size={64} /></div>
@@ -296,9 +285,7 @@ const Dictionary = () => {
                               <h2 className="text-4xl md:text-5xl font-black mb-2">{dailyWord.ku}</h2>
                               <p className="text-xl md:text-2xl text-indigo-100 font-light">{dailyWord.tr}</p>
                               {dailyWord.desc && (
-                                  <div className="mt-4 bg-white/10 p-3 rounded-xl backdrop-blur-sm text-sm italic text-indigo-50 border border-white/10">
-                                      "{dailyWord.desc}"
-                                  </div>
+                                  <div className="mt-4 bg-white/10 p-3 rounded-xl backdrop-blur-sm text-sm italic text-indigo-50 border border-white/10">"{dailyWord.desc}"</div>
                               )}
                               <div className="mt-6 flex justify-center gap-4">
                                   <button onClick={() => toggleFavorite(dailyWord)} className="p-3 bg-white/10 hover:bg-white/20 rounded-full transition backdrop-blur-md">
@@ -312,12 +299,10 @@ const Dictionary = () => {
                       </div>
                   )}
 
-                  {/* Rastgele ve Kategoriler */}
+                  {/* Modüller */}
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                          <h3 className="flex items-center gap-2 font-bold text-slate-800 dark:text-white mb-4">
-                              <Lightbulb className="text-yellow-500" size={20} /> {localT.random_explore}
-                          </h3>
+                          <h3 className="flex items-center gap-2 font-bold text-slate-800 dark:text-white mb-4"><Lightbulb className="text-yellow-500" size={20} /> {localT.random_explore}</h3>
                           <div className="space-y-3">
                               {randomSuggestions.map((item, i) => (
                                   <div key={i} className="flex justify-between items-center p-3 bg-slate-50 dark:bg-slate-900 rounded-xl hover:bg-blue-50 dark:hover:bg-slate-700 transition cursor-pointer" onClick={() => handleQuickSearch(item.ku)}>
@@ -327,21 +312,11 @@ const Dictionary = () => {
                               ))}
                           </div>
                       </div>
-
                       <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm">
-                          <h3 className="flex items-center gap-2 font-bold text-slate-800 dark:text-white mb-4">
-                              <Grid className="text-blue-500" size={20} /> {t('quick_categories')}
-                          </h3>
+                          <h3 className="flex items-center gap-2 font-bold text-slate-800 dark:text-white mb-4"><Grid className="text-blue-500" size={20} /> {t('quick_categories')}</h3>
                           <div className="grid grid-cols-2 gap-3">
-                              {[
-                                  { label: t('cat_colors'), search: 'sor' }, 
-                                  { label: t('cat_numbers'), search: 'yek' },
-                                  { label: t('cat_days'), search: 'şemî' },
-                                  { label: t('cat_family'), search: 'dayik' }
-                              ].map((cat, i) => (
-                                  <button key={i} onClick={() => handleQuickSearch(cat.search)} className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-600 transition text-left">
-                                      {cat.label}
-                                  </button>
+                              {[{ label: t('cat_colors'), search: 'sor' }, { label: t('cat_numbers'), search: 'yek' }, { label: t('cat_days'), search: 'şemî' }, { label: t('cat_family'), search: 'dayik' }].map((cat, i) => (
+                                  <button key={i} onClick={() => handleQuickSearch(cat.search)} className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-600 transition text-left">{cat.label}</button>
                               ))}
                           </div>
                       </div>
@@ -350,7 +325,7 @@ const Dictionary = () => {
               </motion.div>
           )}
 
-          {/* 3. ARAMA SONUÇLARI (Liste / Kart Görünümü) */}
+          {/* 3. SONUÇLAR */}
           <div className="space-y-4">
             <AnimatePresence>
                 {searchTerm && displayedWords.length === 0 && !loading && (
@@ -363,63 +338,36 @@ const Dictionary = () => {
                 {displayedWords.map((word, index) => {
                     const isFav = isFavorite(word.ku);
                     const isCopied = copiedId === (word.id || word.ku);
-                    
-                    // Akıllı Sıralama: Arama diline göre başlık değişir
                     const { mainText, subText, mainLang, subLang } = getDisplayContent(word);
 
                     return (
                         <motion.div
                             key={word.id || word.ku}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ delay: index * 0.05 }}
+                            initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ delay: index * 0.05 }}
                             className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden hover:border-indigo-300 dark:hover:border-indigo-700 transition-all group"
                         >
                             <div className="p-6 flex flex-col md:flex-row justify-between gap-4">
-                                
-                                {/* Sol: Kelime ve Anlam */}
                                 <div className="flex-1">
                                     <div className="flex items-center gap-3 mb-2">
-                                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${mainLang === 'KU' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300'}`}>
-                                            {mainLang}
-                                        </span>
-                                        <h3 className="text-2xl font-black text-slate-800 dark:text-white tracking-tight">
-                                            {mainText}
-                                        </h3>
-                                        {word.source === 'admin' && (
-                                            <span className="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-bold uppercase">{localT.source_admin}</span>
-                                        )}
+                                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${mainLang === 'KU' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300'}`}>{mainLang}</span>
+                                        <h3 className="text-2xl font-black text-slate-800 dark:text-white tracking-tight">{mainText}</h3>
+                                        {word.source === 'admin' && (<span className="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-bold uppercase">{localT.source_admin}</span>)}
                                     </div>
-                                    
                                     <div className="flex items-center gap-3 text-lg text-slate-500 dark:text-slate-400 font-medium">
                                         <ArrowRightLeft size={16} className="text-slate-300" />
                                         <span className="text-slate-700 dark:text-slate-200">{subText}</span>
                                         <span className="text-xs font-bold text-slate-400 bg-slate-100 dark:bg-slate-700 px-1.5 rounded">{subLang}</span>
                                     </div>
                                 </div>
-
-                                {/* Sağ: Aksiyonlar */}
                                 <div className="flex items-start gap-2">
-                                    <button onClick={() => handleCopy(`${mainText} - ${subText}`, word.id || word.ku)} className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" title={localT.copy}>
-                                        {isCopied ? <Check size={20} className="text-green-500" /> : <Copy size={20} />}
-                                    </button>
-                                    <button onClick={() => toggleFavorite(word)} className={`p-2.5 rounded-xl transition-colors ${isFav ? 'bg-pink-50 dark:bg-pink-900/20 text-pink-500' : 'bg-slate-50 dark:bg-slate-700 text-slate-400 hover:text-pink-500'}`} title={localT.fav_add}>
-                                        <Heart size={20} className={isFav ? "fill-current" : ""} />
-                                    </button>
+                                    <button onClick={() => handleCopy(`${mainText} - ${subText}`, word.id || word.ku)} className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" title={localT.copy}>{isCopied ? <Check size={20} className="text-green-500" /> : <Copy size={20} />}</button>
+                                    <button onClick={() => toggleFavorite(word)} className={`p-2.5 rounded-xl transition-colors ${isFav ? 'bg-pink-50 dark:bg-pink-900/20 text-pink-500' : 'bg-slate-50 dark:bg-slate-700 text-slate-400 hover:text-pink-500'}`} title={localT.fav_add}><Heart size={20} className={isFav ? "fill-current" : ""} /></button>
                                 </div>
                             </div>
-
-                            {/* Alt: Açıklama / Örnek Cümle */}
                             {word.desc && (
                                 <div className="bg-slate-50 dark:bg-slate-900/50 p-4 border-t border-slate-100 dark:border-slate-700 flex gap-3">
                                     <Quote size={20} className="text-slate-300 flex-shrink-0" />
-                                    <div>
-                                        <p className="text-xs font-bold text-slate-400 uppercase mb-1">{localT.example}</p>
-                                        <p className="text-slate-600 dark:text-slate-300 text-sm italic leading-relaxed">
-                                            "{word.desc}"
-                                        </p>
-                                    </div>
+                                    <div><p className="text-xs font-bold text-slate-400 uppercase mb-1">{localT.example}</p><p className="text-slate-600 dark:text-slate-300 text-sm italic leading-relaxed">"{word.desc}"</p></div>
                                 </div>
                             )}
                         </motion.div>
