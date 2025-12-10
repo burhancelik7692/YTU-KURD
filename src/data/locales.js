@@ -1,10 +1,10 @@
 export const siteContent = {
   // =================================================================
-  // KÜRTÇE (KU)
+  // KÜRTÇE (KU) - ANA DİL
   // =================================================================
   KU: {
     common: {
-      loading: 'Tê Barkirin...', // Yükleniyor
+      loading: 'Tê Barkirin...',
       error: 'Çewtî derket',
       success: 'Serkeftî'
     },
@@ -22,10 +22,16 @@ export const siteContent = {
       blog: 'Agahdarî',
       follow: 'Me Bişopînin',
       join: 'Tevlî Me Bibe',
-      admin_login: 'Têketina Rêveber', // Admin Girişi
-      favorites: 'Bijareyên Min',       // Favorilerim
+      admin_login: 'Têketina Rêveber',
+      favorites: 'Bijareyên Min',
       logout: 'Derkeve',
       admin_panel: 'Panela Rêveber'
+    },
+    footer: {
+      desc: 'Komeleya xwendekarên Kurd li Zanîngeha Yıldız Teknîk. Armanca me parastin û pêşxistina ziman û çanda Kurdî ye.',
+      quick_links: 'Zû Gihîştin',
+      contact_title: 'Têkilî',
+      copyright: 'Hemû mafên parastî ne.'
     },
     notFound: {
       title: "Rêya Xwe Winda Kir?",
@@ -79,6 +85,12 @@ export const siteContent = {
       hunerDesc: 'Huner û hunermendên kurd'
     },
     pages: {
+      blog: {
+        title: 'Agahdarî',
+        desc: 'Nûçeyên herî dawî û daxuyaniyên komeleyê.',
+        noContent: 'Hîn naverok nehatiye parvekirin.',
+        admin: 'Biçe Panela Rêveber'
+      },
       tekili: {
         title: "Têkilî",
         desc: "Ji bo pirs û pêşniyaran bi me re têkilî daynin.",
@@ -136,8 +148,8 @@ export const siteContent = {
           }
         ],
         phrases: [
-          { org: 'Roj baş', mean: 'Günaydın' },
-          { org: 'Spas', mean: 'Teşekkürler' }
+          { org: 'Roj baş', mean: 'Günaydın / Good Morning' },
+          { org: 'Spas', mean: 'Teşekkürler / Thanks' }
         ]
       },
       cand: {
@@ -208,10 +220,16 @@ export const siteContent = {
       blog: 'Duyurular',
       follow: 'Bizi Takip Edin',
       join: 'Bize Katılın',
-      admin_login: 'Admin Girişi', // Eklendi
-      favorites: 'Favorilerim',     // Eklendi
+      admin_login: 'Admin Girişi',
+      favorites: 'Favorilerim',
       logout: 'Çıkış Yap',
       admin_panel: 'Yönetim Paneli'
+    },
+    footer: {
+      desc: 'Yıldız Teknik Üniversitesi Kürtçe Topluluğu. Amacımız Kürt dili ve kültürünü korumak ve geliştirmektir.',
+      quick_links: 'Hızlı Erişim',
+      contact_title: 'İletişim',
+      copyright: 'Tüm hakları saklıdır.'
     },
     notFound: {
       title: "Yolunu Mu Kaybettin?",
@@ -265,6 +283,12 @@ export const siteContent = {
       hunerDesc: 'Kürt sanatı ve sanatçıları'
     },
     pages: {
+      blog: {
+        title: 'Duyurular',
+        desc: 'Topluluğumuzdan en son haberler ve duyurular.',
+        noContent: 'Henüz içerik paylaşılmadı.',
+        admin: 'Yönetim Paneline Git'
+      },
       tekili: {
         title: "İletişim",
         desc: "Soru ve önerileriniz için bizimle iletişime geçin.",
@@ -336,35 +360,35 @@ export const siteContent = {
           },
           {
             title: "Giyim",
-            text: "Şal û şapik ve fistan yöresel kıyafetlerdir."
+            text: "Kürt kıyafetleri canlı renkleriyle bilinir. Şal û şapik (erkekler için) ve fistan (kadınlar için) temel parçalardır."
           }
         ]
       },
       muzik: {
         title: "Kürt Müziği",
-        desc: "Dağların sesi.",
+        desc: "Dağların sesi ve aşk.",
         sections: [
           {
             title: "Dengbêjlik",
-            text: "Müziğin temelidir. Şakiro önemli bir örnektir."
+            text: "Dengbêjlik Kürt müziğinin sütunudur. Dengbêjler, halkın tarihini ve acılarını sadece sesleriyle anlatırlar. Şakiro önemli bir örnektir."
           },
           {
             title: "Enstrümanlar",
-            text: "Tembur ve erbane başı çeker."
+            text: "Tembur, erbane, zurna ve kaval başlıca enstrümanlardır. Özellikle tembur Kürt müziğinde kutsal bir yere sahiptir."
           }
         ]
       },
       huner: {
-        title: "Sanat",
-        desc: "Kürtlerin gözünden dünya.",
+        title: "Sanat ve Sinema",
+        desc: "Dünyayı Kürtlerin gözünden görmek.",
         sections: [
           {
-            title: "Sinema",
-            text: "Yılmaz Güney öncüdür."
+            title: "Kürt Sineması",
+            text: "Yılmaz Güney Kürt sinemasının babası kabul edilir. 'Yol' gibi filmler dünyada ses getirmiştir."
           },
           {
             title: "Resim",
-            text: "Acı ve umut tuvale yansır."
+            text: "Kürt sanatçılar halkın acılarını ve umutlarını tuvale yansıtırlar. Ahmed-i Hani aynı zamanda büyük bir hattattı."
           }
         ]
       }
@@ -394,10 +418,16 @@ export const siteContent = {
       blog: 'Announcements',
       follow: 'Follow Us',
       join: 'Join Us',
-      admin_login: 'Admin Login', // Eklendi
-      favorites: 'My Favorites',  // Eklendi
+      admin_login: 'Admin Login',
+      favorites: 'My Favorites',
       logout: 'Logout',
       admin_panel: 'Admin Panel'
+    },
+    footer: {
+      desc: 'Yildiz Technical University Kurdish Society. Our aim is to protect and improve the Kurdish language and culture.',
+      quick_links: 'Quick Access',
+      contact_title: 'Contact',
+      copyright: 'All rights reserved.'
     },
     notFound: {
       title: "Lost Your Way?",
@@ -422,11 +452,11 @@ export const siteContent = {
       heroSubtitle: 'Yildiz Technical University - Kurdish Society',
       heroButton: 'Join Us',
       aboutTitle: 'About Us',
-      aboutText1: 'YTU Kurdish Society was established in 2025. Our aim is to protect the Kurdish language.',
-      aboutText2: 'We work with Kurdish students and anyone interested in the language. We organize activities.',
+      aboutText1: 'YTU Kurdish Society established in 2025. Our aim is to protect the Kurdish language, promote our culture, and teach our history.',
+      aboutText2: 'We work with Kurdish students and anyone interested in the language. We organize various cultural, artistic, and educational activities.',
       featuresTitle: 'Departments',
       ctaTitle: 'Join Our Community',
-      ctaText: 'Contact us to join!',
+      ctaText: 'Contact us to learn Kurdish, discover the culture, and work with us!',
       ctaButton: 'Start Now',
       eventTitle: 'Upcoming Event',
       eventEmptyTitle: 'To Be Announced',
@@ -440,17 +470,23 @@ export const siteContent = {
     },
     cards: {
       zimanTitle: 'Language',
-      zimanDesc: 'Learning Kurdish',
+      zimanDesc: 'Learning Kurdish language and grammar',
       candTitle: 'Culture',
-      candDesc: 'Rich culture',
+      candDesc: 'Rich Kurdish culture',
       dirokTitle: 'History',
-      dirokDesc: 'Ancient history',
+      dirokDesc: 'Ancient history of Kurds',
       muzikTitle: 'Music',
-      muzikDesc: 'Kurdish music',
+      muzikDesc: 'Kurdish music and songs',
       hunerTitle: 'Art',
-      hunerDesc: 'Kurdish art'
+      hunerDesc: 'Kurdish art and artists'
     },
     pages: {
+      blog: {
+        title: 'Announcements',
+        desc: 'Latest news from our society.',
+        noContent: 'No content available yet.',
+        admin: 'Go to Admin Panel'
+      },
       tekili: {
         title: "Contact",
         desc: "Contact us for questions and suggestions.",
@@ -465,40 +501,46 @@ export const siteContent = {
         },
         info: {
           addressTitle: "Address",
-          address: "Yildiz Technical University, Istanbul",
+          address: "Yildiz Technical University, Davutpasa Campus, Istanbul",
           emailTitle: "Email",
           follow: "Follow Us"
         }
       },
       dirok: {
         title: "Kurdish History",
-        desc: "From Medes to today.",
+        desc: "From Medes to today, the journey of the ancient people of Mesopotamia.",
         sections: [
           {
             title: "Origins",
-            text: "Kurds are ancient people of Mesopotamia."
+            text: "Kurds are one of the most ancient peoples of Mesopotamia. Known historically as Guti, Hurrian, and Medes. The Median Empire (612 BC) is considered the first major state of Kurdish ancestors."
           },
           {
             title: "Principalities",
-            text: "Kurds established many principalities."
+            text: "In the Middle Ages, Kurds established many principalities. Marwanids, Shaddadids, Botan, Soran, and Baban promoted Kurdish culture and art."
+          },
+          {
+            title: "Modern Period",
+            text: "In the 20th century, the Kurdish struggle for identity and rights continued. Today, Kurds keep their culture alive across four parts of Kurdistan and the diaspora."
           }
         ]
       },
       ziman: {
         title: "Kurdish Language",
-        desc: "Language is identity.",
-        alphabetTitle: "Kurdish Alphabet",
-        phrasesTitle: "Phrases",
+        desc: "Language is our identity. Kurdish is an Indo-European language.",
+        alphabetTitle: "Kurdish Alphabet (Kurmanji)",
+        phrasesTitle: "Important Phrases",
         topics: [
           {
+            id: 'reziman',
             title: 'Grammar',
-            desc: 'Rules',
-            text: 'Kurdish is Indo-European.'
+            desc: 'Rules and structure',
+            text: 'Kurdish belongs to the Indo-European language family. It uses Latin (Kurmanji) and Arabic (Sorani) scripts.'
           },
           {
-            title: 'Speaking',
-            desc: 'Daily',
-            text: 'Hello, How are you...'
+            id: 'axaftin',
+            title: 'Daily Speaking',
+            desc: 'Daily dialogues',
+            text: 'Hello, How are you, I am fine, Thanks, Welcome...'
           }
         ],
         phrases: [
@@ -508,43 +550,43 @@ export const siteContent = {
       },
       cand: {
         title: "Kurdish Culture",
-        desc: "Life and colors.",
+        desc: "Colors, sounds, and life.",
         sections: [
           {
             title: "Newroz",
-            text: "March 21 is the national day."
+            text: "Newroz (March 21) is the national holiday of Kurds. It symbolizes the new year and resistance. The fire of Newroz is a symbol of freedom."
           },
           {
             title: "Clothing",
-            text: "Traditional colorful clothes."
+            text: "Kurdish clothes are known for their vibrant colors. Shal u shapik (for men) and fistan (for women) are the main pieces."
           }
         ]
       },
       muzik: {
         title: "Kurdish Music",
-        desc: "Voice of mountains.",
+        desc: "Voice of the mountains and love.",
         sections: [
           {
-            title: "Dengbej",
-            text: "Traditional bards."
+            title: "Dengbêj",
+            text: "Dengbêj (bards) are the pillars of Kurdish music. They narrate history and pain solely through their voice. Shakiro is a prime example."
           },
           {
             title: "Instruments",
-            text: "Tembur is sacred."
+            text: "Tembûr, daf, zurna, and flute are main instruments. Tembûr holds a sacred place in Kurdish music."
           }
         ]
       },
       huner: {
-        title: "Art",
-        desc: "Kurdish perspective.",
+        title: "Art and Cinema",
+        desc: "Seeing the world through Kurdish eyes.",
         sections: [
           {
-            title: "Cinema",
-            text: "Yilmaz Guney is the father of Kurdish cinema."
+            title: "Kurdish Cinema",
+            text: "Yilmaz Guney is considered the father of Kurdish cinema. Films like 'Yol' have made a global impact."
           },
           {
             title: "Painting",
-            text: "Reflecting hope."
+            text: "Kurdish artists reflect the pain and hope of their people on canvas. Ehmedê Xanî was also a great calligrapher."
           }
         ]
       }

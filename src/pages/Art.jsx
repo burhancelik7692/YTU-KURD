@@ -1,8 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Palette } from 'lucide-react'; // Sanat için 'Palette' ikonu
+import { Palette } from 'lucide-react'; // Sanat için 'Palette' ikonu
 import { useLanguage } from '../context/LanguageContext';
 import { siteContent } from '../data/locales';
 
@@ -25,24 +24,19 @@ const Art = () => {
         <meta name="description" content={content.desc} />
       </Helmet>
 
-      <div className="min-h-screen bg-slate-50 pt-24 pb-12 px-4">
+      {/* Ana Kapsayıcı - Dark Mode ve Padding eklendi */}
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 pt-24 pb-12 px-4 transition-colors duration-300">
         <div className="max-w-4xl mx-auto">
-          
-          {/* Geri Dön Butonu */}
-          <Link to="/" className="inline-flex items-center text-slate-500 hover:text-blue-900 mb-6 transition group">
-            <ArrowLeft size={20} className="mr-1 group-hover:-translate-x-1 transition-transform" /> 
-            {lang === 'KU' ? 'Vegere' : (lang === 'TR' ? 'Geri' : 'Back')}
-          </Link>
           
           {/* Ana İçerik Kartı */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }} 
             animate={{ opacity: 1, y: 0 }} 
             transition={{ duration: 0.5 }}
-            className="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100"
+            className="bg-white dark:bg-slate-800 rounded-3xl shadow-xl overflow-hidden border border-slate-100 dark:border-slate-700"
           >
             {/* Başlık Kısmı (Teal - Turkuaz Tema) */}
-            <div className="bg-teal-600 p-8 md:p-12 text-white relative overflow-hidden">
+            <div className="bg-teal-600 dark:bg-teal-700 p-8 md:p-12 text-white relative overflow-hidden transition-colors">
               <div className="relative z-10">
                 <div className="bg-white/20 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-sm">
                   <Palette size={32} className="text-white" />
@@ -65,12 +59,12 @@ const Art = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
-                  className="border-l-4 border-teal-500 pl-6 py-1 group hover:bg-teal-50/50 rounded-r-xl transition-colors"
+                  className="border-l-4 border-teal-500 pl-6 py-1 group hover:bg-teal-50/50 dark:hover:bg-teal-900/20 rounded-r-xl transition-colors"
                 >
-                  <h2 className="text-2xl font-bold text-slate-800 mb-3 group-hover:text-teal-700 transition-colors">
+                  <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-3 group-hover:text-teal-700 dark:group-hover:text-teal-400 transition-colors">
                     {section.title}
                   </h2>
-                  <p className="text-slate-600 leading-relaxed text-lg">
+                  <p className="text-slate-600 dark:text-slate-300 leading-relaxed text-lg">
                     {section.text}
                   </p>
                 </motion.div>
@@ -78,9 +72,9 @@ const Art = () => {
             </div>
 
             {/* Alt Bilgi Alanı */}
-            <div className="bg-slate-50 p-8 text-center border-t border-slate-100">
-              <p className="text-slate-400 text-sm italic">
-                {lang === 'KU' ? 'Huner neynika civakê ye.' : 'Sanat toplumun aynasıdır.'}
+            <div className="bg-slate-50 dark:bg-slate-900/50 p-8 text-center border-t border-slate-100 dark:border-slate-700 transition-colors">
+              <p className="text-slate-400 dark:text-slate-500 text-sm italic">
+                {lang === 'KU' ? 'Huner neynika civakê ye.' : (lang === 'TR' ? 'Sanat toplumun aynasıdır.' : 'Art is the mirror of society.')}
               </p>
             </div>
 

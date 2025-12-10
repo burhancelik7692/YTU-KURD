@@ -1,24 +1,43 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Globe, Instagram, Gamepad2, Book, Mail, Moon, Sun, Image, MessageSquare } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Menu, X, Globe, Instagram, Gamepad2, Book, Mail, Moon, Sun, Image, MessageSquare, LogIn, User, LogOut } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
+import { useAuth } from '../context/AuthContext'; // Auth eklendi
 import { siteContent } from '../data/locales';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   
-  const { lang, toggleLanguage } = useLanguage();
+  const { lang, changeLanguage } = useLanguage(); // changeLanguage kullanıyoruz
   const { theme, toggleTheme } = useTheme();
+  const { currentUser, logout } = useAuth(); // Kullanıcı kontrolü
   
   const t = siteContent[lang]?.nav || {};
+
+  // Dil Değiştirme Döngüsü (KU -> TR -> EN -> KU)
+  const handleLanguageToggle = () => {
+    if (lang === 'KU') changeLanguage('TR');
+    else if (lang === 'TR') changeLanguage('EN');
+    else changeLanguage('KU');
+  };
+
+  const handleLogout = async () => {
+    try {
+        await logout();
+        navigate('/');
+    } catch (error) {
+        console.error("Çıkış yapılamadı", error);
+    }
+  };
 
   const links = [
     { path: '/', label: t.sereke || 'Home' },
     { path: '/ferheng', label: t.ferheng || 'Sözlük', icon: <Book size={16} /> },
-    { path: '/haberler', label: t.blog || 'Duyurular', icon: <MessageSquare size={16} /> },
+    { path: '/agahdari', label: t.blog || 'Duyurular', icon: <MessageSquare size={16} /> },
     { path: '/ziman', label: t.ziman || 'Dil' },
     { path: '/cand', label: t.cand || 'Kültür' },
     { path: '/dirok', label: t.dirok || 'Tarih' },
@@ -34,6 +53,7 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-20">
           
+          {/* LOGO */}
           <Link to="/" className="flex items-center space-x-3 group">
             <img 
               src="/logo.png" 
@@ -46,6 +66,7 @@ const Navigation = () => {
             </div>
           </Link>
 
+          {/* DESKTOP MENU */}
           <div className="hidden xl:flex items-center space-x-1">
             {links.map((link) => {
               const isActive = location.pathname === link.path;
@@ -64,27 +85,49 @@ const Navigation = () => {
               );
             })}
             
+            {/* TEMA BUTONU */}
             <button onClick={toggleTheme} className="ml-2 p-2 rounded-lg text-slate-600 dark:text-yellow-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
               {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
             </button>
-            <button onClick={toggleLanguage} className="flex items-center gap-1 px-2 py-2 rounded-lg text-slate-600 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700 font-bold text-xs">
+
+            {/* DİL BUTONU */}
+            <button onClick={handleLanguageToggle} className="flex items-center gap-1 px-2 py-2 rounded-lg text-slate-600 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors border border-slate-200 dark:border-slate-700 font-bold text-xs w-16 justify-center">
               <Globe size={16} /> {lang}
             </button>
+
+            {/* ADMIN / LOGIN BUTONU */}
+            {currentUser ? (
+               <div className="flex items-center gap-1">
+                 <Link to="/admin/dashboard" className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-slate-800 rounded-lg" title={t.admin_panel || "Panel"}>
+                    <User size={20} />
+                 </Link>
+                 <button onClick={handleLogout} className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-slate-800 rounded-lg" title={t.logout || "Çıkış"}>
+                    <LogOut size={20} />
+                 </button>
+               </div>
+            ) : (
+               <Link to="/admin" className="p-2 text-slate-500 hover:text-slate-800 dark:hover:text-white transition" title={t.admin_login || "Giriş"}>
+                  <LogIn size={20} />
+               </Link>
+            )}
+
             <motion.a href="https://instagram.com/ytukurdi" target="_blank" rel="noopener noreferrer" className="ml-2 bg-gradient-to-r from-blue-600 to-emerald-600 text-white p-2 rounded-full shadow-md hover:scale-105 transition-transform" whileHover={{ scale: 1.1 }}>
               <Instagram size={18} />
             </motion.a>
           </div>
 
+          {/* MOBIL MENU BUTONU */}
           <div className="xl:hidden flex items-center gap-2">
             <button onClick={toggleTheme} className="p-2 text-slate-600 dark:text-yellow-400">
               {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
             </button>
-            <button onClick={toggleLanguage} className="flex items-center gap-1 px-2 py-2 text-slate-600 dark:text-slate-200 font-bold border border-slate-200 dark:border-slate-700 rounded-lg"><span className="text-sm">{lang}</span><Globe size={20} /></button>
+            <button onClick={handleLanguageToggle} className="flex items-center gap-1 px-2 py-2 text-slate-600 dark:text-slate-200 font-bold border border-slate-200 dark:border-slate-700 rounded-lg"><span className="text-sm">{lang}</span><Globe size={20} /></button>
             <button onClick={() => setIsOpen(!isOpen)} className="text-slate-600 dark:text-slate-200 transition-colors p-2">{isOpen ? <X size={28} /> : <Menu size={28} />}</button>
           </div>
         </div>
       </div>
 
+      {/* MOBIL MENU ACILIR PENCERE */}
       <AnimatePresence>
         {isOpen && (
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="xl:hidden bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 overflow-hidden shadow-xl">
@@ -94,6 +137,19 @@ const Navigation = () => {
                   {link.isGame && <Gamepad2 size={20} />} {link.icon && <span className="text-blue-500 dark:text-blue-400">{link.icon}</span>} {link.label}
                 </Link>
               ))}
+              
+              {/* Mobil Admin Linki */}
+              <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+                  {currentUser ? (
+                     <div className="flex flex-col gap-2">
+                        <Link to="/admin/dashboard" onClick={() => setIsOpen(false)} className="flex items-center gap-2 px-4 py-2 text-blue-500 font-bold"><User size={18} /> {t.admin_panel || "Panel"}</Link>
+                        <button onClick={() => { handleLogout(); setIsOpen(false); }} className="flex items-center gap-2 px-4 py-2 text-red-500 font-bold"><LogOut size={18} /> {t.logout || "Çıkış"}</button>
+                     </div>
+                  ) : (
+                     <Link to="/admin" onClick={() => setIsOpen(false)} className="flex items-center gap-2 px-4 py-2 text-slate-500 font-bold"><LogIn size={18} /> {t.admin_login || "Admin Girişi"}</Link>
+                  )}
+              </div>
+
               <a href="https://instagram.com/ytukurdi" className="flex items-center justify-center gap-2 w-full text-center mt-4 bg-gradient-to-r from-blue-600 to-emerald-600 text-white px-5 py-3 rounded-xl font-bold">
                 <Instagram size={20} /> <span>{t.follow}</span>
               </a>

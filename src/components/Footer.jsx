@@ -1,29 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram, ArrowUp, Mail, Globe, Youtube } from 'lucide-react';
+import { Instagram, ArrowUp, Mail, Youtube } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
-import { siteContent } from '../data/locales'; // Site content'i menü için çekiyoruz
+import { siteContent } from '../data/locales';
 
 const Footer = () => {
   const { lang } = useLanguage();
-  const t = siteContent[lang]?.nav || {}; // Menü çevirilerini al
   
-  // Footer Linkleri (Menüden Dinamik Oluşturma)
+  // Dil içeriğini güvenli bir şekilde al (Hata önleyici)
+  const content = siteContent[lang] || siteContent['KU'];
+  const tNav = content.nav || {};
+  const tFooter = content.footer || {};
+  
+  // Footer Linkleri (Menüden Dinamik)
   const footerLinks = [
-    { path: '/', label: t.sereke },
-    { path: '/ferheng', label: t.ferheng },
-    { path: '/galeri', label: t.gallery },
-    { path: '/haberler', label: t.blog || 'Duyurular' },
-    { path: '/tekili', label: t.tekili },
-    { path: '/admin', label: 'Admin Girişi' }
-  ].filter(link => link.label); // Eğer çevirisi yoksa gösterme
+    { path: '/', label: tNav.sereke },
+    { path: '/ferheng', label: tNav.ferheng },
+    { path: '/galeri', label: tNav.gallery },
+    { path: '/agahdari', label: tNav.blog || 'Agahdarî' },
+    { path: '/tekili', label: tNav.tekili },
+    { path: '/admin', label: tNav.admin_login || 'Admin' }
+  ].filter(link => link.label); 
 
   // --- SCROLL TO TOP MANTIĞI ---
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // 300px aşağı kaydırıldığında butonu göster
     const toggleVisibility = () => {
       if (window.scrollY > 300) {
         setIsVisible(true);
@@ -33,7 +36,6 @@ const Footer = () => {
     };
 
     window.addEventListener('scroll', toggleVisibility);
-
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
@@ -56,13 +58,13 @@ const Footer = () => {
               YTU <span className="text-yellow-500">Kurdî</span>
             </span>
             <p className="text-slate-400 text-sm leading-relaxed">
-              {lang === 'KU' ? 'Komeleya xwendekarên Kurd li Zanîngeha Yıldız Teknîk.' : 'Yıldız Teknik Üniversitesi Kürtçe Topluluğu.'}
+              {tFooter.desc}
             </p>
           </div>
           
           {/* 2. Hızlı Linkler (Dinamik) */}
           <div className="md:col-span-2">
-            <h4 className="text-lg font-bold mb-4 text-yellow-500">{lang === 'KU' ? 'Zû Gihîştin' : 'Hızlı Erişim'}</h4>
+            <h4 className="text-lg font-bold mb-4 text-yellow-500">{tFooter.quick_links}</h4>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-y-2 text-sm">
               {footerLinks.map((link, i) => (
                 <Link key={i} to={link.path} className="text-slate-400 hover:text-white transition">
@@ -74,7 +76,7 @@ const Footer = () => {
 
           {/* 3. İletişim / Sosyal Medya */}
           <div>
-            <h4 className="text-lg font-bold mb-4 text-yellow-500">{lang === 'KU' ? 'Têkilî' : 'İletişim'}</h4>
+            <h4 className="text-lg font-bold mb-4 text-yellow-500">{tFooter.contact_title}</h4>
             <p className="text-slate-400 text-sm mb-2 flex items-center gap-2">
               <Mail size={16} className="text-slate-500" /> ytukurdidrive@gmail.com
             </p>
@@ -88,7 +90,7 @@ const Footer = () => {
         
         {/* Telif Hakkı */}
         <div className="border-t border-slate-800 pt-8 text-center">
-          <p className="text-slate-500 text-sm">© 2025 YTU Kurdî. Hemû mafên parastî ne.</p>
+          <p className="text-slate-500 text-sm">© 2025 YTU Kurdî. {tFooter.copyright}</p>
         </div>
       </div>
 

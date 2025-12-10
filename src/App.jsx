@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import Navigation from "./components/Navigation";
@@ -31,8 +31,7 @@ import { UserProvider, useUser } from './context/UserContext';
 import "./index.css";
 import { Loader2, AlertTriangle } from 'lucide-react';
 
-// --- HATA YAKALAYICI (BEYAZ EKRAN ÇÖZÜMÜ) ---
-// Siteniz çökerse beyaz ekran yerine hatayı gösterir.
+// --- HATA YAKALAYICI ---
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -55,22 +54,18 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-// Korumalı Rota (Admin Girişi Kontrolü)
 const PrivateRoute = ({ children }) => {
   const { currentUser } = useAuth();
   return currentUser ? children : <Navigate to="/admin" />;
 };
 
-// Sayfa Düzeni (Header ve Footer Yönetimi)
 const Layout = ({ children }) => {
   const location = useLocation();
-  // Oyun sayfasında veya Admin panelinde Header/Footer gizle
   const isFullScreen = location.pathname === '/listik' || location.pathname.startsWith('/admin');
 
   return (
     <div className="app-container flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Helmet>
-        {/* React 18+ uyumluluğu için string wrap edildi */}
         <title>{"YTU Kurdî"}</title>
       </Helmet>
       
@@ -81,24 +76,39 @@ const Layout = ({ children }) => {
   );
 };
 
-// --- İÇERİK BİLEŞENİ (Context Hook'ları Burada Kullanılır) ---
-// ÖNEMLİ: useAuth ve useUser hooklarını burada kullanıyoruz çünkü bu bileşen
-// Provider'ların İÇİNDE render ediliyor.
+// --- İÇERİK BİLEŞENİ ---
 const AppContent = () => {
     const auth = useAuth();
     const user = useUser();
     
-    // Hata almamak için güvenli kontrol (?.)
+    // Veri yükleme durumu
     const authLoading = auth?.loading || false;
     const userLoading = user?.loading || false;
+    
+    // 2 Saniyelik Yapay Bekleme
+    const [minTimePassed, setMinTimePassed] = useState(false);
 
-    // Yükleniyor Ekranı (Auth kontrolü bitene kadar bekle)
-    if (authLoading || userLoading) {
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setMinTimePassed(true);
+        }, 2000); // 2 saniye
+        return () => clearTimeout(timer);
+    }, []);
+
+    // Yükleniyor Ekranı (Veriler gelmediyse VEYA 2 saniye dolmadıysa göster)
+    if (authLoading || userLoading || !minTimePassed) {
         return (
-          <div className="flex items-center justify-center min-h-screen bg-slate-900">
-            <div className="text-center">
-                <Loader2 className="animate-spin text-yellow-500 mx-auto mb-4" size={50} />
-                <p className="text-slate-400 animate-pulse">Yükleniyor...</p>
+          <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 text-white z-50 fixed inset-0">
+            <div className="relative mb-8">
+                <div className="absolute inset-0 bg-yellow-500 blur-xl opacity-20 rounded-full animate-pulse"></div>
+                <Loader2 className="animate-spin text-yellow-500 relative z-10" size={64} />
+            </div>
+            
+            {/* 3 Dilli Yükleme Yazısı */}
+            <div className="flex flex-col items-center gap-2 font-medium tracking-wide animate-pulse">
+                <span className="text-yellow-400 text-lg">Tê Barkirin...</span>
+                <span className="text-slate-400 text-sm">Yükleniyor...</span>
+                <span className="text-slate-500 text-xs">Loading...</span>
             </div>
           </div>
         );
@@ -109,7 +119,6 @@ const AppContent = () => {
             <ScrollToTop />
             <Layout>
                 <Routes>
-                    {/* Halka Açık Sayfalar */}
                     <Route path="/" element={<Home />} />
                     <Route path="/cand" element={<Culture />} />
                     <Route path="/muzik" element={<Music />} />
@@ -120,19 +129,14 @@ const AppContent = () => {
                     <Route path="/galeri" element={<Gallery />} />
                     <Route path="/tekili" element={<Contact />} />
                     <Route path="/listik" element={<Listik />} />
-                    
-                    {/* GÜNCELLEME: Haberler -> Agahdarî (Duyurular) */}
                     <Route path="/agahdari" element={<Blog />} />
                     
-                    {/* Admin Sayfaları */}
                     <Route path="/admin" element={<Login />} />
                     <Route path="/admin/dashboard" element={
                         <PrivateRoute>
                             <Dashboard />
                         </PrivateRoute>
                     } />
-                    
-                    {/* 404 Sayfası */}
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Layout>
@@ -140,7 +144,6 @@ const AppContent = () => {
     );
 };
 
-// --- ANA APP BİLEŞENİ (Sadece Provider'ları Sağlar) ---
 function App() {
   return (
     <ErrorBoundary>
@@ -148,7 +151,6 @@ function App() {
           <UserProvider>
             <LanguageProvider>
               <ThemeProvider>
-                {/* Asıl uygulama mantığı AppContent içindedir */}
                 <AppContent />
               </ThemeProvider>
             </LanguageProvider>

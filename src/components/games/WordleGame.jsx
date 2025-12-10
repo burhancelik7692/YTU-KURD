@@ -67,7 +67,7 @@ const WordleGame = ({ onBack, lang }) => {
     return status;
   };
 
-  const keys = ["E R T Y U Û I Î O P", "A S D F G H J K L Ş", "Z C Ç V B N M Ê"];
+  const keys = ["E R T Y U Û I Î O P", "A S D F G H J K L Ş", "Z C Ç V B N M W Ê"];
 
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="min-h-screen bg-slate-900 text-white flex flex-col items-center justify-center p-2 font-sans w-full">
