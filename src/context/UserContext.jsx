@@ -1,115 +1,91 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { useAuth } from './AuthContext'; // AuthContext'i dinlemek için
-import { db } from '../firebase'; // Firebase bağlantısı
+import { doc, setDoc } from 'firebase/firestore';
+import { useAuth } from './AuthContext';
+import { db } from '../firebase';
 
 const UserContext = createContext();
 
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider = ({ children }) => {
-  // AuthContext'ten kullanıcı durumunu al
   const { currentUser, loading: authLoading } = useAuth();
   
-  const [userId, setUserId] = useState(null);
-  const [userProfile, setUserProfile] = useState({}); // Veriyi bu state'te tutuyoruz
-  const [loading, setLoading] = useState(true);
-  
-  const initialUserData = { 
+  // Varsayılan boş kullanıcı şablonu
+  const defaultUserData = { 
     favoriteWords: [],
-    role: 'guest', // Varsayılan rol
-    name: 'Anonim',
-    lastLogin: new Date().toISOString()
+    role: 'guest',
+    name: 'Misafir',
+    theme: 'light',
+    language: 'tr'
   };
 
-  // Firestore'dan veriyi çekme/kaydetme
-  const fetchUserData = async (id) => {
-    if (!id || !db) {
-        setLoading(false);
-        return;
-    }
-    setLoading(true);
-    try {
-      const userRef = doc(db, "users", id);
-      const docSnap = await getDoc(userRef);
+  const [userData, setUserData] = useState(defaultUserData);
+  const [loading, setLoading] = useState(true);
 
-      if (docSnap.exists()) {
-        setUserProfile(docSnap.data());
+  // --- 1. Durum Senkronizasyonu ---
+  // AuthContext veya LocalStorage'dan veriyi alıp state'e işler
+  useEffect(() => {
+    if (authLoading) return;
+
+    if (currentUser) {
+      // SENARYO A: Kullanıcı Giriş Yapmış
+      // AuthContext zaten Firestore verisini çektiği için direkt kullanıyoruz.
+      setUserData({
+        ...defaultUserData, // Eksik alan varsa varsayılanı kullan
+        ...currentUser      // Firestore'dan gelen güncel veri
+      });
+    } else {
+      // SENARYO B: Misafir Kullanıcı
+      // Veriyi tarayıcı hafızasından (LocalStorage) çek
+      const localData = localStorage.getItem('guest_preferences');
+      if (localData) {
+        setUserData({ ...defaultUserData, ...JSON.parse(localData) });
       } else {
-        // Yeni kayıt olan Firebase kullanıcısı (uid)
-        if (currentUser && currentUser.uid === id) {
-             const signedInUserInitialData = { 
-                ...initialUserData, 
-                role: 'standard', 
-                name: currentUser.email.split('@')[0],
-                email: currentUser.email,
-                lastLogin: new Date().toISOString()
-             };
-             await setDoc(userRef, signedInUserInitialData);
-             setUserProfile(signedInUserInitialData);
-        } else {
-            // Tamamen anonim veya misafir
-            setUserProfile(initialUserData); 
-        }
+        setUserData(defaultUserData);
+      }
+    }
+    setLoading(false);
+  }, [currentUser, authLoading]);
+
+
+  // --- 2. Veri Güncelleme Fonksiyonu ---
+  // Tek bir fonksiyon hem misafiri hem üyeyi yönetir
+  const updateUserData = async (newData) => {
+    // Önce arayüzü anında güncelle (Optimistic UI)
+    const updatedState = { ...userData, ...newData };
+    setUserData(updatedState);
+
+    try {
+      if (currentUser) {
+        // Üye ise -> Firestore'a yaz
+        const userRef = doc(db, "users", currentUser.uid);
+        await setDoc(userRef, newData, { merge: true });
+      } else {
+        // Misafir ise -> LocalStorage'a yaz
+        // Sadece kalıcı olması gereken verileri sakla (role: guest olarak kalmalı)
+        const dataToSave = {
+            favoriteWords: updatedState.favoriteWords,
+            theme: updatedState.theme,
+            language: updatedState.language
+        };
+        localStorage.setItem('guest_preferences', JSON.stringify(dataToSave));
       }
     } catch (err) {
-      console.error("Kullanıcı verisi çekilemedi/kaydedilemedi:", err);
-      setUserProfile(initialUserData); 
-    } finally {
-      setLoading(false);
+      console.error("Veri güncellenirken hata oluştu:", err);
+      // Hata olursa state'i geri alabilirsin (Opsiyonel)
     }
   };
 
-  // --- KULLANICI ID YÖNETİMİ VE VERİ ÇEKME ---
-  useEffect(() => {
-    if (authLoading) return; // Auth yüklenene kadar bekle
-    
-    let currentId = null;
-    
-    if (currentUser) {
-        // Oturum açan kullanıcı (Firebase UID)
-        currentId = currentUser.uid;
-    } else {
-        // Anonim kullanıcı (Local ID)
-        let localId = localStorage.getItem('ytu_user_id');
-        if (!localId || !localId.startsWith('guest_')) {
-             // Yeni misafir ID'si oluştur
-             localId = `guest_${Date.now()}_${Math.floor(Math.random() * 9999)}`;
-             localStorage.setItem('ytu_user_id', localId);
-        }
-        currentId = localId;
-    }
-    
-    setUserId(currentId);
-    fetchUserData(currentId);
-    
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser, authLoading]); 
-
-  // Veri Güncelleme Fonksiyonu
-  const updateUserData = async (data) => {
-    if (!userId || !db) {
-      console.error("Güncelleme yapılamadı.");
-      return;
-    }
-    try {
-      const userRef = doc(db, "users", userId);
-      const newData = { ...userProfile, ...data };
-      
-      await setDoc(userRef, newData, { merge: true });
-      setUserProfile(newData); // Local state'i anında güncelle
-      
-    } catch (err) {
-      console.error("Veri güncelleme hatası:", err);
-    }
+  const value = { 
+    userData,     // Kullanıcının tüm verileri (isim, rol, favoriler vb.)
+    updateUserData, // Veri güncelleme fonksiyonu
+    loading,
+    isGuest: !currentUser // Kolay kontrol için bir bayrak
   };
-
-  // userData'yı userProfile olarak güncelledik (daha anlaşılır olması için)
-  const value = { userId, userData: userProfile, loading, updateUserData };
 
   return (
     <UserContext.Provider value={value}>
-      {children}
+      {!loading && children}
     </UserContext.Provider>
   );
 };

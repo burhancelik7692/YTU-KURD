@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Loader2, ZoomIn, X, Image as ImageIcon, Camera, Filter, AlertCircle } from 'lucide-react';
+import { Loader2, ZoomIn, X, Image as ImageIcon, Camera, Filter, AlertCircle, Play, Video, ChevronLeft, ChevronRight, Download, Share2 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { siteContent } from '../data/locales';
 
 // Firebase bağlantısı
 import { db } from '../firebase';
-import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
+import { collection, getDocs, query, where, orderBy } from 'firebase/firestore'; // orderBy kaldırıldı
 
 const Gallery = () => {
   const { lang } = useLanguage();
@@ -26,6 +25,13 @@ const Gallery = () => {
   const [filter, setFilter] = useState('all');
   const [selectedImage, setSelectedImage] = useState(null);
 
+  // --- YARDIMCI: VİDEO KONTROLÜ ---
+  const isVideoUrl = (url) => {
+      if (!url) return false;
+      const lower = url.toLowerCase();
+      return lower.endsWith('.mp4') || lower.endsWith('.webm') || lower.endsWith('.mov') || lower.endsWith('.ogg');
+  };
+
   // --- FIREBASE VERİ ÇEKME ---
   useEffect(() => {
     const fetchGallery = async () => {
@@ -33,22 +39,32 @@ const Gallery = () => {
         setError(null);
         const contentRef = collection(db, "dynamicContent");
         
+        // DÜZELTME: orderBy kaldırıldı (Index hatasını önlemek için)
         const q = query(
           contentRef, 
-          where("type", "==", "gallery"), 
-          orderBy("createdAt", "desc")
+          where("type", "==", "gallery")
         );
         const querySnapshot = await getDocs(q);
         
         const firebaseImages = [];
         querySnapshot.forEach((doc) => {
           const data = doc.data();
-          firebaseImages.push({ 
-              id: doc.id, 
-              src: data.url, 
-              title: data.title, 
-              category: data.category?.toLowerCase() || 'calaki' 
-          });
+          if (data.url) { 
+              firebaseImages.push({ 
+                  id: doc.id, 
+                  src: data.url, 
+                  title: data.title, 
+                  category: data.category?.toLowerCase() || 'calaki',
+                  createdAt: data.createdAt // Sıralama için gerekli
+              });
+          }
+        });
+
+        // DÜZELTME: JavaScript ile Manuel Sıralama (Yeniden Eskiye)
+        firebaseImages.sort((a, b) => {
+            const dateA = a.createdAt?.seconds || 0;
+            const dateB = b.createdAt?.seconds || 0;
+            return dateB - dateA;
         });
 
         setImages(firebaseImages); 
@@ -69,6 +85,61 @@ const Gallery = () => {
   const filteredImages = filter === 'all' 
     ? images 
     : images.filter(img => img.category === filter);
+
+  // --- LIGHTBOX NAVIGASYON (YENİ) ---
+  const handleNext = (e) => {
+    e?.stopPropagation();
+    if (!selectedImage) return;
+    const currentIndex = filteredImages.findIndex(img => img.id === selectedImage.id);
+    const nextIndex = (currentIndex + 1) % filteredImages.length;
+    setSelectedImage(filteredImages[nextIndex]);
+  };
+
+  const handlePrev = (e) => {
+    e?.stopPropagation();
+    if (!selectedImage) return;
+    const currentIndex = filteredImages.findIndex(img => img.id === selectedImage.id);
+    const prevIndex = (currentIndex - 1 + filteredImages.length) % filteredImages.length;
+    setSelectedImage(filteredImages[prevIndex]);
+  };
+
+  // Klavye Kontrolü
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!selectedImage) return;
+      if (e.key === 'Escape') setSelectedImage(null);
+      if (e.key === 'ArrowRight') handleNext();
+      if (e.key === 'ArrowLeft') handlePrev();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage, filteredImages]);
+
+  // Medya İndirme
+  const handleDownload = async (e, url) => {
+      e.stopPropagation();
+      try {
+        const response = await fetch(url);
+        const blob = await response.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = `ytu-kurdi-gallery-${Date.now()}`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (err) {
+        // CORS hatası olursa yeni sekmede aç
+        window.open(url, '_blank');
+      }
+  };
+
+  // Paylaşma
+  const handleShare = (e, url) => {
+      e.stopPropagation();
+      navigator.clipboard.writeText(url);
+      alert(lang === 'KU' ? 'Girêdan hat kopyakirin!' : 'Link kopyalandı!');
+  };
 
   // Kategoriler (Navigasyon için)
   const categories = [
@@ -134,9 +205,9 @@ const Gallery = () => {
 
           {/* Hata Mesajı */}
           {error && (
-             <div className="text-center bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 p-4 rounded-xl flex items-center justify-center gap-2 my-8 border border-red-200 dark:border-red-800">
+              <div className="text-center bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 p-4 rounded-xl flex items-center justify-center gap-2 my-8 border border-red-200 dark:border-red-800">
                <AlertCircle size={20} /> {error}
-             </div>
+              </div>
           )}
 
           {/* Yükleniyor */}
@@ -152,57 +223,85 @@ const Gallery = () => {
             <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               <AnimatePresence>
                 {filteredImages.length > 0 ? (
-                  filteredImages.map((img, index) => (
-                    <motion.div
-                      layout
-                      key={img.id}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.5 }}
-                      transition={{ duration: 0.3, delay: index * 0.05 }}
-                      className="group relative cursor-pointer overflow-hidden rounded-2xl shadow-md bg-slate-200 dark:bg-slate-800 aspect-[4/5] md:aspect-square"
-                      onClick={() => setSelectedImage(img)}
-                    >
-                      {/* Resim */}
-                      <img 
-                        src={img.src} 
-                        alt={img.title} 
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        loading="lazy"
-                        onError={(e) => {
-                            e.target.onerror = null;
-                            e.target.style.display = 'none';
-                            e.target.parentNode.classList.add('flex', 'items-center', 'justify-center', 'bg-slate-100', 'dark:bg-slate-800');
-                            e.target.parentNode.innerHTML += '<span class="text-slate-400"><svg.../></span>'; 
-                        }}
-                      />
-                      
-                      {/* Hover Overlay (Karanlık Perde) */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                            <span className="inline-block px-2 py-1 bg-blue-600 text-white text-[10px] font-bold uppercase rounded mb-2 tracking-wider">
-                                {img.category}
-                            </span>
-                            <h3 className="text-white font-bold text-lg leading-tight line-clamp-2">{img.title}</h3>
+                  filteredImages.map((img, index) => {
+                    const isVideo = isVideoUrl(img.src);
+                    
+                    return (
+                        <motion.div
+                        layout
+                        key={img.id}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.5 }}
+                        transition={{ duration: 0.3, delay: index * 0.05 }}
+                        className="group relative cursor-pointer overflow-hidden rounded-2xl shadow-md bg-slate-200 dark:bg-slate-800 aspect-[4/5] md:aspect-square"
+                        onClick={() => setSelectedImage(img)}
+                        >
+                        {/* MEDYA ALANI */}
+                        {isVideo ? (
+                            <div className="w-full h-full relative">
+                                <video 
+                                    src={img.src} 
+                                    className="w-full h-full object-cover" 
+                                    muted 
+                                    loop 
+                                    playsInline
+                                    onMouseOver={event => event.target.play()}
+                                    onMouseOut={event => event.target.pause()}
+                                />
+                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                    <div className="bg-white/20 backdrop-blur-md p-3 rounded-full border border-white/30 group-hover:scale-110 transition-transform">
+                                        <Play className="text-white fill-current" size={32} />
+                                    </div>
+                                </div>
+                                <div className="absolute top-3 right-3 bg-black/50 backdrop-blur text-white px-2 py-1 rounded text-xs font-bold flex items-center gap-1">
+                                    <Video size={12} /> Video
+                                </div>
+                            </div>
+                        ) : (
+                            <img 
+                                src={img.src} 
+                                alt={img.title} 
+                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                loading="lazy"
+                                onError={(e) => {
+                                    e.target.onerror = null;
+                                    e.target.style.display = 'none';
+                                    e.target.parentNode.classList.add('flex', 'items-center', 'justify-center', 'bg-slate-100', 'dark:bg-slate-800');
+                                    e.target.parentNode.innerHTML += '<span class="text-slate-400 opacity-50"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></span>'; 
+                                }}
+                            />
+                        )}
+                        
+                        {/* Hover Overlay (Karanlık Perde & Bilgi) */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                            <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                <span className="inline-block px-2 py-1 bg-blue-600 text-white text-[10px] font-bold uppercase rounded mb-2 tracking-wider">
+                                    {img.category}
+                                </span>
+                                {img.title && <h3 className="text-white font-bold text-lg leading-tight line-clamp-2">{img.title}</h3>}
+                            </div>
                         </div>
-                      </div>
 
-                      {/* Büyüteç İkonu (Ortada) */}
-                      <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                        <div className="bg-white/20 backdrop-blur-md p-3 rounded-full">
-                            <ZoomIn className="text-white" size={32} />
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))
+                        {/* Büyüteç İkonu (Resimler için) */}
+                        {!isVideo && (
+                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                                <div className="bg-white/20 backdrop-blur-md p-3 rounded-full">
+                                    <ZoomIn className="text-white" size={32} />
+                                </div>
+                            </div>
+                        )}
+                        </motion.div>
+                    );
+                  })
                 ) : (
                   <div className="col-span-full text-center py-20 px-6 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-3xl">
                     <div className="w-16 h-16 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
                         <ImageIcon size={32} />
                     </div>
-                    <p className="text-slate-500 dark:text-slate-400 font-medium text-lg">Di vê kategoriyê de wêne tune.</p>
+                    <p className="text-slate-500 dark:text-slate-400 font-medium text-lg">Di vê kategoriyê de naverok tune.</p>
                     <button onClick={() => setFilter('all')} className="mt-4 text-blue-600 dark:text-blue-400 font-bold hover:underline">
-                        Hemû wêneyan nîşan bide
+                        Hemûyan nîşan bide
                     </button>
                   </div>
                 )}
@@ -212,7 +311,7 @@ const Gallery = () => {
         </div>
       </div>
 
-      {/* 4. LIGHTBOX (Büyük Resim Modu) */}
+      {/* 4. LIGHTBOX (Büyük Resim/Video Modu) */}
       <AnimatePresence>
         {selectedImage && (
           <motion.div 
@@ -222,26 +321,73 @@ const Gallery = () => {
             className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/95 backdrop-blur-xl"
             onClick={() => setSelectedImage(null)}
           >
-            {/* Kapat Butonu */}
-            <button className="absolute top-6 right-6 text-white/70 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all z-50">
-              <X size={40} />
+            {/* Üst Toolbar */}
+            <div className="absolute top-0 left-0 right-0 p-4 flex justify-between items-center z-50 bg-gradient-to-b from-black/60 to-transparent">
+               <div className="text-white font-bold ml-2 line-clamp-1 max-w-[50%]">{selectedImage.title}</div>
+               <div className="flex gap-2">
+                   <button 
+                      onClick={(e) => handleShare(e, selectedImage.src)}
+                      className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors" title="Copy Link"
+                   >
+                      <Share2 size={20} />
+                   </button>
+                   <button 
+                      onClick={(e) => handleDownload(e, selectedImage.src)}
+                      className="p-2.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors" title="Download"
+                   >
+                      <Download size={20} />
+                   </button>
+                   <button 
+                      onClick={() => setSelectedImage(null)}
+                      className="p-2.5 rounded-full bg-white/10 hover:bg-red-500/80 text-white transition-colors ml-2"
+                   >
+                      <X size={20} />
+                   </button>
+               </div>
+            </div>
+
+            {/* Sol Ok */}
+            <button 
+                onClick={handlePrev} 
+                className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-50 hidden md:block"
+            >
+                <ChevronLeft size={32} />
+            </button>
+
+            {/* Sağ Ok */}
+            <button 
+                onClick={handleNext} 
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-50 hidden md:block"
+            >
+                <ChevronRight size={32} />
             </button>
             
-            {/* Resim Container */}
+            {/* Medya Container */}
             <motion.div 
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              className="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center"
+              key={selectedImage.id} // Key değiştiğinde animasyon tetiklenir
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.2 }}
+              className="relative max-w-6xl w-full max-h-[85vh] flex flex-col items-center"
               onClick={(e) => e.stopPropagation()} 
             >
-              <img 
-                src={selectedImage.src} 
-                alt={selectedImage.title} 
-                className="w-auto h-auto max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
-              />
+              {isVideoUrl(selectedImage.src) ? (
+                  <video 
+                    src={selectedImage.src} 
+                    controls 
+                    autoPlay 
+                    className="w-full max-h-[80vh] rounded-lg shadow-2xl bg-black outline-none"
+                  />
+              ) : (
+                  <img 
+                    src={selectedImage.src} 
+                    alt={selectedImage.title} 
+                    className="w-auto h-auto max-w-full max-h-[80vh] object-contain rounded-lg shadow-2xl"
+                  />
+              )}
+
               <div className="mt-6 text-center">
-                  <h2 className="text-white text-2xl font-bold mb-1">{selectedImage.title}</h2>
                   <span className="inline-block px-3 py-1 bg-white/10 text-white/80 text-xs font-bold uppercase rounded-full border border-white/10">
                     {selectedImage.category}
                   </span>

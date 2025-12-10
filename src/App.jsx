@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 
-// Sayfalar
+// --- SAYFALAR ---
 import Home from "./pages/Home";
 import Culture from "./pages/Culture"; 
 import Music from "./pages/Music";
@@ -20,10 +20,11 @@ import Gallery from "./pages/Gallery";
 import Blog from "./pages/Blog";
 import UserDashboard from "./pages/UserDashboard"; // Kullanıcı Paneli
 
-// Admin Sayfaları
-import AuthPage from "./pages/admin/AuthPage"; // Login, Register, Forgot Password tek sayfada
-import Dashboard from "./pages/admin/Dashboard";
+// --- ADMIN & AUTH SAYFALARI ---
+import AuthPage from "./pages/admin/AuthPage"; // Login, Register, Forgot Password
+import Dashboard from "./pages/admin/Dashboard"; // Admin Paneli
 
+// --- CONTEXT & UTILS ---
 import ScrollToTop from "./components/ScrollToTop"; 
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext'; 
@@ -68,56 +69,71 @@ const AdminPrivateRoute = ({ children }) => {
   const { currentUser, loading: authLoading } = useAuth();
   const { userData, loading: userLoading } = useUser();
   
-  // Yükleme
+  // 1. Veriler yükleniyorsa bekle
   if (authLoading || userLoading) {
       return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 text-white"><Loader2 className="animate-spin text-yellow-500" size={50} /></div>
+        <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 text-white">
+            <Loader2 className="animate-spin text-yellow-500 mb-4" size={50} />
+            <p className="text-slate-400 text-sm animate-pulse">Yetki kontrolü yapılıyor...</p>
+        </div>
       );
   }
 
-  // Yönlendirme Mantığı
+  // 2. Kullanıcı giriş yapmamışsa -> Login sayfasına at
   if (!currentUser) {
-      return <Navigate to="/admin" />;
+      return <Navigate to="/admin" replace />;
   }
 
-  const isAdmin = userData?.role === 'admin';
-
-  if (!isAdmin) {
-      // Eğer kullanıcı giriş yapmış ama Admin değilse, kendi paneline yönlendir.
-      return <Navigate to="/user" />;
+  // 3. Giriş yapmış ama Admin değilse -> Kullanıcı paneline at
+  if (userData?.role !== 'admin') {
+      return <Navigate to="/user" replace />;
   }
   
+  // 4. Sorun yoksa sayfayı göster
   return children;
 };
 
-// --- SAYFA DÜZENİ ---
+// =========================================================
+// 🔒 KORUMALI ROTA (Kullanıcı Girişi Kontrolü)
+// =========================================================
+const UserPrivateRoute = ({ children }) => {
+    const { currentUser, loading } = useAuth();
+    
+    if (loading) return null; // Splash zaten hallediyor ama güvenlik için
+
+    if (!currentUser) {
+        return <Navigate to="/admin" replace />;
+    }
+    return children;
+};
+
+// --- SAYFA DÜZENİ (NAVBAR & FOOTER KONTROLÜ) ---
 const Layout = ({ children }) => {
   const location = useLocation();
-  const isFullScreen = location.pathname.startsWith('/admin') || location.pathname.startsWith('/user'); 
+  
+  // Admin ve User panellerinde Navbar/Footer gizle (Tam ekran deneyimi için)
+  const isFullScreen = location.pathname.startsWith('/admin/dashboard') || location.pathname.startsWith('/user'); 
 
   return (
     <div className="app-container flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
       <Helmet><title>{"YTU Kurdî"}</title></Helmet>
       {!isFullScreen && <Navigation />}
-      <main className="flex-grow">{children}</main>
+      <main className="flex-grow relative z-0">{children}</main>
       {!isFullScreen && <Footer />}
     </div>
   );
 };
 
-// --- İÇERİK VE YÖNLENDİRME (App'in İç Mantığı) ---
+// --- İÇERİK VE YÖNLENDİRME MANTIĞI ---
 const AppContent = () => {
-    const auth = useAuth();
-    const user = useUser();
+    const { loading: authLoading } = useAuth();
+    const { loading: userLoading } = useUser();
     
-    // Yükleme durumları
-    const authLoading = auth?.loading || false;
-    const userLoading = user?.loading || false;
-    
-    const [isLoading, setIsLoading] = useState(true);
+    // Splash Screen için kendi state'imiz (Görsel efekt süresi için)
+    const [isSplashVisible, setSplashVisible] = useState(true);
     const [progress, setProgress] = useState(0);
 
-    // Rastgele Parçacıklar (Görsel Efekt)
+    // Rastgele Parçacıklar (Splash Efekti)
     const particles = Array.from({ length: 20 }).map((_, i) => ({
         id: i,
         x: Math.random() * 100,
@@ -132,33 +148,37 @@ const AppContent = () => {
         const interval = setInterval(() => {
             setProgress((prev) => {
                 if (prev >= 100) { clearInterval(interval); return 100; }
-                return prev + Math.floor(Math.random() * 8) + 2;
+                return prev + Math.floor(Math.random() * 15) + 5;
             });
-        }, 50);
+        }, 100);
 
-        // Minimum bekleme süresi (2.5 saniye)
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-        }, 2500);
-
-        return () => {
-            clearTimeout(timer);
-            clearInterval(interval);
+        // Firebase verisi ve animasyon bitene kadar bekle
+        const checkLoading = () => {
+            if (!authLoading && !userLoading && progress >= 100) {
+                 // Biraz daha beklet ki kullanıcı animasyonu görsün (UX)
+                 setTimeout(() => setSplashVisible(false), 500);
+            }
         };
-    }, []);
+        
+        // Veri yüklendiğinde kontrol et
+        if (!authLoading && !userLoading) {
+            // Progress bar 100 olsun diye zorla
+            setProgress(100);
+            setTimeout(() => setSplashVisible(false), 800);
+        }
 
-    // Yükleme devam ediyorsa gösterilecek
-    const showSplash = isLoading || authLoading || userLoading;
+        return () => clearInterval(interval);
+    }, [authLoading, userLoading]); // Dependency array önemli
 
     return (
         <>
             {/* --- GELİŞMİŞ SPLASH SCREEN --- */}
             <AnimatePresence>
-                {showSplash && (
+                {isSplashVisible && (
                     <motion.div
                         key="splash-screen"
                         initial={{ opacity: 1 }}
-                        exit={{ opacity: 0, filter: "blur(15px)", scale: 1.05 }}
+                        exit={{ opacity: 0, filter: "blur(20px)", scale: 1.1 }}
                         transition={{ duration: 0.8, ease: "easeInOut" }}
                         className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-slate-950 overflow-hidden"
                     >
@@ -183,11 +203,7 @@ const AppContent = () => {
                             transition={{ duration: 1 }}
                             className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
                         >
-                            <img 
-                                src="/logo.png" 
-                                alt="Background Logo" 
-                                className="w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] object-contain grayscale opacity-20 animate-[pulse_4s_ease-in-out_infinite]" 
-                            />
+                            <img src="/logo.png" alt="Background Logo" className="w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] object-contain grayscale opacity-20 animate-[pulse_4s_ease-in-out_infinite]" />
                         </motion.div>
 
                         {/* 3. MERKEZİ YÜKLEYİCİ */}
@@ -195,14 +211,14 @@ const AppContent = () => {
                             
                             {/* Logo ve Dönen Halkalar */}
                             <div className="relative w-32 h-32 mb-8 flex items-center justify-center">
-                                {/* Dış Halka - Sarı */}
+                                {/* Dış Halka */}
                                 <motion.div 
                                     animate={{ rotate: 360 }}
                                     transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
                                     className="absolute inset-0 rounded-full border-2 border-transparent border-t-yellow-500 border-l-yellow-500/50"
                                 ></motion.div>
                                 
-                                {/* İç Halka - Mavi */}
+                                {/* İç Halka */}
                                 <motion.div 
                                     animate={{ rotate: -360 }}
                                     transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
@@ -230,20 +246,15 @@ const AppContent = () => {
                                 YTU KURDÎ
                             </motion.h1>
                             
-                            {/* İlerleme Çubuğu ve Yazı */}
+                            {/* İlerleme Çubuğu */}
                             <div className="w-64">
                                 <div className="flex justify-between text-xs font-bold text-slate-400 mb-2 uppercase tracking-widest">
-                                    <motion.span 
-                                        animate={{ opacity: [0.5, 1, 0.5] }} 
-                                        transition={{ duration: 1.5, repeat: Infinity }}
-                                        className="text-yellow-500"
-                                    >
+                                    <motion.span animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 1.5, repeat: Infinity }} className="text-yellow-500">
                                         Tê Barkirin...
                                     </motion.span>
                                     <span>{Math.min(progress, 100)}%</span>
                                 </div>
                                 
-                                {/* Bar */}
                                 <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden border border-white/5">
                                     <motion.div 
                                         className="h-full bg-gradient-to-r from-blue-600 via-blue-400 to-yellow-400"
@@ -251,17 +262,9 @@ const AppContent = () => {
                                         transition={{ ease: "linear" }}
                                     />
                                 </div>
-                                
-                                {/* Alt Yazılar */}
-                                <div className="flex justify-center gap-4 mt-3 text-[10px] text-slate-600 uppercase tracking-widest font-medium">
-                                    <span>Yükleniyor</span>
-                                    <span>•</span>
-                                    <span>Loading</span>
-                                </div>
                             </div>
                         </div>
 
-                        {/* Alt Bilgi */}
                         <div className="absolute bottom-8 text-slate-700 text-[10px] font-mono tracking-widest opacity-50">
                             v1.0.0 &copy; 2025 ZANÎNGEHA YILDIZ TEKNÎK
                         </div>
@@ -269,13 +272,14 @@ const AppContent = () => {
                 )}
             </AnimatePresence>
 
-            {/* ANA UYGULAMA (Yükleme bitince Router devreye girer) */}
-            {!showSplash && (
+            {/* --- ANA UYGULAMA ROUTER --- */}
+            {/* Splash ekranı kalktığında Router devreye girer */}
+            {!isSplashVisible && (
                 <Router>
                     <ScrollToTop />
                     <Layout>
                         <Routes>
-                            {/* Normal Sayfalar */}
+                            {/* --- GENEL ERİŞİME AÇIK SAYFALAR --- */}
                             <Route path="/" element={<Home />} />
                             <Route path="/cand" element={<Culture />} />
                             <Route path="/muzik" element={<Music />} />
@@ -288,19 +292,27 @@ const AppContent = () => {
                             <Route path="/listik" element={<Listik />} />
                             <Route path="/agahdari" element={<Blog />} />
                             
-                            {/* AUTHENTICATION (Login, Register, Forgot Password hepsi burada) */}
+                            {/* --- AUTHENTICATION --- */}
+                            {/* Giriş/Kayıt/Şifre Sıfırlama Hepsi Burada */}
                             <Route path="/admin" element={<AuthPage />} />
                             
-                            {/* KULLANICI PANELİ */}
-                            <Route path="/user" element={<UserDashboard />} />
+                            {/* --- KORUMALI ROTALAR --- */}
 
-                            {/* ADMIN PANELİ - Sadece Rolü 'admin' Olanlar Girebilir */}
+                            {/* 1. Kullanıcı Paneli (Sadece giriş yapmışlar) */}
+                            <Route path="/user" element={
+                                <UserPrivateRoute>
+                                    <UserDashboard />
+                                </UserPrivateRoute>
+                            } />
+
+                            {/* 2. Admin Paneli (Sadece 'admin' rolü olanlar) */}
                             <Route path="/admin/dashboard" element={
                                 <AdminPrivateRoute>
                                     <Dashboard />
                                 </AdminPrivateRoute>
                             } />
                             
+                            {/* 404 Sayfası */}
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </Layout>
@@ -310,11 +322,11 @@ const AppContent = () => {
     );
 };
 
-// --- ANA UYGULAMA ---
+// --- UYGULAMA SARMALAYICISI ---
 function App() {
   return (
     <ErrorBoundary>
-        {/* Tüm uygulama, Auth ve User Context'leri ile sarıldı */}
+        {/* Context Sıralaması Önemlidir: Auth -> User -> Language */}
         <AuthProvider>
           <UserProvider>
             <LanguageProvider>

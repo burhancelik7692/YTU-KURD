@@ -5,7 +5,6 @@ import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 
 // --- FIREBASE KONFİGÜRASYONU ---
-// Bu bilgileri kendi Firebase projenizden almalısınız.
 const firebaseConfig = {
   apiKey: "AIzaSyDadado7dT6SYDywKRCpAc9L7kqkubdadE",
   authDomain: "ytu-kurdi.firebaseapp.com",
@@ -25,7 +24,7 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 
-// Analytics için güvenlik kontrolü
+// Analytics için güvenlik kontrolü (Bazı ortamlarda çalışmayabilir)
 let analytics;
 isSupported().then((yes) => {
   if (yes) {
@@ -35,5 +34,6 @@ isSupported().then((yes) => {
   console.log("Analytics bu ortamda desteklenmiyor:", err);
 });
 
-// 3. Dışa Aktar
+// 3. Servisleri Dışa Aktar
+// Diğer dosyalarda `import { db, auth } from './firebase'` şeklinde kullanacaksın.
 export { app, analytics, db, storage, auth };
