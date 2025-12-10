@@ -29,24 +29,66 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { UserProvider, useUser } from './context/UserContext'; 
 
 import "./index.css";
-import { Loader2, AlertTriangle } from 'lucide-react';
+import { Loader2, AlertTriangle, XCircle } from 'lucide-react';
 
-// --- HATA YAKALAYICI ---
+// =========================================================
+// 🚨 GELİŞMİŞ HATA YAKALAYICI (GLOBAL ERROR BOUNDARY)
+// =========================================================
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null };
+    this.state = { hasError: false, error: null, errorInfo: null };
   }
-  static getDerivedStateFromError(error) { return { hasError: true, error }; }
-  componentDidCatch(error, errorInfo) { console.error("Kritik Hata:", error, errorInfo); }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error("Uygulama Çöktü:", error, errorInfo);
+    this.setState({ errorInfo });
+  }
+
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center text-white p-6 text-center">
-          <AlertTriangle size={64} className="text-red-500 mb-4" />
-          <h1 className="text-2xl font-bold">Bir şeyler ters gitti!</h1>
-          <p className="text-red-300 mt-2 p-4 bg-slate-800 rounded border border-red-500/30 font-mono text-sm">{this.state.error?.message}</p>
-          <button onClick={() => window.location.reload()} className="mt-6 px-6 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 font-bold transition">Sayfayı Yenile</button>
+        <div style={{
+          position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh',
+          backgroundColor: '#1a1a1a', color: '#ff4d4d', zIndex: 9999,
+          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+          padding: '20px', fontFamily: 'monospace', overflow: 'auto'
+        }}>
+          <div style={{ maxWidth: '800px', width: '100%', backgroundColor: '#2a2a2a', padding: '30px', borderRadius: '15px', border: '2px solid #ff4d4d', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '20px', borderBottom: '1px solid #444', paddingBottom: '15px' }}>
+                <AlertTriangle size={40} />
+                <h1 style={{ margin: 0, fontSize: '24px', color: '#fff' }}>Uygulama Hatası (Crash)</h1>
+            </div>
+            
+            <h2 style={{ fontSize: '18px', color: '#ff8080', marginBottom: '10px' }}>Hata Mesajı:</h2>
+            <div style={{ backgroundColor: '#000', padding: '15px', borderRadius: '8px', marginBottom: '20px', color: '#fff', border: '1px solid #ff4d4d' }}>
+              {this.state.error && this.state.error.toString()}
+            </div>
+
+            <h2 style={{ fontSize: '18px', color: '#ff8080', marginBottom: '10px' }}>Hata Yeri (Stack Trace):</h2>
+            <div style={{ backgroundColor: '#000', padding: '15px', borderRadius: '8px', maxHeight: '200px', overflowY: 'auto', fontSize: '12px', color: '#ccc', whiteSpace: 'pre-wrap' }}>
+              {this.state.errorInfo && this.state.errorInfo.componentStack}
+            </div>
+
+            <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
+                <button 
+                    onClick={() => window.location.reload()} 
+                    style={{ padding: '12px 24px', backgroundColor: '#3b82f6', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', fontSize: '16px' }}
+                >
+                    Sayfayı Yenile
+                </button>
+                <button 
+                    onClick={() => window.location.href = '/'} 
+                    style={{ padding: '12px 24px', backgroundColor: '#444', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', fontSize: '16px' }}
+                >
+                    Ana Sayfaya Dön
+                </button>
+            </div>
+          </div>
         </div>
       );
     }
@@ -54,14 +96,16 @@ class ErrorBoundary extends React.Component {
   }
 }
 
+// --- KORUMALI ROTA ---
 const PrivateRoute = ({ children }) => {
   const { currentUser } = useAuth();
   return currentUser ? children : <Navigate to="/admin" />;
 };
 
+// --- SAYFA DÜZENİ ---
 const Layout = ({ children }) => {
   const location = useLocation();
-  const isFullScreen = location.pathname === '/listik' || location.pathname.startsWith('/admin');
+  const isFullScreen = location.pathname.startsWith('/admin');
 
   return (
     <div className="app-container flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
@@ -76,26 +120,27 @@ const Layout = ({ children }) => {
   );
 };
 
-// --- İÇERİK BİLEŞENİ ---
+// --- İÇERİK VE YÖNLENDİRME ---
 const AppContent = () => {
     const auth = useAuth();
     const user = useUser();
     
-    // Veri yükleme durumu
+    // Auth ve User verilerinin yüklenme durumu
+    // Hata almamak için opsiyonel zincirleme (?.) kullanıyoruz
     const authLoading = auth?.loading || false;
     const userLoading = user?.loading || false;
     
-    // 2 Saniyelik Yapay Bekleme
+    // 2 Saniyelik Zorunlu Bekleme
     const [minTimePassed, setMinTimePassed] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => {
             setMinTimePassed(true);
-        }, 2000); // 2 saniye
+        }, 2000); // 2000ms = 2 Saniye
         return () => clearTimeout(timer);
     }, []);
 
-    // Yükleniyor Ekranı (Veriler gelmediyse VEYA 2 saniye dolmadıysa göster)
+    // Yükleniyor Ekranı
     if (authLoading || userLoading || !minTimePassed) {
         return (
           <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 text-white z-50 fixed inset-0">
@@ -104,9 +149,8 @@ const AppContent = () => {
                 <Loader2 className="animate-spin text-yellow-500 relative z-10" size={64} />
             </div>
             
-            {/* 3 Dilli Yükleme Yazısı */}
             <div className="flex flex-col items-center gap-2 font-medium tracking-wide animate-pulse">
-                <span className="text-yellow-400 text-lg">Tê Barkirin...</span>
+                <span className="text-yellow-400 text-lg font-bold">Tê Barkirin...</span>
                 <span className="text-slate-400 text-sm">Yükleniyor...</span>
                 <span className="text-slate-500 text-xs">Loading...</span>
             </div>
@@ -137,6 +181,7 @@ const AppContent = () => {
                             <Dashboard />
                         </PrivateRoute>
                     } />
+                    
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </Layout>
@@ -144,8 +189,10 @@ const AppContent = () => {
     );
 };
 
+// --- ANA UYGULAMA ---
 function App() {
   return (
+    // ErrorBoundary'yi en dışa koyduk ki Context hatalarını da yakalasın
     <ErrorBoundary>
         <AuthProvider>
           <UserProvider>

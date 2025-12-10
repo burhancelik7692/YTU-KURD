@@ -193,6 +193,15 @@ export const siteContent = {
             text: "Hunermendên Kurd êş û hêviyên gelê xwe li ser tûwalê nîşan didin. Ehmedê Xanî di heman demê de xetatekî mezin bû."
           }
         ]
+      },
+      listik: {
+        title: 'Lîstikên Me', 
+        sub: 'Hîn bibe, bilîze û kêfê bike.', 
+        wordle: 'Peyvê Bibîne', wordleDesc: 'Peyva veşartî texmîn bike.',
+        quiz: 'Testa Çandê', quizDesc: 'Zanîna xwe bipîve.',
+        name: 'Navê Min Çi Ye?', nameDesc: 'Navekî kurdî hilbijêre.',
+        play: 'Bilîze', back: 'Vegere Lîstikan',
+        comingSoon: 'Nêzîk de...'
       }
     }
   },
@@ -391,6 +400,15 @@ export const siteContent = {
             text: "Kürt sanatçılar halkın acılarını ve umutlarını tuvale yansıtırlar. Ahmed-i Hani aynı zamanda büyük bir hattattı."
           }
         ]
+      },
+      listik: {
+        title: 'Oyun Alanı', 
+        sub: 'Öğren, oyna ve eğlen.', 
+        wordle: 'Kelime Avı', wordleDesc: 'Gizli kelimeyi tahmin et.',
+        quiz: 'Kültür Testi', quizDesc: 'Bilgini ölç.',
+        name: 'Kürtçe İsmim Ne?', nameDesc: 'Kendine Kürtçe isim seç.',
+        play: 'Oyna', back: 'Oyunlara Dön',
+        comingSoon: 'Çok Yakında...'
       }
     }
   },
@@ -452,15 +470,15 @@ export const siteContent = {
       heroSubtitle: 'Yildiz Technical University - Kurdish Society',
       heroButton: 'Join Us',
       aboutTitle: 'About Us',
-      aboutText1: 'YTU Kurdish Society established in 2025. Our aim is to protect the Kurdish language, promote our culture, and teach our history.',
-      aboutText2: 'We work with Kurdish students and anyone interested in the language. We organize various cultural, artistic, and educational activities.',
+      aboutText1: 'YTU Kurdish Society established in 2025.',
+      aboutText2: 'We promote Kurdish language and culture.',
       featuresTitle: 'Departments',
-      ctaTitle: 'Join Our Community',
-      ctaText: 'Contact us to learn Kurdish, discover the culture, and work with us!',
+      ctaTitle: 'Join Community',
+      ctaText: 'Contact us!',
       ctaButton: 'Start Now',
       eventTitle: 'Upcoming Event',
-      eventEmptyTitle: 'To Be Announced',
-      eventEmptyDesc: 'Stay tuned for new events.',
+      eventEmptyTitle: 'TBA',
+      eventEmptyDesc: 'Stay tuned.',
       dailyTitle: 'Daily Content',
       dailyWord: 'Word',
       dailyQuote: 'Quote',
@@ -470,15 +488,15 @@ export const siteContent = {
     },
     cards: {
       zimanTitle: 'Language',
-      zimanDesc: 'Learning Kurdish language and grammar',
+      zimanDesc: 'Learning Kurdish',
       candTitle: 'Culture',
-      candDesc: 'Rich Kurdish culture',
+      candDesc: 'Rich culture',
       dirokTitle: 'History',
-      dirokDesc: 'Ancient history of Kurds',
+      dirokDesc: 'Ancient history',
       muzikTitle: 'Music',
-      muzikDesc: 'Kurdish music and songs',
+      muzikDesc: 'Kurdish music',
       hunerTitle: 'Art',
-      hunerDesc: 'Kurdish art and artists'
+      hunerDesc: 'Kurdish art'
     },
     pages: {
       blog: {
@@ -489,58 +507,56 @@ export const siteContent = {
       },
       tekili: {
         title: "Contact",
-        desc: "Contact us for questions and suggestions.",
+        desc: "Contact us.",
         form: {
           name: "Full Name",
           email: "Email",
-          message: "Your Message",
+          message: "Message",
           send: "Send",
           sending: "Sending...",
-          success: "Message sent! Thank you.",
-          error: "Failed to send."
+          success: "Sent.",
+          error: "Error."
         },
         info: {
           addressTitle: "Address",
-          address: "Yildiz Technical University, Davutpasa Campus, Istanbul",
+          address: "YTU Istanbul",
           emailTitle: "Email",
-          follow: "Follow Us"
+          follow: "Follow"
         }
       },
       dirok: {
         title: "Kurdish History",
-        desc: "From Medes to today, the journey of the ancient people of Mesopotamia.",
+        desc: "From Medes to today.",
         sections: [
           {
             title: "Origins",
-            text: "Kurds are one of the most ancient peoples of Mesopotamia. Known historically as Guti, Hurrian, and Medes. The Median Empire (612 BC) is considered the first major state of Kurdish ancestors."
+            text: "Ancient people of Mesopotamia."
           },
           {
             title: "Principalities",
-            text: "In the Middle Ages, Kurds established many principalities. Marwanids, Shaddadids, Botan, Soran, and Baban promoted Kurdish culture and art."
+            text: "Many principalities established."
           },
           {
             title: "Modern Period",
-            text: "In the 20th century, the Kurdish struggle for identity and rights continued. Today, Kurds keep their culture alive across four parts of Kurdistan and the diaspora."
+            text: "Struggle for identity continues."
           }
         ]
       },
       ziman: {
         title: "Kurdish Language",
-        desc: "Language is our identity. Kurdish is an Indo-European language.",
-        alphabetTitle: "Kurdish Alphabet (Kurmanji)",
-        phrasesTitle: "Important Phrases",
+        desc: "Identity.",
+        alphabetTitle: "Alphabet",
+        phrasesTitle: "Phrases",
         topics: [
           {
-            id: 'reziman',
             title: 'Grammar',
-            desc: 'Rules and structure',
-            text: 'Kurdish belongs to the Indo-European language family. It uses Latin (Kurmanji) and Arabic (Sorani) scripts.'
+            desc: 'Rules',
+            text: 'Indo-European.'
           },
           {
-            id: 'axaftin',
-            title: 'Daily Speaking',
-            desc: 'Daily dialogues',
-            text: 'Hello, How are you, I am fine, Thanks, Welcome...'
+            title: 'Speaking',
+            desc: 'Daily',
+            text: 'Hello...'
           }
         ],
         phrases: [
@@ -550,45 +566,54 @@ export const siteContent = {
       },
       cand: {
         title: "Kurdish Culture",
-        desc: "Colors, sounds, and life.",
+        desc: "Life.",
         sections: [
           {
             title: "Newroz",
-            text: "Newroz (March 21) is the national holiday of Kurds. It symbolizes the new year and resistance. The fire of Newroz is a symbol of freedom."
+            text: "National holiday."
           },
           {
             title: "Clothing",
-            text: "Kurdish clothes are known for their vibrant colors. Shal u shapik (for men) and fistan (for women) are the main pieces."
+            text: "Colorful clothes."
           }
         ]
       },
       muzik: {
         title: "Kurdish Music",
-        desc: "Voice of the mountains and love.",
+        desc: "Voice.",
         sections: [
           {
             title: "Dengbêj",
-            text: "Dengbêj (bards) are the pillars of Kurdish music. They narrate history and pain solely through their voice. Shakiro is a prime example."
+            text: "Bards."
           },
           {
             title: "Instruments",
-            text: "Tembûr, daf, zurna, and flute are main instruments. Tembûr holds a sacred place in Kurdish music."
+            text: "Tembur."
           }
         ]
       },
       huner: {
-        title: "Art and Cinema",
-        desc: "Seeing the world through Kurdish eyes.",
+        title: "Art",
+        desc: "Perspective.",
         sections: [
           {
-            title: "Kurdish Cinema",
-            text: "Yilmaz Guney is considered the father of Kurdish cinema. Films like 'Yol' have made a global impact."
+            title: "Cinema",
+            text: "Yilmaz Guney."
           },
           {
             title: "Painting",
-            text: "Kurdish artists reflect the pain and hope of their people on canvas. Ehmedê Xanî was also a great calligrapher."
+            text: "Reflecting hope."
           }
         ]
+      },
+      listik: {
+        title: 'Game Zone', 
+        sub: 'Learn, play and enjoy.', 
+        wordle: 'Wordle', wordleDesc: 'Guess the hidden word.',
+        quiz: 'Culture Quiz', quizDesc: 'Test your knowledge.',
+        name: 'My Kurdish Name', nameDesc: 'Pick a Kurdish name.',
+        play: 'Play', back: 'Back to Games',
+        comingSoon: 'Coming Soon...'
       }
     }
   }
