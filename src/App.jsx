@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { motion, AnimatePresence } from "framer-motion"; 
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 
@@ -17,9 +18,10 @@ import NotFound from "./pages/NotFound";
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
 import Blog from "./pages/Blog";
+import UserDashboard from "./pages/UserDashboard"; // Kullanıcı Paneli
 
 // Admin Sayfaları
-import Login from "./pages/admin/Login";
+import AuthPage from "./pages/admin/AuthPage"; // Login, Register, Forgot Password tek sayfada
 import Dashboard from "./pages/admin/Dashboard";
 
 import ScrollToTop from "./components/ScrollToTop"; 
@@ -29,66 +31,29 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { UserProvider, useUser } from './context/UserContext'; 
 
 import "./index.css";
-import { Loader2, AlertTriangle, XCircle } from 'lucide-react';
+import { AlertTriangle, Loader2 } from 'lucide-react'; 
 
 // =========================================================
-// 🚨 GELİŞMİŞ HATA YAKALAYICI (GLOBAL ERROR BOUNDARY)
+// 🚨 HATA YAKALAYICI (GLOBAL ERROR BOUNDARY)
 // =========================================================
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false, error: null, errorInfo: null };
+    this.state = { hasError: false, error: null };
   }
 
-  static getDerivedStateFromError(error) {
-    return { hasError: true, error };
-  }
+  static getDerivedStateFromError(error) { return { hasError: true, error }; }
 
-  componentDidCatch(error, errorInfo) {
-    console.error("Uygulama Çöktü:", error, errorInfo);
-    this.setState({ errorInfo });
-  }
+  componentDidCatch(error, errorInfo) { console.error("Kritik Hata:", error, errorInfo); }
 
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{
-          position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh',
-          backgroundColor: '#1a1a1a', color: '#ff4d4d', zIndex: 9999,
-          display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-          padding: '20px', fontFamily: 'monospace', overflow: 'auto'
-        }}>
-          <div style={{ maxWidth: '800px', width: '100%', backgroundColor: '#2a2a2a', padding: '30px', borderRadius: '15px', border: '2px solid #ff4d4d', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '20px', borderBottom: '1px solid #444', paddingBottom: '15px' }}>
-                <AlertTriangle size={40} />
-                <h1 style={{ margin: 0, fontSize: '24px', color: '#fff' }}>Uygulama Hatası (Crash)</h1>
-            </div>
-            
-            <h2 style={{ fontSize: '18px', color: '#ff8080', marginBottom: '10px' }}>Hata Mesajı:</h2>
-            <div style={{ backgroundColor: '#000', padding: '15px', borderRadius: '8px', marginBottom: '20px', color: '#fff', border: '1px solid #ff4d4d' }}>
-              {this.state.error && this.state.error.toString()}
-            </div>
-
-            <h2 style={{ fontSize: '18px', color: '#ff8080', marginBottom: '10px' }}>Hata Yeri (Stack Trace):</h2>
-            <div style={{ backgroundColor: '#000', padding: '15px', borderRadius: '8px', maxHeight: '200px', overflowY: 'auto', fontSize: '12px', color: '#ccc', whiteSpace: 'pre-wrap' }}>
-              {this.state.errorInfo && this.state.errorInfo.componentStack}
-            </div>
-
-            <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
-                <button 
-                    onClick={() => window.location.reload()} 
-                    style={{ padding: '12px 24px', backgroundColor: '#3b82f6', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', fontSize: '16px' }}
-                >
-                    Sayfayı Yenile
-                </button>
-                <button 
-                    onClick={() => window.location.href = '/'} 
-                    style={{ padding: '12px 24px', backgroundColor: '#444', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold', fontSize: '16px' }}
-                >
-                    Ana Sayfaya Dön
-                </button>
-            </div>
-          </div>
+        <div className="min-h-screen bg-slate-900 flex flex-col items-center justify-center text-white p-6 text-center">
+          <AlertTriangle size={64} className="text-red-500 mb-4" />
+          <h1 className="text-2xl font-bold">Uygulama çöktü!</h1>
+          <p className="text-red-300 mt-2 p-4 bg-slate-800 rounded border border-red-500/30 font-mono text-sm">{this.state.error?.message}</p>
+          <button onClick={() => window.location.reload()} className="mt-6 px-6 py-2 bg-blue-600 rounded-lg hover:bg-blue-700 font-bold transition">Sayfayı Yenile</button>
         </div>
       );
     }
@@ -96,23 +61,43 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-// --- KORUMALI ROTA ---
-const PrivateRoute = ({ children }) => {
-  const { currentUser } = useAuth();
-  return currentUser ? children : <Navigate to="/admin" />;
+// =========================================================
+// 🔒 KORUMALI ROTA (Admin Rolü Kontrolü)
+// =========================================================
+const AdminPrivateRoute = ({ children }) => {
+  const { currentUser, loading: authLoading } = useAuth();
+  const { userData, loading: userLoading } = useUser();
+  
+  // Yükleme
+  if (authLoading || userLoading) {
+      return (
+        <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 text-white"><Loader2 className="animate-spin text-yellow-500" size={50} /></div>
+      );
+  }
+
+  // Yönlendirme Mantığı
+  if (!currentUser) {
+      return <Navigate to="/admin" />;
+  }
+
+  const isAdmin = userData?.role === 'admin';
+
+  if (!isAdmin) {
+      // Eğer kullanıcı giriş yapmış ama Admin değilse, kendi paneline yönlendir.
+      return <Navigate to="/user" />;
+  }
+  
+  return children;
 };
 
 // --- SAYFA DÜZENİ ---
 const Layout = ({ children }) => {
   const location = useLocation();
-  const isFullScreen = location.pathname.startsWith('/admin');
+  const isFullScreen = location.pathname.startsWith('/admin') || location.pathname.startsWith('/user'); 
 
   return (
     <div className="app-container flex flex-col min-h-screen bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100 transition-colors duration-300">
-      <Helmet>
-        <title>{"YTU Kurdî"}</title>
-      </Helmet>
-      
+      <Helmet><title>{"YTU Kurdî"}</title></Helmet>
       {!isFullScreen && <Navigation />}
       <main className="flex-grow">{children}</main>
       {!isFullScreen && <Footer />}
@@ -120,79 +105,214 @@ const Layout = ({ children }) => {
   );
 };
 
-// --- İÇERİK VE YÖNLENDİRME ---
+// --- İÇERİK VE YÖNLENDİRME (App'in İç Mantığı) ---
 const AppContent = () => {
     const auth = useAuth();
     const user = useUser();
     
-    // Auth ve User verilerinin yüklenme durumu
-    // Hata almamak için opsiyonel zincirleme (?.) kullanıyoruz
+    // Yükleme durumları
     const authLoading = auth?.loading || false;
     const userLoading = user?.loading || false;
     
-    // 2 Saniyelik Zorunlu Bekleme
-    const [minTimePassed, setMinTimePassed] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
+    const [progress, setProgress] = useState(0);
+
+    // Rastgele Parçacıklar (Görsel Efekt)
+    const particles = Array.from({ length: 20 }).map((_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 3 + 1,
+        duration: Math.random() * 3 + 2,
+        delay: Math.random() * 2
+    }));
 
     useEffect(() => {
+        // İlerleme çubuğu animasyonu
+        const interval = setInterval(() => {
+            setProgress((prev) => {
+                if (prev >= 100) { clearInterval(interval); return 100; }
+                return prev + Math.floor(Math.random() * 8) + 2;
+            });
+        }, 50);
+
+        // Minimum bekleme süresi (2.5 saniye)
         const timer = setTimeout(() => {
-            setMinTimePassed(true);
-        }, 2000); // 2000ms = 2 Saniye
-        return () => clearTimeout(timer);
+            setIsLoading(false);
+        }, 2500);
+
+        return () => {
+            clearTimeout(timer);
+            clearInterval(interval);
+        };
     }, []);
 
-    // Yükleniyor Ekranı
-    if (authLoading || userLoading || !minTimePassed) {
-        return (
-          <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 text-white z-50 fixed inset-0">
-            <div className="relative mb-8">
-                <div className="absolute inset-0 bg-yellow-500 blur-xl opacity-20 rounded-full animate-pulse"></div>
-                <Loader2 className="animate-spin text-yellow-500 relative z-10" size={64} />
-            </div>
-            
-            <div className="flex flex-col items-center gap-2 font-medium tracking-wide animate-pulse">
-                <span className="text-yellow-400 text-lg font-bold">Tê Barkirin...</span>
-                <span className="text-slate-400 text-sm">Yükleniyor...</span>
-                <span className="text-slate-500 text-xs">Loading...</span>
-            </div>
-          </div>
-        );
-    }
+    // Yükleme devam ediyorsa gösterilecek
+    const showSplash = isLoading || authLoading || userLoading;
 
     return (
-        <Router>
-            <ScrollToTop />
-            <Layout>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/cand" element={<Culture />} />
-                    <Route path="/muzik" element={<Music />} />
-                    <Route path="/huner" element={<Art />} />
-                    <Route path="/dirok" element={<History />} />
-                    <Route path="/ziman" element={<Language />} />
-                    <Route path="/ferheng" element={<Dictionary />} /> 
-                    <Route path="/galeri" element={<Gallery />} />
-                    <Route path="/tekili" element={<Contact />} />
-                    <Route path="/listik" element={<Listik />} />
-                    <Route path="/agahdari" element={<Blog />} />
-                    
-                    <Route path="/admin" element={<Login />} />
-                    <Route path="/admin/dashboard" element={
-                        <PrivateRoute>
-                            <Dashboard />
-                        </PrivateRoute>
-                    } />
-                    
-                    <Route path="*" element={<NotFound />} />
-                </Routes>
-            </Layout>
-        </Router>
+        <>
+            {/* --- GELİŞMİŞ SPLASH SCREEN --- */}
+            <AnimatePresence>
+                {showSplash && (
+                    <motion.div
+                        key="splash-screen"
+                        initial={{ opacity: 1 }}
+                        exit={{ opacity: 0, filter: "blur(15px)", scale: 1.05 }}
+                        transition={{ duration: 0.8, ease: "easeInOut" }}
+                        className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-slate-950 overflow-hidden"
+                    >
+                        {/* 1. ARKA PLAN EFEKTLERİ */}
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-900/20 via-slate-950 to-slate-950"></div>
+                        
+                        {/* Uçuşan Parçacıklar */}
+                        {particles.map((p) => (
+                            <motion.div
+                                key={p.id}
+                                className="absolute bg-white rounded-full opacity-20"
+                                style={{ left: `${p.x}%`, top: `${p.y}%`, width: p.size, height: p.size, }}
+                                animate={{ y: [0, -30, 0], opacity: [0.1, 0.5, 0.1], }}
+                                transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: "easeInOut" }}
+                            />
+                        ))}
+
+                        {/* 2. ARKA PLAN HAYALET LOGO */}
+                        <motion.div 
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 0.05, scale: 1 }}
+                            transition={{ duration: 1 }}
+                            className="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+                        >
+                            <img 
+                                src="/logo.png" 
+                                alt="Background Logo" 
+                                className="w-[80vw] h-[80vw] md:w-[40vw] md:h-[40vw] object-contain grayscale opacity-20 animate-[pulse_4s_ease-in-out_infinite]" 
+                            />
+                        </motion.div>
+
+                        {/* 3. MERKEZİ YÜKLEYİCİ */}
+                        <div className="relative z-10 flex flex-col items-center">
+                            
+                            {/* Logo ve Dönen Halkalar */}
+                            <div className="relative w-32 h-32 mb-8 flex items-center justify-center">
+                                {/* Dış Halka - Sarı */}
+                                <motion.div 
+                                    animate={{ rotate: 360 }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                                    className="absolute inset-0 rounded-full border-2 border-transparent border-t-yellow-500 border-l-yellow-500/50"
+                                ></motion.div>
+                                
+                                {/* İç Halka - Mavi */}
+                                <motion.div 
+                                    animate={{ rotate: -360 }}
+                                    transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+                                    className="absolute inset-3 rounded-full border-2 border-transparent border-b-blue-500 border-r-blue-500/50"
+                                ></motion.div>
+
+                                {/* Ortadaki Net Logo */}
+                                <motion.div 
+                                    initial={{ scale: 0.5, opacity: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    transition={{ duration: 0.5, type: "spring" }}
+                                    className="w-20 h-20 bg-slate-900 rounded-full flex items-center justify-center shadow-2xl border border-white/10 relative z-20"
+                                >
+                                    <img src="/logo.png" alt="Logo" className="w-16 h-16 object-contain" />
+                                </motion.div>
+                            </div>
+
+                            {/* Marka İsmi */}
+                            <motion.h1 
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                transition={{ delay: 0.3 }}
+                                className="text-4xl md:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400 tracking-[0.2em] mb-8 drop-shadow-lg text-center"
+                            >
+                                YTU KURDÎ
+                            </motion.h1>
+                            
+                            {/* İlerleme Çubuğu ve Yazı */}
+                            <div className="w-64">
+                                <div className="flex justify-between text-xs font-bold text-slate-400 mb-2 uppercase tracking-widest">
+                                    <motion.span 
+                                        animate={{ opacity: [0.5, 1, 0.5] }} 
+                                        transition={{ duration: 1.5, repeat: Infinity }}
+                                        className="text-yellow-500"
+                                    >
+                                        Tê Barkirin...
+                                    </motion.span>
+                                    <span>{Math.min(progress, 100)}%</span>
+                                </div>
+                                
+                                {/* Bar */}
+                                <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden border border-white/5">
+                                    <motion.div 
+                                        className="h-full bg-gradient-to-r from-blue-600 via-blue-400 to-yellow-400"
+                                        style={{ width: `${Math.min(progress, 100)}%` }}
+                                        transition={{ ease: "linear" }}
+                                    />
+                                </div>
+                                
+                                {/* Alt Yazılar */}
+                                <div className="flex justify-center gap-4 mt-3 text-[10px] text-slate-600 uppercase tracking-widest font-medium">
+                                    <span>Yükleniyor</span>
+                                    <span>•</span>
+                                    <span>Loading</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Alt Bilgi */}
+                        <div className="absolute bottom-8 text-slate-700 text-[10px] font-mono tracking-widest opacity-50">
+                            v1.0.0 &copy; 2025 ZANÎNGEHA YILDIZ TEKNÎK
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* ANA UYGULAMA (Yükleme bitince Router devreye girer) */}
+            {!showSplash && (
+                <Router>
+                    <ScrollToTop />
+                    <Layout>
+                        <Routes>
+                            {/* Normal Sayfalar */}
+                            <Route path="/" element={<Home />} />
+                            <Route path="/cand" element={<Culture />} />
+                            <Route path="/muzik" element={<Music />} />
+                            <Route path="/huner" element={<Art />} />
+                            <Route path="/dirok" element={<History />} />
+                            <Route path="/ziman" element={<Language />} />
+                            <Route path="/ferheng" element={<Dictionary />} /> 
+                            <Route path="/galeri" element={<Gallery />} />
+                            <Route path="/tekili" element={<Contact />} />
+                            <Route path="/listik" element={<Listik />} />
+                            <Route path="/agahdari" element={<Blog />} />
+                            
+                            {/* AUTHENTICATION (Login, Register, Forgot Password hepsi burada) */}
+                            <Route path="/admin" element={<AuthPage />} />
+                            
+                            {/* KULLANICI PANELİ */}
+                            <Route path="/user" element={<UserDashboard />} />
+
+                            {/* ADMIN PANELİ - Sadece Rolü 'admin' Olanlar Girebilir */}
+                            <Route path="/admin/dashboard" element={
+                                <AdminPrivateRoute>
+                                    <Dashboard />
+                                </AdminPrivateRoute>
+                            } />
+                            
+                            <Route path="*" element={<NotFound />} />
+                        </Routes>
+                    </Layout>
+                </Router>
+            )}
+        </>
     );
 };
 
 // --- ANA UYGULAMA ---
 function App() {
   return (
-    // ErrorBoundary'yi en dışa koyduk ki Context hatalarını da yakalasın
     <ErrorBoundary>
         <AuthProvider>
           <UserProvider>
