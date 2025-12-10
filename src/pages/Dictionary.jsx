@@ -1,99 +1,127 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Book, X, Loader2, AlertCircle, Heart, Copy, Check, Filter, BookOpen } from 'lucide-react';
+import { Search, Book, X, Loader2, AlertCircle, Heart, Copy, Check, Filter, BookOpen, Keyboard, Sparkles, Lightbulb, Grid, Quote, ArrowRightLeft } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useUser } from '../context/UserContext'; 
 
 // Firebase
 import { db } from '../firebase';
-import { collection, getDocs, query, where, orderBy } from 'firebase/firestore';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 
 // --- YEDEK VERİLER ---
-// Eğer dışarıdan bir dosya (dictionary.js) varsa onu kullanır, yoksa boş dizi döner.
 let EXTERNAL_DATA = [];
-try {
-    // Eğer src/data/dictionary.js dosyanız varsa burayı açabilirsiniz:
-    // const mod = require('../data/dictionary'); 
-    // EXTERNAL_DATA = mod.EXTERNAL_DICTIONARY || [];
-} catch (e) {
-    console.log("External dictionary not found, skipping.");
-}
 
-// Acil Durum Verisi (İnternet yoksa veya veritabanı boşsa görünür)
+// Acil Durum Verisi
 const INTERNAL_DICTIONARY = [
-  { id: 'int_1', ku: 'Erê', tr: 'Evet' },
-  { id: 'int_2', ku: 'Na', tr: 'Hayır' },
+  { id: 'int_1', ku: 'Erê', tr: 'Evet', desc: 'Erê, ez têm. (Evet, geliyorum.)' },
+  { id: 'int_2', ku: 'Na', tr: 'Hayır', desc: 'Na, spas dikim. (Hayır, teşekkür ederim.)' },
   { id: 'int_3', ku: 'Spas', tr: 'Teşekkürler' },
-  { id: 'int_4', ku: 'Rojbaş', tr: 'Günaydın / İyi günler' },
-  { id: 'int_5', ku: 'Şevbaş', tr: 'İyi geceler' }
+  { id: 'int_4', ku: 'Rojbaş', tr: 'Günaydın', desc: 'Rojbaş hevalno! (Günaydın arkadaşlar!)' },
+  { id: 'int_5', ku: 'Şevbaş', tr: 'İyi geceler' },
+  { id: 'int_6', ku: 'Heval', tr: 'Arkadaş', desc: 'Hevalê min ê hêja. (Değerli arkadaşım.)' },
+  { id: 'int_7', ku: 'Evîn', tr: 'Aşk' },
+  { id: 'int_8', ku: 'Azadî', tr: 'Özgürlük' },
+  { id: 'int_9', ku: 'Jiyan', tr: 'Yaşam', desc: 'Jiyan xweş e. (Yaşam güzeldir.)' },
+  { id: 'int_10', ku: 'Aşitî', tr: 'Barış' }
 ];
 
+const KURDISH_CHARS = ['ê', 'î', 'û', 'x', 'w', 'q', 'Ê', 'Î', 'Û'];
+
 const Dictionary = () => {
-  const { t, lang } = useLanguage(); // Global çeviri fonksiyonu
+  const { t, lang } = useLanguage();
+  const searchInputRef = useRef(null);
   
-  // UserContext Güvenli Erişim
   const userContext = useUser();
   const userData = userContext?.userData || {};
   const updateUserData = userContext?.updateUserData || (() => {});
 
-  // Sayfaya Özel Yerel Çeviriler (Global dosyada olmayanlar için)
   const localT = {
     KU: { 
-        desc: "Gencîneya peyvan bigere.",
-        fav: "Bijare",
-        all: "Hemû",
+        desc: "Gencîneya peyvan, mînak û wateyan.",
+        search_hint: "Lêgerînê dest pê bike...",
+        special_chars: "Tîpên Taybet",
+        total_db: "Di databasê de",
+        words: "peyv hene",
+        copy: "Kopyala",
+        fav_add: "Li bijareyan zêde bike",
         copied: "Hat Kopyakirin!",
-        total_label: "Hêjmara Peyvan",
-        count_suffix: "peyv hatin dîtin",
-        not_found: "Peyv nehat dîtin"
+        random_explore: "Tesadûfî Bibîne",
+        daily_word: "Peyva Îro",
+        example: "Mînak / Daxuyanî",
+        source_admin: "Fermî"
     },
     TR: { 
-        desc: "Kelime hazinesini keşfet.",
-        fav: "Favoriler",
-        all: "Tümü",
+        desc: "Kelime hazinesi, örnekler ve anlamlar.",
+        search_hint: "Aramaya başla...",
+        special_chars: "Özel Karakterler",
+        total_db: "Veritabanında",
+        words: "kelime var",
+        copy: "Kopyala",
+        fav_add: "Favorilere ekle",
         copied: "Kopyalandı!",
-        total_label: "Kelime Sayısı",
-        count_suffix: "kelime bulundu",
-        not_found: "Kelime bulunamadı"
+        random_explore: "Rastgele Keşfet",
+        daily_word: "Günün Kelimesi",
+        example: "Örnek / Açıklama",
+        source_admin: "Resmi"
     },
     EN: { 
-        desc: "Explore the vocabulary.",
-        fav: "Favorites",
-        all: "All",
+        desc: "Vocabulary, examples and meanings.",
+        search_hint: "Start searching...",
+        special_chars: "Special Characters",
+        total_db: "Database has",
+        words: "words",
+        copy: "Copy",
+        fav_add: "Add to favorites",
         copied: "Copied!",
-        total_label: "Total Words",
-        count_suffix: "words found",
-        not_found: "Word not found"
+        random_explore: "Random Explore",
+        daily_word: "Word of Today",
+        example: "Example / Description",
+        source_admin: "Official"
     }
   }[lang] || {};
 
   // State
   const [searchTerm, setSearchTerm] = useState("");
-  const [dictionaryData, setDictionaryData] = useState([]); 
+  const [allDictionaryData, setAllDictionaryData] = useState([]); 
+  const [displayedWords, setDisplayedWords] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [activeList, setActiveList] = useState('all'); 
   const [copiedId, setCopiedId] = useState(null);
+  
+  // Keşfet Modülü State'leri
+  const [dailyWord, setDailyWord] = useState(null);
+  const [randomSuggestions, setRandomSuggestions] = useState([]);
 
-  // --- FAVORİ İŞLEMLERİ ---
+  // --- HARF EKLEME ---
+  const insertChar = (char) => {
+      const input = searchInputRef.current;
+      if (input) {
+          const start = input.selectionStart;
+          const end = input.selectionEnd;
+          const newValue = searchTerm.substring(0, start) + char + searchTerm.substring(end);
+          setSearchTerm(newValue);
+          setTimeout(() => {
+              input.selectionStart = input.selectionEnd = start + 1;
+              input.focus();
+          }, 0);
+      }
+  };
+
+  // --- FAVORİ & KOPYALAMA ---
   const isFavorite = (wordKey) => (userData.favoriteWords || []).includes(wordKey);
 
   const toggleFavorite = (wordObj) => {
     const wordKey = wordObj.ku; 
     const favorites = userData.favoriteWords || [];
     let newFavorites;
-
     if (favorites.includes(wordKey)) {
       newFavorites = favorites.filter(key => key !== wordKey);
     } else {
       newFavorites = [...favorites, wordKey];
     }
-    // Veritabanını/Locali güncelle
     updateUserData({ favoriteWords: newFavorites });
   };
 
-  // --- KOPYALAMA ---
   const handleCopy = (text, id) => {
     navigator.clipboard.writeText(text);
     setCopiedId(id);
@@ -105,247 +133,300 @@ const Dictionary = () => {
     const fetchDictionary = async () => {
       setLoading(true);
       try {
-        // 1. Firebase'den Veri Çek (Admin Panelinden eklenenler)
-        // type: 'dictionary' olanları getir
-        const q = query(
-            collection(db, "dynamicContent"), 
-            where("type", "==", "dictionary")
-        );
-        
+        const q = query(collection(db, "dynamicContent"), where("type", "==", "dictionary"));
         const querySnapshot = await getDocs(q);
         const firebaseWords = [];
         
         querySnapshot.forEach((doc) => {
           const data = doc.data();
-          // Veri bütünlüğünü kontrol et
           if (data.ku && data.tr) { 
+              // 'desc' alanını da alıyoruz (Örnek cümleler için)
               firebaseWords.push({ 
                   id: doc.id, 
                   ku: data.ku, 
                   tr: data.tr, 
-                  source: 'admin',
-                  createdAt: data.createdAt 
+                  desc: data.desc || null, 
+                  source: 'admin' 
               }); 
           }
         });
 
-        // 2. Verileri Birleştir (Firebase + Yerel + Dış)
-        // Öncelik: Firebase > Dış Dosya > Yerel
-        const combined = [
-            ...INTERNAL_DICTIONARY,
-            ...EXTERNAL_DATA,
-            ...firebaseWords
-        ];
+        const dictionaryMap = new Map();
+        INTERNAL_DICTIONARY.forEach(word => dictionaryMap.set(word.ku.toLowerCase(), word));
+        EXTERNAL_DATA.forEach(word => dictionaryMap.set(word.ku.toLowerCase(), word));
+        firebaseWords.forEach(word => dictionaryMap.set(word.ku.toLowerCase(), word));
 
-        // 3. Tekrarları Temizle (Kürtçe kelimeye göre)
-        const uniqueMap = new Map();
-        combined.forEach(word => {
-            if (word && word.ku) {
-                // Baş harfi büyük yap
-                const key = word.ku.charAt(0).toUpperCase() + word.ku.slice(1);
-                uniqueMap.set(key, { ...word, ku: key });
-            }
-        });
+        const uniqueList = Array.from(dictionaryMap.values());
+        setAllDictionaryData(uniqueList);
 
-        // 4. Alfabetik Sırala
-        const sortedList = Array.from(uniqueMap.values()).sort((a, b) => a.ku.localeCompare(b.ku, 'ku'));
-        
-        setDictionaryData(sortedList);
+        // Günün Kelimesi
+        if (uniqueList.length > 0) {
+            const today = new Date();
+            const seed = today.getFullYear() * 10000 + (today.getMonth() + 1) * 100 + today.getDate();
+            const dailyIndex = seed % uniqueList.length;
+            setDailyWord(uniqueList[dailyIndex]);
+
+            const shuffled = [...uniqueList].sort(() => 0.5 - Math.random());
+            setRandomSuggestions(shuffled.slice(0, 3));
+        }
 
       } catch (err) {
-        console.error("Sözlük yükleme hatası:", err);
-        // Hata durumunda sadece yerel veriyi göster
-        setDictionaryData(INTERNAL_DICTIONARY);
-        setError(t('error_generic') || "Veri yüklenirken hata oluştu.");
+        console.error("Hata:", err);
+        setAllDictionaryData(INTERNAL_DICTIONARY);
       } finally {
         setLoading(false);
       }
     };
 
     fetchDictionary();
-  }, [t]); 
+  }, []); 
 
-  // --- FİLTRELEME ---
-  const filteredWords = dictionaryData.filter(item => 
-    item.ku.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    item.tr.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  // --- ARAMA MOTORU ---
+  useEffect(() => {
+      if (searchTerm.trim().length === 0) {
+          setDisplayedWords([]);
+          return;
+      }
+      const term = searchTerm.toLowerCase();
+      
+      // Filtreleme
+      const results = allDictionaryData.filter(item => 
+          item.ku.toLowerCase().includes(term) || item.tr.toLowerCase().includes(term)
+      );
 
-  const wordsToShow = activeList === 'all' 
-    ? filteredWords 
-    : filteredWords.filter(item => isFavorite(item.ku));
+      // Sıralama (Tam eşleşmeler en üste)
+      results.sort((a, b) => {
+          const aKu = a.ku.toLowerCase() === term;
+          const aTr = a.tr.toLowerCase() === term;
+          const bKu = b.ku.toLowerCase() === term;
+          const bTr = b.tr.toLowerCase() === term;
+          if ((aKu || aTr) && !(bKu || bTr)) return -1;
+          if (!(aKu || aTr) && (bKu || bTr)) return 1;
+          return 0;
+      });
+
+      setDisplayedWords(results.slice(0, 50));
+  }, [searchTerm, allDictionaryData]);
+
+  // Hızlı Kategori Arama
+  const handleQuickSearch = (term) => {
+      setSearchTerm(term);
+      if(searchInputRef.current) searchInputRef.current.focus();
+  };
+
+  // --- AKILLI GÖRÜNTÜLEME FONKSİYONU ---
+  // Arama terimine göre hangi dilin başa geleceğini belirler
+  const getDisplayContent = (word) => {
+      const term = searchTerm.toLowerCase();
+      // Varsayılan: Kürtçe - Türkçe
+      let mainText = word.ku;
+      let subText = word.tr;
+      let mainLang = "KU";
+      let subLang = "TR";
+
+      // Eğer arama terimi Türkçe kısmında geçiyor ve Kürtçe kısmında geçmiyorsa yer değiştir
+      if (term && word.tr.toLowerCase().includes(term) && !word.ku.toLowerCase().includes(term)) {
+          mainText = word.tr;
+          subText = word.ku;
+          mainLang = "TR";
+          subLang = "KU";
+      }
+
+      return { mainText, subText, mainLang, subLang };
+  };
 
   return (
     <>
-      <Helmet>
-        <title>{t('dictionary')} - YTU Kurdî</title>
-      </Helmet>
+      <Helmet><title>{t('dictionary')} - YTU Kurdî</title></Helmet>
 
       <div className="min-h-screen bg-slate-50 dark:bg-slate-900 pt-28 pb-12 px-4 transition-colors duration-300">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-4xl mx-auto">
 
-          {/* 1. HEADER & İSTATİSTİK KARTI */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              {/* Sol: Başlık Alanı */}
-              <div className="md:col-span-2 bg-gradient-to-br from-indigo-600 to-purple-700 dark:from-indigo-900 dark:to-purple-900 rounded-3xl p-8 text-white shadow-xl relative overflow-hidden flex flex-col justify-center">
-                  <div className="relative z-10">
-                      <div className="flex items-center gap-3 mb-2 opacity-80">
-                          <BookOpen size={20} />
-                          <span className="text-xs font-bold tracking-wider uppercase">YTU FERHENG</span>
-                      </div>
-                      <h1 className="text-3xl md:text-4xl font-black mb-2">{t('dictionary')}</h1>
-                      <p className="text-indigo-100 mb-6">{localT.desc}</p>
-                      
-                      <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-2 rounded-lg border border-white/10 text-sm font-medium backdrop-blur-md">
-                          <Book size={16} />
-                          <span>{t('kurdish')} - {t('turkish')}</span>
-                      </div>
-                  </div>
-                  {/* Dekoratif İkon */}
-                  <div className="absolute right-0 bottom-0 opacity-10 transform translate-x-4 translate-y-4">
-                      <Book size={120} />
+          {/* 1. BAŞLIK VE ARAMA ALANI */}
+          <div className="text-center mb-10">
+              <h1 className="text-4xl font-black text-slate-800 dark:text-white mb-2">{t('dictionary')}</h1>
+              <p className="text-slate-500 dark:text-slate-400 mb-8">{localT.desc}</p>
+
+              <div className="relative max-w-2xl mx-auto group z-20">
+                  <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                  <div className="relative">
+                      <input 
+                          ref={searchInputRef}
+                          type="text" 
+                          placeholder={t('search_placeholder')} 
+                          value={searchTerm} 
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                          className="w-full pl-12 pr-12 py-4 rounded-xl border-none bg-white dark:bg-slate-800 text-slate-800 dark:text-white shadow-xl focus:ring-0 text-lg font-medium placeholder-slate-400" 
+                      />
+                      <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-slate-400" size={24} />
+                      {searchTerm && (
+                          <button onClick={() => {setSearchTerm(""); setDisplayedWords([]);}} className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-red-500 transition">
+                              <X size={20} />
+                          </button>
+                      )}
                   </div>
               </div>
 
-              {/* Sağ: Arama & Sayı */}
-              <div className="bg-white dark:bg-slate-800 rounded-3xl p-6 shadow-xl border border-slate-100 dark:border-slate-700 flex flex-col justify-between">
-                  <div className="mb-4">
-                      <span className="text-slate-400 text-xs font-bold uppercase block mb-1">{localT.total_label}</span>
-                      <span className="text-4xl font-black text-indigo-600 dark:text-indigo-400">{dictionaryData.length}</span>
+              {/* Sanal Klavye */}
+              <div className="mt-6 max-w-2xl mx-auto bg-white/50 dark:bg-slate-800/50 p-3 rounded-2xl border border-slate-200 dark:border-slate-700 backdrop-blur-sm">
+                  <div className="flex items-center justify-center gap-2 mb-2 text-xs font-bold text-slate-400 uppercase tracking-widest">
+                      <Keyboard size={12} /> {localT.special_chars}
                   </div>
-                  
-                  <div className="relative w-full">
-                    <input 
-                        type="text" 
-                        placeholder={t('search_placeholder')} 
-                        value={searchTerm} 
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full pl-10 pr-10 py-3 rounded-xl border-2 border-slate-100 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 text-slate-800 dark:text-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-900 transition-all font-medium outline-none" 
-                    />
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" size={20} />
-                    {searchTerm && (
-                        <button onClick={() => setSearchTerm("")} className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-red-500">
-                            <X size={16} />
-                        </button>
-                    )}
+                  <div className="flex flex-wrap justify-center gap-2">
+                      {KURDISH_CHARS.map(char => (
+                          <button key={char} onClick={() => insertChar(char)} className="w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-lg bg-white dark:bg-slate-700 text-slate-700 dark:text-white font-bold shadow-sm border-b-2 border-slate-200 dark:border-slate-600 hover:bg-blue-50 dark:hover:bg-slate-600 hover:border-blue-300 hover:-translate-y-0.5 active:translate-y-0 transition-all text-sm sm:text-base">
+                              {char}
+                          </button>
+                      ))}
                   </div>
               </div>
           </div>
 
-          {/* 2. FİLTRE BUTONLARI & SONUÇ BİLGİSİ */}
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-6 px-2">
-              <div className="flex gap-2">
-                 <button 
-                    onClick={() => setActiveList('all')} 
-                    className={`px-4 py-2 rounded-lg font-bold text-sm transition-all flex items-center gap-2 ${activeList === 'all' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-500/30' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'}`}
-                 >
-                    <Filter size={16} /> {localT.all}
-                 </button>
-                 <button 
-                    onClick={() => setActiveList('favorites')} 
-                    className={`px-4 py-2 rounded-lg font-bold text-sm transition-all flex items-center gap-2 ${activeList === 'favorites' ? 'bg-pink-600 text-white shadow-lg shadow-pink-500/30' : 'bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'}`}
-                 >
-                    <Heart size={16} className={activeList === 'favorites' ? "fill-current" : ""} /> {localT.fav}
-                    <span className="bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 text-[10px] px-2 py-0.5 rounded-full ml-1">
-                        {userData.favoriteWords?.length || 0}
-                    </span>
-                 </button>
-              </div>
-              
-              <span className="text-xs font-bold text-slate-400 uppercase">
-                {loading ? <Loader2 className="animate-spin" size={16} /> : <>{wordsToShow.length} {localT.count_suffix}</>}
-              </span>
-          </div>
+          {/* 2. BOŞ EKRAN MODÜLLERİ (Keşfet) */}
+          {!searchTerm && !loading && (
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
+                  {/* Günün Kelimesi Kartı */}
+                  {dailyWord && (
+                      <div className="bg-gradient-to-br from-indigo-600 to-purple-700 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl group">
+                          <div className="absolute top-0 right-0 p-4 opacity-20"><Sparkles size={64} /></div>
+                          <div className="relative z-10 text-center">
+                              <div className="inline-flex items-center gap-2 bg-white/20 px-3 py-1 rounded-full text-xs font-bold uppercase mb-4 backdrop-blur-sm">
+                                  <Sparkles size={12} /> {localT.daily_word}
+                              </div>
+                              <h2 className="text-4xl md:text-5xl font-black mb-2">{dailyWord.ku}</h2>
+                              <p className="text-xl md:text-2xl text-indigo-100 font-light">{dailyWord.tr}</p>
+                              {dailyWord.desc && (
+                                  <div className="mt-4 bg-white/10 p-3 rounded-xl backdrop-blur-sm text-sm italic text-indigo-50 border border-white/10">
+                                      "{dailyWord.desc}"
+                                  </div>
+                              )}
+                              <div className="mt-6 flex justify-center gap-4">
+                                  <button onClick={() => toggleFavorite(dailyWord)} className="p-3 bg-white/10 hover:bg-white/20 rounded-full transition backdrop-blur-md">
+                                      <Heart size={20} className={isFavorite(dailyWord.ku) ? "fill-white text-white" : "text-white"} />
+                                  </button>
+                                  <button onClick={() => handleCopy(`${dailyWord.ku} - ${dailyWord.tr}`, 'daily')} className="p-3 bg-white/10 hover:bg-white/20 rounded-full transition backdrop-blur-md">
+                                      {copiedId === 'daily' ? <Check size={20} /> : <Copy size={20} />}
+                                  </button>
+                              </div>
+                          </div>
+                      </div>
+                  )}
 
-          {/* Hata Mesajı */}
-          {error && (
-              <div className="bg-yellow-50 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 p-4 rounded-xl flex items-center gap-3 mb-6 border border-yellow-100 dark:border-yellow-800">
-                <AlertCircle size={20} /> <span className="text-sm font-medium">{error}</span>
-              </div>
+                  {/* Rastgele ve Kategoriler */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                          <h3 className="flex items-center gap-2 font-bold text-slate-800 dark:text-white mb-4">
+                              <Lightbulb className="text-yellow-500" size={20} /> {localT.random_explore}
+                          </h3>
+                          <div className="space-y-3">
+                              {randomSuggestions.map((item, i) => (
+                                  <div key={i} className="flex justify-between items-center p-3 bg-slate-50 dark:bg-slate-900 rounded-xl hover:bg-blue-50 dark:hover:bg-slate-700 transition cursor-pointer" onClick={() => handleQuickSearch(item.ku)}>
+                                      <span className="font-bold text-slate-700 dark:text-slate-200">{item.ku}</span>
+                                      <span className="text-sm text-slate-500">{item.tr}</span>
+                                  </div>
+                              ))}
+                          </div>
+                      </div>
+
+                      <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                          <h3 className="flex items-center gap-2 font-bold text-slate-800 dark:text-white mb-4">
+                              <Grid className="text-blue-500" size={20} /> {t('quick_categories')}
+                          </h3>
+                          <div className="grid grid-cols-2 gap-3">
+                              {[
+                                  { label: t('cat_colors'), search: 'sor' }, 
+                                  { label: t('cat_numbers'), search: 'yek' },
+                                  { label: t('cat_days'), search: 'şemî' },
+                                  { label: t('cat_family'), search: 'dayik' }
+                              ].map((cat, i) => (
+                                  <button key={i} onClick={() => handleQuickSearch(cat.search)} className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl text-sm font-bold text-slate-600 dark:text-slate-300 hover:bg-blue-100 dark:hover:bg-blue-900/30 hover:text-blue-600 transition text-left">
+                                      {cat.label}
+                                  </button>
+                              ))}
+                          </div>
+                      </div>
+                  </div>
+                  <div className="text-center"><p className="text-xs text-slate-400 font-bold uppercase tracking-widest">{localT.total_db}: {allDictionaryData.length} {localT.words}</p></div>
+              </motion.div>
           )}
 
-          {/* 3. KELİME KARTLARI */}
-          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <AnimatePresence mode="popLayout">
-              {wordsToShow.length > 0 ? (
-                wordsToShow.map((word) => {
-                  const isFav = isFavorite(word.ku);
-                  const isCopied = copiedId === (word.id || word.ku);
-
-                  return (
-                    <motion.div
-                      key={word.id || word.ku}
-                      layout
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      className="bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 hover:shadow-md hover:border-indigo-200 dark:hover:border-indigo-800 group relative flex flex-col justify-between h-full transition-all"
-                    >
-                      <div className="flex justify-between items-start mb-3">
-                          <div>
-                              <span className="text-2xl font-extrabold text-indigo-900 dark:text-indigo-100 tracking-tight block">
-                                {word.ku}
-                              </span>
-                              {/* Admin'den eklenenler için rozet */}
-                              {word.source === 'admin' && (
-                                <span className="text-[10px] bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 px-1.5 py-0.5 rounded font-bold">Admin</span>
-                              )}
-                          </div>
-                          
-                          <button 
-                            onClick={() => toggleFavorite(word)} 
-                            className={`p-2 rounded-full transition-colors ${isFav ? 'bg-pink-50 dark:bg-pink-900/20 text-pink-500' : 'text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-700'}`}
-                          >
-                              <Heart size={18} className={isFav ? "fill-current" : ""} />
-                          </button>
-                      </div>
-
-                      <div className="flex justify-between items-end mt-2 pt-3 border-t border-slate-50 dark:border-slate-700/50">
-                          <div className="flex-1">
-                              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">{t('turkish')}</span>
-                              <span className="text-lg font-medium text-slate-700 dark:text-slate-300">{word.tr}</span>
-                          </div>
-                          
-                          <button 
-                            onClick={() => handleCopy(`${word.ku} - ${word.tr}`, word.id || word.ku)}
-                            className="text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors p-1.5 rounded-lg hover:bg-indigo-50 dark:hover:bg-slate-700 relative"
-                            title="Kopyala"
-                          >
-                              {isCopied ? <Check size={18} className="text-green-500" /> : <Copy size={18} />}
-                              
-                              {/* Kopyalandı Tooltip */}
-                              <AnimatePresence>
-                                {isCopied && (
-                                    <motion.div 
-                                        initial={{ opacity: 0, y: 10 }}
-                                        animate={{ opacity: 1, y: -20 }}
-                                        exit={{ opacity: 0 }}
-                                        className="absolute bottom-full right-0 mb-2 bg-slate-800 text-white text-[10px] px-2 py-1 rounded shadow-lg whitespace-nowrap pointer-events-none"
-                                    >
-                                        {localT.copied}
-                                    </motion.div>
-                                )}
-                              </AnimatePresence>
-                          </button>
-                      </div>
+          {/* 3. ARAMA SONUÇLARI (Liste / Kart Görünümü) */}
+          <div className="space-y-4">
+            <AnimatePresence>
+                {searchTerm && displayedWords.length === 0 && !loading && (
+                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-center py-10">
+                        <div className="w-16 h-16 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-3 text-slate-400"><Search size={32} /></div>
+                        <p className="text-slate-500 font-medium">Encam nehat dîtin / Sonuç bulunamadı.</p>
                     </motion.div>
-                  );
-                })
-              ) : (
-                <motion.div 
-                    initial={{ opacity: 0 }} 
-                    animate={{ opacity: 1 }} 
-                    className="col-span-full text-center py-20 bg-white dark:bg-slate-800 rounded-3xl border border-dashed border-slate-300 dark:border-slate-700"
-                >
-                  <div className="w-16 h-16 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
-                      <Search size={32} />
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-700 dark:text-white mb-1">{localT.not_found}</h3>
-                  <p className="text-slate-500 dark:text-slate-400 text-sm">Ji kerema xwe peyveke din biceribîne.</p>
-                </motion.div>
-              )}
+                )}
+
+                {displayedWords.map((word, index) => {
+                    const isFav = isFavorite(word.ku);
+                    const isCopied = copiedId === (word.id || word.ku);
+                    
+                    // Akıllı Sıralama: Arama diline göre başlık değişir
+                    const { mainText, subText, mainLang, subLang } = getDisplayContent(word);
+
+                    return (
+                        <motion.div
+                            key={word.id || word.ku}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ delay: index * 0.05 }}
+                            className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden hover:border-indigo-300 dark:hover:border-indigo-700 transition-all group"
+                        >
+                            <div className="p-6 flex flex-col md:flex-row justify-between gap-4">
+                                
+                                {/* Sol: Kelime ve Anlam */}
+                                <div className="flex-1">
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <span className={`text-[10px] font-bold px-2 py-0.5 rounded uppercase tracking-wider ${mainLang === 'KU' ? 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300' : 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-300'}`}>
+                                            {mainLang}
+                                        </span>
+                                        <h3 className="text-2xl font-black text-slate-800 dark:text-white tracking-tight">
+                                            {mainText}
+                                        </h3>
+                                        {word.source === 'admin' && (
+                                            <span className="text-[10px] bg-green-100 text-green-700 px-1.5 py-0.5 rounded font-bold uppercase">{localT.source_admin}</span>
+                                        )}
+                                    </div>
+                                    
+                                    <div className="flex items-center gap-3 text-lg text-slate-500 dark:text-slate-400 font-medium">
+                                        <ArrowRightLeft size={16} className="text-slate-300" />
+                                        <span className="text-slate-700 dark:text-slate-200">{subText}</span>
+                                        <span className="text-xs font-bold text-slate-400 bg-slate-100 dark:bg-slate-700 px-1.5 rounded">{subLang}</span>
+                                    </div>
+                                </div>
+
+                                {/* Sağ: Aksiyonlar */}
+                                <div className="flex items-start gap-2">
+                                    <button onClick={() => handleCopy(`${mainText} - ${subText}`, word.id || word.ku)} className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-700 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" title={localT.copy}>
+                                        {isCopied ? <Check size={20} className="text-green-500" /> : <Copy size={20} />}
+                                    </button>
+                                    <button onClick={() => toggleFavorite(word)} className={`p-2.5 rounded-xl transition-colors ${isFav ? 'bg-pink-50 dark:bg-pink-900/20 text-pink-500' : 'bg-slate-50 dark:bg-slate-700 text-slate-400 hover:text-pink-500'}`} title={localT.fav_add}>
+                                        <Heart size={20} className={isFav ? "fill-current" : ""} />
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Alt: Açıklama / Örnek Cümle */}
+                            {word.desc && (
+                                <div className="bg-slate-50 dark:bg-slate-900/50 p-4 border-t border-slate-100 dark:border-slate-700 flex gap-3">
+                                    <Quote size={20} className="text-slate-300 flex-shrink-0" />
+                                    <div>
+                                        <p className="text-xs font-bold text-slate-400 uppercase mb-1">{localT.example}</p>
+                                        <p className="text-slate-600 dark:text-slate-300 text-sm italic leading-relaxed">
+                                            "{word.desc}"
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
+                        </motion.div>
+                    );
+                })}
             </AnimatePresence>
-          </motion.div>
+          </div>
 
         </div>
       </div>

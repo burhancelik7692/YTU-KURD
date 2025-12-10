@@ -1,6 +1,6 @@
 export const translations = {
   KU: {
-    // ... (Mevcut kodlar)
+    // --- NAVİGASYON ---
     home: "Mal",
     culture: "Çand",
     music: "Muzîk",
@@ -18,6 +18,7 @@ export const translations = {
     logout: "Derkeve",
     dashboard: "Dashboard",
 
+    // --- GENEL EYLEMLER ---
     search: "Lêgerîn",
     save: "Tomar bike",
     cancel: "Betal bike",
@@ -32,6 +33,7 @@ export const translations = {
     date: "Dîrok",
     actions: "Çalakî",
     
+    // --- AUTH SAYFASI ---
     login_title: "Têketina Endam",
     admin_title: "Têketina Rêveber",
     register_title: "Hesabê Çêke",
@@ -50,6 +52,7 @@ export const translations = {
     auth_desc_standard: "Ji bo tomarkirina pirtûkxane, peyvên bijare û lîstikan têkeve.",
     auth_desc_admin: "Ev qad tenê ji bo personelên destûrdar e.",
 
+    // --- KULLANICI PANELİ ---
     welcome: "Bi xêr hatî",
     last_login: "Têketina Dawî",
     favorite_words: "Peyvên Bijare",
@@ -65,6 +68,7 @@ export const translations = {
     edit_profile: "Profîlê Biguherîne",
     full_name: "Nav û Paşnav",
 
+    // --- ADMIN DASHBOARD ---
     admin_dashboard_title: "Panela Rêveberiyê",
     overview: "Giştî",
     site_settings: "Mîhengên Malperê",
@@ -93,8 +97,6 @@ export const translations = {
     settings_hero_section: "Beşa Destpêkê (Hero)",
     settings_about_section: "Beşa Derbarê Me",
     settings_save_success: "Mîheng hatin tomarkirin.",
-    
-    // --- YENİ EKLENENLER ---
     joined_date: "Dîroka Tevlîbûnê",
     external_link: "Girêdana Derve (Link)",
     cover_image: "Wêneya Bergê",
@@ -104,6 +106,7 @@ export const translations = {
     tag_announcement: "Daxuyanî",
     tag_event: "Çalakî",
 
+    // --- SAYFA YÖNETİMİ ---
     page_management: "Rêveberiya Rûpelan",
     select_page_to_edit: "Rûpela ku tu dixwazî biguherînî hilbijêre",
     page_title: "Sernivîsa Rûpelê",
@@ -119,12 +122,22 @@ export const translations = {
       contact: "Rûpela Têkiliyê"
     },
 
+    // --- SÖZLÜK ---
     word_of_day: "Peyva Rojê",
+    random_words: "Peyvên Tesadûfî",
+    discover: "Keşif Bike",
+    quick_categories: "Kategoriyên Lezgîn",
+    cat_colors: "Reng",
+    cat_numbers: "Hejmar",
+    cat_days: "Roj",
+    cat_family: "Malbat",
+    click_to_search: "Ji bo lêgerînê bitikîne",
     search_placeholder: "Peyvê binivîse...",
     kurdish: "Kurdî",
     turkish: "Tirkî",
     meaning: "Wate",
 
+    // --- HATALAR ---
     error: "Xeletî",
     success: "Serkeftî",
     error_generic: "Xeletiyek çêbû.",
@@ -142,7 +155,7 @@ export const translations = {
   },
   
   TR: {
-    // ... (Mevcut kodlar)
+    // --- NAVİGASYON ---
     home: "Anasayfa",
     culture: "Kültür",
     music: "Müzik",
@@ -160,6 +173,7 @@ export const translations = {
     logout: "Çıkış Yap",
     dashboard: "Panel",
 
+    // --- GENEL ---
     search: "Ara",
     save: "Kaydet",
     cancel: "İptal",
@@ -174,6 +188,7 @@ export const translations = {
     date: "Tarih",
     actions: "İşlemler",
 
+    // --- AUTH ---
     login_title: "Üye Girişi",
     admin_title: "Yönetici Girişi",
     register_title: "Hesap Oluştur",
@@ -192,6 +207,7 @@ export const translations = {
     auth_desc_standard: "Favorilerini, okuma listeni ve oyun ilerlemeni kaydetmek için giriş yap.",
     auth_desc_admin: "Bu alan sadece yetkili personel içindir.",
 
+    // --- KULLANICI PANELİ ---
     welcome: "Hoş geldiniz",
     last_login: "Son Giriş",
     favorite_words: "Favori Kelimeler",
@@ -207,6 +223,7 @@ export const translations = {
     edit_profile: "Profili Düzenle",
     full_name: "Ad Soyad",
 
+    // --- ADMIN DASHBOARD ---
     admin_dashboard_title: "Yönetici Paneli",
     overview: "Genel Bakış",
     site_settings: "Site Ayarları",
@@ -235,8 +252,6 @@ export const translations = {
     settings_hero_section: "Giriş (Hero) Bölümü",
     settings_about_section: "Hakkında Bölümü",
     settings_save_success: "Ayarlar başarıyla kaydedildi.",
-
-    // --- YENİ EKLENENLER ---
     joined_date: "Kayıt Tarihi",
     external_link: "Dış Bağlantı (Link)",
     cover_image: "Kapak Görseli",
@@ -246,6 +261,7 @@ export const translations = {
     tag_announcement: "Duyuru",
     tag_event: "Etkinlik",
 
+    // --- SAYFA YÖNETİMİ ---
     page_management: "Sayfa Yönetimi",
     select_page_to_edit: "Düzenlemek istediğiniz sayfayı seçin",
     page_title: "Sayfa Başlığı",
@@ -261,12 +277,22 @@ export const translations = {
       contact: "İletişim Sayfası"
     },
 
+    // --- SÖZLÜK ---
     word_of_day: "Günün Kelimesi",
+    random_words: "Rastgele Kelimeler",
+    discover: "Keşfet",
+    quick_categories: "Hızlı Kategoriler",
+    cat_colors: "Renkler",
+    cat_numbers: "Sayılar",
+    cat_days: "Günler",
+    cat_family: "Aile",
+    click_to_search: "Aramak için tıkla",
     search_placeholder: "Kelime ara...",
     kurdish: "Kürtçe",
     turkish: "Türkçe",
     meaning: "Anlam",
 
+    // --- HATALAR ---
     error: "Hata",
     success: "Başarılı",
     error_generic: "Bir hata oluştu.",
@@ -284,7 +310,7 @@ export const translations = {
   },
 
   EN: {
-    // ... (Mevcut kodlar)
+    // --- NAVIGATION ---
     home: "Home",
     culture: "Culture",
     music: "Music",
@@ -302,6 +328,7 @@ export const translations = {
     logout: "Logout",
     dashboard: "Dashboard",
 
+    // --- GENERAL ---
     search: "Search",
     save: "Save",
     cancel: "Cancel",
@@ -316,6 +343,7 @@ export const translations = {
     date: "Date",
     actions: "Actions",
 
+    // --- AUTH ---
     login_title: "Member Login",
     admin_title: "Admin Login",
     register_title: "Create Account",
@@ -334,6 +362,7 @@ export const translations = {
     auth_desc_standard: "Login to save favorites.",
     auth_desc_admin: "Authorized personnel only.",
 
+    // --- USER DASHBOARD ---
     welcome: "Welcome",
     last_login: "Last Login",
     favorite_words: "Favorite Words",
@@ -349,6 +378,7 @@ export const translations = {
     edit_profile: "Edit Profile",
     full_name: "Full Name",
 
+    // --- ADMIN DASHBOARD ---
     admin_dashboard_title: "Admin Dashboard",
     overview: "Overview",
     site_settings: "Site Settings",
@@ -377,8 +407,6 @@ export const translations = {
     settings_hero_section: "Hero Section",
     settings_about_section: "About Section",
     settings_save_success: "Settings saved successfully.",
-
-    // --- NEW ADDITIONS ---
     joined_date: "Joined Date",
     external_link: "External Link",
     cover_image: "Cover Image",
@@ -388,6 +416,7 @@ export const translations = {
     tag_announcement: "Announcement",
     tag_event: "Event",
 
+    // --- PAGE MANAGEMENT ---
     page_management: "Page Management",
     select_page_to_edit: "Select a page to edit",
     page_title: "Page Title",
@@ -403,12 +432,22 @@ export const translations = {
       contact: "Contact Page"
     },
 
+    // --- DICTIONARY ---
     word_of_day: "Word of the Day",
+    random_words: "Random Words",
+    discover: "Discover",
+    quick_categories: "Quick Categories",
+    cat_colors: "Colors",
+    cat_numbers: "Numbers",
+    cat_days: "Days",
+    cat_family: "Family",
+    click_to_search: "Click to search",
     search_placeholder: "Search word...",
     kurdish: "Kurdish",
     turkish: "Turkish",
     meaning: "Meaning",
 
+    // --- ERRORS ---
     error: "Error",
     success: "Success",
     error_generic: "An error occurred.",
