@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useNavigate, Link } from 'react-router-dom';
-import { Mail, Lock, User, Key, LogIn, UserPlus, AlertTriangle, Loader2, Home, Settings, CheckCircle } from 'lucide-react';
+import { Mail, Lock, User, Key, LogIn, UserPlus, AlertTriangle, Loader2, Home, Settings, CheckCircle, EyeOff, Eye } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../../context/AuthContext';
 import { useUser } from '../../context/UserContext';
@@ -27,7 +27,7 @@ const translations = {
         error: "Hata",
         success: "Başarılı",
         adminWarning: "Bu alan sadece yetkili personel içindir.",
-        standardLoginText: "Kütüphane, Favoriler ve Oyunları Kaydetme",
+        standardLoginText: "Favorilerini, okuma listeni ve oyun ilerlemeni kaydetmek için giriş yap.",
         resetSent: "Şifre sıfırlama e-postası gönderildi. Lütfen e-postanı kontrol et.",
     },
     ku: {
@@ -87,7 +87,6 @@ const AuthPage = () => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
     const navigate = useNavigate();
-    // NOT: AuthContext'te register ve resetPassword fonksiyonlarının tanımlı olması gerekir.
     const { login, register, resetPassword } = useAuth();
     const { userData, loading: userLoading } = useUser();
     const { lang } = useLanguage(); 
@@ -131,11 +130,8 @@ const AuthPage = () => {
         setMessage(null);
         
         try {
-            // Firebase Auth işlemi
             await login(email, password);
-
-            // Başarılı girişten sonra yönlendirme useEffect'te yapılır.
-            // (userData'nın çekilip rolün kontrol edilmesi beklenir)
+            // Başarılı girişten sonra yönlendirme userData'nın yüklenmesini bekleyen useEffect'te yapılır.
 
         } catch (error) {
             let errorText = t.error + ": E-posta veya şifre yanlış.";
@@ -155,7 +151,6 @@ const AuthPage = () => {
         setIsLoading(true);
         setMessage(null);
         try {
-            // Register işlemi Firebase'de kullanıcıyı 'standard' rolü ile kaydeder.
             await register(email, password, name, 'standard'); 
             setMessage({ type: 'success', text: t.registerSuccess });
             setCurrentTab('login'); 
@@ -190,7 +185,6 @@ const AuthPage = () => {
             visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
         };
         
-        // Form Başlıkları
         const currentFormTitle = 
             currentTab === 'login' ? t.loginTitle : 
             currentTab === 'register' ? t.registerTitle : t.forgotTitle;
@@ -219,7 +213,7 @@ const AuthPage = () => {
                                 <FormInput icon={<Mail size={20} />} type="email" placeholder={t.emailPlaceholder} value={email} onChange={(e) => setEmail(e.target.value)} />
                                 <FormInput icon={<Lock size={20} />} type="password" placeholder={t.passwordPlaceholder} value={password} onChange={(e) => setPassword(e.target.value)} isPassword={true} isVisible={isPasswordVisible} toggleVisible={() => setIsPasswordVisible(!isPasswordVisible)} />
                                 
-                                <motion.button type="submit" disabled={isLoading} className={`w-full flex items-center justify-center px-4 py-3 font-semibold rounded-xl shadow-lg transition duration-300 disabled:opacity-50 ${currentTab === 'login' ? 'bg-blue-600 hover:bg-blue-700' : 'bg-green-600 hover:bg-green-700'}`}>
+                                <motion.button type="submit" disabled={isLoading} className={`w-full flex items-center justify-center px-4 py-3 font-semibold rounded-xl shadow-lg transition duration-300 disabled:opacity-50 ${currentTab === 'login' ? 'bg-blue-600 text-white hover:bg-blue-700' : 'bg-green-600 text-white hover:bg-green-700'}`}>
                                     {isLoading ? <Loader2 className="animate-spin mr-2" size={20} /> : (currentTab === 'login' ? <LogIn size={20} className="mr-2" /> : <UserPlus size={20} className="mr-2" />)}
                                     {currentTab === 'login' ? t.loginButton : t.registerButton}
                                 </motion.button>

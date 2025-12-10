@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   LogOut, LayoutDashboard, FileText, Image as ImageIcon, Book, 
   Users, Settings, Plus, Search, Trash2, Edit3, Save, X, 
-  BarChart2, Clock, CheckCircle, AlertCircle, Home
+  BarChart2, Clock, CheckCircle, AlertCircle, Home, Loader2, Link as LinkIcon
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { db } from '../../firebase';
 import { collection, getDocs, addDoc, deleteDoc, doc, updateDoc, query, orderBy, getDoc, setDoc } from 'firebase/firestore';
 
 const Dashboard = () => {
-  const { logout, currentUser } = useAuth();
+  const { logout } = useAuth();
   const navigate = useNavigate();
   
   // UI State
@@ -39,41 +39,41 @@ const Dashboard = () => {
     title: '', desc: '', category: '', type: 'blog', url: '', ku: '', tr: '' 
   });
 
-  // --- VERİLERİ ÇEK ---
+  // --- VERİ ÇEKME ---
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      // 1. İçerikleri Çek
+      const q = query(collection(db, "dynamicContent"), orderBy("createdAt", "desc"));
+      const snapshot = await getDocs(q);
+      const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      setContents(data);
+
+      // 2. İstatistikleri Hesapla
+      setStats({
+        words: data.filter(i => i.type === 'dictionary').length,
+        blogs: data.filter(i => i.type === 'blog' || i.type === 'content').length,
+        images: data.filter(i => i.type === 'gallery').length,
+        users: 1 // Gerçekte buradan users koleksiyonu çekilmeli
+      });
+
+      // 3. Site Ayarlarını Çek
+      const settingsRef = doc(db, "settings", "home");
+      const settingsSnap = await getDoc(settingsRef);
+      if (settingsSnap.exists()) {
+          setSiteSettings(prev => ({ ...prev, ...settingsSnap.data() }));
+      }
+
+    } catch (err) {
+      console.error("Veri hatası:", err);
+      setError("Veriler yüklenirken hata oluştu.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchAllData = async () => {
-        setLoading(true);
-        try {
-            // 1. İçerikleri Çek
-            const q = query(collection(db, "dynamicContent"), orderBy("createdAt", "desc"));
-            const snapshot = await getDocs(q);
-            const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            setContents(data);
-
-            // 2. İstatistikleri Hesapla
-            setStats({
-                words: data.filter(i => i.type === 'dictionary').length,
-                blogs: data.filter(i => i.type === 'blog' || i.type === 'content').length,
-                images: data.filter(i => i.type === 'gallery').length,
-                users: 1
-            });
-
-            // 3. Site Ayarlarını Çek
-            const settingsRef = doc(db, "settings", "home");
-            const settingsSnap = await getDoc(settingsRef);
-            if (settingsSnap.exists()) {
-                setSiteSettings(prev => ({ ...prev, ...settingsSnap.data() }));
-            }
-
-        } catch (err) {
-            console.error("Veri hatası:", err);
-            setError("Veriler yüklenirken hata oluştu.");
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    fetchAllData();
+    fetchData();
   }, []);
 
   // --- İŞLEMLER ---
@@ -108,8 +108,6 @@ const Dashboard = () => {
           setIsModalOpen(false);
           setEditingId(null);
           setFormData({ title: '', desc: '', category: '', type: 'blog', url: '', ku: '', tr: '' });
-          
-          // Listeyi yenile (Basitçe sayfayı yenilemek yerine state güncellemek daha iyi olur ama şimdilik fetch çağırıyoruz)
           window.location.reload(); 
       } catch (err) {
           setError("İşlem başarısız: " + err.message);
@@ -135,7 +133,7 @@ const Dashboard = () => {
       setIsModalOpen(true);
   };
 
-  // Filtreleme
+  // --- FİLTRELEME ---
   const filteredContent = activeTab === 'overview' 
     ? contents.slice(0, 5) 
     : contents.filter(c => c.type === activeTab);
@@ -155,7 +153,7 @@ const Dashboard = () => {
         <nav className="flex-1 px-4 space-y-2">
           {[
             { id: 'overview', label: 'Genel Bakış', icon: BarChart2 },
-            { id: 'settings', label: 'Site Ayarları', icon: Settings }, // YENİ
+            { id: 'settings', label: 'Site Ayarları', icon: Settings },
             { id: 'blog', label: 'Duyurular', icon: FileText },
             { id: 'dictionary', label: 'Sözlük', icon: Book },
             { id: 'gallery', label: 'Galeri', icon: ImageIcon },
@@ -183,7 +181,7 @@ const Dashboard = () => {
         </div>
       </aside>
 
-      {/* 2. ANA ALAN */}
+      {/* 2. ANA ALAN BAŞLANGICI */}
       <main className={`flex-1 p-8 transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-20'}`}>
         
         {/* Bildirimler */}
@@ -193,11 +191,11 @@ const Dashboard = () => {
         <header className="flex justify-between items-center mb-10">
           <div>
             <h2 className="text-3xl font-bold text-slate-800 dark:text-white">Admin Paneli</h2>
-            <p className="text-slate-500 dark:text-slate-400 text-sm">İçerik ve ayarları buradan yönet.</p>
+            <p className="text-slate-500 dark:text-slate-400 text-sm">İçerik yönetim merkezi.</p>
           </div>
-          {activeTab !== 'settings' && (
+          {activeTab !== 'settings' && activeTab !== 'overview' && ( 
             <button 
-              onClick={() => { setEditingId(null); setFormData({ title: '', desc: '', category: '', type: 'blog', url: '', ku: '', tr: '' }); setIsModalOpen(true); }}
+              onClick={() => { setEditingId(null); setFormData({ title: '', desc: '', category: '', type: activeTab, url: '', ku: '', tr: '' }); setIsModalOpen(true); }}
               className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-bold shadow-lg transition-transform transform hover:-translate-y-1"
             >
               <Plus size={20} /> Yeni Ekle
@@ -205,147 +203,187 @@ const Dashboard = () => {
           )}
         </header>
 
-        {/* --- AYARLAR SEKME İÇERİĞİ --- */}
-        {activeTab === 'settings' ? (
-             <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700">
-                 <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100 dark:border-slate-700">
-                    <Home className="text-yellow-500" size={28} />
-                    <h3 className="text-2xl font-bold text-slate-800 dark:text-white">Anasayfa Metin Ayarları</h3>
-                 </div>
-                 <form onSubmit={handleSettingsUpdate} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="col-span-2"><h4 className="text-sm font-bold text-blue-500 uppercase tracking-widest mb-4">Giriş (Hero) Bölümü</h4></div>
-                    <div>
-                        <label className="block text-sm font-bold text-slate-600 dark:text-slate-300 mb-2">Başlık 1 (Örn: Li YTÜ)</label>
-                        <input type="text" value={siteSettings.heroTitle1} onChange={e => setSiteSettings({...siteSettings, heroTitle1: e.target.value})} className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600" />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-bold text-slate-600 dark:text-slate-300 mb-2">Başlık 2 (Renkli Kısım)</label>
-                        <input type="text" value={siteSettings.heroTitle2} onChange={e => setSiteSettings({...siteSettings, heroTitle2: e.target.value})} className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600" />
-                    </div>
-                    <div className="col-span-2">
-                        <label className="block text-sm font-bold text-slate-600 dark:text-slate-300 mb-2">Alt Başlık (Slogan)</label>
-                        <textarea value={siteSettings.heroSubtitle} onChange={e => setSiteSettings({...siteSettings, heroSubtitle: e.target.value})} className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600" rows="2" />
-                    </div>
-
-                    <div className="col-span-2 border-t border-slate-100 dark:border-slate-700 my-4 pt-4"><h4 className="text-sm font-bold text-blue-500 uppercase tracking-widest">Hakkımızda Bölümü</h4></div>
-                    <div>
-                        <label className="block text-sm font-bold text-slate-600 dark:text-slate-300 mb-2">Hakkımızda Başlık</label>
-                        <input type="text" value={siteSettings.aboutTitle} onChange={e => setSiteSettings({...siteSettings, aboutTitle: e.target.value})} className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600" />
-                    </div>
-                    <div className="col-span-2">
-                        <label className="block text-sm font-bold text-slate-600 dark:text-slate-300 mb-2">Paragraf 1</label>
-                        <textarea value={siteSettings.aboutText1} onChange={e => setSiteSettings({...siteSettings, aboutText1: e.target.value})} className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600" rows="3" />
-                    </div>
-                    <div className="col-span-2">
-                        <label className="block text-sm font-bold text-slate-600 dark:text-slate-300 mb-2">Paragraf 2</label>
-                        <textarea value={siteSettings.aboutText2} onChange={e => setSiteSettings({...siteSettings, aboutText2: e.target.value})} className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600" rows="3" />
-                    </div>
-
-                    <div className="col-span-2 flex justify-end">
-                        <button type="submit" disabled={loading} className="px-8 py-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 shadow-lg flex items-center gap-2">
-                           {loading ? <Loader2 className="animate-spin" /> : <><Save size={20} /> Ayarları Kaydet</>}
-                        </button>
-                    </div>
-                 </form>
-             </div>
-        ) : (
-             /* --- DİĞER SEKMELER (TABLO) --- */
-             <>
-                {/* İstatistikler (Sadece Genel Bakışta) */}
-                {activeTab === 'overview' && (
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
-                    {[
-                      { title: 'Kelimeler', val: stats.words, icon: Book, color: 'bg-purple-500' },
-                      { title: 'Duyurular', val: stats.blogs, icon: FileText, color: 'bg-blue-500' },
-                      { title: 'Fotoğraflar', val: stats.images, icon: ImageIcon, color: 'bg-orange-500' },
-                      { title: 'Admin', val: stats.users, icon: Users, color: 'bg-green-500' },
-                    ].map((stat, i) => (
-                      <div key={i} className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center gap-4">
-                        <div className={`p-4 rounded-xl text-white shadow-lg ${stat.color}`}><stat.icon size={24} /></div>
-                        <div><p className="text-slate-500 dark:text-slate-400 text-sm font-medium">{stat.title}</p><h3 className="text-2xl font-black text-slate-800 dark:text-white">{stat.val}</h3></div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* Tablo */}
-                <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-xl border border-slate-100 dark:border-slate-700 overflow-hidden">
-                   {/* ... Tablo Başlığı ve Arama (Aynı kalır) ... */}
-                   <div className="overflow-x-auto">
-                        <table className="w-full text-left">
-                            <thead className="bg-slate-50 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400 text-xs uppercase font-bold">
-                                <tr>
-                                    <th className="p-4">İçerik</th>
-                                    <th className="p-4">Tip</th>
-                                    <th className="p-4 text-right">İşlemler</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
-                                {filteredContent.map((item) => (
-                                    <tr key={item.id} className="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
-                                        <td className="p-4">
-                                            <div className="font-bold text-slate-800 dark:text-white">{item.title || item.ku}</div>
-                                            <div className="text-xs text-slate-500 truncate max-w-xs">{item.desc || item.tr}</div>
-                                        </td>
-                                        <td className="p-4"><span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">{item.type}</span></td>
-                                        <td className="p-4 text-right">
-                                            <div className="flex items-center justify-end gap-2">
-                                                <button onClick={() => openEditModal(item)} className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg"><Edit3 size={18} /></button>
-                                                <button onClick={() => handleDelete(item.id)} className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg"><Trash2 size={18} /></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                   </div>
-                </div>
-             </>
+        {/* --- YÜKLEME EKRANI --- */}
+        {loading && (
+             <div className="text-center py-20"><Loader2 className="animate-spin mx-auto text-blue-600" size={32} /></div>
         )}
 
-      </main>
+        {!loading && (
+             <>
+                {/* --- AYARLAR SEKME İÇERİĞİ --- */}
+                {activeTab === 'settings' ? (
+                    <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-xl border border-slate-200 dark:border-slate-700">
+                        <div className="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100 dark:border-slate-700">
+                            <Home className="text-yellow-500" size={28} />
+                            <h3 className="text-2xl font-bold text-slate-800 dark:text-white">Anasayfa Metin Ayarları</h3>
+                        </div>
+                        <form onSubmit={handleSettingsUpdate} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="col-span-2"><h4 className="text-sm font-bold text-blue-500 uppercase tracking-widest mb-4">Giriş (Hero) Bölümü</h4></div>
+                            {/* Hero Alanları */}
+                            {Object.keys(siteSettings).filter(key => key.startsWith('hero') || key.startsWith('cta')).map(key => (
+                                <div key={key} className={key.includes('Subtitle') || key.includes('ctaText') ? 'col-span-2' : ''}>
+                                    <label className="block text-sm font-bold text-slate-600 dark:text-slate-300 mb-2">{key}</label>
+                                    <textarea value={siteSettings[key]} onChange={e => setSiteSettings({...siteSettings, [key]: e.target.value})} className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600" rows={key.includes('Subtitle') || key.includes('ctaText') ? "2" : "1"} />
+                                </div>
+                            ))}
 
-      {/* --- MODAL (EKLEME/DÜZENLEME) --- */}
+                            <div className="col-span-2 border-t border-slate-100 dark:border-slate-700 my-4 pt-4"><h4 className="text-sm font-bold text-blue-500 uppercase tracking-widest">Hakkımızda Bölümü</h4></div>
+                            {/* About Alanları */}
+                            {Object.keys(siteSettings).filter(key => key.startsWith('about')).map(key => (
+                                <div key={key} className={key.includes('Text') ? 'col-span-2' : ''}>
+                                    <label className="block text-sm font-bold text-slate-600 dark:text-slate-300 mb-2">{key}</label>
+                                    <textarea value={siteSettings[key]} onChange={e => setSiteSettings({...siteSettings, [key]: e.target.value})} className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-600" rows={key.includes('Text') ? "3" : "1"} />
+                                </div>
+                            ))}
+
+                            <div className="col-span-2 flex justify-end">
+                                <button type="submit" className="px-8 py-4 bg-green-600 text-white rounded-xl font-bold hover:bg-green-700 shadow-lg flex items-center gap-2">
+                                    <Save size={20} /> Ayarları Kaydet
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                ) : (
+                    /* --- GENEL BAKIŞ VE İÇERİK TABLOLARI --- */
+                    <>
+                        {/* İstatistikler */}
+                        {activeTab === 'overview' && (
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+                            {[
+                                { title: 'Kelimeler', val: stats.words, icon: Book, color: 'bg-purple-500' },
+                                { title: 'Duyurular', val: stats.blogs, icon: FileText, color: 'bg-blue-500' },
+                                { title: 'Fotoğraflar', val: stats.images, icon: ImageIcon, color: 'bg-orange-500' },
+                                { title: 'Admin', val: stats.users, icon: Users, color: 'bg-green-500' },
+                            ].map((stat, i) => (
+                                <div key={i} className="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700 flex items-center gap-4">
+                                <div className={`p-4 rounded-xl text-white shadow-lg ${stat.color}`}><stat.icon size={24} /></div>
+                                <div><p className="text-slate-500 dark:text-slate-400 text-sm font-medium">{stat.title}</p><h3 className="text-2xl font-black text-slate-800 dark:text-white">{stat.val}</h3></div>
+                                </div>
+                            ))}
+                            </div>
+                        )}
+
+                        {/* Tablo */}
+                        <div className="bg-white dark:bg-slate-800 rounded-3xl shadow-xl border border-slate-100 dark:border-slate-700 overflow-hidden">
+                             <div className="p-6 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center">
+                                <h3 className="text-lg font-bold text-slate-800 dark:text-white capitalize">
+                                    {activeTab === 'overview' ? 'Son Eklenenler' : `${activeTab} Listesi`}
+                                </h3>
+                                <div className="bg-slate-100 dark:bg-slate-900 rounded-lg px-4 py-2 flex items-center gap-2 text-slate-500">
+                                    <Search size={16} />
+                                    <input type="text" placeholder="Ara..." className="bg-transparent outline-none text-sm w-32 md:w-64" />
+                                </div>
+                            </div>
+
+                            <div className="overflow-x-auto">
+                                <table className="w-full text-left">
+                                    <thead className="bg-slate-50 dark:bg-slate-900/50 text-slate-500 dark:text-slate-400 text-xs uppercase font-bold">
+                                        <tr>
+                                            <th className="p-4">Başlık / Kelime</th>
+                                            <th className="p-4">Tip</th>
+                                            <th className="p-4">Tarih</th>
+                                            <th className="p-4 text-right">İşlemler</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-slate-100 dark:divide-slate-700">
+                                        {filteredContent.map((item) => (
+                                            <tr key={item.id} className="hover:bg-slate-50 dark:hover:bg-slate-700/30 transition-colors">
+                                                <td className="p-4">
+                                                    <div className="font-bold text-slate-800 dark:text-white">{item.title || item.ku}</div>
+                                                    <div className="text-xs text-slate-500 truncate max-w-xs">{item.desc || item.tr}</div>
+                                                </td>
+                                                <td className="p-4"><span className="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">{item.type}</span></td>
+                                                <td className="p-4 text-slate-500 text-sm flex items-center gap-2"><Clock size={14} /> {item.createdAt?.seconds ? new Date(item.createdAt.seconds * 1000).toLocaleDateString() : 'Bugün'}</td>
+                                                <td className="p-4 text-right">
+                                                    <div className="flex items-center justify-end gap-2">
+                                                        {item.url && <a href={item.url} target="_blank" rel="noopener noreferrer" className="p-2 text-green-500 hover:bg-green-50 dark:hover:bg-green-900/20 rounded-lg transition" title="Görüntüle"><LinkIcon size={18} /></a>}
+                                                        <button onClick={() => openEditModal(item)} className="p-2 text-blue-500 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition"><Edit3 size={18} /></button>
+                                                        <button onClick={() => handleDelete(item.id)} className="p-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition"><Trash2 size={18} /></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
+                                {filteredContent.length === 0 && (<div className="p-8 text-center text-slate-500">Henüz içerik bulunmuyor.</div>)}
+                            </div>
+                        </div>
+                    </>
+                )}
+             </>
+        )}
+      </main>
+      {/* 2. ANA ALAN SONU */}
+
+      {/* 3. EKLEME/DÜZENLEME MODALI BAŞLANGICI */}
       <AnimatePresence>
         {isModalOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-            <motion.div initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }} className="bg-white dark:bg-slate-800 w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden">
-               {/* Modal Header */}
-               <div className="p-6 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50">
-                    <h3 className="text-xl font-bold text-slate-800 dark:text-white">{editingId ? 'Düzenle' : 'Yeni Ekle'}</h3>
-                    <button onClick={() => setIsModalOpen(false)}><X size={20} /></button>
-               </div>
-               {/* Form */}
-               <form onSubmit={handleContentSubmit} className="p-8 space-y-6">
-                    {/* Tip Seçimi */}
-                    <div>
-                        <label className="block text-sm font-bold text-slate-500 mb-2">Tip</label>
-                        <div className="flex gap-2">
-                            {['blog', 'dictionary', 'gallery'].map(type => (
-                                <button key={type} type="button" onClick={() => setFormData({...formData, type})} className={`px-4 py-2 rounded-lg text-sm font-bold border transition ${formData.type === type ? 'bg-blue-600 text-white border-blue-600' : 'border-slate-200 text-slate-500'}`}>{type}</button>
-                            ))}
-                        </div>
-                    </div>
-                    
-                    {/* İçerik Alanları */}
-                    {formData.type === 'dictionary' ? (
-                        <div className="grid grid-cols-2 gap-4">
-                            <input type="text" placeholder="Kürtçe (ku)" value={formData.ku} onChange={e => setFormData({...formData, ku: e.target.value})} className="w-full p-3 rounded-xl border bg-transparent" required />
-                            <input type="text" placeholder="Türkçe (tr)" value={formData.tr} onChange={e => setFormData({...formData, tr: e.target.value})} className="w-full p-3 rounded-xl border bg-transparent" required />
-                        </div>
-                    ) : (
-                        <>
-                            <input type="text" placeholder="Başlık" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} className="w-full p-3 rounded-xl border bg-transparent" required />
-                            {formData.type === 'gallery' && <input type="url" placeholder="Resim URL" value={formData.url} onChange={e => setFormData({...formData, url: e.target.value})} className="w-full p-3 rounded-xl border bg-transparent" required />}
-                            {formData.type === 'blog' && <textarea placeholder="İçerik" value={formData.desc} onChange={e => setFormData({...formData, desc: e.target.value})} className="w-full p-3 rounded-xl border bg-transparent" rows="4" />}
-                        </>
-                    )}
+          <motion.div 
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.9, y: 20 }}
+              className="bg-white dark:bg-slate-800 w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden"
+            >
+              <div className="p-6 border-b border-slate-100 dark:border-slate-700 flex justify-between items-center bg-slate-50 dark:bg-slate-900/50">
+                <h3 className="text-xl font-bold text-slate-800 dark:text-white">{editingId ? 'İçeriği Düzenle' : 'Yeni İçerik Ekle'}</h3>
+                <button onClick={() => setIsModalOpen(false)} className="p-2 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-full transition"><X size={20} /></button>
+              </div>
+              
+              <form onSubmit={handleContentSubmit} className="p-8 space-y-6">
+                
+                {/* Tip Seçimi */}
+                <div>
+                   <label className="block text-sm font-bold text-slate-500 mb-2">İçerik Tipi</label>
+                   <div className="flex gap-4">
+                      {['blog', 'dictionary', 'gallery'].map(type => (
+                         <button 
+                            key={type}
+                            type="button" 
+                            onClick={() => setFormData({...formData, type})}
+                            className={`px-4 py-2 rounded-xl text-sm font-bold border-2 transition ${formData.type === type ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-slate-200 dark:border-slate-700 text-slate-500'}`}
+                         >
+                            {type === 'blog' ? 'Duyuru' : type === 'dictionary' ? 'Sözlük' : 'Galeri'}
+                         </button>
+                      ))}
+                   </div>
+                </div>
 
-                    <div className="flex justify-end gap-3 pt-4">
-                        <button type="button" onClick={() => setIsModalOpen(false)} className="px-6 py-2 rounded-xl text-slate-500 hover:bg-slate-100">İptal</button>
-                        <button type="submit" className="px-6 py-2 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700">Kaydet</button>
+                {/* Form Alanları */}
+                {formData.type === 'dictionary' ? (
+                  <div className="grid grid-cols-2 gap-4">
+                    <input type="text" placeholder="Kürtçe (ku)" value={formData.ku} onChange={e => setFormData({...formData, ku: e.target.value})} className="w-full p-3 rounded-xl border bg-slate-50 dark:bg-slate-900" required />
+                    <input type="text" placeholder="Türkçe (tr)" value={formData.tr} onChange={e => setFormData({...formData, tr: e.target.value})} className="w-full p-3 rounded-xl border bg-slate-50 dark:bg-slate-900" required />
+                  </div>
+                ) : (
+                  <>
+                    <div>
+                      <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Başlık</label>
+                      <input type="text" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700" required />
                     </div>
-               </form>
+                    {formData.type === 'gallery' && (
+                        <div>
+                        <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">Resim URL</label>
+                        <input type="url" value={formData.url} onChange={e => setFormData({...formData, url: e.target.value})} className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700" placeholder="https://..." required />
+                        </div>
+                    )}
+                    {formData.type === 'blog' && (
+                        <div>
+                        <label className="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">İçerik / Açıklama</label>
+                        <textarea rows="4" value={formData.desc} onChange={e => setFormData({...formData, desc: e.target.value})} className="w-full p-3 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 resize-none" />
+                        </div>
+                    )}
+                  </>
+                )}
+
+                <div className="flex justify-end gap-3 pt-4">
+                    <button type="button" onClick={() => setIsModalOpen(false)} className="px-6 py-2 rounded-xl text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-700 transition">İptal</button>
+                    <button type="submit" className="px-6 py-2 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 flex items-center gap-2">
+                        <Save size={18} /> Kaydet
+                    </button>
+                </div>
+              </form>
             </motion.div>
           </motion.div>
         )}

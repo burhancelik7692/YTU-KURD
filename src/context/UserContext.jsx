@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { db } from '../firebase'; 
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { useAuth } from './AuthContext'; // AuthContext'i dinlemek için çağırıyoruz
+import { useAuth } from './AuthContext'; // AuthContext'i dinlemek için
+import { db } from '../firebase'; // Firebase bağlantısı
 
 const UserContext = createContext();
 
@@ -12,11 +12,13 @@ export const UserProvider = ({ children }) => {
   const { currentUser, loading: authLoading } = useAuth();
   
   const [userId, setUserId] = useState(null);
-  const [userData, setUserData] = useState({});
+  const [userProfile, setUserProfile] = useState({}); // Veriyi bu state'te tutuyoruz
   const [loading, setLoading] = useState(true);
   
   const initialUserData = { 
     favoriteWords: [],
+    role: 'guest', // Varsayılan rol
+    name: 'Anonim',
     lastLogin: new Date().toISOString()
   };
 
@@ -32,35 +34,46 @@ export const UserProvider = ({ children }) => {
       const docSnap = await getDoc(userRef);
 
       if (docSnap.exists()) {
-        setUserData(docSnap.data());
+        setUserProfile(docSnap.data());
       } else {
-        await setDoc(userRef, initialUserData); 
-        setUserData(initialUserData);
+        // Yeni kayıt olan Firebase kullanıcısı (uid)
+        if (currentUser && currentUser.uid === id) {
+             const signedInUserInitialData = { 
+                ...initialUserData, 
+                role: 'standard', 
+                name: currentUser.email.split('@')[0],
+                email: currentUser.email,
+                lastLogin: new Date().toISOString()
+             };
+             await setDoc(userRef, signedInUserInitialData);
+             setUserProfile(signedInUserInitialData);
+        } else {
+            // Tamamen anonim veya misafir
+            setUserProfile(initialUserData); 
+        }
       }
     } catch (err) {
-      console.error("Kullanıcı verisi çekilemedi/kaydedilemedi, misafir modu aktif:", err);
-      setUserData(initialUserData); 
+      console.error("Kullanıcı verisi çekilemedi/kaydedilemedi:", err);
+      setUserProfile(initialUserData); 
     } finally {
       setLoading(false);
     }
   };
 
-  // --- ANA YÖNETİM HOOK'U ---
+  // --- KULLANICI ID YÖNETİMİ VE VERİ ÇEKME ---
   useEffect(() => {
-    // 1. Auth yüklenene kadar bekle
-    if (authLoading) return;
+    if (authLoading) return; // Auth yüklenene kadar bekle
     
     let currentId = null;
     
     if (currentUser) {
-        // 2. Giriş yapmış kullanıcı: Firebase UID kullan
+        // Oturum açan kullanıcı (Firebase UID)
         currentId = currentUser.uid;
-        localStorage.setItem('ytu_user_id', currentUser.uid);
     } else {
-        // 3. Anonim kullanıcı: LocalStorage'daki misafir ID'sini kullan
+        // Anonim kullanıcı (Local ID)
         let localId = localStorage.getItem('ytu_user_id');
-        if (!localId || localId.startsWith('guest_')) {
-             // Eğer ID yoksa veya eski misafir ID'si ise yeni misafir ID'si oluştur
+        if (!localId || !localId.startsWith('guest_')) {
+             // Yeni misafir ID'si oluştur
              localId = `guest_${Date.now()}_${Math.floor(Math.random() * 9999)}`;
              localStorage.setItem('ytu_user_id', localId);
         }
@@ -71,28 +84,28 @@ export const UserProvider = ({ children }) => {
     fetchUserData(currentId);
     
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentUser, authLoading]); // currentUser veya Auth durumu değiştiğinde çalış
+  }, [currentUser, authLoading]); 
 
   // Veri Güncelleme Fonksiyonu
   const updateUserData = async (data) => {
     if (!userId || !db) {
-      console.error("Kullanıcı ID'si veya Firestore bağlantısı yok. Güncelleme yapılamadı.");
+      console.error("Güncelleme yapılamadı.");
       return;
     }
     try {
       const userRef = doc(db, "users", userId);
-      
-      const newData = { ...userData, ...data };
+      const newData = { ...userProfile, ...data };
       
       await setDoc(userRef, newData, { merge: true });
-      setUserData(newData); // Local state'i anında güncelle
+      setUserProfile(newData); // Local state'i anında güncelle
       
     } catch (err) {
       console.error("Veri güncelleme hatası:", err);
     }
   };
 
-  const value = { userId, userData, loading, updateUserData };
+  // userData'yı userProfile olarak güncelledik (daha anlaşılır olması için)
+  const value = { userId, userData: userProfile, loading, updateUserData };
 
   return (
     <UserContext.Provider value={value}>

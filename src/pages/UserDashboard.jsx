@@ -3,16 +3,15 @@ import { Helmet } from 'react-helmet';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUser } from '../context/UserContext';
 import { useLanguage } from '../context/LanguageContext';
-import { useAuth } from '../context/AuthContext'; // Çıkış yapmak için
+import { useAuth } from '../context/AuthContext';
 import { siteContent } from '../data/locales';
 import { Heart, Book, Image as ImageIcon, Loader2, X, ArrowLeft, LogOut, User as UserIcon } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 const UserDashboard = () => {
     const { lang } = useLanguage();
-    // NOT: UserContext'ten verileri alırken güvenliğe dikkat ediyoruz.
-    const { logout } = useAuth(); // Auth'tan sadece logout alıyoruz (çıkış butonu için)
-    const { userData: userProfile, loading: profileLoading, updateUserData } = useUser(); // Kullanıcı verilerini UserContext'ten alıyoruz
+    const { logout } = useAuth(); // Çıkış butonu için
+    const { userData: userProfile, loading: profileLoading, updateUserData } = useUser(); 
     const navigate = useNavigate();
 
     const [tab, setTab] = useState('favorites');
@@ -25,7 +24,7 @@ const UserDashboard = () => {
             galleryTitle: 'Wênegeh', dictTitle: 'Ferheng', logout: 'Derkeve', 
             profile: 'Profîla Bikarhêner', back: 'Vegere Sereke',
             welcome: 'Bi xêr hatî', wordsFound: 'peyv hatin dîtin',
-            lastLoginTitle: 'Têketina Dawî'
+            lastLoginTitle: 'Têketina Dawî', remove: 'Rake'
         },
         TR: {
             title: 'Kullanıcı Paneli', favorites: 'Favorilerim', loading: 'Yükleniyor...', 
@@ -33,14 +32,14 @@ const UserDashboard = () => {
             galleryTitle: 'Galeri', dictTitle: 'Sözlük', logout: 'Çıkış Yap',
             profile: 'Kullanıcı Profili', back: 'Ana Sayfaya Dön',
             welcome: 'Hoş geldin', wordsFound: 'kelime bulundu',
-            lastLoginTitle: 'Son Giriş'
+            lastLoginTitle: 'Son Giriş', remove: 'Kaldır'
         },
     }[lang] || {};
 
     const favoriteWords = userProfile.favoriteWords || [];
     const loading = profileLoading;
 
-    // --- FAVORİ ÇIKARMA İŞLEVİ (Sözlük'teki ile aynı mantık) ---
+    // --- FAVORİ ÇIKARMA İŞLEVİ ---
     const removeFavorite = (wordKey) => {
         const newFavorites = favoriteWords.filter(key => key !== wordKey);
         updateUserData({ favoriteWords: newFavorites });
@@ -151,7 +150,7 @@ const UserDashboard = () => {
                                                 <button 
                                                     onClick={() => removeFavorite(word)} 
                                                     className="absolute top-2 right-2 text-slate-400 hover:text-red-500 transition-colors p-1"
-                                                    title="Remove from favorites"
+                                                    title={t.remove}
                                                 >
                                                     <X size={18} />
                                                 </button>

@@ -2,9 +2,12 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { 
   signInWithEmailAndPassword, 
   signOut, 
-  onAuthStateChanged 
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  sendPasswordResetEmail
 } from 'firebase/auth';
-import { auth } from '../firebase'; // Yukarıdaki firebase.js dosyasını kullanır
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, db } from '../firebase'; // db eklendi
 
 const AuthContext = createContext();
 
@@ -16,12 +19,33 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Kullanıcı Girişi
+  // Giriş
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  // Çıkış Yapma
+  // Kayıt Ol
+  const register = async (email, password, name, role = 'standard') => {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+
+    // Firestore'a rol ve isim kaydet
+    await setDoc(doc(db, "users", user.uid), {
+        email: user.email,
+        name: name,
+        role: role, // Varsayılan: standard
+        createdAt: new Date(),
+    }, { merge: true });
+    
+    return userCredential;
+  };
+
+  // Şifre Sıfırlama
+  const resetPassword = (email) => {
+      return sendPasswordResetEmail(auth, email);
+  };
+
+  // Çıkış Yap
   const logout = () => {
     return signOut(auth);
   };
@@ -39,6 +63,8 @@ export const AuthProvider = ({ children }) => {
   const value = {
     currentUser,
     login,
+    register,
+    resetPassword,
     logout,
     loading
   };

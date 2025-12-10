@@ -314,6 +314,7 @@ const AppContent = () => {
 function App() {
   return (
     <ErrorBoundary>
+        {/* Tüm uygulama, Auth ve User Context'leri ile sarıldı */}
         <AuthProvider>
           <UserProvider>
             <LanguageProvider>
