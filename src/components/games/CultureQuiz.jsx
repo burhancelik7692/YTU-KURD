@@ -9,7 +9,7 @@ import confetti from 'canvas-confetti';
 const MUSIC_PLAYLIST = [
   { id: "bg_music", src: "/music/bg_music.mp3" }, 
   { id: "win", src: "/music/win.mp3" },
-  { id: "lose", src: "/music/lose.mp3" }
+  { id: "lose", src: "/music/Dengbej Şakiro - Kekê Xiyaseddin .mp3" }
 ];
 
 const SFX = {
@@ -208,7 +208,7 @@ const RESULTS_MUSIC_DB = [
   // --- Düşük Puan (%0 - %49) -> Hüzünlü Şarkılar ---
   { filename: "huzunlu1.mp3", title: "Dil Perîşan im", artist: "Mihemed Şêxo", mood: "sad" },
   { filename: "huzunlu2.mp3", title: "Qamişlo", artist: "Ciwan Haco", mood: "sad" },
-  { filename: "huzunlu3.mp3", title: "Dayê", artist: "Nizamettin Ariç", mood: "sad" },
+  { filename: "Dengbej Şakiro - Kekê Xiyaseddin .mp3", title: "Kekê Xiyaseddin", artist: "Dengbej Şakiro", mood: "sad" },
 
   // --- Orta Puan (%50 - %79) -> Normal/Ritmik Şarkılar ---
   { filename: "orta1.mp3", title: "Eman Dilo", artist: "Hozan Serhat", mood: "mid" },
